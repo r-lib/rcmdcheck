@@ -16,8 +16,17 @@ NULL
 #'   vectors containing the output for the failed check.
 #'
 #' @export
+#' @importFrom withr with_dir
 
 rcmdcheck <- function(path) {
-  out <- safe_check_packages(path)
+
+  targz <- build_package(path)
+  on.exit(unlink(dirname(targz), recursive = TRUE), add = TRUE)
+
+  with_dir(
+    dirname(targz),
+    out <- safe_check_packages(basename(targz))
+  )
+
   parse_check_output(out)
 }
