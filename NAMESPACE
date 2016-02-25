@@ -2,3 +2,5 @@
 
 S3method(print,rcmdcheck)
 export(rcmdcheck)
+importFrom(crayon,magenta)
+importFrom(crayon,red)

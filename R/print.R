@@ -19,11 +19,26 @@ print.rcmdcheck <- function(x, ...) {
   }
 }
 
+#' @importFrom crayon magenta
+
 print_header <- function(text) {
   width <- min(getOption("width", 80), 80)
-  cat("-- ", text, " ", rep("-", width - nchar(text) - 4), "\n\n", sep = "")
+  str <- paste0(
+    "-- ",
+    text,
+    " ",
+    paste(rep("-", width - nchar(text) - 4), collapse = "")
+  )
+  cat(magenta(str), "\n\n", sep = "")
 }
 
+#' @importFrom crayon red
+
 print_entry <- function(entry) {
-  cat(entry, sep = "", "\n")
+  lines <- strsplit(entry, "\n", fixed = TRUE)[[1]]
+
+  first <- paste0("* ", lines[1])
+  cat(red(first), "\n", sep = "")
+
+  cat(paste0("  ", lines[-1]), sep = "\n", "")
 }

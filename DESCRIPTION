@@ -12,3 +12,5 @@ BugReports: https://github.com/MangoTheCat/rcmdcheck/issues
 RoxygenNote: 5.0.1
 Suggests: 
     testthat
+Imports:
+    crayon
