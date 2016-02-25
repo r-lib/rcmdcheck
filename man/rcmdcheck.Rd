@@ -5,8 +5,21 @@
 \alias{rcmdcheck}
 \alias{rcmdcheck-package}
 \title{Run R CMD check from R and Capture Results}
+\usage{
+rcmdcheck(path)
+}
+\arguments{
+\item{path}{Path to a package tarball or a directory}
+}
+\value{
+An S3 object (list) with fields \code{errors},
+  \code{warnings} and \code{nodes}. These are all character
+  vectors containing the output for the failed check.
+}
 \description{
 Run R CMD check form R programatically, and capture the results of the
 individual checks.
+
+Run \code{R CMD check} on a package or a directory
 }
 
