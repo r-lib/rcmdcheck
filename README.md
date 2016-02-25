@@ -8,7 +8,7 @@
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/github/MangoTheCat/rcmdcheck?svg=true)](https://ci.appveyor.com/project/gaborcsardi/rcmdcheck)
 [![](http://www.r-pkg.org/badges/version/rcmdcheck)](http://www.r-pkg.org/pkg/rcmdcheck)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/rcmdcheck)](http://www.r-pkg.org/pkg/rcmdcheck)
-
+[![Coverage Status](https://img.shields.io/codecov/c/github/MangoTheCat/rcmdcheck/master.svg)](https://codecov.io/github/MangoTheCat/rcmdcheck?branch=master)
 
 Run R CMD check form R programatically, and capture the results of the
   individual checks.
