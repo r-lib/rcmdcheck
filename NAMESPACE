@@ -2,6 +2,7 @@
 
 S3method(print,rcmdcheck)
 export(rcmdcheck)
+importFrom(clisymbols,symbol)
 importFrom(crayon,magenta)
 importFrom(crayon,red)
 importFrom(withr,with_dir)

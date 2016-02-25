@@ -13,5 +13,6 @@ RoxygenNote: 5.0.1
 Suggests: 
     testthat
 Imports:
+    clisymbols,
     crayon,
     withr
