@@ -1,7 +1,7 @@
 
 R <- function(...) {
 
-  rbin <- file.path(R.home(), "bin", "R")
+  rbin <- file.path(R.home("bin"), "R")
 
   args <- as.character(unlist(list(...)))
 
