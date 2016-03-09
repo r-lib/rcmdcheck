@@ -4,6 +4,8 @@
 
 print.rcmdcheck <- function(x, ...) {
 
+  cat("\n")
+
   if (length(x$errors)) {
     print_header(paste(symbol$cross, "Error(s)"))
     lapply(x$errors, print_entry)
@@ -22,17 +24,18 @@ print.rcmdcheck <- function(x, ...) {
   summary(x, ...)
 }
 
-#' @importFrom crayon magenta
+#' @importFrom crayon cyan
+#' @importFrom clisymbols symbol
 
 print_header <- function(text) {
   width <- min(getOption("width", 80), 80)
   str <- paste0(
-    "-- ",
+    symbol$line, symbol$line, " ",
     text,
     " ",
-    paste(rep("-", width - nchar(text) - 4), collapse = "")
+    paste(rep(symbol$line, width - nchar(text) - 4), collapse = "")
   )
-  cat(magenta(str), "\n\n", sep = "")
+  cat(cyan(str), "\n\n", sep = "")
 }
 
 #' @importFrom crayon red make_style
@@ -53,7 +56,7 @@ print_entry <- function(entry) {
 
 summary.rcmdcheck <- function(object, ...) {
 
-  cat("-- ")
+  cat(symbol$line, symbol$line, " ", sep = "")
   summary_entry(object, "errors")
   cat(" | ")
   summary_entry(object, "warnings")
@@ -72,7 +75,7 @@ summary_entry <- function(x, name) {
     cat(green(paste(len, name, symbol$tick)))
 
   } else if (len == 1) {
-    cat(red(paste(len, name, symbol$cross)))
+    cat(red(paste(len, sub("s$", "", name), symbol$cross)))
 
   } else {
     cat(red(paste(len, name, symbol$cross)))

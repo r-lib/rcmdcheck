@@ -6,10 +6,12 @@
 \alias{rcmdcheck-package}
 \title{Run R CMD check from R and Capture Results}
 \usage{
-rcmdcheck(path)
+rcmdcheck(path, quiet = FALSE)
 }
 \arguments{
-\item{path}{Path to a package tarball or a directory}
+\item{path}{Path to a package tarball or a directory.}
+
+\item{quiet}{Whether to print check output during checking.}
 }
 \value{
 An S3 object (list) with fields \code{errors},

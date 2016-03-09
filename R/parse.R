@@ -5,6 +5,7 @@ parse_check_output <- function(output) {
 
   structure(
     list(
+      output   = output,
       errors   = grep(" ... ERROR\n",   entries, value = TRUE, fixed = TRUE),
       warnings = grep(" ... WARNING\n", entries, value = TRUE, fixed = TRUE),
       notes    = grep(" ... NOTE\n",    entries, value = TRUE, fixed = TRUE)
