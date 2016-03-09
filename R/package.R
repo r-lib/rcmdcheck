@@ -12,6 +12,8 @@ NULL
 #'
 #' @param path Path to a package tarball or a directory.
 #' @param quiet Whether to print check output during checking.
+#' @param args Character vector of arguments to pass to
+#'   \code{R CMD check}.
 #' @return An S3 object (list) with fields \code{errors},
 #'   \code{warnings} and \code{nodes}. These are all character
 #'   vectors containing the output for the failed check.
@@ -19,14 +21,14 @@ NULL
 #' @export
 #' @importFrom withr with_dir
 
-rcmdcheck <- function(path = ".", quiet = FALSE) {
+rcmdcheck <- function(path = ".", quiet = FALSE, args = character()) {
 
   targz <- build_package(path)
   on.exit(unlink(dirname(targz), recursive = TRUE), add = TRUE)
 
   with_dir(
     dirname(targz),
-    out <- safe_check_packages(basename(targz), quiet = quiet)
+    out <- safe_check_packages(basename(targz), args = args, quiet = quiet)
   )
 
   invisible(parse_check_output(out))

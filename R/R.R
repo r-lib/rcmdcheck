@@ -1,9 +1,9 @@
 
-R <- function(..., callback = NULL) {
+R <- function(..., args = NULL, callback = NULL) {
 
   rbin <- file.path(R.home("bin"), "R")
 
-  args <- as.character(unlist(list(...)))
+  args <- c(as.character(unlist(list(...))), args)
 
   safe_system(rbin, args = args, callback = callback)
 }
