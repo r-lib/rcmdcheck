@@ -11,12 +11,14 @@ build_package <- function(path) {
 
   file.copy(path, tmpdir, recursive = TRUE)
 
-  with_dir(
-    tmpdir,
-    R("CMD", "build", basename(path))
-  )
-
-  unlink(file.path(tmpdir, basename(path)), recursive = TRUE)
+  ## If not a tar.gz, build it. Otherwise just leave it as it is.
+  if (file.info(path)$isdir) {
+    with_dir(
+      tmpdir,
+      R("CMD", "build", basename(path))
+    )
+    unlink(file.path(tmpdir, basename(path)), recursive = TRUE)
+  }
 
   ## replace previous handler, no need to clean up any more
   on.exit(NULL)
