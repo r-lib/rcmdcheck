@@ -23,6 +23,7 @@ devtools::install_github("mangothecat/rcmdcheck")
 
 ```r
 library(rcmdcheck)
+rcmdcheck("path/to/R/package")
 ```
 
 Call `rcmdcheck()` on a source R package `.tar.gz` file, or on a folder
