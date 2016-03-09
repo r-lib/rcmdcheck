@@ -25,6 +25,14 @@ devtools::install_github("mangothecat/rcmdcheck")
 library(rcmdcheck)
 ```
 
+Call `rcmdcheck()` on a source R package `.tar.gz` file, or on a folder
+containing your R package. Supply `quiet = FALSE` if you want to omit the
+output. The result of the check is returned, in a list with elements
+`errors`, `warnings`, and `notes`. Each element is a character vector,
+and one element of the character vectors is a single failure.
+
+![](/inst/screenshot.png)
+
 ## License
 
 MIT © Mango Solutions
