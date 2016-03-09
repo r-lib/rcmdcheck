@@ -19,7 +19,7 @@ NULL
 #' @export
 #' @importFrom withr with_dir
 
-rcmdcheck <- function(path, quiet = FALSE) {
+rcmdcheck <- function(path = ".", quiet = FALSE) {
 
   targz <- build_package(path)
   on.exit(unlink(dirname(targz), recursive = TRUE), add = TRUE)
