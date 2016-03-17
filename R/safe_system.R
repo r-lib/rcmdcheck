@@ -5,7 +5,10 @@ safe_system <- function(command, args, callback = NULL) {
     safe_system_callback(command, args, callback)
 
   } else {
-    safe_system_sync(command, args)
+    res <- safe_system_sync(command, args)
+    res$stdout <- win2unix(res$stdout)
+    res$stderr <- win2unix(res$stderr)
+    res
   }
 }
 
