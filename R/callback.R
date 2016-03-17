@@ -119,6 +119,9 @@ check_callback <- function() {
     }
 
     ## NA is the way we forbid output
-    if (!is.na(x)) cat(x, "\n", sep = "")
+    if (!is.na(x)) {
+      cat(x, "\n", sep = "")
+      flush(stdout())
+    }
   }
 }
