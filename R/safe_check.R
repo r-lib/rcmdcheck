@@ -1,7 +1,7 @@
 
 safe_check_packages <- function(..., args, quiet) {
 
-  lib <- paste(.libPaths(), collapse = ":")
+  lib <- paste(.libPaths(), collapse = .Platform$path.sep)
 
   with_envvar(
     c(R_LIBS = lib,
