@@ -3,8 +3,8 @@ Title: Run 'R CMD check' from 'R' and Capture Results
 Version: 1.0.0
 Author: Gabor Csardi
 Maintainer: Gabor Csardi <gcsardi@mango-solutions.com>
-Description: Run 'R CMD check' from 'R' programatically, and capture the results of the
-  individual checks.
+Description: Run 'R CMD check' from 'R' programatically, and capture the
+    results of the individual checks.
 License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/MangoTheCat/rcmdcheck
