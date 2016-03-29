@@ -111,13 +111,6 @@ check_callback <- function() {
       get_style(state)(paste0("   ", x))
     }
 
-    ## Replace long file names on OSX, they look bad
-    if (grepl("\u2018.*\u2019", x)) {
-      tmpdir <- Sys.getenv("TMPDIR")
-      x <- sub(paste0("\u2018", tmpdir), "\u2018$TMPDIR/", x, fixed = TRUE)
-      x <- sub(paste0("\u2018/private", tmpdir), "\u2018$TMPDIR/", x, fixed = TRUE)
-    }
-
     ## NA is the way we forbid output
     if (!is.na(x)) {
       cat(x, "\n", sep = "")
