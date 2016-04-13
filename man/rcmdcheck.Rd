@@ -6,7 +6,8 @@
 \alias{rcmdcheck-package}
 \title{Run R CMD check from R and Capture Results}
 \usage{
-rcmdcheck(path = ".", quiet = FALSE, args = character())
+rcmdcheck(path = ".", quiet = FALSE, args = character(),
+  libpath = .libPaths(), repos = getOption("repos"))
 }
 \arguments{
 \item{path}{Path to a package tarball or a directory.}
@@ -15,6 +16,13 @@ rcmdcheck(path = ".", quiet = FALSE, args = character())
 
 \item{args}{Character vector of arguments to pass to
 \code{R CMD check}.}
+
+\item{libpath}{The library path to set for the check.
+The default uses the current library path.}
+
+\item{repos}{The \code{repos} option to set for the check.
+This is needed for cyclic dependency checks if you use the
+\code{--as-cran} argument. The default uses the current value.}
 }
 \value{
 An S3 object (list) with fields \code{errors},
