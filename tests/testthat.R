@@ -1,4 +1,6 @@
 library(testthat)
 library(rcmdcheck)
 
-test_check("rcmdcheck")
+if (Sys.getenv("NOT_CRAN") != "") {
+  test_check("rcmdcheck")
+}
