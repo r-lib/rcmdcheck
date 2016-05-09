@@ -1,6 +1,6 @@
 Package: rcmdcheck
 Title: Run 'R CMD check' from 'R' and Capture Results
-Version: 1.1.0
+Version: 1.2.0
 Author: Gabor Csardi
 Maintainer: Gabor Csardi <gcsardi@mango-solutions.com>
 Description: Run 'R CMD check' from 'R' programmatically, and capture the
@@ -9,8 +9,8 @@ License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/MangoTheCat/rcmdcheck
 BugReports: https://github.com/MangoTheCat/rcmdcheck/issues
-RoxygenNote: 5.0.1
-Suggests: 
+RoxygenNote: 5.0.1.9000
+Suggests:
     testthat
 Imports:
     clisymbols,
