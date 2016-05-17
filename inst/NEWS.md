@@ -1,7 +1,10 @@
 
-# 1.2.0
+# 1.2.1
 
 * Report errors during the build, typically vignette errors.
+
+* Use the `callr` package (https://github.com/MangoTheCat/callr)
+  for running `R CMD` commands.
 
 # 1.1.0
 
