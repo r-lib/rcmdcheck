@@ -1,6 +1,6 @@
 Package: rcmdcheck
 Title: Run 'R CMD check' from 'R' and Capture Results
-Version: 1.2.0
+Version: 1.2.1
 Author: Gabor Csardi
 Maintainer: Gabor Csardi <gcsardi@mango-solutions.com>
 Description: Run 'R CMD check' from 'R' programmatically, and capture the
@@ -13,6 +13,8 @@ RoxygenNote: 5.0.1.9000
 Suggests:
     testthat
 Imports:
+    callr,
     clisymbols,
     crayon,
     withr
+Remotes: MangoTheCat/callr

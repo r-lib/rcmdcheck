@@ -15,7 +15,7 @@ build_package <- function(path) {
   if (file.info(path)$isdir) {
     build_status <- with_dir(
       tmpdir,
-      R("CMD", "build", basename(path))
+      rcmd_safe("build", basename(path))
     )
     unlink(file.path(tmpdir, basename(path)), recursive = TRUE)
   }

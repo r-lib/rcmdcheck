@@ -25,6 +25,7 @@ NULL
 #'
 #' @export
 #' @importFrom withr with_dir
+#' @importFrom callr rcmd_safe
 
 rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
                       libpath = .libPaths(), repos = getOption("repos")) {
@@ -34,12 +35,12 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   with_dir(
     dirname(targz),
-    out <- safe_check_packages(
-      basename(targz),
-      args = args,
-      quiet = quiet,
+    out <- rcmd_safe(
+      "check",
+      cmdargs = c(basename(targz), args),
       libpath = libpath,
-      repos = repos
+      repos = repos,
+      callback = if (!quiet) check_callback()
     )
   )
 

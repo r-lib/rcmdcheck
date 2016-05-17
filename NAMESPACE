@@ -3,6 +3,7 @@
 S3method(print,rcmdcheck)
 S3method(summary,rcmdcheck)
 export(rcmdcheck)
+importFrom(callr,rcmd_safe)
 importFrom(clisymbols,symbol)
 importFrom(crayon,bold)
 importFrom(crayon,cyan)
