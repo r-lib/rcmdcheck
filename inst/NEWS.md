@@ -1,6 +1,10 @@
 
 # 1.2.1
 
+* Parse `R CMD check` results: `parse_check`, `parse_check_url`.
+
+* Download and parse check results for CRAN packages.
+
 * Report errors during the build, typically vignette errors.
 
 * Use the `callr` package (https://github.com/MangoTheCat/callr)
