@@ -1,6 +1,9 @@
 
 # 1.2.1
 
+* The result object has more metadata: package name, version,
+  R version and platform.
+
 * `rcmdcheck()` works on tarballs build via `R CMD build` now.
 
 * Parse `R CMD check` results: `parse_check`, `parse_check_url`.

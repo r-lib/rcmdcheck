@@ -8,10 +8,44 @@ parse_check_output <- function(output) {
       output   = output,
       errors   = grep(" ... ERROR\n",   entries, value = TRUE, fixed = TRUE),
       warnings = grep(" ... WARNING\n", entries, value = TRUE, fixed = TRUE),
-      notes    = grep(" ... NOTE\n",    entries, value = TRUE, fixed = TRUE)
+      notes    = grep(" ... NOTE\n",    entries, value = TRUE, fixed = TRUE),
+      package  = parse_package(entries),
+      version  = parse_version(entries),
+      rversion = parse_rversion(entries),
+      platform = parse_platform(entries)
     ),
     class = "rcmdcheck"
   )
+}
+
+parse_package <- function(entries) {
+  line <- grep("^this is package .* version", entries, value = TRUE)
+  sub(
+    "^this is package .([a-zA-Z0-9\\.]+)[^a-zA-Z0-9\\.].*$",
+    "\\1",
+    line,
+    perl = TRUE
+  )
+}
+
+parse_version <- function(entries) {
+  line <- grep("^this is package .* version", entries, value = TRUE)
+  sub(
+    "^this is package .[a-zA-Z0-9\\.]+. version .([-0-9\\.]+)[^-0-9\\.].*$",
+    "\\1",
+    line,
+    perl = TRUE
+  )
+}
+
+parse_rversion <- function(entries) {
+  line <- grep("^using R version", entries, value = TRUE)
+  sub("^using R version ([^\\s]+)\\s.*$", "\\1", line, perl = TRUE)
+}
+
+parse_platform <- function(entries) {
+  line <- grep("^using platform:", entries, value = TRUE)
+  sub("^using platform: ([^\\s]+)\\s.*$", "\\1", line, perl = TRUE)
 }
 
 #' Parse \code{R CMD check} results from a file or string
