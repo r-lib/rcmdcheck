@@ -6,35 +6,66 @@ print.rcmdcheck <- function(x, ...) {
 
   cat("\n")
 
+  print_header("R CMD check results", paste(x$package, x$version))
+
   if (length(x$errors)) {
-    print_header(paste(symbol$cross, "Error(s)"))
     lapply(x$errors, print_entry)
   }
 
   if (length(x$warnings)) {
-    print_header(paste("!", "Warning(s)"))
     lapply(x$warnings, print_entry)
   }
 
   if (length(x$notes)) {
-    print_header(paste(symbol$info, "Note(s)"))
     lapply(x$notes, print_entry)
   }
 
   summary(x, ...)
 }
 
-#' @importFrom crayon cyan
-#' @importFrom clisymbols symbol
+make_line <- function(x) {
+  paste(rep(symbol$line, x), collapse = "")
+}
 
-print_header <- function(text) {
-  width <- min(getOption("width", 80), 80)
-  str <- paste0(
-    symbol$line, symbol$line, " ",
-    text,
-    " ",
-    paste(rep(symbol$line, width - nchar(text) - 4), collapse = "")
-  )
+lines <- vapply(1:100, FUN.VALUE = "", make_line)
+
+header_line <- function(left = "", right = "",
+                        width = getOption("width")) {
+
+  ncl <- nchar(left)
+  ncr <- nchar(right)
+
+  if (ncl) left <- paste0(" ", left, " ")
+  if (ncr) right <- paste0(" ", right, " ")
+  ndashes <- width - ((ncl > 0) * 2  + (ncr > 0) * 2 + ncl + ncr)
+
+  if (ndashes < 4) {
+    right <- substr(right, 1, ncr - (4 - ndashes))
+    ncr <- nchar(right)
+
+  }
+
+  dashes <- if (ndashes <= length(lines)) {
+    lines[ndashes]
+  } else {
+    make_line(ndashes)
+  }
+
+  res <- paste0(
+    substr(dashes, 1, 2),
+    left,
+    substr(dashes, 3, ndashes - 4),
+    right,
+    substr(dashes, ndashes - 3, ndashes)
+  )[1]
+
+  substring(res, 1, width)
+}
+
+#' @importFrom crayon cyan
+
+print_header <- function(left, right = "") {
+  str <- header_line(left, right)
   cat(cyan(str), "\n\n", sep = "")
 }
 
