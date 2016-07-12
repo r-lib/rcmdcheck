@@ -64,9 +64,9 @@ header_line <- function(left = "", right = "",
 
 #' @importFrom crayon cyan
 
-print_header <- function(left, right = "") {
+print_header <- function(left, right = "", color = cyan) {
   str <- header_line(left, right)
-  cat(cyan(str), "\n\n", sep = "")
+  cat(color(str), "\n\n", sep = "")
 }
 
 #' @importFrom crayon red make_style

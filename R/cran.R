@@ -1,4 +1,21 @@
 
+#' Download and show all CRAN check flavour platforms
+#'
+#' If the \code{package} argument is \code{NULL}, then all current
+#' platforms are downloaded. If the \code{package} argument is specified,
+#' then all flavours used for the latests package checks for that
+#' package, are downloaded and returned.
+#'
+#' @param package CRAN package name or \code{NULL}.
+#' @return Character vector of platform ids.
+#'
+#' @export
+#' @examples
+#' \dontrun{
+#' cran_check_flavours()
+#' cran_check_flavours("simplegraph")
+#' }
+
 cran_check_flavours <- function(package = NULL) {
 
   if (is.null(package)) return(cran_check_flavours_generic())

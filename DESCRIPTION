@@ -16,5 +16,6 @@ Imports:
     callr,
     clisymbols,
     crayon,
+    digest,
     withr
 Remotes: MangoTheCat/callr
