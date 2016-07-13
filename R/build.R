@@ -13,9 +13,8 @@ build_package <- function(path, tmpdir) {
       rcmd_safe("build", basename(path))
     )
     unlink(file.path(tmpdir, basename(path)), recursive = TRUE)
+    report_system_error("Build failed", build_status)
   }
-
-  report_system_error("Build failed", build_status)
 
   ## replace previous handler, no need to clean up any more
   on.exit(NULL)
