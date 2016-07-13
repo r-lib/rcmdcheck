@@ -31,7 +31,9 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
                       libpath = .libPaths(), repos = getOption("repos")) {
 
   targz <- build_package(path)
-  on.exit(unlink(dirname(targz), recursive = TRUE), add = TRUE)
+  if (targz != path && targz != normalizePath(path)) {
+    on.exit(unlink(dirname(targz), recursive = TRUE), add = TRUE)
+  }
 
   with_dir(
     dirname(targz),
