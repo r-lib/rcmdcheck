@@ -3,8 +3,6 @@
 
 build_package <- function(path, tmpdir) {
 
-  path <- normalizePath(path)
-
   dir.create(tmpdir)
   file.copy(path, tmpdir, recursive = TRUE)
 
