@@ -1,14 +1,11 @@
 
 #' @importFrom withr with_dir
 
-build_package <- function(path) {
+build_package <- function(path, tmpdir) {
 
   path <- normalizePath(path)
 
-  tmpdir <- tempfile()
   dir.create(tmpdir)
-  on.exit(unlink(tmpdir, recursive = TRUE))
-
   file.copy(path, tmpdir, recursive = TRUE)
 
   ## If not a tar.gz, build it. Otherwise just leave it as it is.

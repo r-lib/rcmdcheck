@@ -30,10 +30,8 @@ NULL
 rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
                       libpath = .libPaths(), repos = getOption("repos")) {
 
-  targz <- build_package(path)
-  if (targz != path && targz != normalizePath(path)) {
-    on.exit(unlink(dirname(targz), recursive = TRUE), add = TRUE)
-  }
+  targz <- build_package(path, tmp <- tempfile())
+  on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
 
   with_dir(
     dirname(targz),
