@@ -5,8 +5,6 @@ build_package <- function(path) {
 
   path <- normalizePath(path)
 
-  if (!file.info(path)$isdir) { return(path) }
-
   tmpdir <- tempfile()
   dir.create(tmpdir)
   on.exit(unlink(tmpdir, recursive = TRUE))
