@@ -6,7 +6,7 @@
 #' @importFrom crayon red green make_style bold
 #' @importFrom clisymbols symbol
 
-check_callback <- function() {
+check_callback <- function(top_line = TRUE) {
 
   ok   <- green
   note <- make_style("orange")
@@ -14,7 +14,7 @@ check_callback <- function() {
   err  <- red
   pale <- make_style("darkgrey")
 
-  first <- TRUE
+  first <- top_line
   state <- "OK"
 
   no <- function(x, what = "") {
