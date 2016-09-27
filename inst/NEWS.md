@@ -1,6 +1,9 @@
 
 # 1.2.1
 
+* Compare two check results with `compare_checks` or compare check
+  results to CRAN with `compare_to_cran`.
+
 * The result object has more metadata: package name, version,
   R version and platform.
 
