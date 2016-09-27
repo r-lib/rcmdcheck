@@ -18,4 +18,3 @@ Imports:
     crayon,
     digest,
     withr
-Remotes: MangoTheCat/callr
