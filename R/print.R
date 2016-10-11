@@ -1,12 +1,15 @@
 
+#' Print R CMD check results
+#' @param header Whether to print a header.
 #' @export
 #' @importFrom clisymbols symbol
 
-print.rcmdcheck <- function(x, ...) {
+print.rcmdcheck <- function(x, header = TRUE, ...) {
 
-  cat("\n")
-
-  print_header("R CMD check results", paste(x$package, x$version))
+  if (header) {
+    cat("\n")
+    print_header("R CMD check results", paste(x$package, x$version))
+  }
 
   if (length(x$errors)) {
     lapply(x$errors, print_entry)
