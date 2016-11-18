@@ -17,5 +17,6 @@ Imports:
     clisymbols,
     crayon,
     digest,
+    rprojroot,
     withr
 Encoding: UTF-8

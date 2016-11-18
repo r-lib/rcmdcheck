@@ -24,13 +24,18 @@ NULL
 #'   vectors containing the output for the failed check.
 #'
 #' @export
+#' @importFrom rprojroot find_package_root_file
 #' @importFrom withr with_dir
 #' @importFrom callr rcmd_safe
 
 rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
                       libpath = .libPaths(), repos = getOption("repos")) {
 
-  path <- normalizePath(path)
+  if (file.info(path)$isdir) {
+    path <- find_package_root_file(path = path)
+  } else {
+    path <- normalizePath(path)
+  }
 
   targz <- build_package(path, tmp <- tempfile())
   on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
