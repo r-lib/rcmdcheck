@@ -1,6 +1,8 @@
 
 #' Print R CMD check results
+#' @param x Check result object to print.
 #' @param header Whether to print a header.
+#' @param ... Additional arguments, currently ignored.
 #' @export
 #' @importFrom clisymbols symbol
 
