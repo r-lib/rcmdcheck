@@ -1,4 +1,8 @@
 
+# 1.2.1.9000
+
+* Find package root automatically (#18)
+
 # 1.2.1
 
 * Compare two check results with `compare_checks` or compare check
