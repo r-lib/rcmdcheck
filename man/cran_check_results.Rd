@@ -18,4 +18,3 @@ A list of \code{rcmdcheck} objects.
 \description{
 Download and parse R CMD check results from CRAN
 }
-

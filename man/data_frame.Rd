@@ -23,4 +23,3 @@ Data frame.
   lengths zero and one.
 }
 \keyword{internal}
-

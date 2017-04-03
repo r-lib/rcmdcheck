@@ -23,4 +23,3 @@ is checked for a \code{00check.log} file.
 \seealso{
 \code{\link{parse_check_url}}
 }
-

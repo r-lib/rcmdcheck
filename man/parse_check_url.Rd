@@ -21,4 +21,3 @@ Shorthand to parse R CMD check results from a URL
 \seealso{
 \code{\link{parse_check}}
 }
-

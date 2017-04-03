@@ -18,4 +18,3 @@ An code{rmdcheck_comparison} object.
 \description{
 Compare a check result to CRAN check results
 }
-

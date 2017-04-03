@@ -17,4 +17,3 @@ An \code{rcmdcheck_comparison} object.
 \description{
 Compare a set of check results to another check result
 }
-

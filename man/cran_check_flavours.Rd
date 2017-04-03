@@ -24,4 +24,3 @@ cran_check_flavours()
 cran_check_flavours("simplegraph")
 }
 }
-

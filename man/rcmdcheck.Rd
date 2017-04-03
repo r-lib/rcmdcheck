@@ -36,4 +36,3 @@ individual checks.
 
 Run \code{R CMD check} on a package or a directory
 }
-

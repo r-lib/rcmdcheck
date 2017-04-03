@@ -16,4 +16,3 @@
 \description{
 Print R CMD check results
 }
-
