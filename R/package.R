@@ -47,7 +47,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
       cmdargs = c(basename(targz), args),
       libpath = libpath,
       repos = repos,
-      callback = if (!quiet) check_callback()
+      block_callback = if (!quiet) block_callback(),
+      spinner = !quiet
     )
   )
 

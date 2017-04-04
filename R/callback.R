@@ -5,8 +5,11 @@
 
 #' @importFrom crayon red green make_style bold
 #' @importFrom clisymbols symbol
+#' @importFrom utils head tail
 
-check_callback <- function(top_line = TRUE) {
+block_callback <- function(top_line = TRUE) {
+
+  partial_line <- ""
 
   ok   <- green
   note <- make_style("orange")
@@ -50,7 +53,7 @@ check_callback <- function(top_line = TRUE) {
     )
   }
 
-  function(x) {
+  do_line <- function(x) {
 
     ## First line of output?
     if (first) {
@@ -116,5 +119,16 @@ check_callback <- function(top_line = TRUE) {
       cat(x, "\n", sep = "")
       flush(stdout())
     }
+  }
+
+  function(x) {
+    x <- paste0(partial_line, x)
+    partial_line <<- ""
+    lines <- strsplit(x, "\r?\n")[[1]]
+    if (last_char(x) != "\n") {
+      partial_line <<- tail(lines, 1)
+      lines <- head(lines, -1)
+    }
+    lapply(lines, do_line)
   }
 }

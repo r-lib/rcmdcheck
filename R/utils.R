@@ -92,3 +92,8 @@ first_line <- function(x) {
   l <- strsplit(x, "\n", fixed = TRUE)
   vapply(l, "[[", "", 1)
 }
+
+last_char <- function(x) {
+  l <- nchar(x)
+  substr(x, l, l)
+}
