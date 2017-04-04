@@ -97,3 +97,7 @@ last_char <- function(x) {
   l <- nchar(x)
   substr(x, l, l)
 }
+
+cat0 <- function(..., sep = "") {
+  cat(..., sep = "")
+}

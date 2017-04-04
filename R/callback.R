@@ -129,6 +129,8 @@ block_callback <- function(top_line = TRUE) {
       partial_line <<- tail(lines, 1)
       lines <- head(lines, -1)
     }
+    cat("  \r")
     lapply(lines, do_line)
+    cat0(sub("^[\\* ]", "  ", partial_line), "\r")
   }
 }
