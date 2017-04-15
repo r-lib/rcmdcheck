@@ -8,7 +8,7 @@
 \title{Run R CMD check from R and Capture Results}
 \usage{
 rcmdcheck(path = ".", quiet = FALSE, args = character(),
-  libpath = .libPaths(), repos = getOption("repos"))
+  libpath = .libPaths(), repos = getOption("repos"), timeout = Inf)
 }
 \arguments{
 \item{path}{Path to a package tarball or a directory.}
@@ -24,6 +24,10 @@ The default uses the current library path.}
 \item{repos}{The \code{repos} option to set for the check.
 This is needed for cyclic dependency checks if you use the
 \code{--as-cran} argument. The default uses the current value.}
+
+\item{timeout}{Timeout for the check, in seconds, or as a `difftime`
+object. If it is not finished before this, it will be killed.
+\code{Inf} means no timeout.}
 }
 \value{
 An S3 object (list) with fields \code{errors},

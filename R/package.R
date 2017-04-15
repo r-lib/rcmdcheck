@@ -19,6 +19,9 @@ NULL
 #' @param repos The \code{repos} option to set for the check.
 #'   This is needed for cyclic dependency checks if you use the
 #'   \code{--as-cran} argument. The default uses the current value.
+#' @param timeout Timeout for the check, in seconds, or as a
+#'   \code{difftime} object. If it is not finished before this, it will be
+#'   killed. \code{Inf} means no timeout.
 #' @return An S3 object (list) with fields \code{errors},
 #'   \code{warnings} and \code{nodes}. These are all character
 #'   vectors containing the output for the failed check.
@@ -29,7 +32,8 @@ NULL
 #' @importFrom callr rcmd_safe
 
 rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
-                      libpath = .libPaths(), repos = getOption("repos")) {
+                      libpath = .libPaths(), repos = getOption("repos"),
+                      timeout = Inf) {
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -48,7 +52,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
       libpath = libpath,
       repos = repos,
       block_callback = if (!quiet) block_callback(),
-      spinner = !quiet
+      spinner = !quiet,
+      timeout = timeout
     )
   )
 
