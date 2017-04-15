@@ -3,7 +3,7 @@ parse_check_output <- function(output) {
 
   entries <- strsplit(paste0("\n", output$stdout), "\n* ", fixed = TRUE)[[1]][-1]
 
-  structure(
+  res <- structure(
     list(
       output   = output,
       errors   = grep(" ... ERROR\n",   entries, value = TRUE, fixed = TRUE),
@@ -16,6 +16,12 @@ parse_check_output <- function(output) {
     ),
     class = "rcmdcheck"
   )
+
+  if (output$timeout) {
+    res$errors = c(res$errors, "R CMD check timed out")
+  }
+
+  res
 }
 
 parse_package <- function(entries) {

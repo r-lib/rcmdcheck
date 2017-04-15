@@ -25,9 +25,10 @@ The default uses the current library path.}
 This is needed for cyclic dependency checks if you use the
 \code{--as-cran} argument. The default uses the current value.}
 
-\item{timeout}{Timeout for the check, in seconds, or as a `difftime`
-object. If it is not finished before this, it will be killed.
-\code{Inf} means no timeout.}
+\item{timeout}{Timeout for the check, in seconds, or as a
+\code{difftime} object. If it is not finished before this, it will be
+killed. \code{Inf} means no timeout. If the check is timed out,
+that is added as an extra error to the result object.}
 }
 \value{
 An S3 object (list) with fields \code{errors},

@@ -21,7 +21,8 @@ NULL
 #'   \code{--as-cran} argument. The default uses the current value.
 #' @param timeout Timeout for the check, in seconds, or as a
 #'   \code{difftime} object. If it is not finished before this, it will be
-#'   killed. \code{Inf} means no timeout.
+#'   killed. \code{Inf} means no timeout. If the check is timed out,
+#'   that is added as an extra error to the result object.
 #' @return An S3 object (list) with fields \code{errors},
 #'   \code{warnings} and \code{nodes}. These are all character
 #'   vectors containing the output for the failed check.
@@ -56,6 +57,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
       timeout = timeout
     )
   )
+
+  if (out$timeout) message("R CMD check timed out")
 
   invisible(parse_check_output(out))
 }
