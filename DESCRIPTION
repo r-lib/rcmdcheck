@@ -20,4 +20,6 @@ Imports:
     rprojroot,
     utils,
     withr
+Remotes:
+    r-pkgs/callr
 Encoding: UTF-8
