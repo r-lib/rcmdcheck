@@ -45,20 +45,25 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   targz <- build_package(path, tmp <- tempfile())
   on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
 
-  with_dir(
+  out <- with_dir(
     dirname(targz),
-    out <- rcmd_safe(
-      "check",
-      cmdargs = c(basename(targz), args),
-      libpath = libpath,
-      repos = repos,
-      block_callback = if (!quiet) block_callback(),
-      spinner = !quiet,
-      timeout = timeout
-    )
+    do_check(targz, args, libpath, repos, quiet, timeout)
   )
 
   if (out$timeout) message("R CMD check timed out")
 
   invisible(parse_check_output(out))
+}
+
+do_check <- function(targz, args, libpath, repos, quiet, timeout) {
+  rcmd_safe(
+    "check",
+    cmdargs = c(basename(targz), args),
+    libpath = libpath,
+    repos = repos,
+    block_callback = if (!quiet) block_callback(),
+    spinner = !quiet,
+    timeout = timeout,
+    fail_on_status = FALSE
+  )
 }
