@@ -17,6 +17,10 @@ parse_check_output <- function(output) {
     class = "rcmdcheck"
   )
 
+  if (length(res$errors)) {
+    res$install_out <- output$install_out
+  }
+
   if (output$timeout) {
     res$errors = c(res$errors, "R CMD check timed out")
   }

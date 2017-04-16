@@ -56,7 +56,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 }
 
 do_check <- function(targz, args, libpath, repos, quiet, timeout) {
-  rcmd_safe(
+  res <- rcmd_safe(
     "check",
     cmdargs = c(basename(targz), args),
     libpath = libpath,
@@ -66,4 +66,12 @@ do_check <- function(targz, args, libpath, repos, quiet, timeout) {
     timeout = timeout,
     fail_on_status = FALSE
   )
+  install_out <- file.path(dir(pattern="\\.Rcheck$"), "00install.out")
+  res$install_out <- if (file.exists(install_out)) {
+    read_char(install_out)
+  } else {
+    "<00install.out file does not exist>"
+  }
+
+  res
 }
