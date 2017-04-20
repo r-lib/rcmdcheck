@@ -1,11 +1,4 @@
 
-#' Start running `R CMD check` in the background
-#'
-#' @inheritParams rcmdcheck
-#' @return A list with two elements:
-#'   * `process` is the [processx::process] object of the background process.
-#'   * `targz` is the (temporary) `tar.gz` package file.
-#'
 #' @export
 #' @importFrom callr rcmd_bg_safe
 

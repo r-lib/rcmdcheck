@@ -8,23 +8,23 @@
 #' @name rcmdcheck
 NULL
 
-#' Run `R CMD check` on a package or a directory
+#' Run \code{R CMD check} on a package or a directory
 #'
 #' @param path Path to a package tarball or a directory.
 #' @param quiet Whether to print check output during checking.
 #' @param args Character vector of arguments to pass to
-#'   `R CMD check`.
+#'   \code{R CMD check}.
 #' @param libpath The library path to set for the check.
 #'   The default uses the current library path.
-#' @param repos The `repos` option to set for the check.
+#' @param repos The \code{repos} option to set for the check.
 #'   This is needed for cyclic dependency checks if you use the
-#'   `--as-cran` argument. The default uses the current value.
+#'   \code{--as-cran} argument. The default uses the current value.
 #' @param timeout Timeout for the check, in seconds, or as a
-#'  [base::difftime] object. If it is not finished before this, it will be
-#'   killed. `Inf` means no timeout. If the check is timed out,
+#'   \code{difftime} object. If it is not finished before this, it will be
+#'   killed. \code{Inf} means no timeout. If the check is timed out,
 #'   that is added as an extra error to the result object.
-#' @return An S3 object (list) with fields `errors`,
-#'   `warnings` and `nodes`. These are all character
+#' @return An S3 object (list) with fields \code{errors},
+#'   \code{warnings} and \code{nodes}. These are all character
 #'   vectors containing the output for the failed check.
 #'
 #' @export

@@ -9,19 +9,17 @@ data_frame(..., stringsAsFactors = FALSE)
 \arguments{
 \item{...}{Named data frame columns, or data frames.}
 
-\item{stringsAsFactors}{Just leave it on \code{FALSE}. \code{:)}}
+\item{stringsAsFactors}{Just leave it on FALSE. :)}
 }
 \value{
 Data frame.
 }
 \description{
-\itemize{
-\item Sets stringsAsFactors to FALSE by default
-\item If any columns have zero length, the result will have
-zero rows.
-\item If a column is a scalar, then it will be recycled.
-\item Non-matching number of rows gives an error, except for
-lengths zero and one.
-}
+* Sets stringsAsFactors to FALSE by default
+* If any columns have zero length, the result will have
+  zero rows.
+* If a column is a scalar, then it will be recycled.
+* Non-matching number of rows gives an error, except for
+  lengths zero and one.
 }
 \keyword{internal}

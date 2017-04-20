@@ -10,7 +10,6 @@ LazyData: true
 URL: https://github.com/MangoTheCat/rcmdcheck
 BugReports: https://github.com/MangoTheCat/rcmdcheck/issues
 RoxygenNote: 6.0.1.9000
-Roxygen: list(markdown = TRUE)
 Suggests:
     testthat
 Imports:

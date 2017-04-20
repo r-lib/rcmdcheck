@@ -26,14 +26,14 @@ This is needed for cyclic dependency checks if you use the
 \code{--as-cran} argument. The default uses the current value.}
 
 \item{timeout}{Timeout for the check, in seconds, or as a
-\link[base:difftime]{base::difftime} object. If it is not finished before this, it will be
+\code{difftime} object. If it is not finished before this, it will be
 killed. \code{Inf} means no timeout. If the check is timed out,
 that is added as an extra error to the result object.}
 }
 \value{
 An S3 object (list) with fields \code{errors},
-\code{warnings} and \code{nodes}. These are all character
-vectors containing the output for the failed check.
+  \code{warnings} and \code{nodes}. These are all character
+  vectors containing the output for the failed check.
 }
 \description{
 Run R CMD check form R programatically, and capture the results of the
