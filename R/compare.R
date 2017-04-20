@@ -3,8 +3,9 @@
 #'
 #' @param old A check result, or a list of check results.
 #' @param new A check result.
-#' @return An \code{rcmdcheck_comparison} object.
+#' @return An `rcmdcheck_comparison` object.
 #'
+#' @family check comparisons
 #' @export
 
 compare_checks <- function(old, new) {
@@ -20,8 +21,9 @@ compare_checks <- function(old, new) {
 #' @param check A check result.
 #' @param flavours CRAN check flavour(s) to use. By default all
 #'   platforms are used.
-#' @return An code{rmdcheck_comparison} object.
+#' @return An `rmdcheck_comparison` object.
 #'
+#' @family check comparisons
 #' @export
 
 compare_to_cran <- function(check,

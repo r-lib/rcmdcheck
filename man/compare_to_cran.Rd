@@ -13,8 +13,11 @@ compare_to_cran(check, flavours = cran_check_flavours(check$package))
 platforms are used.}
 }
 \value{
-An code{rmdcheck_comparison} object.
+An \code{rmdcheck_comparison} object.
 }
 \description{
 Compare a check result to CRAN check results
+}
+\seealso{
+Other check comparisons: \code{\link{compare_checks}}
 }

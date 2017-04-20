@@ -35,7 +35,7 @@ is_string <- function(x) {
 #'   lengths zero and one.
 #'
 #' @param ... Named data frame columns, or data frames.
-#' @param stringsAsFactors Just leave it on FALSE. :)
+#' @param stringsAsFactors Just leave it on `FALSE`. `:)`
 #' @return Data frame.
 #'
 #' @keywords internal
