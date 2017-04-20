@@ -1,12 +1,12 @@
 
 #' Download and show all CRAN check flavour platforms
 #'
-#' If the \code{package} argument is \code{NULL}, then all current
-#' platforms are downloaded. If the \code{package} argument is specified,
+#' If the `package` argument is `NULL`, then all current
+#' platforms are downloaded. If the `package` argument is specified,
 #' then all flavours used for the latests package checks for that
 #' package, are downloaded and returned.
 #'
-#' @param package CRAN package name or \code{NULL}.
+#' @param package CRAN package name or `NULL`.
 #' @return Character vector of platform ids.
 #'
 #' @export
@@ -65,7 +65,7 @@ cran_check_flavours_generic <- function() {
 #' @param package Name of a single package to download the checks for.
 #' @param flavours CRAN check flavours to use. Defaults to all
 #'   flavours that were used to check the package.
-#' @return A list of \code{rcmdcheck} objects.
+#' @return A list of `rcmdcheck` objects.
 #'
 #' @export
 
