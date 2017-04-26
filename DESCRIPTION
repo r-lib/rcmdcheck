@@ -18,9 +18,10 @@ Imports:
     clisymbols,
     crayon,
     digest,
+    R6,
     rprojroot,
     utils,
     withr
 Remotes:
-    r-pkgs/callr
+    r-pkgs/callr@background
 Encoding: UTF-8
