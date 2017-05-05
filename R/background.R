@@ -7,15 +7,47 @@ NULL
 rcmdcheck_process <- R6Class(
   "rcmdcheck_process",
   inherit = callr::rcmd_process,
+
   public = list(
+
     initialize = function(path = ".", args = character(),
       libpath = .libPaths(), repos = getOption("repos"))
-      rcc_init(self, private, super, path, args, libpath, repos)
+      rcc_init(self, private, super, path, args, libpath, repos),
+
+    parse_results = function()
+      rcc_parse_results(self, private),
+
+    get_output_connection = function()
+      stop("not implemented"),
+
+    get_error_connection = function()
+      stop("not implemented"),
+
+    read_output_lines = function(...) {
+      l <- super$read_output_lines(...)
+      private$cstdout <- c(private$cstdout, l)
+      l
+    },
+
+    read_error_lines = function(...) {
+      l <- super$read_error_lines(...)
+      private$cstderr <- c(private$cstderr, l)
+      l
+    },
+
+    kill = function(...) {
+      private$killed <- TRUE
+      super$kill(...)
+    }
+
   ),
   private = list(
     path  = NULL,
     tmp   = NULL,
-    targz = NULL
+    targz = NULL,
+    cstdout = character(),
+    cstderr = character(),
+    killed = FALSE
   )
 )
 
@@ -48,4 +80,31 @@ rcc_init <- function(self, private, super, path, args, libpath, repos) {
   )
 
   invisible(self)
+}
+
+rcc_parse_results <- function(self, private) {
+  if (self$is_alive()) stop("Process still alive")
+
+  ## Make sure all output is read out
+  self$read_output_lines()
+  self$read_error_lines()
+
+  out <- list(
+    status = self$get_exit_status(),
+    stdout = paste(private$cstdout, collapse = "\n"),
+    stderr = paste(private$cstderr, collapse = "\n"),
+    timeout = private$killed
+  )
+
+  install_out <- file.path(
+    dir(private$tmp, pattern = "\\.Rcheck$", full.names = TRUE),
+    "00install.out"
+  )
+  out$install_out <- if (file.exists(install_out)) {
+    read_char(install_out)
+  } else {
+    "<00install.out file does not exist>"
+  }
+
+  parse_check_output(out)
 }
