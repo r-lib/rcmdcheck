@@ -66,12 +66,8 @@ do_check <- function(targz, args, libpath, repos, quiet, timeout) {
     timeout = timeout,
     fail_on_status = FALSE
   )
-  install_out <- file.path(dir(pattern="\\.Rcheck$"), "00install.out")
-  res$install_out <- if (file.exists(install_out)) {
-    read_char(install_out)
-  } else {
-    "<00install.out file does not exist>"
-  }
+  res$install_out <- get_install_out(".")
+  res$description <- get_check_description(".")
 
   res
 }
