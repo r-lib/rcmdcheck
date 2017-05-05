@@ -17,12 +17,6 @@ rcmdcheck_process <- R6Class(
     parse_results = function()
       rcc_parse_results(self, private),
 
-    get_output_connection = function()
-      stop("not implemented"),
-
-    get_error_connection = function()
-      stop("not implemented"),
-
     read_output_lines = function(...) {
       l <- super$read_output_lines(...)
       private$cstdout <- c(private$cstdout, l)
