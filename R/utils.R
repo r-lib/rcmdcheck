@@ -101,3 +101,28 @@ last_char <- function(x) {
 cat0 <- function(..., sep = "") {
   cat(..., sep = "")
 }
+
+get_install_out <- function(path) {
+  install_out <- file.path(
+    dir(path, pattern = "\\.Rcheck$", full.names = TRUE),
+    "00install.out"
+  )
+
+  if (file.exists(install_out)) {
+    read_char(install_out)
+  } else {
+    "<00install.out file does not exist>"
+  }
+}
+
+get_check_description <- function(path) {
+  path <- normalizePath(path)
+  chkdir <- dir(path, pattern = "\\.Rcheck$")
+  pkg <- sub("\\.Rcheck$", "", chkdir)
+  desc <- file.path(path, chkdir, "00_pkg_src", pkg, "DESCRIPTION")
+  if (file.exists(desc)) {
+    read_char(desc)
+  } else {
+    "<DESCRIPTION file does not exist>"
+  }
+}

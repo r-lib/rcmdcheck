@@ -87,18 +87,10 @@ rcc_parse_results <- function(self, private) {
     status = self$get_exit_status(),
     stdout = paste(private$cstdout, collapse = "\n"),
     stderr = paste(private$cstderr, collapse = "\n"),
-    timeout = private$killed
+    timeout = private$killed,
+    install_out = get_install_out(private$tmp),
+    description = get_check_description(private$tmp)
   )
-
-  install_out <- file.path(
-    dir(private$tmp, pattern = "\\.Rcheck$", full.names = TRUE),
-    "00install.out"
-  )
-  out$install_out <- if (file.exists(install_out)) {
-    read_char(install_out)
-  } else {
-    "<00install.out file does not exist>"
-  }
 
   parse_check_output(out)
 }
