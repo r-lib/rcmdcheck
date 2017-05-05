@@ -24,7 +24,7 @@ NULL
 #'   killed. `Inf` means no timeout. If the check is timed out,
 #'   that is added as an extra error to the result object.
 #' @return An S3 object (list) with fields `errors`,
-#'   `warnings` and `nodes`. These are all character
+#'   `warnings` and `notes`. These are all character
 #'   vectors containing the output for the failed check.
 #'
 #' @export

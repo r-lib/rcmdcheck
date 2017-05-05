@@ -32,7 +32,7 @@ that is added as an extra error to the result object.}
 }
 \value{
 An S3 object (list) with fields \code{errors},
-\code{warnings} and \code{nodes}. These are all character
+\code{warnings} and \code{notes}. These are all character
 vectors containing the output for the failed check.
 }
 \description{
