@@ -126,3 +126,67 @@ print_comparison_x <- function(x, color, func, str) {
     cat("\n")
   }
 }
+
+#' @export
+
+summary.rcmdcheck_comparison <- function(object, ...) {
+
+  pale <- make_style("darkgrey")
+
+  make_summary <- function(type) {
+    recs <- object$cmp[object$cmp$type == type, , drop = FALSE]
+    old <- unique(recs$hash[recs$which == "old"])
+    new <- unique(recs$hash[recs$which == "new"])
+    c(both  = length(intersect(old, new)),
+      fixed = length(setdiff(old, new)),
+      broke = length(setdiff(new, old)))
+  }
+
+  error_summary   <- make_summary("error")
+  warning_summary <- make_summary("warning")
+  note_summary    <- make_summary("note")
+
+  sum_status <-
+    if ((error_summary + warning_summary + note_summary)["broke"] == 0) {
+      green(symbol$tick)
+    } else {
+      red(symbol$cross)
+    }
+
+  format_summary <- function(x) {
+    paste0(
+      x[["both"]],
+      if (x[["fixed"]]) green(paste0("-", x[["fixed"]])) else "  ",
+      if (x[["broke"]]) red(paste0("+", x[["broke"]])) else "  "
+    )
+  }
+
+  oldversion <- paste(unique(vapply(object$old, "[[", "", "version")),
+                      collapse = ", ")
+  newversion <- object$new$version
+  package_version <- if (oldversion == newversion) {
+    oldversion
+  } else {
+    paste0(newversion, " vs ", oldversion)
+  }
+
+  header <- paste0(
+    sum_status, " ",
+    object$new$package, " ",
+    package_version
+  )
+
+  cat(
+    pale(paste0(
+      col_align(header, width = 40),
+      " ", symbol$line, symbol$line, " ",
+      format_summary(error_summary), " E | ",
+      format_summary(warning_summary), " W | ",
+      format_summary(note_summary), " N"
+    )),
+    "\n",
+    sep = ""
+  )
+
+  invisible(object)
+}
