@@ -50,7 +50,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     do_check(targz, args, libpath, repos, quiet, timeout)
   )
 
-  if (out$timeout) message("R CMD check timed out")
+  if (isTRUE(out$timeout)) message("R CMD check timed out")
 
   invisible(parse_check_output(out))
 }
