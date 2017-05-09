@@ -73,21 +73,33 @@ hash_check <- function(check) {
   vapply(cleancheck, digest, "")
 }
 
+#' Print R CMD check result comparisons
+#'
+#' See [compare_checks()] and [compare_to_cran()].
+#'
+#' @param x R CMD check result comparison object.
+#' @param header Whether to print the header. You can suppress the
+#'   header if you want to use the printout as part of another object's
+#'   printout.
+#' @param ... Additional arguments, currently ignored.
 #' @export
 #' @importFrom crayon red
 
-print.rcmdcheck_comparison <- function(x, ...) {
+print.rcmdcheck_comparison <- function(x, header = TRUE, ...) {
 
-  print_header(
-    "R CMD check comparison",
-    paste0(
-      x$old[[1]]$package, " ",
-      x$old[[1]]$version,
-      " vs ",
-      if (x$old[[1]]$package != x$new$package) paste0(x$new$package, " "),
-      x$new$version
+  if (header) {
+    print_header(
+      "R CMD check comparison",
+      paste0(
+        x$old[[1]]$package, " ",
+        x$old[[1]]$version,
+        " vs ",
+        if (x$old[[1]]$package != x$new$package)
+          paste0(x$new$package, " "),
+        x$new$version
+      )
     )
-  )
+  }
 
   print_comparison_fixed(x)
   print_comparison_same(x)
