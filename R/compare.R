@@ -180,9 +180,9 @@ summary.rcmdcheck_comparison <- function(object, ...) {
     pale(paste0(
       col_align(header, width = 40),
       " ", symbol$line, symbol$line, " ",
-      format_summary(error_summary), " E | ",
-      format_summary(warning_summary), " W | ",
-      format_summary(note_summary), " N"
+      "E: ", format_summary(error_summary), " | ",
+      "W: ", format_summary(warning_summary), " | ",
+      "N: ", format_summary(note_summary)
     )),
     "\n",
     sep = ""
