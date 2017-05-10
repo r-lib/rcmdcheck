@@ -103,12 +103,8 @@ cat0 <- function(..., sep = "") {
 }
 
 get_install_out <- function(path) {
-  install_out <- file.path(
-    dir(path, pattern = "\\.Rcheck$", full.names = TRUE),
-    "00install.out"
-  )
-
-  if (file.exists(install_out)) {
+  install_out <- file.path(path, "00install.out")
+  if (is_string(install_out) && file.exists(install_out)) {
     read_char(install_out)
   } else {
     "<00install.out file does not exist>"
@@ -116,11 +112,10 @@ get_install_out <- function(path) {
 }
 
 get_check_description <- function(path) {
-  path <- normalizePath(path)
-  chkdir <- dir(path, pattern = "\\.Rcheck$")
+  chkdir <- basename(path)
   pkg <- sub("\\.Rcheck$", "", chkdir)
-  desc <- file.path(path, chkdir, "00_pkg_src", pkg, "DESCRIPTION")
-  if (file.exists(desc)) {
+  desc <- file.path(path, "00_pkg_src", pkg, "DESCRIPTION")
+  if (is_string(desc) && file.exists(desc)) {
     read_char(desc)
   } else {
     "<DESCRIPTION file does not exist>"
