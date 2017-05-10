@@ -66,8 +66,6 @@ do_check <- function(targz, args, libpath, repos, quiet, timeout) {
     timeout = timeout,
     fail_on_status = FALSE
   )
-  res$install_out <- get_install_out(".")
-  res$description <- get_check_description(".")
 
   res
 }

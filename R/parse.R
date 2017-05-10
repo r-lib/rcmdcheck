@@ -12,14 +12,14 @@ parse_check_output <- function(output) {
       package  = parse_package(entries),
       version  = parse_version(entries),
       rversion = parse_rversion(entries),
-      platform = parse_platform(entries)
+      platform = parse_platform(entries),
+      checkdir = parse_checkdir(entries)
     ),
     class = "rcmdcheck"
   )
 
-  if (length(res$errors)) {
-    res$install_out <- output$install_out
-  }
+  res$install_out <- get_install_out(res$checkdir)
+  res$description <- get_check_description(res$checkdir)
 
   if (isTRUE(output$timeout)) {
     res$errors = c(res$errors, "R CMD check timed out")
@@ -56,6 +56,12 @@ parse_rversion <- function(entries) {
 parse_platform <- function(entries) {
   line <- grep("^using platform:", entries, value = TRUE)
   sub("^using platform: ([^\\s]+)\\s.*$", "\\1", line, perl = TRUE)
+}
+
+parse_checkdir <- function(entries) {
+  line <- grep("^using log directory", entries, value = TRUE)
+  sub("^using log directory\\s+[^/\\\\]+([/\\\\].+\\.Rcheck).*$", "\\1",
+      line, perl = TRUE)
 }
 
 #' Parse \code{R CMD check} results from a file or string
