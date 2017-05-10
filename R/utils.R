@@ -128,7 +128,9 @@ read_dcf <- function(path) {
   txt <- textConnection("res", open = "w", local = TRUE)
   write.dcf(dcf, txt)
   close(txt)
-  paste(res, collapse = "\n")
+  res <- paste0(paste(res, collapse = "\n"), "\n")
+  if ("Encoding" %in% colnames(dcf)) Encoding(res) <- dcf[, "Encoding"]
+  res
 }
 
 #' @importFrom crayon col_nchar
