@@ -116,10 +116,19 @@ get_check_description <- function(path) {
   pkg <- sub("\\.Rcheck$", "", chkdir)
   desc <- file.path(path, "00_pkg_src", pkg, "DESCRIPTION")
   if (is_string(desc) && file.exists(desc)) {
-    read_char(desc)
+    read_dcf(desc)
   } else {
     "<DESCRIPTION file does not exist>"
   }
+}
+
+read_dcf <- function(path) {
+  fields <- colnames(read.dcf(path))
+  dcf <- read.dcf(path, keep.white = fields)
+  txt <- textConnection("res", open = "w", local = TRUE)
+  write.dcf(dcf, txt)
+  close(txt)
+  paste(res, collapse = "\n")
 }
 
 #' @importFrom crayon col_nchar
