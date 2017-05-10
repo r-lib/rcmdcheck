@@ -12,8 +12,6 @@ test_that("rcmdcheck works", {
     print(bad1),
     "Non-standard license specification"
   )
-
-  expect_null(bad1$install_out)
 })
 
 test_that("non-quiet mode works", {
