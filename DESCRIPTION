@@ -14,7 +14,7 @@ Roxygen: list(markdown = TRUE)
 Suggests:
     testthat
 Imports:
-    callr,
+    callr (>= 1.0.0.9000),
     clisymbols,
     crayon,
     digest,
