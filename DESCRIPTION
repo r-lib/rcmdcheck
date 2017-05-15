@@ -2,13 +2,13 @@ Package: rcmdcheck
 Title: Run 'R CMD check' from 'R' and Capture Results
 Version: 1.2.1.9000
 Author: Gábor Csárdi
-Maintainer: Gábor Csárdi <gcsardi@mango-solutions.com>
+Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: Run 'R CMD check' from 'R' programmatically, and capture the
     results of the individual checks.
 License: MIT + file LICENSE
 LazyData: true
-URL: https://github.com/MangoTheCat/rcmdcheck
-BugReports: https://github.com/MangoTheCat/rcmdcheck/issues
+URL: https://github.com/R-Pkgs/rcmdcheck#readme
+BugReports: https://github.com/R-Pkgs/rcmdcheck/issues
 RoxygenNote: 6.0.1.9000
 Roxygen: list(markdown = TRUE)
 Suggests:
