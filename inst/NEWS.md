@@ -1,7 +1,25 @@
 
 # 1.2.1.9000
 
+* `rcmdcheck_process` to run `R CMD check` in the background
+
+* Timeout support (default is 10 minutes)
+
+* Save `install.out` and also `DESCRIPTION` in the result
+
+* Better printing of progress: now the message from the check that is
+  actually being performed is shown on the screen.
+
+* Spinner while running check
+
+* `summary()` method for check comparisons
+
+* `check_details()` to query the check results programmatically.
+  (No need to use `$errors`, `$warnings`, etc. directly.)
+
 * Find package root automatically (#18)
+
+* Header line is optional in printout
 
 # 1.2.1
 
