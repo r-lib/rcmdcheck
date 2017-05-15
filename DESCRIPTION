@@ -23,5 +23,5 @@ Imports:
     utils,
     withr
 Remotes:
-    r-pkgs/callr@background
+    r-pkgs/callr
 Encoding: UTF-8
