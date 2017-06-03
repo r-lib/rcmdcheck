@@ -18,6 +18,7 @@ Imports:
     clisymbols,
     crayon,
     digest,
+    prettyunits,
     R6,
     rprojroot,
     utils,
