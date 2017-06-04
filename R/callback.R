@@ -94,19 +94,20 @@ block_callback <- function(top_line = TRUE) {
   ## The output from the tests is a bit messed up, especially if we
   ## want to process it line by line.
   ## The tests start with '* checking test ...\n' and then when a test
-  ## file start running we see sg like '  Running ‘testthat.R’'
-  ## This is without the newline character. The first test file that
-  ## errors out will stop the tests entirely.
+  ## file starts running we see sg like '  Running 'testthat.R''
+  ## This is without the newline character.
+  ##
+  ## The first test file that errors out will stop the tests entirely.
   ##
   ## When a test file is done, we get a '\n', and then either the next one
-  ## is started with another '  Running...' line (without \n), or they are
-  ## done completely, and we get a '\n' and ' ERROR\n' or ' OK\n' depending
+  ## is started with another '  Running ...' line (without \n), or they are
+  ## done completely, and we get a '\n' and ' ERROR\n' / ' OK\n' depending
   ## on the result.
   ##
   ## So the tricky thing is, we can only update a 'Running ' line after
   ## we already know what is in the next line. If the next line is ' ERROR',
-  ## then the test file failed, otherwise succeeded. So we do the actual
-  ## updating based on the partial lines.
+  ## then the test file failed, otherwise succeeded. So we also do the actual
+  ## updating based on the '  Running' partial lines.
   ##
   ## As usually, prev_line contains the previous line.
 
