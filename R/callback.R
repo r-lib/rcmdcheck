@@ -50,6 +50,10 @@ block_callback <- function(top_line = TRUE) {
       do_test_mode(x)
     } else if (is_new_check(x)) {
       do_new_check(x)
+    } else if (grepl("^Status: ", x)) {
+      ## We just skip the status, it is printed out anyway, as the return
+      ## value
+      NA_character_
     } else {
       do_continuation(x)
     }
