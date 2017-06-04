@@ -142,7 +142,7 @@ block_callback <- function(top_line = TRUE) {
   }
 
   do_continuation <- function(x) {
-    x
+    paste0("   ", x)
   }
 
   function(x) {
