@@ -1,7 +1,4 @@
 
-xrec <- new.env()
-xrec$rec <- list()
-
 ## This is the callback called for each line of the output
 ## We color it a bit, OK is green, NOTE is orange,
 ## WARNING and ERROR are red.
@@ -146,7 +143,6 @@ block_callback <- function(top_line = TRUE) {
   }
 
   function(x) {
-    xrec$rec <<- c(xrec$rec, list(list(Sys.time(), x)))
     x <- paste0(partial_line, x)
     partial_line <<- ""
     lines <- strsplit(x, "\r?\n")[[1]]
