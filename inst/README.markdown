@@ -32,7 +32,7 @@ output. The result of the check is returned, in a list with elements
 `errors`, `warnings`, and `notes`. Each element is a character vector,
 and one element of the character vectors is a single failure.
 
-![](/inst/rcmdcheck.png)
+![](/inst/rcmdcheck.gif)
 
 ## License
 
