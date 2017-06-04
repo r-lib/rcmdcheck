@@ -28,7 +28,7 @@ block_callback <- function(top_line = TRUE) {
 
   time_if_long <- function() {
     elapsed <- now - line_started
-    if (elapsed> as.difftime(0.5, units = "secs")) {
+    if (elapsed> as.difftime(1/3, units = "secs")) {
       style(timing = paste0(" (", pretty_dt(elapsed), ")"))
     } else {
       ""
@@ -61,6 +61,10 @@ block_callback <- function(top_line = TRUE) {
 
     ## NA_character_ can omit output
     if (is.na(xx)) return()
+
+    if (should_time) xx <- style(xx, timing = time_if_long())
+
+    line_started <<- now
 
     cat(xx, "\n", sep = "")
     flush(stdout())
@@ -131,6 +135,7 @@ block_callback <- function(top_line = TRUE) {
     if (grepl("^  Running ", x) &&
         !grepl("^\\* checking tests \\.\\.\\.", prev_line)) {
       xx <- style(ok = symbol$tick, pale = no(prev_line))
+      xx <- style(xx, timing = time_if_long())
       cat(xx, "\n", sep = "")
       flush(stdout())
     }
