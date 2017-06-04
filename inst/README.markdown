@@ -36,4 +36,4 @@ and one element of the character vectors is a single failure.
 
 ## License
 
-MIT © Mango Solutions
+MIT © Mango Solutions, Gábor Csárdi, RStudio
