@@ -78,13 +78,13 @@ block_callback <- function(top_line = TRUE) {
       style(ok = symbol$tick, "  ", pale = no(x, "OK"))
     } else if (grepl(" \\.\\.\\. NOTE\\s*$", x)) {
       state <<- "NOTE"
-      style(note = c("N ", no(x, "NOTE")))
+      style(note = c("N  ", no(x, "NOTE")))
     } else if (grepl(" \\.\\.\\. WARNING\\s*$", x)) {
       state <<- "WARNING"
-      style(warn = c("W ", no(x, "WARNING")))
+      style(warn = c("W  ", no(x, "WARNING")))
     } else if (grepl(" \\.\\.\\. ERROR\\s*$", x)) {
       state <<- "ERROR"
-      style(err = c("E ", no(x, "ERROR")))
+      style(err = c("E  ", no(x, "ERROR")))
     } else if (grepl("^\\* checking tests \\.\\.\\.[ ]?$", x)) {
       state <<- "tests"
       style(pale = c(symbol$line, "  ", no(x)))
