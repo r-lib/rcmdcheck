@@ -7,8 +7,8 @@ Description: Run 'R CMD check' from 'R' programmatically, and capture the
     results of the individual checks.
 License: MIT + file LICENSE
 LazyData: true
-URL: https://github.com/R-Pkgs/rcmdcheck#readme
-BugReports: https://github.com/R-Pkgs/rcmdcheck/issues
+URL: https://github.com/r-Lib/rcmdcheck#readme
+BugReports: https://github.com/r-Lib/rcmdcheck/issues
 RoxygenNote: 6.0.1.9000
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -25,5 +25,5 @@ Imports:
     utils,
     withr
 Remotes:
-    r-pkgs/callr
+    r-lib/callr
 Encoding: UTF-8
