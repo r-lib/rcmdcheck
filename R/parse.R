@@ -6,9 +6,9 @@ parse_check_output <- function(output) {
   res <- structure(
     list(
       output   = output,
-      errors   = grep(" ... ERROR\n",   entries, value = TRUE, fixed = TRUE),
-      warnings = grep(" ... WARNING\n", entries, value = TRUE, fixed = TRUE),
-      notes    = grep(" ... NOTE\n",    entries, value = TRUE, fixed = TRUE),
+      errors   = grep(" ...\\s+ERROR\n",   entries, value = TRUE),
+      warnings = grep(" ...\\s+WARNING\n", entries, value = TRUE),
+      notes    = grep(" ...\\s+NOTE\n",    entries, value = TRUE),
       package  = parse_package(entries),
       version  = parse_version(entries),
       rversion = parse_rversion(entries),
