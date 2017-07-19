@@ -66,9 +66,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     description = read_char(tmpdesc)
   )
 
-  print(summary(res))
-
-  invisible(res)
+  res
 }
 
 do_check <- function(targz, args, libpath, repos, quiet, timeout) {
