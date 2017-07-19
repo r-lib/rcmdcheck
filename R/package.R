@@ -45,21 +45,25 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   targz <- build_package(path, tmp <- tempfile())
 
-  out <- with_dir(
-    dirname(targz),
-    do_check(targz, args, libpath, repos, quiet, timeout)
-  )
-
   dsc <- desc(targz)
   dsc$write(tmpdesc <- tempfile())
   on.exit(unlink(tmpdesc), add = TRUE)
+  package_name <- unname(dsc$get("Package"))
+  package_version <- unname(dsc$get("Version"))
+
+  out <- with_dir(
+    dirname(targz),
+    do_check(targz, package_name, package_version, args, libpath, repos,
+             quiet, timeout)
+  )
 
   if (isTRUE(out$timeout)) message("R CMD check timed out")
 
   res <- parse_check_output(
-    out,
-    package = unname(dsc$get("Package")),
-    version = unname(dsc$get("Version")),
+    out$result,
+    session_info = out$session_info,
+    package = package_name,
+    version = package_version,
     rversion = R.Version()$version.string, # should be the same
     platform = R.Version()$platform,       # should be the same
     description = read_char(tmpdesc),
@@ -69,17 +73,53 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   res
 }
 
-do_check <- function(targz, args, libpath, repos, quiet, timeout) {
-  res <- rcmd_safe(
-    "check",
-    cmdargs = c(basename(targz), args),
-    libpath = libpath,
-    repos = repos,
-    block_callback = if (!quiet) block_callback(),
-    spinner = !quiet,
-    timeout = timeout,
-    fail_on_status = FALSE
+#' @importFrom withr with_envvar
+
+do_check <- function(targz, package, version, args, libpath, repos,
+                     quiet, timeout) {
+
+  profile <- tempfile()
+  session_output <- tempfile()
+  on.exit(unlink(c(profile, session_output)), add = TRUE)
+
+  last <- substitute(
+    function() {
+      si <- utils::sessionInfo()
+      l <- if (file.exists(`__output__`)) {
+        readRDS(`__output__`)
+      } else {
+        list()
+      }
+      saveRDS(c(l, list(si)), `__output__`)
+    },
+    list(`__output__` = session_output)
   )
 
-  res
+  cat(".Last <-", deparse(last), file = profile, sep = "\n")
+
+  res <- with_envvar(
+    c(R_PROFILE_USER = profile),
+    rcmd_safe(
+      "check",
+      cmdargs = c(basename(targz), args),
+      libpath = libpath,
+      user_profile = TRUE,
+      repos = repos,
+      block_callback = if (!quiet) block_callback(),
+      spinner = !quiet,
+      timeout = timeout,
+      fail_on_status = FALSE
+    )
+  )
+
+  session_info <- tryCatch(
+    Filter(
+      function(so) package %in% names(so$otherPkgs),
+      suppressWarnings(readRDS(session_output))
+    )[[1]],
+    error = function(e) NULL,
+    warning = function(w) NULL
+  )
+
+  list(result = res, session_info = session_info)
 }

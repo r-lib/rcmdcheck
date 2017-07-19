@@ -1,7 +1,8 @@
 
 parse_check_output <- function(output, package = NULL, version = NULL,
                                rversion = NULL, platform = NULL,
-                               description = NULL, tempfiles = NULL) {
+                               description = NULL, tempfiles = NULL,
+                               session_info = NULL) {
 
   entries <- strsplit(paste0("\n", output$stdout), "\n* ", fixed = TRUE)[[1]][-1]
 
@@ -15,7 +16,8 @@ parse_check_output <- function(output, package = NULL, version = NULL,
       version  = version %||% parse_version(entries),
       rversion = rversion %||% parse_rversion(entries),
       platform = platform %||% parse_platform(entries),
-      checkdir = parse_checkdir(entries)
+      checkdir = parse_checkdir(entries),
+      session_info = session_info
     ),
     class = "rcmdcheck"
   )
