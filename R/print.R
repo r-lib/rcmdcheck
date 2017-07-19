@@ -91,7 +91,11 @@ print_entry <- function(entry) {
 #' @export
 
 summary.rcmdcheck <- function(object, ...) {
+  structure(list(object), class = "rcmdcheck_summary")
+}
 
+print.rcmdcheck_summary <- function(x, ...) {
+  object <- x[[1]]
   cat(symbol$line, symbol$line, " ", sep = "")
   summary_entry(object, "errors")
   cat(" | ")

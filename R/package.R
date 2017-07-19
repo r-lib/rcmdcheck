@@ -54,7 +54,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   res <- parse_check_output(out)
 
-  summary(res)
+  print(summary(res))
 
   invisible(res)
 }
