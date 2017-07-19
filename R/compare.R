@@ -201,6 +201,8 @@ summary.rcmdcheck_comparison <- function(object, ...) {
   )
 }
 
+#' @export
+
 print.rcmdcheck_comparison_summary <- function(x, ...) {
 
   pale <- make_style("darkgrey")
