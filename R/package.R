@@ -52,6 +52,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   )
 
   dsc <- desc(targz)
+  dsc$write(tmpdesc <- tempfile())
+  on.exit(unlink(tmpdesc), add = TRUE)
 
   if (isTRUE(out$timeout)) message("R CMD check timed out")
 
@@ -60,7 +62,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     package = unname(dsc$get("Package")),
     version = unname(dsc$get("Version")),
     rversion = R.Version()$version.string, # should be the same
-    platform = R.Version()$platform        # should be the same
+    platform = R.Version()$platform,       # should be the same
+    description = read_char(tmpdesc)
   )
 
   print(summary(res))

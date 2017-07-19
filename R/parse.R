@@ -1,6 +1,7 @@
 
 parse_check_output <- function(output, package = NULL, version = NULL,
-                               rversion = NULL, platform = NULL) {
+                               rversion = NULL, platform = NULL,
+                               description = NULL) {
 
   entries <- strsplit(paste0("\n", output$stdout), "\n* ", fixed = TRUE)[[1]][-1]
 
@@ -20,7 +21,7 @@ parse_check_output <- function(output, package = NULL, version = NULL,
   )
 
   res$install_out <- get_install_out(res$checkdir)
-  res$description <- get_check_description(res$checkdir)
+  res$description <- description %||% get_check_description(res$checkdir)
 
   if (isTRUE(output$timeout)) {
     res$errors = c(res$errors, "R CMD check timed out")
