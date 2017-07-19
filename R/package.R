@@ -44,7 +44,6 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   }
 
   targz <- build_package(path, tmp <- tempfile())
-  on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
 
   out <- with_dir(
     dirname(targz),
@@ -63,7 +62,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     version = unname(dsc$get("Version")),
     rversion = R.Version()$version.string, # should be the same
     platform = R.Version()$platform,       # should be the same
-    description = read_char(tmpdesc)
+    description = read_char(tmpdesc),
+    tempfiles = tmp
   )
 
   res

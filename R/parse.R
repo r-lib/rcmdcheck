@@ -1,7 +1,7 @@
 
 parse_check_output <- function(output, package = NULL, version = NULL,
                                rversion = NULL, platform = NULL,
-                               description = NULL) {
+                               description = NULL, tempfiles = NULL) {
 
   entries <- strsplit(paste0("\n", output$stdout), "\n* ", fixed = TRUE)[[1]][-1]
 
@@ -25,6 +25,17 @@ parse_check_output <- function(output, package = NULL, version = NULL,
 
   if (isTRUE(output$timeout)) {
     res$errors = c(res$errors, "R CMD check timed out")
+  }
+
+  if (!is.null(tempfiles)) {
+    res$cleaner <- new.env(parent = emptyenv())
+    res$cleaner$cleanme <- tempfiles
+    finalizer <- function(e) {
+      try(unlink(e$cleanme, recursive = TRUE), silent = TRUE)
+    }
+    ## To avoid keeping this execution environment
+    environment(finalizer) <- baseenv()
+    reg.finalizer(res$cleaner, finalizer, onexit = TRUE)
   }
 
   res
