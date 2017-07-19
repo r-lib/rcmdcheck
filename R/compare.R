@@ -143,8 +143,6 @@ print_comparison_x <- function(x, color, func, str) {
 
 summary.rcmdcheck_comparison <- function(object, ...) {
 
-  pale <- make_style("darkgrey")
-
   make_summary <- function(type) {
     recs <- object$cmp[object$cmp$type == type, , drop = FALSE]
     old <- unique(recs$hash[recs$which == "old"])
@@ -188,17 +186,36 @@ summary.rcmdcheck_comparison <- function(object, ...) {
     package_version
   )
 
+  structure(
+    list(
+      object = object,
+      header = header,
+      error_summary = error_summary,
+      warning_summary = warning_summary,
+      note_summary = note_summary,
+      formatted_error_summary = format_summary(error_summary),
+      formatted_warning_summary = format_summary(warning_summary),
+      formatted_note_summary = format_summary(note_summary)
+    ),
+    class = "rcmdcheck_comparison_summary"
+  )
+}
+
+print.rcmdcheck_comparison_summary <- function(x, ...) {
+
+  pale <- make_style("darkgrey")
+
   cat(
     pale(paste0(
-      col_align(header, width = 40),
+      col_align(x$header, width = 40),
       " ", symbol$line, symbol$line, " ",
-      "E: ", format_summary(error_summary), " | ",
-      "W: ", format_summary(warning_summary), " | ",
-      "N: ", format_summary(note_summary)
+      "E: ", x$formatted_error_summary, " | ",
+      "W: ", x$formatted_warning_summary, " | ",
+      "N: ", x$formatted_note_summary
     )),
     "\n",
     sep = ""
   )
 
-  invisible(object)
+  invisible(x)
 }
