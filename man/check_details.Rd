@@ -27,6 +27,11 @@ A check timeout adds an ERROR to this vector.
 \code{00install.out} file. A single string.
 \item \code{description}: the contents of the DESCIRPTION file of the package.
 A single string.
+\item \code{session_info}: the output of \code{utils::sessionInfo()}, from the R
+session performing the checks.
+\item \code{check_dir}: the path to the check directory, if it hasn't been
+cleaned up yet, or \code{NA}. The check directory is automatically
+cleaned up, when the check object is deleted (garbage collected).
 }
 }
 \description{

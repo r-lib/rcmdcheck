@@ -38,6 +38,8 @@ parse_check_output <- function(output, package = NULL, version = NULL,
     ## To avoid keeping this execution environment
     environment(finalizer) <- baseenv()
     reg.finalizer(res$cleaner, finalizer, onexit = TRUE)
+  } else {
+    res$cleaner <- list()
   }
 
   res

@@ -18,6 +18,11 @@
 #'     `00install.out` file. A single string.
 #'   * `description`: the contents of the DESCIRPTION file of the package.
 #'     A single string.
+#'   * `session_info`: the output of `utils::sessionInfo()`, from the R
+#'     session performing the checks.
+#'   * `check_dir`: the path to the check directory, if it hasn't been
+#'     cleaned up yet, or `NA`. The check directory is automatically
+#'     cleaned up, when the check object is deleted (garbage collected).
 #'
 #' @export
 
@@ -31,6 +36,8 @@ check_details <- function(check) {
     platform = check$platform,
     checkdir = check$checkdir,
     install_out = check$install_out,
-    description = check$description
+    description = check$description,
+    session_info = check$session_info,
+    check_dir = check$cleaner$cleanme %||% NA_character_
   )
 }
