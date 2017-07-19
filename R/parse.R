@@ -1,5 +1,6 @@
 
-parse_check_output <- function(output) {
+parse_check_output <- function(output, package = NULL, version = NULL,
+                               rversion = NULL, platform = NULL) {
 
   entries <- strsplit(paste0("\n", output$stdout), "\n* ", fixed = TRUE)[[1]][-1]
 
@@ -9,10 +10,10 @@ parse_check_output <- function(output) {
       errors   = grep(" ...\\s+ERROR\n",   entries, value = TRUE),
       warnings = grep(" ...\\s+WARNING\n", entries, value = TRUE),
       notes    = grep(" ...\\s+NOTE\n",    entries, value = TRUE),
-      package  = parse_package(entries),
-      version  = parse_version(entries),
-      rversion = parse_rversion(entries),
-      platform = parse_platform(entries),
+      package  = package %||% parse_package(entries),
+      version  = version %||% parse_version(entries),
+      rversion = rversion %||% parse_rversion(entries),
+      platform = platform %||% parse_platform(entries),
       checkdir = parse_checkdir(entries)
     ),
     class = "rcmdcheck"

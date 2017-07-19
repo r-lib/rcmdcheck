@@ -18,6 +18,7 @@ Imports:
     callr (>= 1.0.0.9000),
     clisymbols,
     crayon,
+    desc,
     digest,
     prettyunits,
     R6,

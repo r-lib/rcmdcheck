@@ -31,6 +31,7 @@ NULL
 #' @importFrom rprojroot find_package_root_file
 #' @importFrom withr with_dir
 #' @importFrom callr rcmd_safe
+#' @importFrom desc desc
 
 rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
                       libpath = .libPaths(), repos = getOption("repos"),
@@ -50,9 +51,17 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     do_check(targz, args, libpath, repos, quiet, timeout)
   )
 
+  dsc <- desc(targz)
+
   if (isTRUE(out$timeout)) message("R CMD check timed out")
 
-  res <- parse_check_output(out)
+  res <- parse_check_output(
+    out,
+    package = unname(dsc$get("Package")),
+    version = unname(dsc$get("Version")),
+    rversion = R.Version()$version.string, # should be the same
+    platform = R.Version()$platform        # should be the same
+  )
 
   print(summary(res))
 
