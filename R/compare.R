@@ -140,6 +140,7 @@ print_comparison_x <- function(x, color, func, str) {
 }
 
 #' @export
+#' @importFrom crayon bgRed white
 
 summary.rcmdcheck_comparison <- function(object, ...) {
 
@@ -156,8 +157,18 @@ summary.rcmdcheck_comparison <- function(object, ...) {
   warning_summary <- make_summary("warning")
   note_summary    <- make_summary("note")
 
+  re_install_failed <-
+    "can be installed \\.\\.\\.\\s*ERROR\\s*Installation failed"
+
   sum_status <-
-    if ((error_summary + warning_summary + note_summary)["broke"] == 0) {
+    if (isTRUE(object$new$output$timeout)) {
+      white(bgRed("T"))
+    } else if (any(grepl(re_install_failed, object$new$errors)) ||
+               any(grepl(re_install_failed, unlist(lapply(object$old, "[[",
+                                                          "errors"))))) {
+      white(bgRed("I"))
+    } else if ((error_summary + warning_summary +
+                  note_summary)["broke"] == 0) {
       green(symbol$tick)
     } else {
       red(symbol$cross)
