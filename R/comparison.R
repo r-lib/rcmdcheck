@@ -2,9 +2,14 @@ rcmdcheck_comparison <- function(old, new) {
   stopifnot(is.list(old))
   stopifnot(inherits(new, "rcmdcheck"))
 
-  # Generate single dataframe of comparisons
+  # Generate data frame of problems
   old_df <- do.call(rbind, lapply(old, as.data.frame, which = "old"))
   new_df <- as.data.frame(new, which = "new")
+
+  # For each problem, determine whether it's new (1), fixed (-1), or
+  # unchanged (0/0.5).
+  new_df$change <- ifelse(new_df$hash %in% old_df$hash, 0,    1)
+  old_df$change <- ifelse(old_df$hash %in% new_df$hash, 0.5, -1)
   cmp_df <- rbind(old_df, new_df)
 
   old_versions <- vapply(old, "[[", "version", FUN.VALUE = character(1))
@@ -32,54 +37,33 @@ rcmdcheck_comparison <- function(old, new) {
 #'   printout.
 #' @param ... Additional arguments, currently ignored.
 #' @export
-#' @importFrom crayon red
+#' @importFrom crayon red green
 
 print.rcmdcheck_comparison <- function(x, header = TRUE, ...) {
-
   if (header) {
     print_header(
       "R CMD check comparison",
-      paste0(
-        x$package, " ",
-        paste0(x$versions, collapse = " / ")
-      )
+      paste0(x$package, " ", paste0(x$versions, collapse = " / "))
     )
   }
 
-  print_comparison_fixed(x)
-  print_comparison_same(x)
-  print_comparison_new(x)
+  print_comparison(x, -1, "Fixed")
+  print_comparison(x, 0, "Still failing")
+  print_comparison(x, 1, "Newly failing")
 
   invisible(x)
 }
 
-#' @importFrom crayon red green
-
-print_comparison_new <- function(x) {
-  print_comparison_x(x, red, setdiff, "Newly failing")
-}
-
-print_comparison_same <- function(x) {
-  print_comparison_x(x, red, intersect, "Still failing")
-}
-
-print_comparison_fixed <- function(x) {
-  print_comparison_x(x, green, function(x, y) setdiff(y, x), "Fixed")
-}
-
-print_comparison_x <- function(x, color, func, str) {
-  old <- x$cmp$hash[x$cmp$which == "old"]
-  new <- x$cmp$hash[x$cmp$which == "new"]
-
-  chn <- func(unique(new), unique(old))
-
-  symb <- if (str == "Fixed") green(symbol$tick) else red(symbol$cross)
-
-  if (length(chn)) {
-    cat(color(paste0(symbol$line, symbol$line, " ", str, "\n\n")))
-    for (i in match(chn, x$cmp$hash)) {
-      cat(symb, first_line(x$cmp$output[i]), "\n")
-    }
-    cat("\n")
+print_comparison <- function(x, change, title) {
+  rows <- x$cmp[x$cmp$change == change, , drop = FALSE]
+  if (nrow(rows) == 0) {
+    return()
   }
+
+  col <- if (change == -1) green else red
+  sym <- if (change == -1) symbol$tick else symbol$cross
+
+  cat_line(col(paste0(symbol$line, symbol$line, " ", title)))
+  cat_line()
+  cat_line(paste0(col(sym), " ", first_line(rows$output), "\n", collapse = ""))
 }
