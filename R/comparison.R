@@ -3,8 +3,8 @@ rcmdcheck_comparison <- function(old, new) {
   stopifnot(inherits(new, "rcmdcheck"))
 
   # Generate single dataframe of comparisons
-  old_df <- do.call(rbind, lapply(old, checks_as_df, which = "old"))
-  new_df <- checks_as_df(new, which = "new")
+  old_df <- do.call(rbind, lapply(old, as.data.frame, which = "old"))
+  new_df <- as.data.frame(new, which = "new")
   cmp_df <- rbind(old_df, new_df)
 
   structure(
@@ -17,35 +17,6 @@ rcmdcheck_comparison <- function(old, new) {
   )
 }
 
-checks_as_df <- function(check, which) {
-
-  entries <- list(
-    type = c(
-      rep("error", length(check$errors)),
-      rep("warning", length(check$warnings)),
-      rep("note", length(check$notes))
-    ),
-    output = c(check$errors, check$warnings, check$notes)
-  )
-
-  data_frame(
-    which = which,
-    platform = check$platform %||% NA_character_,
-    rversion = check$rversion %||% NA_character_,
-    package = check$package %||% NA_character_,
-    version = check$version %||% NA_character_,
-    type = entries$type,
-    output = entries$output,
-    hash = hash_check(entries$output)
-  )
-}
-
-#' @importFrom digest digest
-
-hash_check <- function(check) {
-  cleancheck <- gsub("[^a-zA-Z0-9]", "", first_line(check))
-  vapply(cleancheck, digest, "")
-}
 
 #' Print R CMD check result comparisons
 #'

@@ -82,6 +82,41 @@ parse_checkdir <- function(entries) {
       line, perl = TRUE)
 }
 
+#' @export
+as.data.frame.rcmdcheck <- function(x,
+                                    row.names = NULL,
+                                    optional = FALSE,
+                                    ...,
+                                    which) {
+
+  entries <- list(
+    type = c(
+      rep("error", length(x$errors)),
+      rep("warning", length(x$warnings)),
+      rep("note", length(x$notes))
+    ),
+    output = c(x$errors, x$warnings, x$notes)
+  )
+
+  data_frame(
+    which = which,
+    platform = x$platform %||% NA_character_,
+    rversion = x$rversion %||% NA_character_,
+    package = x$package %||% NA_character_,
+    version = x$version %||% NA_character_,
+    type = entries$type,
+    output = entries$output,
+    hash = hash_check(entries$output)
+  )
+}
+
+#' @importFrom digest digest
+
+hash_check <- function(check) {
+  cleancheck <- gsub("[^a-zA-Z0-9]", "", first_line(check))
+  vapply(cleancheck, digest, "")
+}
+
 #' Parse \code{R CMD check} results from a file or string
 #'
 #' At most one of \code{file} or \code{text} can be given.
