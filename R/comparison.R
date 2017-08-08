@@ -3,25 +3,21 @@ rcmdcheck_comparison <- function(old, new) {
   stopifnot(inherits(new, "rcmdcheck"))
 
   # Generate single dataframe of comparisons
-  old_df <- do.call(rbind, lapply(old, checks_as_df))
-  new_df <- checks_as_df(new)
-
-  cmp <- rbind(
-    data_frame(which = "old", old_df),
-    data_frame(which = "new", new_df)
-  )
+  old_df <- do.call(rbind, lapply(old, checks_as_df, which = "old"))
+  new_df <- checks_as_df(new, which = "new")
+  cmp_df <- rbind(old_df, new_df)
 
   structure(
     list(
       old = old,
       new = new,
-      cmp = cmp
+      cmp = cmp_df
     ),
     class = "rcmdcheck_comparison"
   )
 }
 
-checks_as_df <- function(check) {
+checks_as_df <- function(check, which) {
 
   entries <- list(
     type = c(
@@ -33,6 +29,7 @@ checks_as_df <- function(check) {
   )
 
   data_frame(
+    which = which,
     platform = check$platform %||% NA_character_,
     rversion = check$rversion %||% NA_character_,
     package = check$package %||% NA_character_,
