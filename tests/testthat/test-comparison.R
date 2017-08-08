@@ -9,6 +9,7 @@ test_that("basic metadata stored in comparison object", {
 
 test_that("status correctly computed when both checks are ok", {
   cf <- compare_check_files(test_path("minimal-ok.log"), test_path("minimal-ok.log"))
+  expect_equal(cf$status, "+")
 })
 
 test_that("print message displays informative output", {
