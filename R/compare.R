@@ -13,6 +13,12 @@ compare_checks <- function(old, new) {
   rcmdcheck_comparison(old, new)
 }
 
+compare_check_files <- function(old, new) {
+  old <- parse_check(old)
+  new <- parse_check(new)
+  rcmdcheck_comparison(list(old), new)
+}
+
 #' Compare a check result to CRAN check results
 #'
 #' @param check A check result.

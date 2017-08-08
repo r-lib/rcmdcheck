@@ -7,8 +7,12 @@ rcmdcheck_comparison <- function(old, new) {
   new_df <- as.data.frame(new, which = "new")
   cmp_df <- rbind(old_df, new_df)
 
+  old_versions <- vapply(old, "[[", "version", FUN.VALUE = character(1))
+
   structure(
     list(
+      package = new$package,
+      versions = c(new$version, old_versions),
       old = old,
       new = new,
       cmp = cmp_df
@@ -36,12 +40,8 @@ print.rcmdcheck_comparison <- function(x, header = TRUE, ...) {
     print_header(
       "R CMD check comparison",
       paste0(
-        x$old[[1]]$package, " ",
-        x$old[[1]]$version,
-        " vs ",
-        if (x$old[[1]]$package != x$new$package)
-          paste0(x$new$package, " "),
-        x$new$version
+        x$package, " ",
+        paste0(x$versions, collapse = " / ")
       )
     )
   }
