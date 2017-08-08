@@ -6,7 +6,6 @@ new_rcmdcheck <- function(stdout,
                           rversion = NULL,
                           platform = NULL,
                           description = NULL,
-                          tempfiles = NULL,
                           session_info = NULL) {
 
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
@@ -33,19 +32,6 @@ new_rcmdcheck <- function(stdout,
 
   if (isTRUE(timeout)) {
     res$errors = c(res$errors, "R CMD check timed out")
-  }
-
-  if (!is.null(tempfiles)) {
-    res$cleaner <- new.env(parent = emptyenv())
-    res$cleaner$cleanme <- tempfiles
-    finalizer <- function(e) {
-      try(unlink(e$cleanme, recursive = TRUE), silent = TRUE)
-    }
-    ## To avoid keeping this execution environment
-    environment(finalizer) <- baseenv()
-    reg.finalizer(res$cleaner, finalizer, onexit = TRUE)
-  } else {
-    res$cleaner <- list()
   }
 
   res

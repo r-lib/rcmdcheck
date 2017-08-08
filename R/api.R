@@ -37,7 +37,6 @@ check_details <- function(check) {
     checkdir = check$checkdir,
     install_out = check$install_out,
     description = check$description,
-    session_info = check$session_info,
-    check_dir = check$cleaner$cleanme %||% NA_character_
+    session_info = check$session_info
   )
 }

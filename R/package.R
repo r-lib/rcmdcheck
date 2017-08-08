@@ -67,9 +67,11 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     version = package_version,
     rversion = R.Version()$version.string, # should be the same
     platform = R.Version()$platform,       # should be the same
-    description = read_char(tmpdesc),
-    tempfiles = tmp
+    description = read_char(tmpdesc)
   )
+
+  # Automatically delete temporary files when this object disappears
+  res$cleaner <- auto_clean(tmp)
 
   res
 }

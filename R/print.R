@@ -25,8 +25,8 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
     lapply(x$notes, print_entry)
   }
 
-  if (is.character(chkdir <- x$cleaner$cleanme) && file.exists(chkdir)) {
-    cat("  Check directory: ", sQuote(chkdir), "\n", sep = "")
+  if (file.exists(x$checkdir)) {
+    cat("  Check directory: ", sQuote(x$checkdir), "\n", sep = "")
   } else {
     cat("  Check directory already cleared.\n")
   }
