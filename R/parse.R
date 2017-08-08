@@ -1,8 +1,12 @@
 
-new_rcmdcheck <- function(stdout, timeout = FALSE,
-                          package = NULL, version = NULL,
-                          rversion = NULL, platform = NULL,
-                          description = NULL, tempfiles = NULL,
+new_rcmdcheck <- function(stdout,
+                          timeout = FALSE,
+                          package = NULL,
+                          version = NULL,
+                          rversion = NULL,
+                          platform = NULL,
+                          description = NULL,
+                          tempfiles = NULL,
                           session_info = NULL) {
 
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
