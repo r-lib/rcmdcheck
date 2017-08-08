@@ -14,9 +14,9 @@ rcmdcheck_comparison <- function(old, new) {
 
   # Compute overall status
   re_inst_fail <- "can be installed \\.\\.\\.\\s*ERROR\\s*Installation failed"
-  inst_fail <- grepl(re_inst_fail, new_df$output) || grepl(re_inst_fail, new_df$output)
+  inst_fail <- any(grepl(re_inst_fail, new_df$output) || grepl(re_inst_fail, old_df$output))
 
-  if (inst_fail) {
+  if (isTRUE(inst_fail)) {
     status <- "i"
   } else if (new$timeout) {
     status <- "t"

@@ -7,6 +7,10 @@ test_that("basic metadata stored in comparison object", {
   expect_equal(cf$versions, c("0.9.8", "0.9.8"))
 })
 
+test_that("status correctly computed when both checks are ok", {
+  cf <- compare_check_files(test_path("minimal-ok.log"), test_path("minimal-ok.log"))
+})
+
 test_that("print message displays informative output", {
   cf <- compare_check_files(test_path("minimal-ee.log"), test_path("minimal-ewn.log"))
 
