@@ -1,0 +1,19 @@
+✖ minimal 1.0.0                          ── E: 1-1   | W: 0  +1 | N: 0  +1
+
+
+── R CMD check comparison ─────────────────────────── minimal 1.0.0 / 1.0.0 ────
+Status: BROKEN
+
+── Fixed
+
+✔ check 4 ... ERROR
+
+── Still failing
+
+✖ check 1 ... ERROR
+
+── Newly failing
+
+✖ check 2 ... WARNING
+✖ check 3 ... NOTE
+
