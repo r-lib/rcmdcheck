@@ -3,7 +3,6 @@
 S3method(as.data.frame,rcmdcheck)
 S3method(print,rcmdcheck)
 S3method(print,rcmdcheck_comparison)
-S3method(print,rcmdcheck_comparison_summary)
 S3method(summary,rcmdcheck)
 S3method(summary,rcmdcheck_comparison)
 export(check_details)

@@ -11,7 +11,7 @@ test_that("print message displays informative output", {
   cf <- compare_check_files(test_path("minimal-ee.log"), test_path("minimal-ewn.log"))
 
   expect_output_file({
-    print(summary(cf))
+    summary(cf)
     cat("\n\n")
     print(cf)
   }, file = "comparison-newly-failing.txt", update = TRUE)

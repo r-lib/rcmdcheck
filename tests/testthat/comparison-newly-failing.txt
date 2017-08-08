@@ -2,6 +2,7 @@
 
 
 ── R CMD check comparison ─────────────────────────── minimal 1.0.0 / 1.0.0 ────
+Status: BROKEN
 
 ── Fixed
 

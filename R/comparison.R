@@ -12,12 +12,27 @@ rcmdcheck_comparison <- function(old, new) {
   old_df$change <- ifelse(old_df$hash %in% new_df$hash, 0.5, -1)
   cmp_df <- rbind(old_df, new_df)
 
+  # Compute overall status
+  re_inst_fail <- "can be installed \\.\\.\\.\\s*ERROR\\s*Installation failed"
+  inst_fail <- grepl(re_inst_fail, new_df$output) || grepl(re_inst_fail, new_df$output)
+
+  if (inst_fail) {
+    status <- "i"
+  } else if (new$timeout) {
+    status <- "t"
+  } else if (sum(new_df$change == 1) == 0) {
+    status <- "+"
+  } else {
+    status <- "-"
+  }
+
   old_versions <- vapply(old, "[[", "version", FUN.VALUE = character(1))
 
   structure(
     list(
       package = new$package,
       versions = c(new$version, old_versions),
+      status = status,
       old = old,
       new = new,
       cmp = cmp_df
@@ -37,15 +52,24 @@ rcmdcheck_comparison <- function(old, new) {
 #'   printout.
 #' @param ... Additional arguments, currently ignored.
 #' @export
-#' @importFrom crayon red green
+#' @importFrom crayon red green bold
 
 print.rcmdcheck_comparison <- function(x, header = TRUE, ...) {
   if (header) {
-    print_header(
+    cat_head(
       "R CMD check comparison",
       paste0(x$package, " ", paste0(x$versions, collapse = " / "))
     )
   }
+
+  status <- switch(x$status,
+    "+" = green("OK"),
+    "-" = red("BROKEN"),
+    "i" = red("INSTALL FAILURE"),
+    "t" = red("TIMEOUT")
+  )
+  cat_line("Status: ", bold(status))
+  cat_line()
 
   print_comparison(x, -1, "Fixed")
   print_comparison(x, 0, "Still failing")

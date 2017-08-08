@@ -9,8 +9,9 @@
 print.rcmdcheck <- function(x, header = TRUE, ...) {
 
   if (header) {
-    cat("\n")
-    print_header("R CMD check results", paste(x$package, x$version))
+    cat_line()
+    cat_head("R CMD check results", paste(x$package, x$version))
+    cat_line()
   }
 
   if (length(x$errors)) {
@@ -75,9 +76,9 @@ header_line <- function(left = "", right = "",
 
 #' @importFrom crayon cyan
 
-print_header <- function(left, right = "", color = cyan) {
+cat_head <- function(left, right = "", style = cyan) {
   str <- header_line(left, right)
-  cat(color(str), "\n\n", sep = "")
+  cat_line(str, style = style)
 }
 
 #' @importFrom crayon red make_style

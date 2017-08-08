@@ -161,6 +161,11 @@ make_space <- function(num, filling = " ") {
   strrep(filling, num)
 }
 
-cat_line <- function(...) {
-  cat(..., "\n", sep = "")
+cat_line <- function(..., style = NULL) {
+  text <- paste0(..., collapse = "")
+  if (!is.null(style)) {
+    text <- style(text)
+  }
+
+  cat(text, "\n", sep = "")
 }
