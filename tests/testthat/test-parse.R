@@ -19,7 +19,7 @@ test_that("install log is captured", {
 # data frame coercion -----------------------------------------------------
 
 test_that("can coerce to data frame", {
-  check <- parse_check(test_path("RedCapR-fail.log"))
+  check <- parse_check(test_path("REDCapR-fail.log"))
   df <- as.data.frame(check, which = "new")
 
   expect_equal(nrow(df), 1)
