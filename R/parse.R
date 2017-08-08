@@ -1,5 +1,7 @@
 
 new_rcmdcheck <- function(stdout,
+                          stderr,
+                          status = 0L,
                           timeout = FALSE,
                           package = NULL,
                           version = NULL,
@@ -16,6 +18,8 @@ new_rcmdcheck <- function(stdout,
   res <- structure(
     list(
       stdout      = stdout,
+      stderr      = stderr,
+      status      = status,
       timeout     = timeout,
 
       errors      = grep(" ...\\s+ERROR\n",   entries, value = TRUE),
@@ -102,7 +106,11 @@ parse_check <- function(file = NULL, text = NULL, ...) {
     text <- readLines(file)
   }
 
-  new_rcmdcheck(stdout = paste(text, collapse = "\n"), ...)
+  new_rcmdcheck(
+    stdout = paste(text, collapse = "\n"),
+    stderr = "",
+    ...
+  )
 }
 
 #' Shorthand to parse R CMD check results from a URL

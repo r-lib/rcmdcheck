@@ -61,6 +61,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   res <- new_rcmdcheck(
     stdout = out$result$stdout,
+    stderr = out$result$stderr,
+    status = out$result$status,
     timeout = out$result$timeout,
     session_info = out$session_info,
     package = package_name,
