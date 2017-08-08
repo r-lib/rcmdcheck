@@ -1,14 +1,16 @@
 
-parse_check_output <- function(output, package = NULL, version = NULL,
-                               rversion = NULL, platform = NULL,
-                               description = NULL, tempfiles = NULL,
-                               session_info = NULL) {
+new_rcmdcheck <- function(stdout, timeout = FALSE,
+                          package = NULL, version = NULL,
+                          rversion = NULL, platform = NULL,
+                          description = NULL, tempfiles = NULL,
+                          session_info = NULL) {
 
-  entries <- strsplit(paste0("\n", output$stdout), "\n* ", fixed = TRUE)[[1]][-1]
+  entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
 
   res <- structure(
     list(
-      output   = output,
+      stdout   = stdout,
+      timeout  = timeout,
       errors   = grep(" ...\\s+ERROR\n",   entries, value = TRUE),
       warnings = grep(" ...\\s+WARNING\n", entries, value = TRUE),
       notes    = grep(" ...\\s+NOTE\n",    entries, value = TRUE),
@@ -25,7 +27,7 @@ parse_check_output <- function(output, package = NULL, version = NULL,
   res$install_out <- get_install_out(res$checkdir)
   res$description <- description %||% get_check_description(res$checkdir)
 
-  if (isTRUE(output$timeout)) {
+  if (isTRUE(timeout)) {
     res$errors = c(res$errors, "R CMD check timed out")
   }
 
@@ -103,13 +105,7 @@ parse_check <- function(file = NULL, text = NULL) {
     text <- readLines(file)
   }
 
-  output <- list(
-    stdout = paste(text, collapse = "\n"),
-    stderr = "",
-    status = 0
-  )
-
-  parse_check_output(output)
+  new_rcmdcheck(stdout = paste(text, collapse = "\n"))
 }
 
 #' Shorthand to parse R CMD check results from a URL

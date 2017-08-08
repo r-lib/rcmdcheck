@@ -59,8 +59,9 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   if (isTRUE(out$timeout)) message("R CMD check timed out")
 
-  res <- parse_check_output(
-    out$result,
+  res <- new_rcmdcheck(
+    stdout = out$result$stdout,
+    timeout = out$result$timeout,
     session_info = out$session_info,
     package = package_name,
     version = package_version,
