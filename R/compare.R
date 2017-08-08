@@ -161,7 +161,7 @@ summary.rcmdcheck_comparison <- function(object, ...) {
     "can be installed \\.\\.\\.\\s*ERROR\\s*Installation failed"
 
   sum_status <-
-    if (isTRUE(object$new$output$timeout)) {
+    if (isTRUE(object$new$timeout)) {
       white(bgRed("T"))
     } else if (any(grepl(re_install_failed, object$new$errors)) ||
                any(grepl(re_install_failed, unlist(lapply(object$old, "[[",

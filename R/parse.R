@@ -1,45 +1,46 @@
 
-parse_check_output <- function(output, package = NULL, version = NULL,
-                               rversion = NULL, platform = NULL,
-                               description = NULL, tempfiles = NULL,
-                               session_info = NULL) {
+new_rcmdcheck <- function(stdout,
+                          stderr,
+                          status = 0L,
+                          timeout = FALSE,
+                          package = NULL,
+                          version = NULL,
+                          rversion = NULL,
+                          platform = NULL,
+                          checkdir = NULL,
+                          install_out = NULL,
+                          description = NULL,
+                          session_info = NULL) {
 
-  entries <- strsplit(paste0("\n", output$stdout), "\n* ", fixed = TRUE)[[1]][-1]
+  entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
+  checkdir <- checkdir %||% parse_checkdir(entries)
 
   res <- structure(
     list(
-      output   = output,
-      errors   = grep(" ...\\s+ERROR\n",   entries, value = TRUE),
-      warnings = grep(" ...\\s+WARNING\n", entries, value = TRUE),
-      notes    = grep(" ...\\s+NOTE\n",    entries, value = TRUE),
-      package  = package %||% parse_package(entries),
-      version  = version %||% parse_version(entries),
-      rversion = rversion %||% parse_rversion(entries),
-      platform = platform %||% parse_platform(entries),
-      checkdir = parse_checkdir(entries),
+      stdout      = stdout,
+      stderr      = stderr,
+      status      = status,
+      timeout     = timeout,
+
+      errors      = grep(" ...\\s+ERROR\n",   entries, value = TRUE),
+      warnings    = grep(" ...\\s+WARNING\n", entries, value = TRUE),
+      notes       = grep(" ...\\s+NOTE\n",    entries, value = TRUE),
+
+      package     = package %||% parse_package(entries),
+      version     = version %||% parse_version(entries),
+      rversion    = rversion %||% parse_rversion(entries),
+      platform    = platform %||% parse_platform(entries),
+
+      checkdir    = checkdir,
+      install_out = install_out %||% get_install_out(checkdir),
+      description = description %||% get_check_description(checkdir),
       session_info = session_info
     ),
     class = "rcmdcheck"
   )
 
-  res$install_out <- get_install_out(res$checkdir)
-  res$description <- description %||% get_check_description(res$checkdir)
-
-  if (isTRUE(output$timeout)) {
-    res$errors = c(res$errors, "R CMD check timed out")
-  }
-
-  if (!is.null(tempfiles)) {
-    res$cleaner <- new.env(parent = emptyenv())
-    res$cleaner$cleanme <- tempfiles
-    finalizer <- function(e) {
-      try(unlink(e$cleanme, recursive = TRUE), silent = TRUE)
-    }
-    ## To avoid keeping this execution environment
-    environment(finalizer) <- baseenv()
-    reg.finalizer(res$cleaner, finalizer, onexit = TRUE)
-  } else {
-    res$cleaner <- list()
+  if (isTRUE(timeout)) {
+    res$errors <- c(res$errors, "R CMD check timed out")
   }
 
   res
@@ -90,12 +91,14 @@ parse_checkdir <- function(entries) {
 #' @param file The \code{00check.log} file, or a directory that
 #'   contains that file. It can also be a connection object.
 #' @param text The contentst of a \code{00check.log} file.
+#' @param ... Other arguments passed onto the constructor.
+#'   Used for testing.
 #' @return An \code{rcmdcheck} object, the check results.
 #'
 #' @seealso \code{\link{parse_check_url}}
 #' @export
 
-parse_check <- function(file = NULL, text = NULL) {
+parse_check <- function(file = NULL, text = NULL, ...) {
 
   ## If no text, then find the file, and read it in
   if (is.null(text)) {
@@ -103,13 +106,11 @@ parse_check <- function(file = NULL, text = NULL) {
     text <- readLines(file)
   }
 
-  output <- list(
+  new_rcmdcheck(
     stdout = paste(text, collapse = "\n"),
     stderr = "",
-    status = 0
+    ...
   )
-
-  parse_check_output(output)
 }
 
 #' Shorthand to parse R CMD check results from a URL

@@ -36,11 +36,3 @@ test_that("non-quiet mode works", {
   out <- read_char(tmp)
   expect_match(out, "Non-standard license specification")
 })
-
-test_that("install.out is saved on install error", {
-
-  Sys.unsetenv("R_TESTS")
-
-  bad2 <- rcmdcheck("bad2", quiet = TRUE)
-  expect_match(bad2$install_out, "unable to collate and parse R files")
-})

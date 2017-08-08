@@ -129,14 +129,10 @@ rcc_parse_results <- function(self, private) {
   self$read_output_lines()
   self$read_error_lines()
 
-  out <- list(
-    status = self$get_exit_status(),
-    stdout = paste(private$cstdout, collapse = "\n"),
-    stderr = paste(private$cstderr, collapse = "\n"),
-    timeout = private$killed,
-    install_out = get_install_out(private$tmp),
-    description = get_check_description(private$tmp)
+  new_rcmdcheck(
+    stdout =  paste(private$cstdout, collapse = "\n"),
+    stderr =  paste(private$cstderr, collapse = "\n"),
+    status =  self$get_exit_status(),
+    timeout = private$killed
   )
-
-  parse_check_output(out)
 }
