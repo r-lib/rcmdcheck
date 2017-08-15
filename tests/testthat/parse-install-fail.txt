@@ -23,5 +23,5 @@ ERROR: lazy loading failed for package ‘RSQLServer’
 
 ── Summary ─────────────────────────────────────────────────────────────────────
 
-Check directory: ‘RSQLServer-install’
+Check directory: 'RSQLServer-install'
 1 error ✖ | 0 warnings ✔ | 0 notes ✔

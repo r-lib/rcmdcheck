@@ -42,5 +42,5 @@ Execution halted
 
 ── Summary ─────────────────────────────────────────────────────────────────────
 
-Check directory: ‘dataonderivatives-test’
+Check directory: 'dataonderivatives-test'
 1 error ✖ | 0 warnings ✔ | 1 note ✖
