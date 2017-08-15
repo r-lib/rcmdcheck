@@ -7,7 +7,6 @@ new_rcmdcheck <- function(stdout,
                           timeout = FALSE,
                           checkdir = NULL,
                           test_fail = NULL,
-                          install_out = NULL,
                           session_info = NULL) {
 
   stopifnot(inherits(description, "description"))
@@ -35,7 +34,7 @@ new_rcmdcheck <- function(stdout,
 
       checkdir    = checkdir,
       test_fail   = test_fail %||% get_test_fail(checkdir),
-      install_out = install_out %||% get_install_out(checkdir),
+      install_out = get_install_out(checkdir),
       session_info = session_info
     ),
     class = "rcmdcheck"
