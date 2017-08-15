@@ -169,3 +169,7 @@ cat_line <- function(..., style = NULL) {
 
   cat(text, "\n", sep = "")
 }
+
+duration <- function(start) {
+  as.numeric(Sys.time() - start)
+}

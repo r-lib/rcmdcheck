@@ -51,6 +51,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   package_name <- unname(dsc$get("Package"))
   package_version <- unname(dsc$get("Version"))
 
+  start_time <- Sys.time()
+
   out <- with_dir(
     dirname(targz),
     do_check(targz, package_name, package_version, args, libpath, repos,
@@ -63,6 +65,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     stdout = out$result$stdout,
     stderr = out$result$stderr,
     status = out$result$status,
+    duration = duration(start_time),
     timeout = out$result$timeout,
     session_info = out$session_info,
     package = package_name,

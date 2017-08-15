@@ -133,6 +133,7 @@ rcc_parse_results <- function(self, private) {
     stdout =  paste(private$cstdout, collapse = "\n"),
     stderr =  paste(private$cstderr, collapse = "\n"),
     status =  self$get_exit_status(),
+    duration = duration(self$get_start_time),
     timeout = private$killed
   )
 }
