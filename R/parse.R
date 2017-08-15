@@ -57,9 +57,15 @@ parse_platform <- function(entries) {
 }
 
 parse_checkdir <- function(entries) {
+  quotes <- "\\x91\\x92\u2018\u2019`'"
+
   line <- grep("^using log directory", entries, value = TRUE)
-  sub("^using log directory [‘']([^’']+)[’']$", "\\1",
-      line, perl = TRUE)
+  sub(
+    paste0("^using log directory [", quotes, "]([^", quotes, "]+)[", quotes, "]$"),
+    "\\1",
+    line,
+    perl = TRUE
+  )
 }
 
 #' @export
