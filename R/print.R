@@ -27,12 +27,13 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
   }
 
   if (file.exists(x$checkdir)) {
-    cat("  Check directory: ", sQuote(x$checkdir), "\n", sep = "")
+    cat_line("  Check directory: ", sQuote(x$checkdir))
   } else {
-    cat("  Check directory already cleared.\n")
+    cat_line("  Check directory already cleared.")
   }
 
-  summary(x, ...)
+  cat_line()
+  print(summary(x, ...))
 }
 
 make_line <- function(x) {
