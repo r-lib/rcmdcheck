@@ -51,7 +51,6 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     dirname(targz),
     do_check(targz,
       package = desc$get("Package")[[1]],
-      version = desc$get("Version")[[1]],
       args = args,
       libpath = libpath,
       repos = repos,
@@ -82,7 +81,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
 #' @importFrom withr with_envvar
 
-do_check <- function(targz, package, version, args, libpath, repos,
+do_check <- function(targz, package, args, libpath, repos,
                      quiet, timeout) {
 
   profile <- tempfile()
