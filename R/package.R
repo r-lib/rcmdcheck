@@ -43,9 +43,9 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     path <- normalizePath(path)
   }
 
-  desc <- desc(path)
   targz <- build_package(path, tmp <- tempfile())
   start_time <- Sys.time()
+  desc <- desc(targz)
 
   out <- with_dir(
     dirname(targz),
@@ -125,7 +125,10 @@ do_check <- function(targz, package, args, libpath, repos,
   session_info <- Filter(
     function(so) package %in% names(so$otherPkgs),
     session_info
-  )[[1]]
+  )
+  if (length(session_info) > 1) {
+    session_info <- session_info[[1]]
+  }
 
   list(result = res, session_info = session_info)
 }
