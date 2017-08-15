@@ -10,9 +10,8 @@ test_that("can parse basic package information from file", {
 
 test_that("install log is captured", {
   path <- test_path("RSQLServer-install")
-  check <- parse_check(path, checkdir = path)
+  check <- parse_check(path)
 
-  expect_equal(check$checkdir, path)
   expect_match(check$install_out, "unable to load shared object")
 
   expect_output_file(print(check), file = "parse-install-fail.txt", update = TRUE)

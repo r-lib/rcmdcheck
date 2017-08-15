@@ -5,14 +5,13 @@ new_rcmdcheck <- function(stdout,
                           status = 0L,
                           duration = 0L,
                           timeout = FALSE,
-                          checkdir = NULL,
                           test_fail = NULL,
                           session_info = NULL) {
 
   stopifnot(inherits(description, "description"))
 
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
-  checkdir <- checkdir %||% parse_checkdir(entries)
+  checkdir <- parse_checkdir(entries)
 
   res <- structure(
     list(
@@ -59,7 +58,7 @@ parse_platform <- function(entries) {
 
 parse_checkdir <- function(entries) {
   line <- grep("^using log directory", entries, value = TRUE)
-  sub("^using log directory\\s+[^/\\\\]+([/\\\\].+\\.Rcheck).*$", "\\1",
+  sub("^using log directory [‘']([^’']+)[’']$", "\\1",
       line, perl = TRUE)
 }
 
