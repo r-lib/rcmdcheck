@@ -14,6 +14,18 @@ test_that("rcmdcheck works", {
   )
 })
 
+test_that("background gives same results", {
+
+  Sys.unsetenv("R_TESTS")
+
+  bad1 <- rcmdcheck_process$new(test_path("bad1"))
+  bad1$wait()
+  res <- bad1$parse_results()
+
+  expect_match(res$warnings[1], "Non-standard license specification")
+  expect_match(res$description, "Advice on R package building")
+})
+
 test_that("non-quiet mode works", {
 
   Sys.unsetenv("R_TESTS")

@@ -1,18 +1,18 @@
 
 new_rcmdcheck <- function(stdout,
                           stderr,
+                          description,
                           status = 0L,
                           duration = 0L,
                           timeout = FALSE,
-                          package = NULL,
-                          version = NULL,
                           rversion = NULL,
                           platform = NULL,
                           checkdir = NULL,
                           test_fail = NULL,
                           install_out = NULL,
-                          description = NULL,
                           session_info = NULL) {
+
+  stopifnot(inherits(description, "description"))
 
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
   checkdir <- checkdir %||% parse_checkdir(entries)
@@ -29,15 +29,16 @@ new_rcmdcheck <- function(stdout,
       warnings    = grep(" ...\\s+WARNING\n", entries, value = TRUE),
       notes       = grep(" ...\\s+NOTE\n",    entries, value = TRUE),
 
-      package     = package %||% parse_package(entries),
-      version     = version %||% parse_version(entries),
+      description = description$str(normalize = FALSE),
+      package     = description$get("Package")[[1]],
+      version     = description$get("Version")[[1]],
+
       rversion    = rversion %||% parse_rversion(entries),
       platform    = platform %||% parse_platform(entries),
 
       checkdir    = checkdir,
       test_fail   = test_fail %||% get_test_fail(checkdir),
       install_out = install_out %||% get_install_out(checkdir),
-      description = description %||% get_check_description(checkdir),
       session_info = session_info
     ),
     class = "rcmdcheck"
@@ -48,26 +49,6 @@ new_rcmdcheck <- function(stdout,
   }
 
   res
-}
-
-parse_package <- function(entries) {
-  line <- grep("^this is package .* version", entries, value = TRUE)
-  sub(
-    "^this is package .([a-zA-Z0-9\\.]+)[^a-zA-Z0-9\\.].*$",
-    "\\1",
-    line,
-    perl = TRUE
-  )
-}
-
-parse_version <- function(entries) {
-  line <- grep("^this is package .* version", entries, value = TRUE)
-  sub(
-    "^this is package .[a-zA-Z0-9\\.]+. version .([-0-9\\.]+)[^-0-9\\.].*$",
-    "\\1",
-    line,
-    perl = TRUE
-  )
 }
 
 parse_rversion <- function(entries) {
@@ -136,6 +117,7 @@ hash_check <- function(check) {
 #'
 #' @seealso \code{\link{parse_check_url}}
 #' @export
+#' @importFrom desc description
 
 parse_check <- function(file = NULL, text = NULL, ...) {
 
@@ -144,13 +126,44 @@ parse_check <- function(file = NULL, text = NULL, ...) {
     file <- find_check_file(file)
     text <- readLines(file)
   }
+  stdout <- paste(text, collapse = "\n")
+
+  # Simulate minimal description from info in log
+  entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
+  desc <- desc::description$new("!new")
+  desc$set(
+    Package = parse_package(entries),
+    Version = parse_version(entries)
+  )
 
   new_rcmdcheck(
-    stdout = paste(text, collapse = "\n"),
+    stdout = stdout,
     stderr = "",
+    description = desc,
     ...
   )
 }
+
+parse_package <- function(entries) {
+  line <- grep("^this is package .* version", entries, value = TRUE)
+  sub(
+    "^this is package .([a-zA-Z0-9\\.]+)[^a-zA-Z0-9\\.].*$",
+    "\\1",
+    line,
+    perl = TRUE
+  )
+}
+
+parse_version <- function(entries) {
+  line <- grep("^this is package .* version", entries, value = TRUE)
+  sub(
+    "^this is package .[a-zA-Z0-9\\.]+. version .([-0-9\\.]+)[^-0-9\\.].*$",
+    "\\1",
+    line,
+    perl = TRUE
+  )
+}
+
 
 #' Shorthand to parse R CMD check results from a URL
 #'

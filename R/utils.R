@@ -126,28 +126,6 @@ get_test_fail <- function(path) {
 }
 
 
-get_check_description <- function(path) {
-  chkdir <- basename(path)
-  pkg <- sub("\\.Rcheck$", "", chkdir)
-  desc <- file.path(path, "00_pkg_src", pkg, "DESCRIPTION")
-  if (is_string(desc) && file.exists(desc)) {
-    read_dcf(desc)
-  } else {
-    "<DESCRIPTION file does not exist>"
-  }
-}
-
-read_dcf <- function(path) {
-  fields <- colnames(read.dcf(path))
-  dcf <- read.dcf(path, keep.white = fields)
-  txt <- textConnection("res", open = "w", local = TRUE)
-  write.dcf(dcf, txt)
-  close(txt)
-  res <- paste0(paste(res, collapse = "\n"), "\n")
-  if ("Encoding" %in% colnames(dcf)) Encoding(res) <- dcf[, "Encoding"]
-  res
-}
-
 #' @importFrom crayon col_nchar
 
 col_align <- function(text, width = getOption("width"),

@@ -43,20 +43,21 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     path <- normalizePath(path)
   }
 
+  desc <- desc(path)
   targz <- build_package(path, tmp <- tempfile())
-
-  dsc <- desc(targz)
-  dsc$write(tmpdesc <- tempfile())
-  on.exit(unlink(tmpdesc), add = TRUE)
-  package_name <- unname(dsc$get("Package"))
-  package_version <- unname(dsc$get("Version"))
-
   start_time <- Sys.time()
 
   out <- with_dir(
     dirname(targz),
-    do_check(targz, package_name, package_version, args, libpath, repos,
-             quiet, timeout)
+    do_check(targz,
+      package = desc$get("Package")[[1]],
+      version = desc$get("Version")[[1]],
+      args = args,
+      libpath = libpath,
+      repos = repos,
+      quiet = quiet,
+      timeout = timeout
+    )
   )
 
   if (isTRUE(out$timeout)) message("R CMD check timed out")
@@ -64,15 +65,13 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   res <- new_rcmdcheck(
     stdout = out$result$stdout,
     stderr = out$result$stderr,
+    description = desc,
     status = out$result$status,
     duration = duration(start_time),
     timeout = out$result$timeout,
     session_info = out$session_info,
-    package = package_name,
-    version = package_version,
     rversion = R.Version()$version.string, # should be the same
-    platform = R.Version()$platform,       # should be the same
-    description = read_char(tmpdesc)
+    platform = R.Version()$platform        # should be the same
   )
 
   # Automatically delete temporary files when this object disappears
