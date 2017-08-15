@@ -118,14 +118,16 @@ do_check <- function(targz, package, args, libpath, repos,
     )
   )
 
+  # Extract session info for this package
   session_info <- tryCatch(
-    Filter(
-      function(so) package %in% names(so$otherPkgs),
-      suppressWarnings(readRDS(session_output))
-    )[[1]],
+    readRDS(session_output),
     error = function(e) NULL,
     warning = function(w) NULL
   )
+  session_info <- Filter(
+    function(so) package %in% names(so$otherPkgs),
+    session_info
+  )[[1]]
 
   list(result = res, session_info = session_info)
 }
