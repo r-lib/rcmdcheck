@@ -43,7 +43,7 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
   cat_head("Summary")
   cat_line()
   if (file.exists(x$checkdir)) {
-    cat_line("Check directory: ", sQuote(x$checkdir))
+    cat_line("Check directory: '", x$checkdir, "'")
    }
   print(summary(x, ...), line = FALSE)
 }
