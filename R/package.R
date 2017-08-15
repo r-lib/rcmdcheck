@@ -68,9 +68,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     status = out$result$status,
     duration = duration(start_time),
     timeout = out$result$timeout,
-    session_info = out$session_info,
-    rversion = R.Version()$version.string, # should be the same
-    platform = R.Version()$platform        # should be the same
+    session_info = out$session_info
   )
 
   # Automatically delete temporary files when this object disappears
