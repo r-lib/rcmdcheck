@@ -1,13 +1,12 @@
 ── R CMD check results ──────────────────────────── dataonderivatives 0.3.0 ────
 
 ❯ checking tests ... ERROR
-  See below
+  See below...
 
 ❯ checking dependencies in R code ... NOTE
   Namespace in Imports field not imported from: ‘stats’
     All declared Imports should be used.
 
-  Check directory: ‘dataonderivatives-test’
 
 ── Test failures ───────────────────────────────────────────────── testthat ────
 
@@ -43,4 +42,5 @@ Execution halted
 
 ── Summary ─────────────────────────────────────────────────────────────────────
 
+Check directory: ‘dataonderivatives-test’
 1 error ✖ | 0 warnings ✔ | 1 note ✖

@@ -14,6 +14,8 @@ test_that("install log is captured", {
 
   expect_equal(check$checkdir, path)
   expect_match(check$install_out, "unable to load shared object")
+
+  expect_output_file(print(check), file = "parse-install-fail.txt", update = TRUE)
 })
 
 test_that("test failures are captured", {
