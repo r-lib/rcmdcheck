@@ -9,6 +9,7 @@ new_rcmdcheck <- function(stdout,
                           rversion = NULL,
                           platform = NULL,
                           checkdir = NULL,
+                          test_fail = NULL,
                           install_out = NULL,
                           description = NULL,
                           session_info = NULL) {
@@ -34,6 +35,7 @@ new_rcmdcheck <- function(stdout,
       platform    = platform %||% parse_platform(entries),
 
       checkdir    = checkdir,
+      test_fail   = test_fail %||% get_test_fail(checkdir),
       install_out = install_out %||% get_install_out(checkdir),
       description = description %||% get_check_description(checkdir),
       session_info = session_info
