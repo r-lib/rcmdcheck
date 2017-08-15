@@ -1,8 +1,15 @@
 
 #' @export
-#' @importFrom crayon bgRed white
 
 summary.rcmdcheck_comparison <- function(object, ...) {
+  structure(list(object), class = "rcmdcheck_comparison_summary")
+}
+
+#' @export
+#' @importFrom crayon bgRed white green
+
+print.rcmdcheck_comparison_summary <- function(x, ...) {
+  object <- x[[1]]
 
   sum_status <- switch(object$status,
     "t" = white(bgRed("T")),
@@ -21,7 +28,7 @@ summary.rcmdcheck_comparison <- function(object, ...) {
     style = make_style("darkgrey")
   )
 
-  invisible(object)
+  invisible(x)
 }
 
 change_summary <- function(rows, type) {
