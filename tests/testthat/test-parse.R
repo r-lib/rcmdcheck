@@ -22,6 +22,9 @@ test_that("test failures are captured", {
 
   expect_named(check$test_fail, "testthat")
   expect_match(check$test_fail[[1]], "BSDR API accesible")
+
+  expect_output_file(print(check), file = "parse-test-fail.txt", update = TRUE)
+
 })
 
 # data frame coercion -----------------------------------------------------
