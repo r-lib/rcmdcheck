@@ -111,6 +111,21 @@ get_install_out <- function(path) {
   }
 }
 
+get_test_fail <- function(path) {
+  test_path <- file.path(path, "tests")
+  paths <- dir(test_path, pattern = "\\.Rout\\.fail$", full.names = TRUE)
+  names(paths) <- gsub("\\.Rout.fail", "", basename(paths))
+
+  trim_header <- function(x) {
+    first_gt <- regexpr(">", x)
+    substr(x, first_gt, nchar(x))
+  }
+
+  tests <- lapply(paths, read_char)
+  lapply(tests, trim_header)
+}
+
+
 get_check_description <- function(path) {
   chkdir <- basename(path)
   pkg <- sub("\\.Rcheck$", "", chkdir)

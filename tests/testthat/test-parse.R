@@ -16,6 +16,14 @@ test_that("install log is captured", {
   expect_match(check$install_out, "unable to load shared object")
 })
 
+test_that("test failures are captured", {
+  path <- test_path("dataonderivatives-test")
+  check <- parse_check(path, checkdir = path)
+
+  expect_named(check$test_fail, "testthat")
+  expect_match(check$test_fail[[1]], "BSDR API accesible")
+})
+
 # data frame coercion -----------------------------------------------------
 
 test_that("can coerce to data frame", {
