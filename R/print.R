@@ -27,10 +27,11 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
     lapply(x$notes, print_entry)
   }
 
-  if (file.exists(x$checkdir)) {
-    cat_line("  Check directory: ", sQuote(x$checkdir))
-  } else {
-    cat_line("  Check directory already cleared.")
+  if (install_failed(x$stdout)) {
+    cat_line()
+    cat_head("Install failure")
+    cat_line()
+    cat(x$install_out)
   }
 
   cat_line()
@@ -43,6 +44,9 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
   cat_line()
   cat_head("Summary")
   cat_line()
+  if (file.exists(x$checkdir)) {
+    cat_line("Check directory: ", sQuote(x$checkdir))
+   }
   print(summary(x, ...), line = FALSE)
 }
 
@@ -100,8 +104,8 @@ print_entry <- function(entry) {
 
   lines <- strsplit(entry, "\n", fixed = TRUE)[[1]]
 
-  if (grepl("checking tests", lines[1])) {
-    lines <- c(lines[1], "See below")
+  if (grepl("^(checking tests)|(checking whether package)", lines[1])) {
+    lines <- c(lines[1], "See below...")
   }
 
   first <- paste0(symbol$pointer, " ", lines[1])

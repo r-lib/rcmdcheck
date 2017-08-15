@@ -13,9 +13,7 @@ rcmdcheck_comparison <- function(old, new) {
   cmp_df <- rbind(old_df, new_df)
 
   # Compute overall status
-  re_inst_fail <- "can be installed \\.\\.\\.\\s*ERROR\\s*Installation failed"
-  inst_fail <- any(grepl(re_inst_fail, new_df$output) || grepl(re_inst_fail, old_df$output))
-
+  inst_fail <- install_failed(new_df$output) || install_failed(old_df$output)
   if (isTRUE(inst_fail)) {
     status <- "i"
   } else if (new$timeout) {
@@ -41,6 +39,10 @@ rcmdcheck_comparison <- function(old, new) {
   )
 }
 
+install_failed <- function(stdout) {
+  re_inst_fail <- "can be installed \\.\\.\\.\\s*ERROR\\s*Installation failed"
+  any(grepl(re_inst_fail, stdout))
+}
 
 #' Print R CMD check result comparisons
 #'
