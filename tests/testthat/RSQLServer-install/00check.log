@@ -1,4 +1,4 @@
-* using log directory ‘tests/testthat/RSQLServer-install’
+* using log directory ‘RSQLServer-install’
 * using R version 3.4.1 (2017-06-30)
 * using platform: x86_64-apple-darwin15.6.0 (64-bit)
 * using session charset: UTF-8
