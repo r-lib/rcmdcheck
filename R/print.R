@@ -5,12 +5,14 @@
 #' @param ... Additional arguments, currently ignored.
 #' @export
 #' @importFrom clisymbols symbol
+#' @importFrom prettyunits pretty_sec
 
 print.rcmdcheck <- function(x, header = TRUE, ...) {
 
   if (header) {
     cat_line()
     cat_head("R CMD check results", paste(x$package, x$version))
+    cat_line("Duration: ", pretty_sec(x$duration))
     cat_line()
   }
 
