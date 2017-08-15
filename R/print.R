@@ -9,7 +9,6 @@
 print.rcmdcheck <- function(x, header = TRUE, ...) {
 
   if (header) {
-    cat_line()
     cat_head("R CMD check results", paste(x$package, x$version))
     cat_line()
   }
@@ -33,7 +32,16 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
   }
 
   cat_line()
-  print(summary(x, ...))
+  for (fail in names(x$test_fail)) {
+    cat_head("Test failures", fail)
+    cat_line()
+    cat(x$test_fail[[fail]])
+  }
+
+  cat_line()
+  cat_head("Summary")
+  cat_line()
+  print(summary(x, ...), line = FALSE)
 }
 
 make_line <- function(x) {
@@ -90,6 +98,10 @@ print_entry <- function(entry) {
 
   lines <- strsplit(entry, "\n", fixed = TRUE)[[1]]
 
+  if (grepl("checking tests", lines[1])) {
+    lines <- c(lines[1], "See below")
+  }
+
   first <- paste0(symbol$pointer, " ", lines[1])
   cat(red(first), "\n", sep = "")
 
@@ -102,9 +114,13 @@ summary.rcmdcheck <- function(object, ...) {
   structure(list(object), class = "rcmdcheck_summary")
 }
 
-print.rcmdcheck_summary <- function(x, ...) {
+print.rcmdcheck_summary <- function(x, ..., line = TRUE) {
   object <- x[[1]]
-  cat(symbol$line, symbol$line, " ", sep = "")
+
+  if (line) {
+    cat(symbol$line, symbol$line, " ", sep = "")
+  }
+
   summary_entry(object, "errors")
   cat(" | ")
   summary_entry(object, "warnings")

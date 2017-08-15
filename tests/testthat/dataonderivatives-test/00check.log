@@ -1,4 +1,4 @@
-* using log directory ‘/Users/hadley/Documents/web/httr/revdep/checks/dataonderivatives/old/dataonderivatives.Rcheck’
+* using log directory ‘/Users/hadley/Documents/web/httr/revdep/checks/dataonderivatives/new/dataonderivatives.Rcheck’
 * using R version 3.4.1 (2017-06-30)
 * using platform: x86_64-apple-darwin15.6.0 (64-bit)
 * using session charset: UTF-8
@@ -46,8 +46,25 @@ Namespace in Imports field not imported from: ‘stats’
 * checking for unstated dependencies in examples ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
+* checking tests ... ERROR
   Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  
+  
+  4. Failure: CME SDR file parses (@test-cme.R#22) -------------------------------
+  nrow(cme(lubridate::ymd(20161213), "FX")) > 0 isn't true.
+  
+  
+  testthat results ================================================================
+  OK: 23 SKIPPED: 0 FAILED: 4
+  1. Failure: BSDR API accesible (@test-bsdr.R#6) 
+  2. Failure: BSDR API accesible (@test-bsdr.R#8) 
+  3. Failure: BSDR API accesible (@test-bsdr.R#9) 
+  4. Failure: CME SDR file parses (@test-cme.R#22) 
+  
+  Error: testthat unit tests failed
+  Execution halted
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 NOTE
+Status: 1 ERROR, 1 NOTE
