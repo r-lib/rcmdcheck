@@ -1,4 +1,5 @@
 ── R CMD check results ─────────────────────────────────── RSQLServer 0.3.0 ────
+Duration: 0ms
 
 ❯ checking whether package ‘RSQLServer’ can be installed ... ERROR
   See below...

@@ -85,6 +85,7 @@ rcmdcheck_process <- R6Class(
     path  = NULL,
     tmp   = NULL,
     targz = NULL,
+    description = NULL,
     cstdout = character(),
     cstderr = character(),
     killed = FALSE
@@ -92,6 +93,7 @@ rcmdcheck_process <- R6Class(
 )
 
 #' @importFrom callr rcmd_process rcmd_process_options
+#' @importFrom desc desc
 
 rcc_init <- function(self, private, super, path, args, libpath, repos) {
 
@@ -103,6 +105,7 @@ rcc_init <- function(self, private, super, path, args, libpath, repos) {
 
   targz <- build_package(path, tmp <- tempfile())
 
+  private$description <- desc(path)
   private$path  <- path
   private$tmp   <- tmp
   private$targz <- targz
@@ -130,10 +133,11 @@ rcc_parse_results <- function(self, private) {
   self$read_error_lines()
 
   new_rcmdcheck(
-    stdout =  paste(private$cstdout, collapse = "\n"),
-    stderr =  paste(private$cstderr, collapse = "\n"),
-    status =  self$get_exit_status(),
-    duration = duration(self$get_start_time()),
-    timeout = private$killed
+    stdout =      paste(private$cstdout, collapse = "\n"),
+    stderr =      paste(private$cstderr, collapse = "\n"),
+    description = private$description,
+    status =      self$get_exit_status(),
+    duration =    duration(self$get_start_time()),
+    timeout =     private$killed
   )
 }

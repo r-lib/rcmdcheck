@@ -44,19 +44,19 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   }
 
   targz <- build_package(path, tmp <- tempfile())
-
-  dsc <- desc(targz)
-  dsc$write(tmpdesc <- tempfile())
-  on.exit(unlink(tmpdesc), add = TRUE)
-  package_name <- unname(dsc$get("Package"))
-  package_version <- unname(dsc$get("Version"))
-
   start_time <- Sys.time()
+  desc <- desc(targz)
 
   out <- with_dir(
     dirname(targz),
-    do_check(targz, package_name, package_version, args, libpath, repos,
-             quiet, timeout)
+    do_check(targz,
+      package = desc$get("Package")[[1]],
+      args = args,
+      libpath = libpath,
+      repos = repos,
+      quiet = quiet,
+      timeout = timeout
+    )
   )
 
   if (isTRUE(out$timeout)) message("R CMD check timed out")
@@ -64,15 +64,11 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   res <- new_rcmdcheck(
     stdout = out$result$stdout,
     stderr = out$result$stderr,
+    description = desc,
     status = out$result$status,
     duration = duration(start_time),
     timeout = out$result$timeout,
-    session_info = out$session_info,
-    package = package_name,
-    version = package_version,
-    rversion = R.Version()$version.string, # should be the same
-    platform = R.Version()$platform,       # should be the same
-    description = read_char(tmpdesc)
+    session_info = out$session_info
   )
 
   # Automatically delete temporary files when this object disappears
@@ -83,7 +79,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
 #' @importFrom withr with_envvar
 
-do_check <- function(targz, package, version, args, libpath, repos,
+do_check <- function(targz, package, args, libpath, repos,
                      quiet, timeout) {
 
   profile <- tempfile()
@@ -120,14 +116,19 @@ do_check <- function(targz, package, version, args, libpath, repos,
     )
   )
 
+  # Extract session info for this package
   session_info <- tryCatch(
-    Filter(
-      function(so) package %in% names(so$otherPkgs),
-      suppressWarnings(readRDS(session_output))
-    )[[1]],
+    readRDS(session_output),
     error = function(e) NULL,
     warning = function(w) NULL
   )
+  session_info <- Filter(
+    function(so) package %in% names(so$otherPkgs),
+    session_info
+  )
+  if (length(session_info) > 1) {
+    session_info <- session_info[[1]]
+  }
 
   list(result = res, session_info = session_info)
 }
