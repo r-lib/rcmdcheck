@@ -28,25 +28,19 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
   }
 
   if (install_failed(x$stdout)) {
-    cat_line()
     cat_head("Install failure")
     cat_line()
     cat(x$install_out)
+    cat_line()
   }
 
-  cat_line()
   for (fail in names(x$test_fail)) {
     cat_head("Test failures", fail)
     cat_line()
     cat(x$test_fail[[fail]])
+    cat_line()
   }
 
-  cat_line()
-  cat_head("Summary")
-  cat_line()
-  if (file.exists(x$checkdir)) {
-    cat_line("Check directory: '", x$checkdir, "'")
-   }
   print(summary(x, ...), line = FALSE)
 }
 
