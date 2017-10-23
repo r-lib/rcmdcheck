@@ -11,7 +11,6 @@ block_callback <- function(top_line = TRUE) {
 
   partial_line <- ""
 
-  first <- top_line
   state <- "OK"
   should_time <- FALSE
   line_started <- Sys.time()
@@ -36,13 +35,6 @@ block_callback <- function(top_line = TRUE) {
 
     should_time <<- FALSE
     now <<- Sys.time()
-
-    ## First line of output?
-    if (first) {
-      line <- rep(symbol$line, min(getOption("width", 80), 80))
-      cat(style(pale = line), sep = "", "\n")
-      first <<- FALSE
-    }
 
     ## Test mode is special. It will change the 'state' back to 'OK',
     ## once it is done.

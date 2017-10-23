@@ -4,7 +4,6 @@ Duration: 0ms
 ❯ checking whether package ‘RSQLServer’ can be installed ... ERROR
   See below...
 
-
 ── Install failure ─────────────────────────────────────────────────────────────
 
 * installing *source* package ‘RSQLServer’ ...
@@ -21,8 +20,4 @@ Error : .onLoad failed in loadNamespace() for 'rJava', details:
 ERROR: lazy loading failed for package ‘RSQLServer’
 * removing ‘/Users/hadley/Documents/dplyr/dbplyr/revdep/checks/RSQLServer/new/RSQLServer.Rcheck/RSQLServer’
 
-
-── Summary ─────────────────────────────────────────────────────────────────────
-
-Check directory: 'RSQLServer-install'
 1 error ✖ | 0 warnings ✔ | 0 notes ✔
