@@ -19,7 +19,7 @@
 
 * Find package root automatically (#18)
 
-* Header line is optional in printout
+* `error_on` argument to throw an error on an `R CMD check` failure (#51)
 
 # 1.2.1
 
