@@ -8,7 +8,8 @@
 \title{Run R CMD check from R and Capture Results}
 \usage{
 rcmdcheck(path = ".", quiet = FALSE, args = character(),
-  libpath = .libPaths(), repos = getOption("repos"), timeout = Inf)
+  libpath = .libPaths(), repos = getOption("repos"), timeout = Inf,
+  error_on = c("never", "error", "warning", "note"))
 }
 \arguments{
 \item{path}{Path to a package tarball or a directory.}
@@ -29,6 +30,14 @@ This is needed for cyclic dependency checks if you use the
 \link[base:difftime]{base::difftime} object. If it is not finished before this, it will be
 killed. \code{Inf} means no timeout. If the check is timed out,
 that is added as an extra error to the result object.}
+
+\item{error_on}{Whether to throw an error on \code{R CMD check} failures.
+Note that the check is always completed (unless a timeout happens),
+and the error is only thrown after completion. If \code{"never"}, then
+no errors are thrown. If \code{"error"}, then only \code{ERROR} failures
+generate errors. If \code{"warning"}, then \code{WARNING} failures generate
+errors as well. If \code{"note"}, then any check failure generated an
+error.}
 }
 \value{
 An S3 object (list) with fields \code{errors},
@@ -38,6 +47,4 @@ vectors containing the output for the failed check.
 \description{
 Run R CMD check form R programatically, and capture the results of the
 individual checks.
-
-Run \code{R CMD check} on a package or a directory
 }

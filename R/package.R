@@ -23,6 +23,13 @@ NULL
 #'  [base::difftime] object. If it is not finished before this, it will be
 #'   killed. `Inf` means no timeout. If the check is timed out,
 #'   that is added as an extra error to the result object.
+#' @param error_on Whether to throw an error on `R CMD check` failures.
+#'   Note that the check is always completed (unless a timeout happens),
+#'   and the error is only thrown after completion. If `"never"`, then
+#'   no errors are thrown. If `"error"`, then only `ERROR` failures
+#'   generate errors. If `"warning"`, then `WARNING` failures generate
+#'   errors as well. If `"note"`, then any check failure generated an
+#'   error.
 #' @return An S3 object (list) with fields `errors`,
 #'   `warnings` and `notes`. These are all character
 #'   vectors containing the output for the failed check.
@@ -35,7 +42,10 @@ NULL
 
 rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
                       libpath = .libPaths(), repos = getOption("repos"),
-                      timeout = Inf) {
+                      timeout = Inf, error_on =
+                        c("never", "error", "warning", "note")) {
+
+  error_on <- match.arg(error_on)
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -73,6 +83,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   # Automatically delete temporary files when this object disappears
   res$cleaner <- auto_clean(tmp)
+
+  handle_error_on(res, error_on)
 
   res
 }
@@ -131,4 +143,33 @@ do_check <- function(targz, package, args, libpath, repos,
   }
 
   list(result = res, session_info = session_info)
+}
+
+handle_error_on <- function(res, error_on) {
+  level <- c(never = 0, error = 1, warning = 2, note = 3)[error_on]
+
+  if (isTRUE(res$timeout)) {
+    stop(make_error(res, "R CMD check timed out"))
+  } else if (length(res$errors) && level >= 1) {
+    stop(make_error(res, "R CMD check found ERRORs"))
+  } else if (length(res$warnings) && level >= 2) {
+    stop(make_error(res, "R CMD check found WARNINGs"))
+  } else if (length(res$notes) && level >= 3) {
+    stop(make_error(res, "R CMD check found NOTEs"))
+  }
+}
+
+make_error <- function(res, msg) {
+  structure(
+    list(result = res, message = msg, call = NULL),
+    class = c(
+      if (isTRUE(res$timeout)) "rcmdcheck_timeout",
+      if (length(res$errors)) "rcmdcheck_error",
+      if (length(res$warnings)) "rcmdcheck_warning",
+      if (length(res$notes)) "rcmdcheck_note",
+      "rcmdcheck_failure",
+      "error",
+      "condition"
+    )
+  )
 }
