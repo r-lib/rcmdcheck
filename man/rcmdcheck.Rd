@@ -4,7 +4,6 @@
 \name{rcmdcheck}
 \alias{rcmdcheck}
 \alias{rcmdcheck-package}
-\alias{rcmdcheck}
 \title{Run R CMD check from R and Capture Results}
 \usage{
 rcmdcheck(path = ".", quiet = FALSE, args = character(),

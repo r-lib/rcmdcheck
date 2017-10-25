@@ -21,3 +21,4 @@ Compare a check result to CRAN check results
 \seealso{
 Other check comparisons: \code{\link{compare_checks}}
 }
+\concept{check comparisons}
