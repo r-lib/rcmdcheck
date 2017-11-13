@@ -65,12 +65,24 @@ rcmdcheck_process <- R6Class(
 
     read_output_lines = function(...) {
       l <- super$read_output_lines(...)
-      private$cstdout <- c(private$cstdout, l)
+      private$cstdout <- c(private$cstdout, paste0(l, "\n"))
       l
     },
 
     read_error_lines = function(...) {
       l <- super$read_error_lines(...)
+      private$cstderr <- c(private$cstderr, paste0(l, "\n"))
+      l
+    },
+
+    read_output = function(...) {
+      l <- super$read_output(...)
+      private$cstdout <- c(private$cstdout, l)
+      l
+    },
+
+    read_error = function(...) {
+      l <- super$read_error(...)
       private$cstderr <- c(private$cstderr, l)
       l
     },
@@ -133,8 +145,8 @@ rcc_parse_results <- function(self, private) {
   self$read_error_lines()
 
   new_rcmdcheck(
-    stdout =      paste(private$cstdout, collapse = "\n"),
-    stderr =      paste(private$cstderr, collapse = "\n"),
+    stdout =      paste(win2unix(private$cstdout), collapse = ""),
+    stderr =      paste(win2unix(private$cstderr), collapse = ""),
     description = private$description,
     status =      self$get_exit_status(),
     duration =    duration(self$get_start_time()),
