@@ -129,6 +129,9 @@ parse_check <- function(file = NULL, text = NULL, ...) {
   }
   stdout <- paste(text, collapse = "\n")
 
+  # Make sure we don't have \r on windows
+  stdout <- gsub("\r\n", "\n", stdout)
+
   # Simulate minimal description from info in log
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
   desc <- desc::description$new("!new")
