@@ -10,6 +10,10 @@ new_rcmdcheck <- function(stdout,
 
   stopifnot(inherits(description, "description"))
 
+  # Make sure we don't have \r on windows
+  stdout <- win2unix(stdout)
+  stderr <- win2unix(stderr)
+
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
   checkdir <- parse_checkdir(entries)
 
@@ -128,9 +132,6 @@ parse_check <- function(file = NULL, text = NULL, ...) {
     text <- readLines(file)
   }
   stdout <- paste(text, collapse = "\n")
-
-  # Make sure we don't have \r on windows
-  stdout <- gsub("\r\n", "\n", stdout)
 
   # Simulate minimal description from info in log
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
