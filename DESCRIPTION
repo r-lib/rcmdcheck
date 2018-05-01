@@ -15,7 +15,7 @@ Suggests:
     covr,
     testthat
 Imports:
-    callr (>= 1.0.0.9000),
+    callr (>= 2.0.0),
     clisymbols,
     crayon,
     desc,
@@ -25,6 +25,4 @@ Imports:
     rprojroot,
     utils,
     withr
-Remotes:
-    r-lib/callr
 Encoding: UTF-8

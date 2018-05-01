@@ -18,7 +18,7 @@
 #' Note that you calling the `get_output_connection` and
 #' `get_error_connection` method on this is not a good idea, because
 #' then the stdout and/or stderr of the process will not be collected
-#' for `parse_results.
+#' for `parse_results()`.
 #'
 #' You can still use the `read_output_lines()` and `read_error_lines()`
 #' methods to read the standard output and error, `parse_results()` is
