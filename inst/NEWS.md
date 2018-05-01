@@ -5,7 +5,16 @@
 
 * Timeout support (default is 10 minutes)
 
-* Save `install.out` and also `DESCRIPTION` in the result
+* Capture and print installation and test failures
+
+* Record and print the duration of the check
+
+* Record and print session information from the check session (#22)
+
+* Keep files until the returned check object is deleted (#23)
+
+* Save `install.out` and also `DESCRIPTION` in the result,
+  save the standard error and the exit status as well
 
 * Better printing of progress: now the message from the check that is
   actually being performed is shown on the screen.
