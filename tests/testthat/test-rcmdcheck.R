@@ -16,6 +16,7 @@ test_that("rcmdcheck works", {
 
 test_that("background gives same results", {
 
+  skip_on_cran()
   Sys.unsetenv("R_TESTS")
 
   bad1 <- rcmdcheck_process$new(test_path("bad1"))
