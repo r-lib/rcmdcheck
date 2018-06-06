@@ -1,7 +1,7 @@
 
 #' @importFrom withr with_dir
 
-build_package <- function(path, tmpdir) {
+build_package <- function(path, tmpdir, quiet) {
 
   dir.create(tmpdir)
   file.copy(path, tmpdir, recursive = TRUE)
@@ -10,7 +10,11 @@ build_package <- function(path, tmpdir) {
   if (file.info(path)$isdir) {
     build_status <- with_dir(
       tmpdir,
-      rcmd_safe("build", basename(path))
+      rcmd_safe(
+        "build",
+        basename(path),
+        block_callback = if (!quiet) block_callback()
+      )
     )
     unlink(file.path(tmpdir, basename(path)), recursive = TRUE)
     report_system_error("Build failed", build_status)

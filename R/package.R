@@ -53,7 +53,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     path <- normalizePath(path)
   }
 
-  targz <- build_package(path, tmp <- tempfile())
+  targz <- build_package(path, tmp <- tempfile(), quiet = quiet)
   start_time <- Sys.time()
   desc <- desc(targz)
 
