@@ -8,9 +8,14 @@ build_package <- function(path, tmpdir, build_args = character(), quiet) {
 
   ## If not a tar.gz, build it. Otherwise just leave it as it is.
   if (file.info(path)$isdir) {
+    if (length(build_args) > 0) {
+      build_args <- append(basename(path), build_args)
+    } else {
+      build_args <- basename(path)
+    }
     build_status <- with_dir(
       tmpdir,
-      rcmd_safe("build", basename(path), cmdargs = build_args,
+      rcmd_safe("build", cmdargs = build_args,
                 block_callback = if (!quiet) block_callback())
     )
     unlink(file.path(tmpdir, basename(path)), recursive = TRUE)
