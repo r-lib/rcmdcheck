@@ -20,7 +20,7 @@ Other methods are inherited from \link[callr:rcmd_process]{callr::rcmd_process} 
 Note that you calling the \code{get_output_connection} and
 \code{get_error_connection} method on this is not a good idea, because
 then the stdout and/or stderr of the process will not be collected
-for `parse_results.
+for \code{parse_results()}.
 
 You can still use the \code{read_output_lines()} and \code{read_error_lines()}
 methods to read the standard output and error, \code{parse_results()} is
