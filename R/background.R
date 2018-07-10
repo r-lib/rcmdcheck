@@ -107,7 +107,7 @@ rcmdcheck_process <- R6Class(
 #' @importFrom callr rcmd_process rcmd_process_options
 #' @importFrom desc desc
 
-rcc_init <- function(self, private, super, path, args, libpath, repos) {
+rcc_init <- function(self, private, super, path, args, libpath, repos, build_args) {
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -115,7 +115,8 @@ rcc_init <- function(self, private, super, path, args, libpath, repos) {
     path <- normalizePath(path)
   }
 
-  targz <- build_package(path, tmp <- tempfile(), quiet = TRUE)
+  targz <- build_package(path, tmp <- tempfile(), build_args = build_args,
+                         quiet = quiet)
 
   private$description <- desc(path)
   private$path  <- path
