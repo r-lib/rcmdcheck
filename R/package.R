@@ -12,8 +12,10 @@ NULL
 #'
 #' @param path Path to a package tarball or a directory.
 #' @param quiet Whether to print check output during checking.
-#' @param args Character vector of arguments to pass to
+#' @param check_args Character vector of arguments to pass to
 #'   `R CMD check`.
+#' @param build_args Character vector of arguments to pass to
+#'   `R CMD build`
 #' @param libpath The library path to set for the check.
 #'   The default uses the current library path.
 #' @param repos The `repos` option to set for the check.
