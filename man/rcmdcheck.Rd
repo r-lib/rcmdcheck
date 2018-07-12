@@ -17,6 +17,12 @@ rcmdcheck(path = ".", quiet = FALSE, check_args = character(),
 
 \item{quiet}{Whether to print check output during checking.}
 
+\item{check_args}{Character vector of arguments to pass to
+\code{R CMD check}.}
+
+\item{build_args}{Character vector of arguments to pass to
+\code{R CMD build}}
+
 \item{libpath}{The library path to set for the check.
 The default uses the current library path.}
 
@@ -36,9 +42,6 @@ no errors are thrown. If \code{"error"}, then only \code{ERROR} failures
 generate errors. If \code{"warning"}, then \code{WARNING} failures generate
 errors as well. If \code{"note"}, then any check failure generated an
 error.}
-
-\item{args}{Character vector of arguments to pass to
-\code{R CMD check}.}
 }
 \value{
 An S3 object (list) with fields \code{errors},
