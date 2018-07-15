@@ -57,10 +57,11 @@ rcmdcheck_process <- R6Class(
 
   public = list(
 
-    initialize = function(path = ".", args = character(),
-      libpath = .libPaths(), repos = getOption("repos"))
-      rcc_init(self, private, super, path, check_args = character(),
-               build_args = character(), libpath, repos),
+    initialize = function(path = ".", check_args = character(),
+      build_args = character(), libpath = .libPaths(),
+      repos = getOption("repos"))
+      rcc_init(self, private, super, path, check_args = check_args,
+               build_args = build_args, libpath, repos),
 
     parse_results = function()
       rcc_parse_results(self, private),
@@ -109,8 +110,8 @@ rcmdcheck_process <- R6Class(
 #' @importFrom callr rcmd_process rcmd_process_options
 #' @importFrom desc desc
 
-rcc_init <- function(self, private, super, path, check_args = character(),
-                     build_args = character(), libpath, repos) {
+rcc_init <- function(self, private, super, path, check_args = check_args,
+                     build_args = build_args, libpath, repos) {
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
