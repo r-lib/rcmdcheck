@@ -4,19 +4,24 @@
 \name{rcmdcheck}
 \alias{rcmdcheck}
 \alias{rcmdcheck-package}
+\alias{rcmdcheck}
 \title{Run R CMD check from R and Capture Results}
 \usage{
-rcmdcheck(path = ".", quiet = FALSE, args = character(),
-  libpath = .libPaths(), repos = getOption("repos"), timeout = Inf,
-  error_on = c("never", "error", "warning", "note"))
+rcmdcheck(path = ".", quiet = FALSE, check_args = character(),
+  build_args = character(), libpath = .libPaths(),
+  repos = getOption("repos"), timeout = Inf, error_on = c("never",
+  "error", "warning", "note"))
 }
 \arguments{
 \item{path}{Path to a package tarball or a directory.}
 
 \item{quiet}{Whether to print check output during checking.}
 
-\item{args}{Character vector of arguments to pass to
+\item{check_args}{Character vector of arguments to pass to
 \code{R CMD check}.}
+
+\item{build_args}{Character vector of arguments to pass to
+\code{R CMD build}}
 
 \item{libpath}{The library path to set for the check.
 The default uses the current library path.}
@@ -46,4 +51,6 @@ vectors containing the output for the failed check.
 \description{
 Run R CMD check form R programatically, and capture the results of the
 individual checks.
+
+Run \code{R CMD check} on a package or a directory
 }

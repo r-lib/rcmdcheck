@@ -27,7 +27,7 @@ new_rcmdcheck <- function(stdout,
 
       rversion    = parse_rversion(entries),
       platform    = parse_platform(entries),
-      errors      = grep(" ...\\s+ERROR\n",   entries, value = TRUE),
+      errors      = grep("ERROR\n",   entries, value = TRUE),
       warnings    = grep(" ...\\s+WARNING\n", entries, value = TRUE),
       notes       = grep(" ...\\s+NOTE\n",    entries, value = TRUE),
 

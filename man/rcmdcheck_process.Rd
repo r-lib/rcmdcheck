@@ -20,7 +20,7 @@ Other methods are inherited from \link[callr:rcmd_process]{callr::rcmd_process} 
 Note that you calling the \code{get_output_connection} and
 \code{get_error_connection} method on this is not a good idea, because
 then the stdout and/or stderr of the process will not be collected
-for `parse_results.
+for \code{parse_results()}.
 
 You can still use the \code{read_output_lines()} and \code{read_error_lines()}
 methods to read the standard output and error, \code{parse_results()} is
@@ -33,7 +33,8 @@ not affected by that.
 \item \code{cp}: A new rcmdcheck_process object.
 \item \code{path}: Path to a package tree or a package archive file. This is the
 package to check.
-\item \code{args}: Command line arguments to \code{R CMD check}.
+\item \code{check_args}: Command line arguments to \code{R CMD check}.
+\item \code{build_args}: Command line arguments to \code{R CMD build}.
 \item \code{libpath}: The library path to set for the check.
 \item \code{repos}: The \code{repos} option to set for the check.
 This is needed for cyclic dependency checks if you use the

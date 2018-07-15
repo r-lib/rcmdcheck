@@ -12,8 +12,10 @@ NULL
 #'
 #' @param path Path to a package tarball or a directory.
 #' @param quiet Whether to print check output during checking.
-#' @param args Character vector of arguments to pass to
+#' @param check_args Character vector of arguments to pass to
 #'   `R CMD check`.
+#' @param build_args Character vector of arguments to pass to
+#'   `R CMD build`
 #' @param libpath The library path to set for the check.
 #'   The default uses the current library path.
 #' @param repos The `repos` option to set for the check.
@@ -40,7 +42,8 @@ NULL
 #' @importFrom callr rcmd_safe
 #' @importFrom desc desc
 
-rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
+rcmdcheck <- function(path = ".", quiet = FALSE, check_args = character(),
+                      build_args = character(),
                       libpath = .libPaths(), repos = getOption("repos"),
                       timeout = Inf, error_on =
                         c("never", "error", "warning", "note")) {
@@ -53,7 +56,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     path <- normalizePath(path)
   }
 
-  targz <- build_package(path, tmp <- tempfile())
+  targz <- build_package(path, tmp <- tempfile(), build_args = build_args,
+                         quiet = quiet)
   start_time <- Sys.time()
   desc <- desc(targz)
 
@@ -61,7 +65,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     dirname(targz),
     do_check(targz,
       package = desc$get("Package")[[1]],
-      args = args,
+      check_args = check_args,
       libpath = libpath,
       repos = repos,
       quiet = quiet,
@@ -91,7 +95,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
 #' @importFrom withr with_envvar
 
-do_check <- function(targz, package, args, libpath, repos,
+do_check <- function(targz, package, check_args, libpath, repos,
                      quiet, timeout) {
 
   profile <- tempfile()
@@ -117,7 +121,7 @@ do_check <- function(targz, package, args, libpath, repos,
     c(R_PROFILE_USER = profile),
     rcmd_safe(
       "check",
-      cmdargs = c(basename(targz), args),
+      cmdargs = c(basename(targz), check_args),
       libpath = libpath,
       user_profile = TRUE,
       repos = repos,

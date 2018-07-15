@@ -28,7 +28,8 @@
 #' * `cp`: A new rcmdcheck_process object.
 #' * `path`: Path to a package tree or a package archive file. This is the
 #'   package to check.
-#' * `args`: Command line arguments to `R CMD check`.
+#' * `check_args`: Command line arguments to `R CMD check`.
+#' * `build_args`: Command line arguments to `R CMD build`.
 #' * `libpath`: The library path to set for the check.
 #' * `repos`: The `repos` option to set for the check.
 #'   This is needed for cyclic dependency checks if you use the
@@ -56,9 +57,11 @@ rcmdcheck_process <- R6Class(
 
   public = list(
 
-    initialize = function(path = ".", args = character(),
-      libpath = .libPaths(), repos = getOption("repos"))
-      rcc_init(self, private, super, path, args, libpath, repos),
+    initialize = function(path = ".", check_args = character(),
+      build_args = character(), libpath = .libPaths(),
+      repos = getOption("repos"))
+      rcc_init(self, private, super, path, check_args = check_args,
+               build_args = build_args, libpath, repos),
 
     parse_results = function()
       rcc_parse_results(self, private),
@@ -107,7 +110,8 @@ rcmdcheck_process <- R6Class(
 #' @importFrom callr rcmd_process rcmd_process_options
 #' @importFrom desc desc
 
-rcc_init <- function(self, private, super, path, args, libpath, repos) {
+rcc_init <- function(self, private, super, path, check_args = check_args,
+                     build_args = build_args, libpath, repos) {
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -115,7 +119,8 @@ rcc_init <- function(self, private, super, path, args, libpath, repos) {
     path <- normalizePath(path)
   }
 
-  targz <- build_package(path, tmp <- tempfile())
+  targz <- build_package(path, tmp <- tempfile(), build_args = build_args,
+                         quiet = TRUE)
 
   private$description <- desc(path)
   private$path  <- path
@@ -124,7 +129,7 @@ rcc_init <- function(self, private, super, path, args, libpath, repos) {
 
   options <- rcmd_process_options(
     cmd = "check",
-    cmdargs = c(basename(targz), args),
+    cmdargs = c(basename(targz), check_args),
     libpath = libpath,
     repos = repos
   )
