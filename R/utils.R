@@ -151,6 +151,19 @@ col_align <- function(text, width = getOption("width"),
   }
 }
 
+strrep <- function(x, times) {
+  x <- as.character(x)
+  if (length(x) == 0L) return(x)
+  r <- .mapply(
+    function(x, times) {
+      if (is.na(x) || is.na(times)) return(NA_character_)
+      if (times <= 0L) return("")
+      paste0(replicate(times, x), collapse = "")
+    },
+    list(x = x, times = times), MoreArgs = list())
+  unlist(r, use.names = FALSE)
+}
+
 make_space <- function(num, filling = " ") {
   strrep(filling, num)
 }
