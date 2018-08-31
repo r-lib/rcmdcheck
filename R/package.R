@@ -113,6 +113,7 @@ do_check <- function(targz, package, args, libpath, repos,
 
   cat(".Last <-", deparse(last), file = profile, sep = "\n")
 
+  if (!quiet) cat_head("R CMD build")
   res <- with_envvar(
     c(R_PROFILE_USER = profile),
     rcmd_safe(

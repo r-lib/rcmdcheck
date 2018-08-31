@@ -8,6 +8,7 @@ build_package <- function(path, tmpdir, quiet) {
 
   ## If not a tar.gz, build it. Otherwise just leave it as it is.
   if (file.info(path)$isdir) {
+    if (!quiet) cat_head("R CMD build")
     build_status <- with_dir(
       tmpdir,
       rcmd_safe(
