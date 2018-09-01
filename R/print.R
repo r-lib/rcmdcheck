@@ -16,15 +16,15 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
   }
 
   if (length(x$errors)) {
-    lapply(x$errors, print_entry)
+    lapply(x$errors, print_entry, entry_style = "err")
   }
 
   if (length(x$warnings)) {
-    lapply(x$warnings, print_entry)
+    lapply(x$warnings, print_entry, entry_style = "warn")
   }
 
   if (length(x$notes)) {
-    lapply(x$notes, print_entry)
+    lapply(x$notes, print_entry, entry_style = "note")
   }
 
   if (install_failed(x$stdout)) {
@@ -92,9 +92,7 @@ cat_head <- function(left, right = "", style = cyan) {
 
 #' @importFrom crayon red make_style
 
-print_entry <- function(entry) {
-
-  greyish <- make_style("darkgrey")
+print_entry <- function(entry, entry_style) {
 
   lines <- strsplit(entry, "\n", fixed = TRUE)[[1]]
 
@@ -103,9 +101,10 @@ print_entry <- function(entry) {
   }
 
   first <- paste0(symbol$pointer, " ", lines[1])
-  cat(red(first), "\n", sep = "")
+  head <- do.call(style, structure(list(first), names = entry_style))
+  cat(head, "\n", sep = "")
 
-  cat(paste0("  ", greyish(lines[-1])), sep = "\n", "")
+  cat(paste0("  ", lines[-1]), sep = "\n", "")
 }
 
 #' @export
