@@ -9,7 +9,7 @@ License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/r-Lib/rcmdcheck#readme
 BugReports: https://github.com/r-Lib/rcmdcheck/issues
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)
 Suggests:
     covr,
@@ -18,7 +18,7 @@ Imports:
     callr (>= 2.0.0),
     clisymbols,
     crayon,
-    desc,
+    desc (>= 1.2.0),
     digest,
     prettyunits,
     R6,

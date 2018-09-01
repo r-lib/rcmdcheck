@@ -36,6 +36,8 @@ new_rcmdcheck <- function(stdout,
       description = description$str(normalize = FALSE),
       package     = description$get("Package")[[1]],
       version     = description$get("Version")[[1]],
+      cran        = description$get_field("Repository", "") == "CRAN",
+      bioc        = description$has_fields("biocViews"),
 
       checkdir    = checkdir,
       test_fail   = test_fail %||% get_test_fail(checkdir),

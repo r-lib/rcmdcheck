@@ -20,9 +20,11 @@
 #'     A single string.
 #'   * `session_info`: the output of `utils::sessionInfo()`, from the R
 #'     session performing the checks.
-#'   * `check_dir`: the path to the check directory, if it hasn't been
+#'   * `checkdir`: the path to the check directory, if it hasn't been
 #'     cleaned up yet, or `NA`. The check directory is automatically
 #'     cleaned up, when the check object is deleted (garbage collected).
+#'   * `cran`: whether it is a CRAN packaged package.
+#'   * `bioc`: whether it is a BioConductor package.
 #'
 #' @export
 
@@ -37,6 +39,8 @@ check_details <- function(check) {
     checkdir = check$checkdir,
     install_out = check$install_out,
     description = check$description,
-    session_info = check$session_info
+    session_info = check$session_info,
+    cran = check$cran,
+    bioc = check$bioc
   )
 }

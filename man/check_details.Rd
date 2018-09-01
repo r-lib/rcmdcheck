@@ -29,9 +29,11 @@ A check timeout adds an ERROR to this vector.
 A single string.
 \item \code{session_info}: the output of \code{utils::sessionInfo()}, from the R
 session performing the checks.
-\item \code{check_dir}: the path to the check directory, if it hasn't been
+\item \code{checkdir}: the path to the check directory, if it hasn't been
 cleaned up yet, or \code{NA}. The check directory is automatically
 cleaned up, when the check object is deleted (garbage collected).
+\item \code{cran}: whether it is a CRAN packaged package.
+\item \code{bioc}: whether it is a BioConductor package.
 }
 }
 \description{

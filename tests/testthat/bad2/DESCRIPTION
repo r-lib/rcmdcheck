@@ -9,3 +9,4 @@ License: Public domain
 Suggests:
     testthat
 RoxygenNote: 5.0.1
+biocViews: GraphAndNetwork

@@ -16,6 +16,9 @@ test_that("rcmdcheck works", {
   expect_equal(length(bad1$errors), 0)
   expect_equal(length(bad1$warnings), 1)
   expect_equal(length(bad1$notes), 0)
+
+  expect_true(bad1$cran)
+  expect_false(bad1$bioc)
 })
 
 test_that("background gives same results", {
@@ -44,6 +47,9 @@ test_that("Installation errors", {
   expect_equal(length(bad2$errors), 1)
   expect_equal(length(bad2$warnings), 0)
   expect_equal(length(bad2$notes), 0)
+
+  expect_false(bad2$cran)
+  expect_true(bad2$bioc)
 })
 
 test_that("non-quiet mode works", {
