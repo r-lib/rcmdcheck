@@ -12,6 +12,10 @@ test_that("rcmdcheck works", {
     print(bad1),
     "Non-standard license specification"
   )
+
+  expect_equal(length(bad1$errors), 0)
+  expect_equal(length(bad1$warnings), 1)
+  expect_equal(length(bad1$notes), 0)
 })
 
 test_that("background gives same results", {
@@ -25,6 +29,21 @@ test_that("background gives same results", {
 
   expect_match(res$warnings[1], "Non-standard license specification")
   expect_match(res$description, "Advice on R package building")
+})
+
+test_that("Installation errors", {
+
+  bad2 <- rcmdcheck(test_path("bad2"), quiet = TRUE)
+  expect_match(bad2$errors[1], "Installation failed")
+
+  expect_output(
+    print(bad2),
+    "installing .source. package"
+  )
+
+  expect_equal(length(bad2$errors), 1)
+  expect_equal(length(bad2$warnings), 0)
+  expect_equal(length(bad2$notes), 0)
 })
 
 test_that("non-quiet mode works", {

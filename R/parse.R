@@ -17,6 +17,8 @@ new_rcmdcheck <- function(stdout,
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
   checkdir <- parse_checkdir(entries)
 
+  notdone <- function(x) grep("DONE", x, invert = TRUE, value = TRUE)
+
   res <- structure(
     list(
       stdout      = stdout,
@@ -27,9 +29,9 @@ new_rcmdcheck <- function(stdout,
 
       rversion    = parse_rversion(entries),
       platform    = parse_platform(entries),
-      errors      = grep("ERROR\n",   entries, value = TRUE),
-      warnings    = grep(" ...\\s+WARNING\n", entries, value = TRUE),
-      notes       = grep(" ...\\s+NOTE\n",    entries, value = TRUE),
+      errors      = notdone(grep("ERROR\n",   entries, value = TRUE)),
+      warnings    = notdone(grep("WARNING\n", entries, value = TRUE)),
+      notes       = notdone(grep("NOTE\n",    entries, value = TRUE)),
 
       description = description$str(normalize = FALSE),
       package     = description$get("Package")[[1]],
