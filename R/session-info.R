@@ -1,5 +1,15 @@
 
 make_fake_profile  <- function(session_output) {
+  profile <- tempfile()
+
+  ## Include the real profile as well, if any
+  user <- Sys.getenv("R_PROFILE_USER", NA_character_)
+  local <- ".Rprofile"
+  home  <- path.expand("~/.Rprofile")
+  if (is.na(user) && file.exists(local)) user <- local
+  if (is.na(user) && file.exists(home)) user <- home
+  if (!is.na(user) && file.exists(user)) file.append(profile, user)
+
   last <- substitute(
     function() {
       si <- utils::sessionInfo()
@@ -13,8 +23,9 @@ make_fake_profile  <- function(session_output) {
     list(`__output__` = session_output)
   )
 
-  profile <- tempfile()
-  cat(".Last <-", deparse(last), file = profile, sep = "\n")
+  cat(".Last <-", deparse(last), sep = "\n", file = profile,
+      append = TRUE)
+
   profile
 }
 
