@@ -74,6 +74,8 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     )
   )
 
+  on.exit(unlink(out$session_info, recursive = TRUE), add = TRUE)
+
   if (isTRUE(out$timeout)) message("R CMD check timed out")
 
   res <- new_rcmdcheck(
@@ -99,24 +101,9 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 do_check <- function(targz, package, args, libpath, repos,
                      quiet, timeout) {
 
-  profile <- tempfile()
   session_output <- tempfile()
-  on.exit(unlink(c(profile, session_output)), add = TRUE)
-
-  last <- substitute(
-    function() {
-      si <- utils::sessionInfo()
-      l <- if (file.exists(`__output__`)) {
-        readRDS(`__output__`)
-      } else {
-        list()
-      }
-      saveRDS(c(l, list(si)), `__output__`)
-    },
-    list(`__output__` = session_output)
-  )
-
-  cat(".Last <-", deparse(last), file = profile, sep = "\n")
+  profile <- make_fake_profile(session_output = session_output)
+  on.exit(unlink(profile), add = TRUE)
 
   if (!quiet) cat_head("R CMD check")
   res <- with_envvar(
@@ -134,21 +121,7 @@ do_check <- function(targz, package, args, libpath, repos,
     )
   )
 
-  # Extract session info for this package
-  session_info <- tryCatch(
-    readRDS(session_output),
-    error = function(e) NULL,
-    warning = function(w) NULL
-  )
-  session_info <- Filter(
-    function(so) package %in% names(so$otherPkgs),
-    session_info
-  )
-  if (length(session_info) > 1) {
-    session_info <- session_info[[1]]
-  }
-
-  list(result = res, session_info = session_info)
+  list(result = res, session_info = session_output)
 }
 
 handle_error_on <- function(res, error_on) {

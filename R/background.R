@@ -103,7 +103,9 @@ rcmdcheck_process <- R6Class(
     description = NULL,
     cstdout = character(),
     cstderr = character(),
-    killed = FALSE
+    killed = FALSE,
+    session_output = NULL,
+    tempfiles = character()
   )
 )
 
@@ -127,16 +129,24 @@ rcc_init <- function(self, private, super, path, args, build_args,
   private$tmp   <- tmp
   private$targz <- targz
 
+  private$session_output <- tempfile()
+  profile <- make_fake_profile(session_output = private$session_output)
+  private$tempfiles  <- c(private$session_output, profile)
+
   options <- rcmd_process_options(
     cmd = "check",
     cmdargs = c(basename(targz), args),
     libpath = libpath,
-    repos = repos
+    repos = repos,
+    user_profile = TRUE
   )
 
-  with_dir(
-    dirname(targz),
-    super$initialize(options)
+  with_envvar(
+    c(R_PROFILE_USER = profile),
+    with_dir(
+      dirname(targz),
+      super$initialize(options)
+    )
   )
 
   invisible(self)
@@ -149,12 +159,15 @@ rcc_parse_results <- function(self, private) {
   self$read_output_lines()
   self$read_error_lines()
 
+  on.exit(unlink(private$tempfiles, recursive = TRUE), add = TRUE)
+
   new_rcmdcheck(
-    stdout =      paste(win2unix(private$cstdout), collapse = ""),
-    stderr =      paste(win2unix(private$cstderr), collapse = ""),
-    description = private$description,
-    status =      self$get_exit_status(),
-    duration =    duration(self$get_start_time()),
-    timeout =     private$killed
+    stdout =       paste(win2unix(private$cstdout), collapse = ""),
+    stderr =       paste(win2unix(private$cstderr), collapse = ""),
+    description =  private$description,
+    status =       self$get_exit_status(),
+    duration =     duration(self$get_start_time()),
+    timeout =      private$killed,
+    session_info = private$session_output
   )
 }

@@ -41,11 +41,12 @@ new_rcmdcheck <- function(stdout,
 
       checkdir    = checkdir,
       test_fail   = test_fail %||% get_test_fail(checkdir),
-      install_out = get_install_out(checkdir),
-      session_info = session_info
+      install_out = get_install_out(checkdir)
     ),
     class = "rcmdcheck"
   )
+
+  res$session_info <- get_session_info(res$package, session_info)
 
   if (isTRUE(timeout)) {
     res$errors <- c(res$errors, "R CMD check timed out")
