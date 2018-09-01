@@ -155,12 +155,16 @@ handle_error_on <- function(res, error_on) {
   level <- c(never = 0, error = 1, warning = 2, note = 3)[error_on]
 
   if (isTRUE(res$timeout)) {
+    print(res)
     stop(make_error(res, "R CMD check timed out"))
   } else if (length(res$errors) && level >= 1) {
+    print(res)
     stop(make_error(res, "R CMD check found ERRORs"))
   } else if (length(res$warnings) && level >= 2) {
+    print(res)
     stop(make_error(res, "R CMD check found WARNINGs"))
   } else if (length(res$notes) && level >= 3) {
+    print(res)
     stop(make_error(res, "R CMD check found NOTEs"))
   }
 }
