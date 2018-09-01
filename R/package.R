@@ -14,6 +14,8 @@ NULL
 #' @param quiet Whether to print check output during checking.
 #' @param args Character vector of arguments to pass to
 #'   `R CMD check`.
+#' @param build_args Character vector of arguments to pass to
+#'   `R CMD build`
 #' @param libpath The library path to set for the check.
 #'   The default uses the current library path.
 #' @param repos The `repos` option to set for the check.
@@ -41,6 +43,7 @@ NULL
 #' @importFrom desc desc
 
 rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
+                      build_args = character(),
                       libpath = .libPaths(), repos = getOption("repos"),
                       timeout = Inf, error_on =
                         c("never", "error", "warning", "note")) {
@@ -53,7 +56,9 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     path <- normalizePath(path)
   }
 
-  targz <- build_package(path, tmp <- tempfile(), quiet = quiet)
+  targz <- build_package(path, tmp <- tempfile(), build_args = build_args,
+                         quiet = quiet)
+
   start_time <- Sys.time()
   desc <- desc(targz)
 
@@ -113,7 +118,7 @@ do_check <- function(targz, package, args, libpath, repos,
 
   cat(".Last <-", deparse(last), file = profile, sep = "\n")
 
-  if (!quiet) cat_head("R CMD build")
+  if (!quiet) cat_head("R CMD check")
   res <- with_envvar(
     c(R_PROFILE_USER = profile),
     rcmd_safe(

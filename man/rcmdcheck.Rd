@@ -7,8 +7,9 @@
 \title{Run R CMD check from R and Capture Results}
 \usage{
 rcmdcheck(path = ".", quiet = FALSE, args = character(),
-  libpath = .libPaths(), repos = getOption("repos"), timeout = Inf,
-  error_on = c("never", "error", "warning", "note"))
+  build_args = character(), libpath = .libPaths(),
+  repos = getOption("repos"), timeout = Inf, error_on = c("never",
+  "error", "warning", "note"))
 }
 \arguments{
 \item{path}{Path to a package tarball or a directory.}
@@ -17,6 +18,9 @@ rcmdcheck(path = ".", quiet = FALSE, args = character(),
 
 \item{args}{Character vector of arguments to pass to
 \code{R CMD check}.}
+
+\item{build_args}{Character vector of arguments to pass to
+\code{R CMD build}}
 
 \item{libpath}{The library path to set for the check.
 The default uses the current library path.}
