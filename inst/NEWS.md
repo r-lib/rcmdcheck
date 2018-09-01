@@ -1,5 +1,5 @@
 
-# 1.2.1.9000
+# devel
 
 * `rcmdcheck_process` to run `R CMD check` in the background
 
@@ -29,6 +29,8 @@
 * Find package root automatically (#18)
 
 * `error_on` argument to throw an error on an `R CMD check` failure (#51)
+
+* Fix colors when printing a check object (#54)
 
 # 1.2.1
 
