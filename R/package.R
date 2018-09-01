@@ -12,7 +12,7 @@ NULL
 #'
 #' @param path Path to a package tarball or a directory.
 #' @param quiet Whether to print check output during checking.
-#' @param check_args Character vector of arguments to pass to
+#' @param args Character vector of arguments to pass to
 #'   `R CMD check`.
 #' @param build_args Character vector of arguments to pass to
 #'   `R CMD build`
@@ -42,7 +42,7 @@ NULL
 #' @importFrom callr rcmd_safe
 #' @importFrom desc desc
 
-rcmdcheck <- function(path = ".", quiet = FALSE, check_args = character(),
+rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
                       build_args = character(),
                       libpath = .libPaths(), repos = getOption("repos"),
                       timeout = Inf, error_on =
@@ -66,7 +66,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, check_args = character(),
     dirname(targz),
     do_check(targz,
       package = desc$get("Package")[[1]],
-      check_args = check_args,
+      args = args,
       libpath = libpath,
       repos = repos,
       quiet = quiet,
@@ -96,7 +96,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, check_args = character(),
 
 #' @importFrom withr with_envvar
 
-do_check <- function(targz, package, check_args, libpath, repos,
+do_check <- function(targz, package, args, libpath, repos,
                      quiet, timeout) {
 
   profile <- tempfile()
@@ -118,12 +118,12 @@ do_check <- function(targz, package, check_args, libpath, repos,
 
   cat(".Last <-", deparse(last), file = profile, sep = "\n")
 
-  if (!quiet) cat_head("R CMD build")
+  if (!quiet) cat_head("R CMD check")
   res <- with_envvar(
     c(R_PROFILE_USER = profile),
     rcmd_safe(
       "check",
-      cmdargs = c(basename(targz), check_args),
+      cmdargs = c(basename(targz), args),
       libpath = libpath,
       user_profile = TRUE,
       repos = repos,

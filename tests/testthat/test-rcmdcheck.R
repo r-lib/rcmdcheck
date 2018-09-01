@@ -74,3 +74,35 @@ test_that("non-quiet mode works", {
   out <- read_char(tmp)
   expect_match(out, "Non-standard license specification")
 })
+
+test_that("build arguments", {
+
+  tmp <- tempfile()
+  on.exit(unlink(tmp), add = TRUE)
+
+  sink(tmp)
+
+  o1 <- expect_error(
+    rcmdcheck(test_path("bad1"), build_args = "-v")
+  )
+
+  sink(NULL)
+
+  out <- read_char(tmp)
+  expect_match(out, "R add-on package builder")
+})
+
+test_that("check arguments", {
+
+  tmp <- tempfile()
+  on.exit(unlink(tmp), add = TRUE)
+
+  sink(tmp)
+
+  rcmdcheck(test_path("fixtures/badpackage_1.0.0.tar.gz"), args = "-v")
+
+  sink(NULL)
+
+  out <- read_char(tmp)
+  expect_match(out, "R add-on package check")
+})

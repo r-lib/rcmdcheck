@@ -28,7 +28,7 @@
 #' * `cp`: A new rcmdcheck_process object.
 #' * `path`: Path to a package tree or a package archive file. This is the
 #'   package to check.
-#' * `check_args`: Command line arguments to `R CMD check`.
+#' * `args`: Command line arguments to `R CMD check`.
 #' * `build_args`: Command line arguments to `R CMD build`.
 #' * `libpath`: The library path to set for the check.
 #' * `repos`: The `repos` option to set for the check.
@@ -57,10 +57,10 @@ rcmdcheck_process <- R6Class(
 
   public = list(
 
-    initialize = function(path = ".", check_args = character(),
+    initialize = function(path = ".", args = character(),
       build_args = character(), libpath = .libPaths(),
       repos = getOption("repos"))
-      rcc_init(self, private, super, path, check_args = check_args,
+      rcc_init(self, private, super, path, args = args,
                build_args = build_args, libpath, repos),
 
     parse_results = function()
@@ -110,8 +110,8 @@ rcmdcheck_process <- R6Class(
 #' @importFrom callr rcmd_process rcmd_process_options
 #' @importFrom desc desc
 
-rcc_init <- function(self, private, super, path, check_args = check_args,
-                     build_args = build_args, libpath, repos) {
+rcc_init <- function(self, private, super, path, args, build_args,
+                     libpath, repos) {
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -129,7 +129,7 @@ rcc_init <- function(self, private, super, path, check_args = check_args,
 
   options <- rcmd_process_options(
     cmd = "check",
-    cmdargs = c(basename(targz), check_args),
+    cmdargs = c(basename(targz), args),
     libpath = libpath,
     repos = repos
   )

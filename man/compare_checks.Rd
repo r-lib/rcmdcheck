@@ -20,3 +20,4 @@ Compare a set of check results to another check result
 \seealso{
 Other check comparisons: \code{\link{compare_to_cran}}
 }
+\concept{check comparisons}
