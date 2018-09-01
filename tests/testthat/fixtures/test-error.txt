@@ -1,0 +1,128 @@
+* using log directory ‘/tmp/RtmpoYWa4I/file31fc5a857856/mlr.Rcheck’
+* using R version 3.5.0 (2017-01-27)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘mlr/DESCRIPTION’ ... OK
+* this is package ‘mlr’ version ‘2.13’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘elmNN’
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘mlr’ can be installed ... [22s/22s] OK
+* checking installed package size ... NOTE
+  installed size is  6.5Mb
+  sub-directories of 1Mb or more:
+    data   3.3Mb
+    R      2.0Mb
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... NOTE
+Picked up _JAVA_OPTIONS: -Xmx2048m -Xms512m
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [34s/34s] OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking compiled code ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... [18s/28s] OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+ [12m/13m] ERROR
+Running the tests in ‘tests/run-classif1.R’ failed.
+Last 999 lines of output:
+  
+  burning and aggregating chains from all threads... done
+  building BART with mem-cache speedup...
+  done building BART in 0.013 sec 
+  
+  burning and aggregating chains from all threads... done
+  building BART with mem-cache speedup...
+  Iteration 100/1250
+  Iteration 200/1250
+  Iteration 300/1250
+  Iteration 400/1250
+  Iteration 500/1250
+  Iteration 600/1250
+  Iteration 700/1250
+  Iteration 800/1250
+  Iteration 900/1250
+  Iteration 1000/1250
+  Iteration 1100/1250
+  Iteration 1200/1250
+  done building BART in 0.551 sec 
+  
+  burning and aggregating chains from all threads... done
+  building BART with mem-cache speedup...
+  done building BART in 0.028 sec 
+  
+  burning and aggregating chains from all threads... done
+  building BART with mem-cache speedup...
+  done building BART in 0.014 sec 
+  
+  burning and aggregating chains from all threads... done
+  ── 1. Error: classif_blackboost (@test_classif_blackboost.R#32)  ───────────────
+  no method for assigning subsets of this S4 class
+  1: do.call(mboost::blackboost, pars) at testthat/test_classif_blackboost.R:32
+  2: (function (formula, data = list(), weights = NULL, na.action = na.pass, offset = NULL, 
+         family = Gaussian(), control = boost_control(), oobweights = NULL, tree_controls = partykit::ctree_control(teststat = "quad", 
+             testtype = "Teststatistic", mincriterion = 0, minsplit = 10, minbucket = 4, 
+             maxdepth = 2, saveinfo = FALSE), ...) 
+     {
+         cl <- match.call()
+         mf <- match.call(expand.dots = FALSE)
+         m <- match(c("formula", "data", "weights", "na.action"), names(mf), 0L)
+         mf <- mf[c(1L, m)]
+         mf$drop.unused.levels <- TRUE
+         mf[[1L]] <- quote(stats::model.frame)
+         mf <- eval(mf, parent.frame())
+         response <- model.response(mf)
+         weights <- model.weights(mf)
+         mf <- mf[, -1, drop = FALSE]
+         mf$"(weights)" <- NULL
+         bl <- list(btree(mf, tree_controls = tree_controls))
+         ret <- mboost_fit(bl, response = response, weights = weights, offset = offset, 
+             family = family, control = control, oobweights = oobweights, ...)
+         ret$call <- cl
+  Error: testthat unit tests failed
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ...
+   ‘mlr.Rmd’ using ‘UTF-8’ ... [0s/0s] OK
+ NONE
+* checking re-building of vignette outputs ... [3s/4s] OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 ERROR, 3 NOTEs

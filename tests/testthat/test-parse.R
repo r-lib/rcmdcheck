@@ -28,6 +28,13 @@ test_that("test failures are captured", {
 
 })
 
+test_that("test failure, ERROR in new line", {
+  check <- parse_check(test_path("fixtures/test-error.txt"))
+  expect_equal(length(check$errors), 1)
+  expect_equal(length(check$warnings), 0)
+  expect_equal(length(check$notes), 3)
+})
+
 # data frame coercion -----------------------------------------------------
 
 test_that("can coerce to data frame", {
