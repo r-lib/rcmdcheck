@@ -178,5 +178,5 @@ cat_line <- function(..., style = NULL) {
 }
 
 duration <- function(start) {
-  as.numeric(Sys.time() - start)
+  as.double(Sys.time() - start, units = "secs")
 }
