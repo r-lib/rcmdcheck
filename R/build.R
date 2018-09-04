@@ -1,7 +1,7 @@
 
 #' @importFrom withr with_dir
 
-build_package <- function(path, tmpdir, build_args, quiet) {
+build_package <- function(path, tmpdir, build_args, libpath, quiet) {
 
   dir.create(tmpdir)
   file.copy(path, tmpdir, recursive = TRUE)
@@ -11,8 +11,13 @@ build_package <- function(path, tmpdir, build_args, quiet) {
     if (!quiet) cat_head("R CMD build")
     build_status <- with_dir(
       tmpdir,
-      rcmd_safe("build", cmdargs = c(build_args, basename(path)),
-                block_callback = if (!quiet) block_callback())
+      rcmd_safe(
+        "build",
+        env = c(callr::rcmd_safe_env(), R_LIBS_USER = paste(libpath, collapse = .Platform$path.sep)),
+        cmdargs = c(build_args, basename(path)),
+        #libpath = libpath, # Is not sufficient!!!
+        block_callback = if (!quiet) block_callback()
+      )
     )
     unlink(file.path(tmpdir, basename(path)), recursive = TRUE)
     report_system_error("Build failed", build_status)

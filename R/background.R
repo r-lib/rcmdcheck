@@ -122,7 +122,7 @@ rcc_init <- function(self, private, super, path, args, build_args,
   }
 
   targz <- build_package(path, tmp <- tempfile(), build_args = build_args,
-                         quiet = TRUE)
+                         libpath = libpath, quiet = TRUE)
 
   private$description <- desc(path)
   private$path  <- path
