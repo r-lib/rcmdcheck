@@ -5,7 +5,22 @@ test_that("rcmdcheck works", {
 
   Sys.unsetenv("R_TESTS")
 
-  bad1 <- rcmdcheck(test_path("bad1"), quiet = TRUE)
+  ## This is to test passing libpath to R CMD check subprocesses
+  ## In the bad1 package, there is an example that reads out
+  ## RCMDCHECK_OUTPUT, and write the .libPaths() there.
+
+  dir.create(tmp_lib <- tempfile())
+  tmp_lib <- normalizePath(tmp_lib)
+  tmp_out <- tempfile(fileext = ".rda")
+  Sys.setenv(RCMDCHECK_OUTPUT = tmp_out)
+  on.exit(unlink(c(tmp_lib, tmp_out), recursive = TRUE), add = TRUE)
+  on.exit(Sys.unsetenv("RCMDCHECK_OUTPUT"), add = TRUE)
+
+  bad1 <- rcmdcheck(
+    test_path("bad1"),
+    quiet = TRUE,
+    libpath = c(tmp_lib, .libPaths()))
+
   expect_match(bad1$warnings[1], "Non-standard license specification")
 
   expect_output(
@@ -15,10 +30,15 @@ test_that("rcmdcheck works", {
 
   expect_equal(length(bad1$errors), 0)
   expect_equal(length(bad1$warnings), 1)
-  expect_equal(length(bad1$notes), 1)
+  expect_equal(length(bad1$notes), 0)
 
   expect_true(bad1$cran)
   expect_false(bad1$bioc)
+
+  ## Check that libpath was passed to R CMD check subprocesses
+  expect_true(file.exists(tmp_out))
+  lp <- readRDS(tmp_out)
+  expect_true(tmp_lib %in% lp)
 
   ## This currently fails with devtools::check(), so it also fails
   ## on Travis
@@ -31,12 +51,30 @@ test_that("background gives same results", {
   skip_on_cran()
   Sys.unsetenv("R_TESTS")
 
-  bad1 <- rcmdcheck_process$new(test_path("bad1"))
+  ## This is to test passing libpath to R CMD check subprocesses
+  ## In the bad1 package, there is an example that reads out
+  ## RCMDCHECK_OUTPUT, and write the .libPaths() there.
+
+  dir.create(tmp_lib <- tempfile())
+  tmp_lib <- normalizePath(tmp_lib)
+  tmp_out <- tempfile(fileext = ".rda")
+  Sys.setenv(RCMDCHECK_OUTPUT = tmp_out)
+  on.exit(unlink(c(tmp_lib, tmp_out), recursive = TRUE), add = TRUE)
+  on.exit(Sys.unsetenv("RCMDCHECK_OUTPUT"), add = TRUE)
+
+  bad1 <- rcmdcheck_process$new(
+     test_path("bad1"),
+     libpath = c(tmp_lib, .libPaths()))
   bad1$wait()
   res <- bad1$parse_results()
 
   expect_match(res$warnings[1], "Non-standard license specification")
   expect_match(res$description, "Advice on R package building")
+
+  ## Check that libpath was passed to R CMD check subprocesses
+  expect_true(file.exists(tmp_out))
+  lp <- readRDS(tmp_out)
+  expect_true(tmp_lib %in% lp)
 
   ## This currently fails with devtools::check(), so it also fails
   ## on Travis
