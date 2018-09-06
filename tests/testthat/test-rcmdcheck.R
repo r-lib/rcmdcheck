@@ -69,19 +69,16 @@ test_that("non-quiet mode works", {
   tmp <- tempfile()
   on.exit(unlink(tmp), add = TRUE)
 
-  sink(tmp)
-
-  bad1 <- rcmdcheck(test_path("bad1"), quiet = FALSE)
-  expect_match(bad1$warnings[1], "Non-standard license specification")
+  out <- capture_output({
+    bad1 <- rcmdcheck(test_path("bad1"), quiet = FALSE)
+    expect_match(bad1$warnings[1], "Non-standard license specification")
+  })
 
   expect_output(
     print(bad1),
     "Non-standard license specification"
   )
 
-  sink(NULL)
-
-  out <- read_char(tmp)
   expect_match(out, "Non-standard license specification")
 })
 
@@ -90,15 +87,11 @@ test_that("build arguments", {
   tmp <- tempfile()
   on.exit(unlink(tmp), add = TRUE)
 
-  sink(tmp)
-
-  o1 <- expect_error(
-    rcmdcheck(test_path("bad1"), build_args = "-v")
+  out <- capture_output(
+    o1 <- expect_error(
+      rcmdcheck(test_path("bad1"), build_args = "-v")
+    )
   )
-
-  sink(NULL)
-
-  out <- read_char(tmp)
   expect_match(out, "R add-on package builder")
 })
 
@@ -107,12 +100,9 @@ test_that("check arguments", {
   tmp <- tempfile()
   on.exit(unlink(tmp), add = TRUE)
 
-  sink(tmp)
+  out <- capture_output(
+    rcmdcheck(test_path("fixtures/badpackage_1.0.0.tar.gz"), args = "-v")
+  )
 
-  rcmdcheck(test_path("fixtures/badpackage_1.0.0.tar.gz"), args = "-v")
-
-  sink(NULL)
-
-  out <- read_char(tmp)
   expect_match(out, "R add-on package check")
 })
