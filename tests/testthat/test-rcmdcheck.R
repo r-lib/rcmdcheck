@@ -77,7 +77,7 @@ test_that("background gives same results", {
   bad1 <- rcmdcheck_process$new(
      test_path("bad1"),
      libpath = c(tmp_lib, .libPaths()))
-  bad1$wait()
+  bad1$read_all_output_lines()
   res <- bad1$parse_results()
 
   expect_match(res$warnings[1], "Non-standard license specification")
