@@ -13,7 +13,9 @@ RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)
 Suggests:
     covr,
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Imports:
     callr (>= 2.0.0),
     clisymbols,
