@@ -33,7 +33,7 @@ test_that("rcmdcheck works", {
   )
 
   expect_equal(length(bad1$errors), 0)
-  expect_equal(length(bad1$warnings), 1)
+  expect_true(length(bad1$warnings) >= 1)
   expect_equal(length(bad1$notes), 0)
 
   expect_true(bad1$cran)
