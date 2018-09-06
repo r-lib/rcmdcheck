@@ -11,10 +11,14 @@ test_that("rcmdcheck works", {
 
   dir.create(tmp_lib <- tempfile())
   tmp_lib <- normalizePath(tmp_lib)
-  tmp_out <- tempfile(fileext = ".rda")
-  Sys.setenv(RCMDCHECK_OUTPUT = tmp_out)
-  on.exit(unlink(c(tmp_lib, tmp_out), recursive = TRUE), add = TRUE)
+  tmp_out1 <- tempfile(fileext = ".rda")
+  tmp_out2 <- tempfile(fileext = ".rda")
+  Sys.setenv(RCMDCHECK_OUTPUT = tmp_out1)
+  Sys.setenv(RCMDBUILD_OUTPUT = tmp_out2)
+  on.exit(unlink(c(tmp_lib, tmp_out1, tmp_out2), recursive = TRUE),
+          add = TRUE)
   on.exit(Sys.unsetenv("RCMDCHECK_OUTPUT"), add = TRUE)
+  on.exit(Sys.unsetenv("RCMDBUILD_OUTPUT"), add = TRUE)
 
   bad1 <- rcmdcheck(
     test_path("bad1"),
@@ -36,9 +40,13 @@ test_that("rcmdcheck works", {
   expect_false(bad1$bioc)
 
   ## Check that libpath was passed to R CMD check subprocesses
-  expect_true(file.exists(tmp_out))
-  lp <- readRDS(tmp_out)
-  expect_true(tmp_lib %in% lp)
+  expect_true(file.exists(tmp_out1))
+  lp1 <- readRDS(tmp_out1)
+  expect_true(tmp_lib %in% lp1)
+
+  expect_true(file.exists(tmp_out2))
+  lp2 <- readRDS(tmp_out2)
+  expect_true(tmp_lib %in% lp2)
 
   ## This currently fails with devtools::check(), so it also fails
   ## on Travis
@@ -57,10 +65,14 @@ test_that("background gives same results", {
 
   dir.create(tmp_lib <- tempfile())
   tmp_lib <- normalizePath(tmp_lib)
-  tmp_out <- tempfile(fileext = ".rda")
-  Sys.setenv(RCMDCHECK_OUTPUT = tmp_out)
-  on.exit(unlink(c(tmp_lib, tmp_out), recursive = TRUE), add = TRUE)
+  tmp_out1 <- tempfile(fileext = ".rda")
+  tmp_out2 <- tempfile(fileext = ".rda")
+  Sys.setenv(RCMDCHECK_OUTPUT = tmp_out1)
+  Sys.setenv(RCMDBUILD_OUTPUT = tmp_out2)
+  on.exit(unlink(c(tmp_lib, tmp_out1, tmp_out2), recursive = TRUE),
+          add = TRUE)
   on.exit(Sys.unsetenv("RCMDCHECK_OUTPUT"), add = TRUE)
+  on.exit(Sys.unsetenv("RCMDBUILD_OUTPUT"), add = TRUE)
 
   bad1 <- rcmdcheck_process$new(
      test_path("bad1"),
@@ -72,9 +84,13 @@ test_that("background gives same results", {
   expect_match(res$description, "Advice on R package building")
 
   ## Check that libpath was passed to R CMD check subprocesses
-  expect_true(file.exists(tmp_out))
-  lp <- readRDS(tmp_out)
-  expect_true(tmp_lib %in% lp)
+  expect_true(file.exists(tmp_out1))
+  lp1 <- readRDS(tmp_out1)
+  expect_true(tmp_lib %in% lp1)
+
+  expect_true(file.exists(tmp_out2))
+  lp2 <- readRDS(tmp_out2)
+  expect_true(tmp_lib %in% lp2)
 
   ## This currently fails with devtools::check(), so it also fails
   ## on Travis

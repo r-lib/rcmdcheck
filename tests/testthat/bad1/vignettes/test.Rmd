@@ -1,0 +1,20 @@
+---
+title: "Test vignette for rcmdcheck"
+author: "Bugs Bunny"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Test vignette for rcmdcheck}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Perspiciatis qui earum nesciunt tempore mollitia aliquid. Error iusto
+doloribus occaecati error. Alias rerum voluptas illo esse et
+rerum. Officiis aut et eligendi quia quo. Culpa inventore dicta soluta
+debitis ex.
+
+```{r}
+outfile <- Sys.getenv("RCMDBUILD_OUTPUT", "")
+if (nzchar(outfile)) saveRDS(.libPaths(), outfile)
+```
