@@ -142,7 +142,8 @@ rcc_init <- function(self, private, super, path, args, build_args,
   )
 
   with_envvar(
-    c(R_PROFILE_USER = profile),
+    c(R_PROFILE_USER = profile,
+      R_LIBS_USER = paste(libpath, collapse = .Platform$path.sep)),
     with_dir(
       dirname(targz),
       super$initialize(options)

@@ -107,11 +107,11 @@ do_check <- function(targz, package, args, libpath, repos,
 
   if (!quiet) cat_head("R CMD check")
   res <- with_envvar(
-    c(R_PROFILE_USER = profile),
+    c(R_PROFILE_USER = profile,
+      R_LIBS_USER = paste(libpath, collapse = .Platform$path.sep)),
     rcmd_safe(
       "check",
       cmdargs = c(basename(targz), args),
-      libpath = libpath,
       user_profile = TRUE,
       repos = repos,
       block_callback = if (!quiet) block_callback(),
