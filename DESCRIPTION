@@ -20,6 +20,7 @@ Imports:
     crayon,
     desc (>= 1.2.0),
     digest,
+    pkgbuild,
     prettyunits,
     R6,
     rprojroot,
