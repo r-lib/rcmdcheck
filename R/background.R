@@ -7,6 +7,7 @@
 #' @section Usage:
 #' ```
 #' cp <- rcmdcheck_process$new(path = ".", args = character(),
+#'          build_args = character(), check_dir = NULL,
 #'          libpath = .libPaths(), repos = getOption("repos"))
 #'
 #' cp$parse_results()
@@ -30,6 +31,7 @@
 #'   package to check.
 #' * `args`: Command line arguments to `R CMD check`.
 #' * `build_args`: Command line arguments to `R CMD build`.
+#' * `check_dir`: Directory for the results.
 #' * `libpath`: The library path to set for the check.
 #' * `repos`: The `repos` option to set for the check.
 #'   This is needed for cyclic dependency checks if you use the
@@ -58,10 +60,10 @@ rcmdcheck_process <- R6Class(
   public = list(
 
     initialize = function(path = ".", args = character(),
-      build_args = character(), libpath = .libPaths(),
+      build_args = character(), check_dir = NULL, libpath = .libPaths(),
       repos = getOption("repos"))
-      rcc_init(self, private, super, path, args = args,
-               build_args = build_args, libpath, repos),
+      rcc_init(self, private, super, path, args, build_args, check_dir,
+               libpath, repos),
 
     parse_results = function()
       rcc_parse_results(self, private),
@@ -98,7 +100,7 @@ rcmdcheck_process <- R6Class(
   ),
   private = list(
     path  = NULL,
-    tmp   = NULL,
+    check_dir = NULL,
     targz = NULL,
     description = NULL,
     cstdout = character(),
@@ -113,7 +115,7 @@ rcmdcheck_process <- R6Class(
 #' @importFrom desc desc
 
 rcc_init <- function(self, private, super, path, args, build_args,
-                     libpath, repos) {
+                     check_dir, libpath, repos) {
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -121,12 +123,19 @@ rcc_init <- function(self, private, super, path, args, build_args,
     path <- normalizePath(path)
   }
 
-  targz <- build_package(path, tmp <- tempfile(), build_args = build_args,
+  if (is.null(check_dir)) {
+    check_dir <- tempfile()
+    cleanup <- TRUE
+  } else {
+    cleanup <- FALSE
+  }
+
+  targz <- build_package(path, check_dir, build_args = build_args,
                          libpath = libpath, quiet = TRUE)
 
   private$description <- desc(path)
-  private$path  <- path
-  private$tmp   <- tmp
+  private$path <- path
+  private$check_dir <- check_dir
   private$targz <- targz
 
   private$session_output <- tempfile()
