@@ -13,9 +13,14 @@ NULL
 #' @param path Path to a package tarball or a directory.
 #' @param quiet Whether to print check output during checking.
 #' @param args Character vector of arguments to pass to
-#'   `R CMD check`.
+#'   `R CMD check`. (Note that instead of the `--output` option you
+#'   should use the `check_dir` argument, because  `--output` cannot
+#'   deal with spaces and other special characters on Windows.
 #' @param build_args Character vector of arguments to pass to
 #'   `R CMD build`
+#' @param check_dir Path to a directory where the check is performed.
+#'   If this is not `NULL`, then the a temporary directory is used, that
+#'   is cleaned up when the returned object is garbage collected.
 #' @param libpath The library path to set for the check.
 #'   The default uses the current library path.
 #' @param repos The `repos` option to set for the check.
@@ -43,7 +48,7 @@ NULL
 #' @importFrom desc desc
 
 rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
-                      build_args = character(),
+                      build_args = character(), check_dir = NULL,
                       libpath = .libPaths(), repos = getOption("repos"),
                       timeout = Inf, error_on =
                         c("never", "error", "warning", "note")) {
@@ -56,7 +61,14 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     path <- normalizePath(path)
   }
 
-  targz <- build_package(path, tmp <- tempfile(), build_args = build_args,
+  if (is.null(check_dir)) {
+    check_dir <- tempfile()
+    cleanup <- TRUE
+  } else {
+    cleanup <- FALSE
+  }
+
+  targz <- build_package(path, check_dir, build_args = build_args,
                          libpath = libpath, quiet = quiet)
 
   start_time <- Sys.time()
@@ -89,7 +101,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   )
 
   # Automatically delete temporary files when this object disappears
-  res$cleaner <- auto_clean(tmp)
+  if (cleanup) res$cleaner <- auto_clean(check_dir)
 
   handle_error_on(res, error_on)
 

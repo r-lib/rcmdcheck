@@ -160,3 +160,28 @@ test_that("check arguments", {
 
   expect_match(out, "R add-on package check")
 })
+
+test_that("check_dir argument", {
+  wd <- NULL
+  mockery::stub(rcmdcheck, "do_check", function(...) {
+    wd <<- getwd()
+    stop("enough")
+  })
+  tmp <- tempfile(pattern = "foo bar")
+  on.exit(unlink(tmp))
+  expect_error(rcmdcheck(test_path("fixtures/badpackage_1.0.0.tar.gz"),
+                         check_dir = tmp))
+
+  expect_true(file.exists(tmp))
+  expect_equal(wd, normalizePath(tmp))
+})
+
+test_that("check_dir and rcmdcheck_process", {
+  tmp <- tempfile(pattern = "foo bar")
+  on.exit(unlink(tmp))
+  px <- rcmdcheck_process$new(test_path("fixtures/badpackage_1.0.0.tar.gz"),
+                              check_dir = tmp)
+  on.exit(px$kill(), add = TRUE)
+  expect_true(file.exists(tmp))
+  expect_true("badpackage_1.0.0.tar.gz" %in% dir(tmp))
+})

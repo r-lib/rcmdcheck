@@ -7,7 +7,7 @@
 \title{Run R CMD check from R and Capture Results}
 \usage{
 rcmdcheck(path = ".", quiet = FALSE, args = character(),
-  build_args = character(), libpath = .libPaths(),
+  build_args = character(), check_dir = NULL, libpath = .libPaths(),
   repos = getOption("repos"), timeout = Inf, error_on = c("never",
   "error", "warning", "note"))
 }
@@ -17,10 +17,16 @@ rcmdcheck(path = ".", quiet = FALSE, args = character(),
 \item{quiet}{Whether to print check output during checking.}
 
 \item{args}{Character vector of arguments to pass to
-\code{R CMD check}.}
+\code{R CMD check}. (Note that instead of the \code{--output} option you
+should use the \code{check_dir} argument, because  \code{--output} cannot
+deal with spaces and other special characters on Windows.}
 
 \item{build_args}{Character vector of arguments to pass to
 \code{R CMD build}}
+
+\item{check_dir}{Path to a directory where the check is performed.
+If this is not \code{NULL}, then the a temporary directory is used, that
+is cleaned up when the returned object is garbage collected.}
 
 \item{libpath}{The library path to set for the check.
 The default uses the current library path.}
