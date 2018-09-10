@@ -4,7 +4,7 @@
 #' @param header Whether to print a header.
 #' @param ... Additional arguments, currently ignored.
 #' @export
-#' @importFrom clisymbols symbol
+#' @importFrom cli symbol
 #' @importFrom prettyunits pretty_sec
 
 print.rcmdcheck <- function(x, header = TRUE, ...) {

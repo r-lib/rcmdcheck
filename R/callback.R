@@ -3,7 +3,7 @@
 ## We color it a bit, OK is green, NOTE is orange,
 ## WARNING and ERROR are red.
 
-#' @importFrom clisymbols symbol
+#' @importFrom cli symbol
 #' @importFrom utils head tail
 #' @importFrom prettyunits pretty_dt
 

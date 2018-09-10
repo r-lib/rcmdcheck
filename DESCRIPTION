@@ -19,7 +19,7 @@ Suggests:
     testthat
 Imports:
     callr (>= 2.0.0),
-    clisymbols,
+    cli,
     crayon,
     desc (>= 1.2.0),
     digest,
