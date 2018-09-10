@@ -13,6 +13,8 @@
 
 * Keep files until the returned check object is deleted (#23)
 
+* New `xopen()` to show the check file in a file browser window (#61)
+
 * Save `install.out` and also `DESCRIPTION` in the result,
   save the standard error and the exit status as well
 

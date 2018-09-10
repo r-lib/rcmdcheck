@@ -13,7 +13,6 @@ RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)
 Suggests:
     covr,
-    testthat,
     knitr,
     mockery,
     rmarkdown,
@@ -29,5 +28,7 @@ Imports:
     R6,
     rprojroot,
     utils,
-    withr
+    withr,
+    xopen
+Remotes: r-lib/xopen
 Encoding: UTF-8

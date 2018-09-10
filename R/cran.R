@@ -82,6 +82,8 @@ cran_check_results <- function(package,
 
   structure(
     lapply(urls, parse_check_url),
-    names = flavours
+    names = flavours,
+    package = package,
+    class = "rmcdcheck_cran_results"
   )
 }

@@ -9,6 +9,7 @@ rcmdcheck_process is an R6 class, that extends the
 }
 \section{Usage}{
 \preformatted{cp <- rcmdcheck_process$new(path = ".", args = character(),
+         build_args = character(), check_dir = NULL,
          libpath = .libPaths(), repos = getOption("repos"))
 
 cp$parse_results()
@@ -35,6 +36,7 @@ not affected by that.
 package to check.
 \item \code{args}: Command line arguments to \code{R CMD check}.
 \item \code{build_args}: Command line arguments to \code{R CMD build}.
+\item \code{check_dir}: Directory for the results.
 \item \code{libpath}: The library path to set for the check.
 \item \code{repos}: The \code{repos} option to set for the check.
 This is needed for cyclic dependency checks if you use the
