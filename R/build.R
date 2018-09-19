@@ -3,7 +3,7 @@
 #' @importFrom withr with_envvar
 
 build_package <- function(path, tmpdir, build_args, libpath, quiet) {
-  dir.create(tmpdir)
+  dir.create(tmpdir, recursive = TRUE, showWarnings = FALSE)
 
   if (file.info(path)$isdir) {
     if (!quiet) cat_head("R CMD build")
