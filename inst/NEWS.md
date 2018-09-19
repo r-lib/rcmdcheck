@@ -1,38 +1,43 @@
 
 # devel
 
-* `rcmdcheck_process` to run `R CMD check` in the background
+* New `rcmdcheck_process` class to run `R CMD check` in the background.
 
-* Timeout support (default is 10 minutes)
+* `rcmdcheck()` now supports timeouts (default is 10 minutes).
 
-* Capture and print installation and test failures
+* Checks now capture and print installation and test failures.
 
-* Record and print the duration of the check
+* Checks now record and print the duration of the check.
 
-* Record and print session information from the check session (#22)
+* Checks now record and print session information from the check
+  session (#22).
 
-* Keep files until the returned check object is deleted (#23)
+* `rcmdcheck()` new keep files until the returned check object is
+  deleted, if check was run in a temporary directory (the default) (#23).
 
-* New `xopen()` to show the check file in a file browser window (#61)
+* New `xopen()` to show the check file in a file browser window (#61).
 
-* Save `install.out` and also `DESCRIPTION` in the result,
-  save the standard error and the exit status as well
+* Checks now save `install.out` and also `DESCRIPTION` in the result,
+  and save the standard error and the exit status as well.
 
-* Better printing of progress: now the message from the check that is
-  actually being performed is shown on the screen.
+* `rcmdcheck()` printing is now better: the message from the check that is
+  actually _being performed_ is shown on the screen.
 
-* Spinner while running check
+* `rcmdcheck()` now shows a spinner while running check.
 
-* `summary()` method for check comparisons
+* `rcmdcheck()` results now have a `summary()` method for check comparisons.
 
-* `check_details()` to query the check results programmatically.
-  (No need to use `$errors`, `$warnings`, etc. directly.)
+* `rcmdcheck()` results now have a new  `check_details()` method, to query
+  the check results programmatically. (No need to use `$errors`,
+  `$warnings`, etc. directly.)
 
-* Find package root automatically (#18)
+* Checks now find package root automatically (#18).
 
-* `error_on` argument to throw an error on an `R CMD check` failure (#51)
+* `rcmdcheck()` now has an `error_on` argument to throw an error on an
+  `R CMD check` failure (#51).
 
-* Fix colors when printing a check object (#54)
+* `rcmdcheck()` result printing is now better, the colors are
+  consistent (#54).
 
 # 1.2.1
 
