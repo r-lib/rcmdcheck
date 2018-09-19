@@ -30,5 +30,4 @@ Imports:
     utils,
     withr,
     xopen
-Remotes: r-lib/xopen
 Encoding: UTF-8
