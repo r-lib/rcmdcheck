@@ -1,5 +1,5 @@
 
-# devel
+# 1.3.0
 
 * New `rcmdcheck_process` class to run `R CMD check` in the background.
 
