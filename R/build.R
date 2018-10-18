@@ -28,7 +28,7 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
     )
 
   } else {
-    file.copy(path, tmpdir)
+    file.copy(path, tmpdir, overwrite = TRUE)
     file.path(tmpdir, basename(path))
   }
 }
