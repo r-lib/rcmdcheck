@@ -117,6 +117,12 @@ do_check <- function(targz, package, args, libpath, repos,
   profile <- make_fake_profile(session_output = session_output)
   on.exit(unlink(profile), add = TRUE)
 
+  # if the pkg.Rcheck directory already exists, unlink it
+  check_dir <- paste0(package, ".Rcheck")
+  if (file.exists(check_dir)) {
+    unlink(check_dir, recursive = TRUE)
+  }
+
   if (!quiet) cat_head("R CMD check")
   res <- with_envvar(
     c(R_PROFILE_USER = profile,
