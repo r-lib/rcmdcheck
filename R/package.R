@@ -118,10 +118,7 @@ do_check <- function(targz, package, args, libpath, repos,
   on.exit(unlink(profile), add = TRUE)
 
   # if the pkg.Rcheck directory already exists, unlink it
-  check_dir <- paste0(package, ".Rcheck")
-  if (file.exists(check_dir)) {
-    unlink(check_dir, recursive = TRUE)
-  }
+  unlink(paste0(package, ".Rcheck"), recursive = TRUE)
 
   if (!quiet) cat_head("R CMD check")
   res <- with_envvar(
