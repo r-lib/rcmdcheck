@@ -120,13 +120,17 @@ do_check <- function(targz, package, args, libpath, repos,
   # if the pkg.Rcheck directory already exists, unlink it
   unlink(paste0(package, ".Rcheck"), recursive = TRUE)
 
+  callr_version <- package_version(getNamespaceVersion("callr"))
+  rlibsuser <- if (callr_version < "3.0.0.9001")
+    paste(libpath, collapse = .Platform$path.sep)
+
   if (!quiet) cat_head("R CMD check")
   res <- with_envvar(
-    c(R_PROFILE_USER = profile,
-      R_LIBS_USER = paste(libpath, collapse = .Platform$path.sep)),
+    c(R_PROFILE_USER = profile, R_LIBS_USER = rlibsuser),
     rcmd_safe(
       "check",
       cmdargs = c(basename(targz), args),
+      libpath = libpath,
       user_profile = TRUE,
       repos = repos,
       block_callback = if (!quiet) block_callback(),
