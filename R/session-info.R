@@ -12,7 +12,7 @@ make_fake_profile  <- function(session_output) {
 
   last <- substitute(
     function() {
-      si <- utils::sessionInfo()
+      si <- tryCatch(sessioninfo::session_info(), error = identity)
       l <- if (file.exists(`__output__`)) {
         readRDS(`__output__`)
       } else {
@@ -38,12 +38,9 @@ get_session_info <- function(package, session_output) {
   )
 
   session_info <- Filter(
-    function(so) package %in% names(so$otherPkgs),
+    function(so) package %in% so$packages$package,
     session_info
   )
-  if (length(session_info) > 1) {
-    session_info <- session_info[[1]]
-  }
 
-  session_info
+  if (length(session_info) > 0) session_info[[1]] else NULL
 }

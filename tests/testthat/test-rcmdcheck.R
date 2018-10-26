@@ -51,7 +51,7 @@ test_that("rcmdcheck works", {
   ## This currently fails with devtools::check(), so it also fails
   ## on Travis
   skip_on_travis()
-  expect_s3_class(bad1$session_info[[1]], "sessionInfo")
+  expect_s3_class(bad1$session_info, "session_info")
 })
 
 test_that("background gives same results", {
@@ -95,7 +95,7 @@ test_that("background gives same results", {
   ## This currently fails with devtools::check(), so it also fails
   ## on Travis
   skip_on_travis()
-  expect_s3_class(res$session_info[[1]], "sessionInfo")
+  expect_s3_class(res$session_info, "session_info")
 })
 
 test_that("Installation errors", {

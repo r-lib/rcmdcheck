@@ -18,8 +18,8 @@
 #'     `00install.out` file. A single string.
 #'   * `description`: the contents of the DESCIRPTION file of the package.
 #'     A single string.
-#'   * `session_info`: the output of `utils::sessionInfo()`, from the R
-#'     session performing the checks.
+#'   * `session_info`: the output of [sessioninfo::session_info()],
+#'     from the R session performing the checks.
 #'   * `checkdir`: the path to the check directory, if it hasn't been
 #'     cleaned up yet, or `NA`. The check directory is automatically
 #'     cleaned up, when the check object is deleted (garbage collected).

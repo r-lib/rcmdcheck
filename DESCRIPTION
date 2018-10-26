@@ -27,7 +27,10 @@ Imports:
     prettyunits,
     R6,
     rprojroot,
+    sessioninfo (>= 1.1.0.9001),
     utils,
     withr,
     xopen
+Remotes:
+    r-lib/sessioninfo
 Encoding: UTF-8
