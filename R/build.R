@@ -3,7 +3,10 @@
 #' @importFrom withr with_envvar
 
 build_package <- function(path, tmpdir, build_args, libpath, quiet) {
+  path <- normalizePath(path)
+
   dir.create(tmpdir, recursive = TRUE, showWarnings = FALSE)
+  tmpdir <- normalizePath(tmpdir)
 
   if (file.info(path)$isdir) {
     if (!quiet) cat_head("R CMD build")
@@ -28,8 +31,8 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
     )
 
   } else {
-    path_in_tmpdir <- identical(dirname(normalizePath(path)), normalizePath(tmpdir))
-    file.copy(path, tmpdir, overwrite = !path_in_tmpdir)
-    file.path(tmpdir, basename(path))
+    copy <- file.path(tmpdir, basename(path))
+    if (path != copy) file.copy(path, copy)
+    copy
   }
 }
