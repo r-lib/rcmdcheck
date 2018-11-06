@@ -15,6 +15,10 @@ install:
 build_script:
   - travis-tool.sh install_deps
 
+environment:
+  NOT_CRAN: true
+  PATH: "%PATH%;C:\\MinGW\\bin;C:\\MinGW\\msys\\1.0;C:\\MinGW\\msys\\1.0\\bin"
+
 test_script:
   - travis-tool.sh run_tests
 
