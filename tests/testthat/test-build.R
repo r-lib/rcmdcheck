@@ -6,7 +6,7 @@ test_that("input targz and targz to check can be the same", {
   on.exit(unlink(f1), add = TRUE)
   cat("foobar\n", file = f1)
   res <- build_package(f1, tempdir())
-  expect_equal(res, normalizePath(f1))
+  expect_equal(normalizePath(res), normalizePath(f1))
   expect_equal(readLines(res), "foobar")
 })
 
