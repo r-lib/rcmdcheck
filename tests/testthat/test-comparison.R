@@ -25,15 +25,17 @@ test_that("status correctly computed when both checks are ok", {
 test_that("print message displays informative output", {
   if (l10n_info()$`UTF-8`) {
     cf <- compare_check_files(test_path("minimal-ee.log"), test_path("minimal-ewn.log"))
+    known <- "comparison-newly-failing.txt"
   } else {
     cf <- compare_check_files(test_path("minimal-ee-ascii.log"),
                               test_path("minimal-ewn-ascii.log"))
+    known <- "comparison-newly-failing-ascii.txt"
   }
 
   expect_output_file({
     print(summary(cf))
     cat("\n\n")
     print(cf)
-  }, file = "comparison-newly-failing-ascii.txt", update = FALSE)
+  }, file = known, update = FALSE)
 
 })
