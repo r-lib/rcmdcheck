@@ -1,0 +1,46 @@
+
+R version 3.4.1 (2017-06-30) -- "Single Candle"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(dataonderivatives)
+> 
+> test_check("dataonderivatives")
+1. Failure: BSDR API accesible (@test-bsdr.R#6) --------------------------------
+`df1` inherits from `NULL` not `data.frame`.
+
+
+2. Failure: BSDR API accesible (@test-bsdr.R#8) --------------------------------
+`df2` inherits from `NULL` not `data.frame`.
+
+
+3. Failure: BSDR API accesible (@test-bsdr.R#9) --------------------------------
+nrow(df1) <= nrow(df2) isn't true.
+
+
+4. Failure: CME SDR file parses (@test-cme.R#22) -------------------------------
+nrow(cme(lubridate::ymd(20161213), "FX")) > 0 isn't true.
+
+
+testthat results ================================================================
+OK: 23 SKIPPED: 0 FAILED: 4
+1. Failure: BSDR API accesible (@test-bsdr.R#6) 
+2. Failure: BSDR API accesible (@test-bsdr.R#8) 
+3. Failure: BSDR API accesible (@test-bsdr.R#9) 
+4. Failure: CME SDR file parses (@test-cme.R#22) 
+
+Error: testthat unit tests failed
+Execution halted

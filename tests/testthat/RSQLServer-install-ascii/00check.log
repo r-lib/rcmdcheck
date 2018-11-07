@@ -1,0 +1,20 @@
+* using log directory `RSQLServer-install'
+* using R version 3.4.1 (2017-06-30)
+* using platform: x86_64-apple-darwin15.6.0 (64-bit)
+* using session charset: UTF-8
+* checking for file `RSQLServer/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package `RSQLServer' version `0.3.0'
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package `RSQLServer' can be installed ... ERROR
+Installation failed.
+See `/Users/hadley/Documents/dplyr/dbplyr/revdep/checks/RSQLServer/new/RSQLServer.Rcheck/00install.out' for details.
+* DONE
+Status: 1 ERROR

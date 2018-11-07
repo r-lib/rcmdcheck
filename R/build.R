@@ -31,8 +31,10 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
     )
 
   } else {
-    copy <- file.path(tmpdir, basename(path))
-    if (path != copy) file.copy(path, copy, overwrite = TRUE)
-    copy
+    dest <- file.path(tmpdir, basename(path))
+    if (!file.exists(dest) || normalizePath(dest) != path) {
+      file.copy(path, dest, overwrite = TRUE)
+    }
+    dest
   }
 }
