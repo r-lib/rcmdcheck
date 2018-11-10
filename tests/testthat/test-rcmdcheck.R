@@ -3,6 +3,7 @@ context("rcmdcheck")
 
 test_that("rcmdcheck works", {
 
+  skip_on_cran()
   Sys.unsetenv("R_TESTS")
 
   ## This is to test passing libpath to R CMD check subprocesses
@@ -100,6 +101,7 @@ test_that("background gives same results", {
 
 test_that("Installation errors", {
 
+  skip_on_cran()
   bad2 <- rcmdcheck(test_path("bad2"), quiet = TRUE)
   expect_match(bad2$errors[1], "Installation failed")
 
