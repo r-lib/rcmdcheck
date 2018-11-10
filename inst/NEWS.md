@@ -1,5 +1,5 @@
 
-# dev
+# 1.3.2
 
 * `rcmdcheck()` now correctly overwrites existing tarballs if they already
   exist in the check directory. This time for real.
