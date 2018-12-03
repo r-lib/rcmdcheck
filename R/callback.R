@@ -12,13 +12,14 @@ block_callback <- function(top_line = TRUE) {
   partial_line <- ""
 
   state <- "OK"
+  test_running <- FALSE
   should_time <- FALSE
   line_started <- Sys.time()
   now <- NULL
   prev_line <- ""
 
   no <- function(x, what = "") {
-    pattern <- paste0(" \\.\\.\\. ", what, "$")
+    pattern <- paste0(" \\.\\.\\.[ ]?", what, "$")
     sub("^\\* ", "", sub(pattern, "", x))
   }
 
@@ -109,28 +110,81 @@ block_callback <- function(top_line = TRUE) {
   ## As usually, prev_line contains the previous line.
 
   do_test_mode <- function(x) {
-    if (!grepl("^\\* checking tests \\.\\.\\.", prev_line)) {
+    ## Maybe we just learned the result of the current test file
+    if (test_running) {
       if (grepl("^ OK", x)) {
+        ## Tests are over, success
         state <<- "OK"
-        style(ok = symbol$tick, pale = no(prev_line))
+        test_running <<- FALSE
+        xx <- style(ok = symbol$tick, pale = no(prev_line))
+        xx <- style(xx, timing = time_if_long())
       } else if (grepl("^ ERROR", x)) {
+        ## Tests are over, error
         state <<- "ERROR"
-        style(err = "E", pale = no(prev_line))
+        test_running <<- FALSE
+        xx <- style(err = "E", pale = no(prev_line))
+        xx <- style(xx, timing = time_if_long())
+      } else if (grepl("^\\s+Comparing", x)) {
+        ## Comparison
+        test_running <<- FALSE
+        xx <- style(ok = symbol$tick, pale = no(prev_line))
+        xx <- style(xx, timing = time_if_long())
+      } else if (grepl("^\\s+Running", x)) {
+        ## Next test is running now, state unchanged
+        xx <- style(ok = symbol$tick, pale = no(prev_line))
+        xx <- style(xx, timing = time_if_long())
+        now <<- Sys.time()
       } else {
-        NA_character_
+        ## Should not happen?
+        xx <- NA_character_
       }
-    } else {
+      if (!is.na(xx)) {
+        cat(xx, "\n", sep = "")
+        flush(stdout())
+      }
+    }
+
+    ## Now focus on the current line, if we are still testing
+    if (state != "tests") return(NA_character_)
+    if (grepl("^\\s+Comparing.*OK$", x)) {
+      ## Comparison, success
+      style(ok = symbol$tick, pale = no(x, "OK"))
+    } else if (grepl("^\\s+Comparing", x)) {
+      ## Comparison, failed
+      tr <- sub("^.*\\.\\.\\.(.*)$", "\\1", x, perl = TRUE)
+      xx <- style(pale = c("X", no(x, ".*")))
+      cat(xx, "\n", sep = "")
+      paste0("   ", tr)
+    } else if (grepl("^\\s+Running", x)) {
+      now <<- Sys.time()
+      test_running <<- TRUE
       NA_character_
+    } else if (grepl("^ OK", x)) {
+      state <<- "OK"
+      test_running <<- FALSE
+      NA_character_
+    } else if (grepl("^ ERROR", x)) {
+      state <<- "ERROR"
+      test_running <<- FALSE
+      NA_character_
+    } else {
+      paste0("   ", x)
     }
   }
 
   do_test_partial_line <- function(x) {
-    if (grepl("^  Running ", x) &&
-        !grepl("^\\* checking tests \\.\\.\\.", prev_line)) {
-      xx <- style(ok = symbol$tick, pale = no(prev_line))
-      xx <- style(xx, timing = time_if_long())
-      cat(xx, "\n", sep = "")
-      flush(stdout())
+    if (test_running) {
+      if (grepl("^  Running ", x) || grepl("^  Comparing", x)) {
+        test_running <<- FALSE
+        if (grepl("^  Running ", x)) {
+          xx <- style(ok = symbol$tick, pale = no(prev_line))
+          xx <- style(xx, timing = time_if_long())
+        } else {
+          xx <- style(ok = symbol$tick, pale = prev_line)
+        }
+        cat(xx, "\n", sep = "")
+        flush(stdout())
+      }
     }
   }
 
