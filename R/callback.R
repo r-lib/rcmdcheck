@@ -20,7 +20,7 @@ block_callback <- function(top_line = TRUE) {
 
   no <- function(x, what = "") {
     pattern <- paste0(" \\.\\.\\.[ ]?", what, "$")
-    sub("^\\* ", "", sub(pattern, "", x))
+    sub("^\\*+ ", "", sub(pattern, "", x))
   }
 
   time_if_long <- function() {
@@ -81,6 +81,10 @@ block_callback <- function(top_line = TRUE) {
     } else if (grepl("^\\* checking tests \\.\\.\\.[ ]?$", x)) {
       state <<- "tests"
       style(pale = c(symbol$line, "  ", no(x)))
+    } else if (grepl("^\\*\\* running tests", x)) {
+      state <<- "tests"
+      test_running <<- FALSE
+      style(pale = c(symbol$line, symbol$line, " ", no(x), "      "))
     } else if (grepl("^\\* DONE\\s*$", x)) {
       state <<- "OK"
       NA_character_
@@ -112,13 +116,13 @@ block_callback <- function(top_line = TRUE) {
   do_test_mode <- function(x) {
     ## Maybe we just learned the result of the current test file
     if (test_running) {
-      if (grepl("^ OK", x)) {
+      if (grepl("^\\s+OK", x)) {
         ## Tests are over, success
         state <<- "OK"
         test_running <<- FALSE
         xx <- style(ok = symbol$tick, pale = no(prev_line))
         xx <- style(xx, timing = time_if_long())
-      } else if (grepl("^ ERROR", x)) {
+      } else if (grepl("^\\s+ERROR", x)) {
         ## Tests are over, error
         state <<- "ERROR"
         test_running <<- FALSE
@@ -159,14 +163,17 @@ block_callback <- function(top_line = TRUE) {
       now <<- Sys.time()
       test_running <<- TRUE
       NA_character_
-    } else if (grepl("^ OK", x)) {
+    } else if (grepl("^\\s+OK", x)) {
       state <<- "OK"
       test_running <<- FALSE
       NA_character_
-    } else if (grepl("^ ERROR", x)) {
+    } else if (grepl("^\\s+ERROR", x)) {
       state <<- "ERROR"
       test_running <<- FALSE
       NA_character_
+    } else if (grepl("^\\*\\* running tests", x)) {
+      test_running <<- FALSE
+      style(pale = c(symbol$line, symbol$line, " ", no(x), "      "))
     } else {
       paste0("   ", x)
     }
@@ -174,9 +181,9 @@ block_callback <- function(top_line = TRUE) {
 
   do_test_partial_line <- function(x) {
     if (test_running) {
-      if (grepl("^  Running ", x) || grepl("^  Comparing", x)) {
+      if (grepl("^\\s+Running ", x) || grepl("^\\s+Comparing", x)) {
         test_running <<- FALSE
-        if (grepl("^  Running ", x)) {
+        if (grepl("^\\s+Running ", x)) {
           xx <- style(ok = symbol$tick, pale = no(prev_line))
           xx <- style(xx, timing = time_if_long())
         } else {
@@ -203,7 +210,7 @@ block_callback <- function(top_line = TRUE) {
     cat("  \r")
     lapply(lines, do_line)
     if (state == "tests") do_test_partial_line(partial_line)
-    cat0(sub("^[\\* ]", "  ", partial_line), "\r")
+    cat0(sub("^[\\* ]\\*?", "  ", partial_line), "\r")
   }
 }
 
