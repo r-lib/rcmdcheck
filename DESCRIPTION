@@ -18,7 +18,7 @@ Suggests:
     rmarkdown,
     testthat
 Imports:
-    callr (>= 2.0.0),
+    callr (>= 3.1.1.9000),
     cli,
     crayon,
     desc (>= 1.2.0),
@@ -31,4 +31,6 @@ Imports:
     utils,
     withr,
     xopen
+Remotes:
+    r-lib/callr
 Encoding: UTF-8
