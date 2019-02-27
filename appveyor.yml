@@ -12,14 +12,15 @@ install:
 
 # Adapt as necessary starting from here
 
-build_script:
-  - travis-tool.sh install_deps
-
 environment:
   NOT_CRAN: true
   USE_RTOOLS: true
-  R_REMOTES_STANDALONE: true
+  R_REMOTES_STANDALONE: true  
   PATH: "%PATH%;C:\\MinGW\\bin;C:\\MinGW\\msys\\1.0;C:\\MinGW\\msys\\1.0\\bin"
+
+build_script:
+  - SETX R_REMOTES_STANDALONE true /M
+  - travis-tool.sh install_deps
 
 test_script:
   - travis-tool.sh run_tests
