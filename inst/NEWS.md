@@ -1,6 +1,8 @@
 
 # dev
 
+* Fix standard output and standard error mixup in the test cases, #88, #96.
+
 # 1.3.2
 
 * `rcmdcheck()` now correctly overwrites existing tarballs if they already
