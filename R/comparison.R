@@ -20,13 +20,13 @@ rcmdcheck_comparison <- function(old, new) {
     status <- "i"
   } else if (inst_fail_new) {
     ## install still fails
-    status <- "i+"
+    status <- "i-"
   } else if (new$timeout && ! any(old_df$timeout)) {
     ## install/check newly timeouts
     status <- "t"
   } else if (new$timeout) {
     ## install/check still timeouts
-    status <- "t+"
+    status <- "t-"
   } else if (sum(new_df$change == 1) == 0) {
     ## No new failures, success
     status <- "+"
