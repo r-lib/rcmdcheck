@@ -1,6 +1,6 @@
 Package: rcmdcheck
 Title: Run 'R CMD check' from 'R' and Capture Results
-Version: 1.3.2.9000
+Version: 1.3.2.9001
 Author: Gábor Csárdi
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: Run 'R CMD check' from 'R' programmatically, and capture the

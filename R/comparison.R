@@ -13,14 +13,25 @@ rcmdcheck_comparison <- function(old, new) {
   cmp_df <- rbind(old_df, new_df)
 
   # Compute overall status
-  inst_fail <- install_failed(new_df$output) || install_failed(old_df$output)
-  if (isTRUE(inst_fail)) {
+  inst_fail_new <- isTRUE(install_failed(new_df$output))
+  inst_fail_old <- isTRUE(install_failed(old_df$output))
+  if (inst_fail_new && !inst_fail_old) {
+    ## install newly fails
     status <- "i"
-  } else if (new$timeout) {
+  } else if (inst_fail_new) {
+    ## install still fails
+    status <- "i+"
+  } else if (new$timeout && ! any(old_df$timeout)) {
+    ## install/check newly timeouts
     status <- "t"
+  } else if (new$timeout) {
+    ## install/check still timeouts
+    status <- "t+"
   } else if (sum(new_df$change == 1) == 0) {
+    ## No new failures, success
     status <- "+"
   } else {
+    ## Some new failures
     status <- "-"
   }
 
