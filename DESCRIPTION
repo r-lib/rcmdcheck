@@ -31,6 +31,4 @@ Imports:
     utils,
     withr,
     xopen
-Remotes:
-    r-lib/callr
 Encoding: UTF-8
