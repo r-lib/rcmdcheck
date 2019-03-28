@@ -14,10 +14,10 @@ new_rcmdcheck <- function(stdout,
   stdout <- win2unix(stdout)
   stderr <- win2unix(stderr)
 
-  entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
+  entries <- strsplit(paste0("\n", stdout), "\n\\*+[ ]")[[1]][-1]
   checkdir <- parse_checkdir(entries)
 
-  notdone <- function(x) grep("DONE", x, invert = TRUE, value = TRUE)
+  notdone <- function(x) grep("^DONE", x, invert = TRUE, value = TRUE)
 
   res <- structure(
     list(

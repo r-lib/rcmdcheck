@@ -96,7 +96,9 @@ print_entry <- function(entry, entry_style) {
 
   lines <- strsplit(entry, "\n", fixed = TRUE)[[1]]
 
-  if (grepl("^(checking tests)|(checking whether package)", lines[1])) {
+  if (grepl(paste0("^(checking tests)|",
+                   "(running tests for arch)|",
+                   "(checking whether package)"), lines[1])) {
     lines <- c(lines[1], "See below...")
   }
 
