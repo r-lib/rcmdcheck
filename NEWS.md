@@ -5,6 +5,9 @@
 
 * Fix parsing test failures when multiple architectures are checked, #97.
 
+* `rcmdcheck()` has now better colors. WARNINGs are magenta, and NOTEs
+  are blue (#103, @hadley).
+
 # 1.3.2
 
 * `rcmdcheck()` now correctly overwrites existing tarballs if they already
