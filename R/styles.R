@@ -8,8 +8,8 @@ style <- function(..., sep = "") {
 
   styles <- list(
     "ok"     = green,
-    "note"   = make_style("orange"),
-    "warn"   = make_style("orange") $ bold,
+    "note"   = make_style("blue"),
+    "warn"   = make_style("magenta"),
     "err"    = red,
     "pale"   = make_style("darkgrey"),
     "timing" = make_style("cyan")

@@ -1,7 +1,7 @@
 
 ## This is the callback called for each line of the output
-## We color it a bit, OK is green, NOTE is orange,
-## WARNING and ERROR are red.
+## We color it a bit, OK is green, NOTE is blue
+## WARNING is magenta, ERROR is red.
 
 #' @importFrom cli symbol
 #' @importFrom utils head tail
