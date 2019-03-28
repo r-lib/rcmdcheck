@@ -11,8 +11,7 @@ test_that("parsing tests for multiple architectures", {
   withr::local_dir(tmp)
   untar(basename(tgz), tar = "internal")
 
-  chk <- parse_check("ps.Rcheck")
-  expect_equal(length(chk$test_fail), 2)
-  expect_equal(names(chk$test_fail),
-               c("testthat (i386)", "testthat (x64)"))
+  tf <- get_test_fail("ps.Rcheck")
+  expect_equal(length(tf), 2)
+  expect_equal(names(tf), c("testthat (i386)", "testthat (x64)"))
 })
