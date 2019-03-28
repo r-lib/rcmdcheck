@@ -1,7 +1,8 @@
 context("parse")
 
 test_that("can parse basic package information from file", {
-  outfile <- if (l10n_info()$`UTF-8`) {
+  skip_on_cran()
+  outfile <- if (cli::is_utf8_output()) {
     "bikedata-ok.log"
   } else {
     "bikedata-ok-ascii.log"
@@ -14,7 +15,8 @@ test_that("can parse basic package information from file", {
 })
 
 test_that("install log is captured", {
-  if (l10n_info()$`UTF-8`) {
+  skip_on_cran()
+  if (cli::is_utf8_output()) {
     outfile <- "RSQLServer-install"
     known <- "parse-install-fail.txt"
   } else {
@@ -30,7 +32,8 @@ test_that("install log is captured", {
 })
 
 test_that("test failures are captured", {
-  if (l10n_info()$`UTF-8`) {
+  skip_on_cran()
+  if (cli::is_utf8_output()) {
     outfile <- "dataonderivatives-test"
     known <- "parse-test-fail.txt"
   } else {
@@ -47,7 +50,8 @@ test_that("test failures are captured", {
 })
 
 test_that("test failure, ERROR in new line", {
-  outfile <- if (l10n_info()$`UTF-8`) {
+  skip_on_cran()
+  outfile <- if (cli::is_utf8_output()) {
     "fixtures/test-error.txt"
   } else {
     "fixtures/test-error-ascii.txt"
@@ -61,7 +65,8 @@ test_that("test failure, ERROR in new line", {
 # data frame coercion -----------------------------------------------------
 
 test_that("can coerce to data frame", {
-  outfile <- if (l10n_info()$`UTF-8`) {
+  skip_on_cran()
+  outfile <- if (cli::is_utf8_output()) {
     "REDCapR-fail.log"
   } else {
     "REDCapR-fail-ascii.log"
@@ -74,7 +79,8 @@ test_that("can coerce to data frame", {
 })
 
 test_that("successful check yields zero rows", {
-  outfile <- if (l10n_info()$`UTF-8`) {
+  skip_on_cran()
+  outfile <- if (cli::is_utf8_output()) {
     "bikedata-ok.log"
   } else {
     "bikedata-ok-ascii.log"

@@ -1,7 +1,7 @@
 context("comparison")
 
 test_that("basic metadata stored in comparison object", {
-  if (l10n_info()$`UTF-8`) {
+  if (cli::is_utf8_output()) {
     cf <- compare_check_files(test_path("REDCapR-ok.log"), test_path("REDCapR-fail.log"))
   } else {
     cf <- compare_check_files(test_path("REDCapR-ok-ascii.log"),
@@ -13,7 +13,7 @@ test_that("basic metadata stored in comparison object", {
 })
 
 test_that("status correctly computed when both checks are ok", {
-  if (l10n_info()$`UTF-8`) {
+  if (cli::is_utf8_output()) {
     cf <- compare_check_files(test_path("minimal-ok.log"), test_path("minimal-ok.log"))
   } else {
     cf <- compare_check_files(test_path("minimal-ok-ascii.log"),
@@ -23,7 +23,8 @@ test_that("status correctly computed when both checks are ok", {
 })
 
 test_that("print message displays informative output", {
-  if (l10n_info()$`UTF-8`) {
+  skip_on_cran()
+  if (cli::is_utf8_output()) {
     cf <- compare_check_files(test_path("minimal-ee.log"), test_path("minimal-ewn.log"))
     known <- "comparison-newly-failing.txt"
   } else {
