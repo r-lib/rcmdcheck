@@ -12,8 +12,10 @@ print.rcmdcheck_comparison_summary <- function(x, ...) {
   object <- x[[1]]
 
   sum_status <- switch(object$status,
-    "t" = white(bgRed("T")),
-    "i" = white(bgRed("I")),
+    "t-" = white(bgRed("T")),
+    "t+" = "T",
+    "i-" = white(bgRed("I")),
+    "i+" = "I",
     "+" = green(symbol$tick),
     "-" = red(symbol$cross)
   )
