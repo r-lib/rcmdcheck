@@ -78,8 +78,10 @@ print.rcmdcheck_comparison <- function(x, header = TRUE, ...) {
   status <- switch(x$status,
     "+" = green("OK"),
     "-" = red("BROKEN"),
-    "i" = red("INSTALL FAILURE"),
-    "t" = red("TIMEOUT")
+    "i-" = red("INSTALL FAILURE"),
+    "t-" = red("TIMEOUT"),
+    "i+" = "OK (old version INSTALL FAILURE)",
+    "t+" = "OK (old version TIMEOUT)",
   )
   cat_line("Status: ", bold(status))
   cat_line()
