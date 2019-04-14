@@ -2,11 +2,7 @@ context("parse")
 
 test_that("can parse basic package information from file", {
   skip_on_cran()
-  outfile <- if (cli::is_utf8_output()) {
-    "bikedata-ok.log"
-  } else {
-    "bikedata-ok-ascii.log"
-  }
+  outfile <- "bikedata-ok.log"
   check <- parse_check(test_path(outfile))
 
   expect_equal(check$package, "bikedata")
@@ -16,13 +12,8 @@ test_that("can parse basic package information from file", {
 
 test_that("install log is captured", {
   skip_on_cran()
-  if (cli::is_utf8_output()) {
-    outfile <- "RSQLServer-install"
-    known <- "parse-install-fail.txt"
-  } else {
-    outfile <- "RSQLServer-install-ascii"
-    known <- "parse-install-fail-ascii.txt"
-  }
+  outfile <- "RSQLServer-install"
+  known <- "parse-install-fail.txt"
   path <- test_path(outfile)
   check <- parse_check(path)
 
@@ -33,13 +24,8 @@ test_that("install log is captured", {
 
 test_that("test failures are captured", {
   skip_on_cran()
-  if (cli::is_utf8_output()) {
-    outfile <- "dataonderivatives-test"
-    known <- "parse-test-fail.txt"
-  } else {
-    outfile <- "dataonderivatives-test-ascii"
-    known <- "parse-test-fail-ascii.txt"
-  }
+  outfile <- "dataonderivatives-test"
+  known <- "parse-test-fail.txt"
   path <- test_path(outfile)
   check <- parse_check(path)
 
@@ -51,11 +37,7 @@ test_that("test failures are captured", {
 
 test_that("test failure, ERROR in new line", {
   skip_on_cran()
-  outfile <- if (cli::is_utf8_output()) {
-    "fixtures/test-error.txt"
-  } else {
-    "fixtures/test-error-ascii.txt"
-  }
+  outfile <- "fixtures/test-error.txt"
   check <- parse_check(test_path(outfile))
   expect_equal(length(check$errors), 1)
   expect_equal(length(check$warnings), 0)
@@ -66,11 +48,7 @@ test_that("test failure, ERROR in new line", {
 
 test_that("can coerce to data frame", {
   skip_on_cran()
-  outfile <- if (cli::is_utf8_output()) {
-    "REDCapR-fail.log"
-  } else {
-    "REDCapR-fail-ascii.log"
-  }
+  outfile <- "REDCapR-fail.log"
   check <- parse_check(test_path(outfile))
   df <- as.data.frame(check, which = "new")
 
@@ -80,11 +58,7 @@ test_that("can coerce to data frame", {
 
 test_that("successful check yields zero rows", {
   skip_on_cran()
-  outfile <- if (cli::is_utf8_output()) {
-    "bikedata-ok.log"
-  } else {
-    "bikedata-ok-ascii.log"
-  }
+  outfile <- "bikedata-ok.log"
   check <- parse_check(test_path(outfile))
   df <- as.data.frame(check, which = "new")
 

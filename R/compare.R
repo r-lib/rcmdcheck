@@ -3,7 +3,14 @@
 #'
 #' @param old A check result, or a list of check results.
 #' @param new A check result.
-#' @return An `rcmdcheck_comparison` object.
+#' @return An `rcmdcheck_comparison` object with fields:
+#'   * `package`: the name of the package, string,
+#'   * `versions`: package versions, length two character,
+#'   * `status`: comparison status, see below,
+#'   * `old`: list of `rcmdcheck` objects the old check(s),
+#'   * `new`: `rcmdcheck` object, the new check,
+#'   * `cmp`: 
+#' 
 #'
 #' @family check comparisons
 #' @export

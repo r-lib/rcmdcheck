@@ -136,10 +136,11 @@ parse_check <- function(file = NULL, text = NULL, ...) {
     file <- find_check_file(file)
     text <- readLines(file)
   }
-  stdout <- paste(text, collapse = "\n")
+  stdout <- paste(reencode_log(text), collapse = "\n")
 
   # Simulate minimal description from info in log
-  entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
+  entries <- strsplit(paste0("\n", stdout), "\n* ",
+                      fixed = TRUE, useBytes = TRUE)[[1]][-1]
   desc <- desc::description$new("!new")
   desc$set(
     Package = parse_package(entries),
@@ -152,6 +153,21 @@ parse_check <- function(file = NULL, text = NULL, ...) {
     description = desc,
     ...
   )
+}
+
+reencode_log <- function(log) {
+  csline <- head(grep("^\\* using session charset: ",
+                      log, perl = TRUE, useBytes = TRUE, value = TRUE), 1)
+  if (length(csline)) {
+    cs <- strsplit(csline, ": ")[[1]][2]
+    log <- iconv(log, cs, "UTF-8", sub = "byte")
+    if (any(bad <- !validEnc(log))) {
+      log[bad] <- iconv(log[bad], to = "ASCII", sub = "byte")
+    }
+  } else {
+    log <- iconv(log, to = "ASCII", sub = "byte")
+  }
+  log
 }
 
 parse_package <- function(entries) {
