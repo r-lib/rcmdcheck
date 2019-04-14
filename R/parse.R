@@ -155,6 +155,16 @@ parse_check <- function(file = NULL, text = NULL, ...) {
   )
 }
 
+validEnc <- function(x) {
+  ## We just don't do this on older R, because the functionality is
+  ## not available
+  if (getRversion() >= "3.3.0") {
+    asNamespace("base")$validEnc(x)
+  } else {
+    rep(TRUE, length(x))
+  }
+}
+
 reencode_log <- function(log) {
   csline <- head(grep("^\\* using session charset: ",
                       log, perl = TRUE, useBytes = TRUE, value = TRUE), 1)
