@@ -77,6 +77,27 @@ parse_checkdir <- function(entries) {
   )
 }
 
+get_test_fail <- function(path) {
+  test_path <- file.path(path, dir(path, pattern = "^tests"))
+  paths <- dir(test_path, pattern = "\\.Rout\\.fail$", full.names = TRUE)
+
+  test_dirs <- basename(dirname(paths))
+  rel_paths <- ifelse(
+    test_dirs == "tests",
+    basename(paths),
+    paste0(basename(paths), " (", sub("^tests_", "", test_dirs), ")"))
+  names(paths) <- gsub("\\.Rout.fail", "", rel_paths)
+
+  trim_header <- function(x) {
+    first_gt <- regexpr(">", x)
+    substr(x, first_gt, nchar(x))
+  }
+
+  tests <- lapply(paths, read_char)
+  tests <- lapply(tests, win2unix)
+  lapply(tests, trim_header)
+}
+
 #' @export
 as.data.frame.rcmdcheck <- function(x,
                                     row.names = NULL,
