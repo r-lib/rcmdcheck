@@ -1,3 +1,5 @@
+Run R CMD check from R and Capture Results
+================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 

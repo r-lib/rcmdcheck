@@ -1,4 +1,5 @@
 ---
+title: "Run R CMD check from R and Capture Results"
 output:
   github_document:
     toc: true
