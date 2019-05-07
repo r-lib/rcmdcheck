@@ -1,6 +1,9 @@
 
 # dev
 
+* Fix output when standard output does not support `\r`, typically when
+  it is not a terminal (#94).
+
 * Fix standard output and standard error mixup in the test cases, #88, #96.
 
 * Fix parsing test failures when multiple architectures are checked, #97.
