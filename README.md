@@ -43,7 +43,7 @@ the output. The result of the check is returned, in a list with elements
 and one element of the character vectors is a single
 failure.
 
-<img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@master/tools/rcmdcheck.gif">
+<img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@master/tools/rcmdcheck.svg">
 
 ### Programmatic usage
 
