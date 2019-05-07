@@ -1,5 +1,5 @@
 
-# dev
+# 1.3.3
 
 * `cran_check_results()` has now a `quiet` argument, and the download
   progress bars are shown if it is set to `FALSE` (#17).
