@@ -1,6 +1,9 @@
 
 # dev
 
+* `cran_check_results()` has now a `quiet` argument, and the download
+  progress bars are shown if it is set to `FALSE` (#17).
+
 * Fix output when standard output does not support `\r`, typically when
   it is not a terminal (#94).
 

@@ -65,12 +65,14 @@ cran_check_flavours_generic <- function() {
 #' @param package Name of a single package to download the checks for.
 #' @param flavours CRAN check flavours to use. Defaults to all
 #'   flavours that were used to check the package.
+#' @param quiet Whether to omit the download progress bars.
 #' @return A list of `rcmdcheck` objects.
 #'
 #' @export
 
 cran_check_results <- function(package,
-                               flavours = cran_check_flavours(package)) {
+                               flavours = cran_check_flavours(package),
+                               quiet = TRUE) {
 
   stopifnot(is_string(package))
 
@@ -81,7 +83,7 @@ cran_check_results <- function(package,
   )
 
   structure(
-    lapply(urls, parse_check_url),
+    lapply(urls, parse_check_url, quiet = quiet),
     names = flavours,
     package = package,
     class = "rmcdcheck_cran_results"
