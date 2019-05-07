@@ -16,10 +16,12 @@ test_that("print message displays informative output", {
   cf <- compare_check_files(test_path("minimal-ee.log"), test_path("minimal-ewn.log"))
   known <- "comparison-newly-failing.txt"
 
-  expect_output_file({
-    print(summary(cf))
-    cat("\n\n")
-    print(cf)
-  }, file = known, update = FALSE)
+  withr::with_options(list(cli.unicode = TRUE), {
+    expect_output_file({
+      print(summary(cf))
+      cat("\n\n")
+      print(cf)
+    }, file = known, update = FALSE)
+  })
 
 })

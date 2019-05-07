@@ -1,5 +1,5 @@
-* installing *source* package ‘RSQLServer’ ...
-** package ‘RSQLServer’ successfully unpacked and MD5 sums checked
+* installing *source* package `RSQLServer' ...
+** package `RSQLServer' successfully unpacked and MD5 sums checked
 ** R
 ** inst
 ** preparing package for lazy loading
@@ -9,5 +9,5 @@ Error : .onLoad failed in loadNamespace() for 'rJava', details:
   dlopen(/Users/hadley/Documents/dplyr/dbplyr/revdep/library/RSQLServer/rJava/libs/rJava.so, 6): Library not loaded: @rpath/libjvm.dylib
   Referenced from: /Users/hadley/Documents/dplyr/dbplyr/revdep/library/RSQLServer/rJava/libs/rJava.so
   Reason: image not found
-ERROR: lazy loading failed for package ‘RSQLServer’
-* removing ‘/Users/hadley/Documents/dplyr/dbplyr/revdep/checks/RSQLServer/new/RSQLServer.Rcheck/RSQLServer’
+ERROR: lazy loading failed for package `RSQLServer'
+* removing `/Users/hadley/Documents/dplyr/dbplyr/revdep/checks/RSQLServer/new/RSQLServer.Rcheck/RSQLServer'

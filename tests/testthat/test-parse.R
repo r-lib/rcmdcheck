@@ -19,7 +19,9 @@ test_that("install log is captured", {
 
   expect_match(check$install_out, "unable to load shared object")
 
-  expect_output_file(print(check), file = known, update = FALSE)
+  expect_output_file(
+    withr::with_options(list(cli.unicode = TRUE), print(check)),
+    file = known, update = FALSE)
 })
 
 test_that("test failures are captured", {
@@ -32,7 +34,9 @@ test_that("test failures are captured", {
   expect_named(check$test_fail, "testthat")
   expect_match(check$test_fail[[1]], "BSDR API accesible")
 
-  expect_output_file(print(check), file = known, update = FALSE)
+  expect_output_file(
+    withr::with_options(list(cli.unicode = TRUE), print(check)),
+    file = known, update = FALSE)
 })
 
 test_that("test failure, ERROR in new line", {
