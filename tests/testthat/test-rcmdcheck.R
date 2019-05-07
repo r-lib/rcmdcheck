@@ -123,6 +123,7 @@ test_that("Installation errors", {
 
 test_that("non-quiet mode works", {
 
+  skip_on_cran()
   Sys.unsetenv("R_TESTS")
 
   tmp <- tempfile()
@@ -143,6 +144,7 @@ test_that("non-quiet mode works", {
 
 test_that("build arguments", {
 
+  skip_on_cran()
   tmp <- tempfile()
   on.exit(unlink(tmp), add = TRUE)
 
@@ -156,6 +158,7 @@ test_that("build arguments", {
 
 test_that("check arguments", {
 
+  skip_on_cran()
   tmp <- tempfile()
   on.exit(unlink(tmp), add = TRUE)
 
@@ -182,6 +185,7 @@ test_that("check_dir argument", {
 })
 
 test_that("check_dir and rcmdcheck_process", {
+  skip_on_cran()
   tmp <- tempfile(pattern = "foo bar")
   on.exit(unlink(tmp))
   px <- rcmdcheck_process$new(test_path("fixtures/badpackage_1.0.0.tar.gz"),
