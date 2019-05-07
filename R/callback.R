@@ -238,3 +238,27 @@ to_status <- function(x) {
 is_new_check <- function(x) {
   grepl("^\\* ", x)
 }
+
+simple_callback <- function(top_line = TRUE) {
+  function(x) cat(x)
+}
+
+detect_callback <- function() {
+  if (is_dynamic_tty2()) block_callback() else simple_callback()
+}
+
+#' @importFrom cli is_dynamic_tty
+
+is_dynamic_tty2 <- function() {
+  ## This is to work around a cli bug:
+  ## https://github.com/r-lib/cli/issues/70
+  if ((x <- Sys.getenv("R_CLI_DYNAMIC", "")) != "") {
+    isTRUE(x)
+  } else {
+    is_dynamic_tty()
+  }
+}
+
+should_add_spinner <- function() {
+  is_dynamic_tty2()
+}

@@ -14,7 +14,7 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
       c("R_LIBS_USER" = paste(libpath, collapse = .Platform$path.sep)), {
         proc <- pkgbuild_process$new(path, tmpdir, args = build_args)
         on.exit(proc$kill(), add = TRUE)
-        callback <- block_callback()
+        callback <- detect_callback()
         while (proc$is_incomplete_output() || proc$is_incomplete_error()) {
           proc$poll_io(-1)
           out <- proc$read_output()

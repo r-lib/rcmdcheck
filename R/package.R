@@ -134,8 +134,8 @@ do_check <- function(targz, package, args, libpath, repos,
       user_profile = TRUE,
       repos = repos,
       stderr = "2>&1",
-      block_callback = if (!quiet) block_callback(),
-      spinner = !quiet,
+      block_callback = if (!quiet) detect_callback(),
+      spinner = !quiet && should_add_spinner(),
       timeout = timeout,
       fail_on_status = FALSE
     )

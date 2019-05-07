@@ -20,7 +20,7 @@ Suggests:
     testthat
 Imports:
     callr (>= 3.1.1.9000),
-    cli,
+    cli (>= 1.1.0),
     crayon,
     desc (>= 1.2.0),
     digest,
