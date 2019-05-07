@@ -155,13 +155,12 @@ parse_check <- function(file = NULL, text = NULL, ...) {
   ## If no text, then find the file, and read it in
   if (is.null(text)) {
     file <- find_check_file(file)
-    text <- readLines(file)
+    text <- readLines(file, encoding = "bytes")
   }
   stdout <- paste(reencode_log(text), collapse = "\n")
 
   # Simulate minimal description from info in log
-  entries <- strsplit(paste0("\n", stdout), "\n* ",
-                      fixed = TRUE, useBytes = TRUE)[[1]][-1]
+  entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
   desc <- desc::description$new("!new")
   desc$set(
     Package = parse_package(entries),
