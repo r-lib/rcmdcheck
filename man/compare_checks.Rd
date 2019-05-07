@@ -12,7 +12,15 @@ compare_checks(old, new)
 \item{new}{A check result.}
 }
 \value{
-An \code{rcmdcheck_comparison} object.
+An \code{rcmdcheck_comparison} object with fields:
+\itemize{
+\item \code{package}: the name of the package, string,
+\item \code{versions}: package versions, length two character,
+\item \code{status}: comparison status, see below,
+\item \code{old}: list of \code{rcmdcheck} objects the old check(s),
+\item \code{new}: \code{rcmdcheck} object, the new check,
+\item \code{cmp}:
+}
 }
 \description{
 Compare a set of check results to another check result
