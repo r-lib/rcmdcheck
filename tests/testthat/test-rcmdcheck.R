@@ -33,7 +33,10 @@ test_that("rcmdcheck works", {
     "Non-standard license specification"
   )
 
-  expect_equal(length(bad1$errors), 0)
+  ## This fails without LaTex, which is not available on Appveyor
+  if (!identical(Sys.getenv("APPVEYOR"), "True")) {
+    expect_equal(length(bad1$errors), 0)
+  }
   expect_true(length(bad1$warnings) >= 1)
   expect_equal(length(bad1$notes), 0)
 
