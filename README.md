@@ -28,7 +28,7 @@ individual checks.
 ## Installation
 
 ``` r
-source("https://install-github.me/r-lib/rcmdcheck")
+install.packages("rcmdcheck")
 ```
 
 ## Usage
