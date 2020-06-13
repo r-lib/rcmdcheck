@@ -141,7 +141,7 @@ hash_check <- function(check) {
 #'
 #' @param file The \code{00check.log} file, or a directory that
 #'   contains that file. It can also be a connection object.
-#' @param text The contentst of a \code{00check.log} file.
+#' @param text The contents of a \code{00check.log} file.
 #' @param ... Other arguments passed onto the constructor.
 #'   Used for testing.
 #' @return An \code{rcmdcheck} object, the check results.
