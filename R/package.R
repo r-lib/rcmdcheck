@@ -25,26 +25,28 @@ NULL
 #'   spaces to delimit arguments like you would in the shell). For example,
 #'   `build_args = c("--force", "--keep-empty-dirs")` is a correct usage and
 #'   `build_args = "--force --keep-empty-dirs"` is incorrect.
-#' @param check_dir Path to a directory where the check is performed. If this is
-#'   not `NULL`, then the a temporary directory is used, that is cleaned up when
-#'   the returned object is garbage collected.
-#' @param libpath The library path to set for the check. The default uses the
-#'   current library path.
-#' @param repos The `repos` option to set for the check. This is needed for
-#'   cyclic dependency checks if you use the `--as-cran` argument. The default
-#'   uses the current value.
-#' @param timeout Timeout for the check, in seconds, or as a [base::difftime]
-#'   object. If it is not finished before this, it will be killed. `Inf` means
-#'   no timeout. If the check is timed out, that is added as an extra error to
-#'   the result object.
-#' @param error_on Whether to throw an error on `R CMD check` failures. Note
-#'   that the check is always completed (unless a timeout happens), and the
-#'   error is only thrown after completion. If `"never"`, then no errors are
-#'   thrown. If `"error"`, then only `ERROR` failures generate errors. If
-#'   `"warning"`, then `WARNING` failures generate errors as well. If `"note"`,
-#'   then any check failure generated an error.
-#' @return An S3 object (list) with fields `errors`, `warnings` and `notes`.
-#'   These are all character vectors containing the output for the failed check.
+#' @param check_dir Path to a directory where the check is performed.
+#'   If this is not `NULL`, then the a temporary directory is used, that
+#'   is cleaned up when the returned object is garbage collected.
+#' @param libpath The library path to set for the check.
+#'   The default uses the current library path.
+#' @param repos The `repos` option to set for the check.
+#'   This is needed for cyclic dependency checks if you use the
+#'   `--as-cran` argument. The default uses the current value.
+#' @param timeout Timeout for the check, in seconds, or as a
+#'  [base::difftime] object. If it is not finished before this, it will be
+#'   killed. `Inf` means no timeout. If the check is timed out,
+#'   that is added as an extra error to the result object.
+#' @param error_on Whether to throw an error on `R CMD check` failures.
+#'   Note that the check is always completed (unless a timeout happens),
+#'   and the error is only thrown after completion. If `"never"`, then
+#'   no errors are thrown. If `"error"`, then only `ERROR` failures
+#'   generate errors. If `"warning"`, then `WARNING` failures generate
+#'   errors as well. If `"note"`, then any check failure generated an
+#'   error.
+#' @return An S3 object (list) with fields `errors`,
+#'   `warnings` and `notes`. These are all character
+#'   vectors containing the output for the failed check.
 #'
 #' @export
 #' @importFrom rprojroot find_package_root_file
