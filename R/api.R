@@ -16,7 +16,7 @@
 #'   * `checkdir`: check directory.
 #'   * `install_out`: the output of the installation, contents of the
 #'     `00install.out` file. A single string.
-#'   * `description`: the contents of the DESCIRPTION file of the package.
+#'   * `description`: the contents of the DESCRIPTION file of the package.
 #'     A single string.
 #'   * `session_info`: the output of [sessioninfo::session_info()],
 #'     from the R session performing the checks.

@@ -3,7 +3,7 @@
 #'
 #' If the `package` argument is `NULL`, then all current
 #' platforms are downloaded. If the `package` argument is specified,
-#' then all flavours used for the latests package checks for that
+#' then all flavours used for the latest package checks for that
 #' package, are downloaded and returned.
 #'
 #' @param package CRAN package name or `NULL`.
