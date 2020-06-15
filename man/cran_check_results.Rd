@@ -4,8 +4,11 @@
 \alias{cran_check_results}
 \title{Download and parse R CMD check results from CRAN}
 \usage{
-cran_check_results(package, flavours = cran_check_flavours(package),
-  quiet = TRUE)
+cran_check_results(
+  package,
+  flavours = cran_check_flavours(package),
+  quiet = TRUE
+)
 }
 \arguments{
 \item{package}{Name of a single package to download the checks for.}

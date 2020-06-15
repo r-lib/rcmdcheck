@@ -9,7 +9,7 @@ data_frame(..., stringsAsFactors = FALSE)
 \arguments{
 \item{...}{Named data frame columns, or data frames.}
 
-\item{stringsAsFactors}{Just leave it on \code{FALSE}. \code{:)}}
+\item{stringsAsFactors}{Just leave it on \code{FALSE}. \verb{:)}}
 }
 \value{
 Data frame.

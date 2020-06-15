@@ -24,8 +24,8 @@ A check timeout adds an ERROR to this vector.
 \item \code{platform}: check platform
 \item \code{checkdir}: check directory.
 \item \code{install_out}: the output of the installation, contents of the
-\code{00install.out} file. A single string.
-\item \code{description}: the contents of the DESCIRPTION file of the package.
+\verb{00install.out} file. A single string.
+\item \code{description}: the contents of the DESCRIPTION file of the package.
 A single string.
 \item \code{session_info}: the output of \code{\link[sessioninfo:session_info]{sessioninfo::session_info()}},
 from the R session performing the checks.

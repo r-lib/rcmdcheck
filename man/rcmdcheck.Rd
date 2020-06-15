@@ -3,26 +3,38 @@
 \docType{package}
 \name{rcmdcheck}
 \alias{rcmdcheck}
-\alias{rcmdcheck-package}
 \title{Run R CMD check from R and Capture Results}
 \usage{
-rcmdcheck(path = ".", quiet = FALSE, args = character(),
-  build_args = character(), check_dir = NULL, libpath = .libPaths(),
-  repos = getOption("repos"), timeout = Inf, error_on = c("never",
-  "error", "warning", "note"))
+rcmdcheck(
+  path = ".",
+  quiet = FALSE,
+  args = character(),
+  build_args = character(),
+  check_dir = NULL,
+  libpath = .libPaths(),
+  repos = getOption("repos"),
+  timeout = Inf,
+  error_on = c("never", "error", "warning", "note")
+)
 }
 \arguments{
 \item{path}{Path to a package tarball or a directory.}
 
 \item{quiet}{Whether to print check output during checking.}
 
-\item{args}{Character vector of arguments to pass to
-\code{R CMD check}. (Note that instead of the \code{--output} option you
-should use the \code{check_dir} argument, because  \code{--output} cannot
-deal with spaces and other special characters on Windows.}
+\item{args}{Character vector of arguments to pass to \verb{R CMD check}. Pass each
+argument as a single element of this character vector (do not use spaces to
+delimit arguments like you would in the shell). For example, to skip
+running of examples and tests, use \code{args = c("--no-examples", "--no-tests")} and not \code{args = "--no-examples --no-tests"}. (Note that
+instead of the \code{--output} option you should use the \code{check_dir} argument,
+because  \code{--output} cannot deal with spaces and other special characters on
+Windows.)}
 
-\item{build_args}{Character vector of arguments to pass to
-\code{R CMD build}}
+\item{build_args}{Character vector of arguments to pass to \verb{R CMD build}.
+Pass each argument as a single element of this character vector (do not use
+spaces to delimit arguments like you would in the shell). For example,
+\code{build_args = c("--force", "--keep-empty-dirs")} is a correct usage and
+\code{build_args = "--force --keep-empty-dirs"} is incorrect.}
 
 \item{check_dir}{Path to a directory where the check is performed.
 If this is not \code{NULL}, then the a temporary directory is used, that
@@ -40,7 +52,7 @@ This is needed for cyclic dependency checks if you use the
 killed. \code{Inf} means no timeout. If the check is timed out,
 that is added as an extra error to the result object.}
 
-\item{error_on}{Whether to throw an error on \code{R CMD check} failures.
+\item{error_on}{Whether to throw an error on \verb{R CMD check} failures.
 Note that the check is always completed (unless a timeout happens),
 and the error is only thrown after completion. If \code{"never"}, then
 no errors are thrown. If \code{"error"}, then only \code{ERROR} failures
@@ -54,6 +66,6 @@ An S3 object (list) with fields \code{errors},
 vectors containing the output for the failed check.
 }
 \description{
-Run R CMD check form R programatically, and capture the results of the
+Run R CMD check form R programmatically, and capture the results of the
 individual checks.
 }

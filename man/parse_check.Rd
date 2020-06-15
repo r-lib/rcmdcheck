@@ -10,7 +10,7 @@ parse_check(file = NULL, text = NULL, ...)
 \item{file}{The \code{00check.log} file, or a directory that
 contains that file. It can also be a connection object.}
 
-\item{text}{The contentst of a \code{00check.log} file.}
+\item{text}{The contents of a \code{00check.log} file.}
 
 \item{...}{Other arguments passed onto the constructor.
 Used for testing.}

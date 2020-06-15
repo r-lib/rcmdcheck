@@ -2,7 +2,7 @@
 % Please edit documentation in R/background.R
 \name{rcmdcheck_process}
 \alias{rcmdcheck_process}
-\title{Run an \code{R CMD check} process in the background}
+\title{Run an \verb{R CMD check} process in the background}
 \description{
 rcmdcheck_process is an R6 class, that extends the
 \link[callr:rcmd_process]{callr::rcmd_process} class (which in turn extends \link[processx:process]{processx::process}.
@@ -34,8 +34,8 @@ not affected by that.
 \item \code{cp}: A new rcmdcheck_process object.
 \item \code{path}: Path to a package tree or a package archive file. This is the
 package to check.
-\item \code{args}: Command line arguments to \code{R CMD check}.
-\item \code{build_args}: Command line arguments to \code{R CMD build}.
+\item \code{args}: Command line arguments to \verb{R CMD check}.
+\item \code{build_args}: Command line arguments to \verb{R CMD build}.
 \item \code{check_dir}: Directory for the results.
 \item \code{libpath}: The library path to set for the check.
 \item \code{repos}: The \code{repos} option to set for the check.

@@ -15,7 +15,7 @@ Character vector of platform ids.
 \description{
 If the \code{package} argument is \code{NULL}, then all current
 platforms are downloaded. If the \code{package} argument is specified,
-then all flavours used for the latests package checks for that
+then all flavours used for the latest package checks for that
 package, are downloaded and returned.
 }
 \examples{
