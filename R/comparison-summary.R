@@ -6,7 +6,6 @@ summary.rcmdcheck_comparison <- function(object, ...) {
 }
 
 #' @export
-#' @importFrom crayon bgRed white green
 
 print.rcmdcheck_comparison_summary <- function(x, ...) {
   object <- x[[1]]
