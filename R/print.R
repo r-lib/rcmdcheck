@@ -77,7 +77,7 @@ header_line <- function(left = "", right = "",
   substring(res, 1, width)
 }
 
-cat_head <- function(left, right = "", style = rcmdcheck_color(crayon::cyan)) {
+cat_head <- function(left, right = "", style = cyan) {
   str <- header_line(left, right)
   cat_line(str, style = style)
 }
