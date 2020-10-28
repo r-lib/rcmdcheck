@@ -61,11 +61,16 @@ rcmdcheck_process <- R6Class(
 
   public = list(
 
-    initialize = function(path = ".", args = character(),
-      build_args = character(), check_dir = NULL, libpath = .libPaths(),
-      repos = getOption("repos"), env = character())
-      rcc_init(self, private, super, path, args, build_args, check_dir,
-               libpath, repos, env),
+    initialize = function(path = ".",
+                          args = character(),
+                          build_args = character(),
+                          check_dir = NULL,
+                          libpath = .libPaths(),
+                          repos = getOption("repos"),
+                          env = character(),
+                          ...)
+      rcc_init(self, private, super, path, args, build_args,
+        check_dir, libpath, repos, env, ...),
 
     parse_results = function()
       rcc_parse_results(self, private),
@@ -105,7 +110,7 @@ rcmdcheck_process <- R6Class(
 #' @importFrom desc desc
 
 rcc_init <- function(self, private, super, path, args, build_args,
-                     check_dir, libpath, repos, env) {
+                     check_dir, libpath, repos, env, ...) {
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -161,7 +166,8 @@ rcc_init <- function(self, private, super, path, args, build_args,
     repos = repos,
     user_profile = FALSE,
     stderr = "2>&1",
-    env = chkenv
+    env = chkenv,
+    ...
   )
 
   with_dir(
@@ -174,6 +180,12 @@ rcc_init <- function(self, private, super, path, args, build_args,
 
 rcc_parse_results <- function(self, private) {
   if (self$is_alive()) stop("Process still alive")
+
+  out_file <- self$get_output_file()
+  if (is_string(out_file) && out_file != "|") {
+    browser()
+    stopifnot(file.exists(out_file))
+  }
 
   ## Make sure all output is read out
   if (self$has_output_connection()) self$read_output_lines()
