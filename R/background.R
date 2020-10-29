@@ -181,15 +181,17 @@ rcc_init <- function(self, private, super, path, args, build_args,
 rcc_parse_results <- function(self, private) {
   if (self$is_alive()) stop("Process still alive")
 
-  out_file <- self$get_output_file()
-  if (is_string(out_file) && out_file != "|") {
-    browser()
-    stopifnot(file.exists(out_file))
-  }
-
   ## Make sure all output is read out
-  if (self$has_output_connection()) self$read_output_lines()
-  if (self$has_error_connection()) self$read_error_lines()
+  if (self$has_output_connection()) {
+    self$read_output_lines()
+  } else {
+    private$cstdout <- readLines(self$get_output_file())
+  }
+  if (self$has_error_connection()) {
+    self$read_error_lines()
+  } else {
+    private$cstderr <- readLines(self$get_error_file())
+  }
 
   on.exit(unlink(private$tempfiles, recursive = TRUE), add = TRUE)
 
