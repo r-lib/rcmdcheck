@@ -21,6 +21,7 @@ is_count <- function(x) {
 }
 
 `%||%` <- function(l, r) if (is.null(l)) r else l
+`%|0|%` <- function(l, r) if (!length(l)) r else l
 
 #' Alternative to data.frame
 #'
