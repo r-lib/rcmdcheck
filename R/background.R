@@ -195,8 +195,8 @@ rcc_parse_results <- function(self, private) {
   on.exit(unlink(private$tempfiles, recursive = TRUE), add = TRUE)
 
   new_rcmdcheck(
-    stdout =       paste(win2unix(private$cstdout), collapse = ""),
-    stderr =       paste(win2unix(private$cstderr), collapse = ""),
+    stdout =       paste(win2unix(private$cstdout), collapse = "\n"),
+    stderr =       paste(win2unix(private$cstderr), collapse = "\n"),
     description =  private$description,
     status =       self$get_exit_status(),
     duration =     duration(self$get_start_time()),
