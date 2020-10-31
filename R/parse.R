@@ -168,6 +168,9 @@ parse_check <- function(file = NULL, text = NULL, ...) {
   }
   stdout <- paste(reencode_log(text), collapse = "\n")
 
+  # Remove timestamps from checks as these cause false failures (#128)
+  stdout <- gsub("\\[[0-9]+s/[0-9]+s\\]", "", stdout)
+
   # Simulate minimal description from info in log
   entries <- strsplit(paste0("\n", stdout), "\n* ", fixed = TRUE)[[1]][-1]
   desc <- desc::description$new("!new")
