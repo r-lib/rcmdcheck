@@ -1,6 +1,9 @@
 
 # dev
 
+* RStudio's Pandoc is now on the path during `rcmdcheck()` 
+  (#109, #132, @dpprdan).
+
 # 1.3.3
 
 * `cran_check_results()` has now a `quiet` argument, and the download
