@@ -50,7 +50,7 @@ NULL
 #'
 #' @export
 #' @importFrom rprojroot find_package_root_file
-#' @importFrom withr with_dir
+#' @importFrom withr local_path with_dir
 #' @importFrom callr rcmd_safe
 #' @importFrom desc desc
 
@@ -77,6 +77,11 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   targz <- build_package(path, check_dir, build_args = build_args,
                          libpath = libpath, quiet = quiet)
+
+  # Put RStudio's pandoc on the path
+  if (nzchar(Sys.getenv("RSTUDIO_PANDOC"))) {
+    local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  }
 
   start_time <- Sys.time()
   desc <- desc(targz)
