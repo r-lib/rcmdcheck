@@ -1,8 +1,4 @@
 
-read_char <- function(path, ...) {
-  readChar(path, nchars = file.info(path)$size, ...)
-}
-
 win2unix <- function(str) {
   gsub("\r\n", "\n", str, fixed = TRUE)
 }
@@ -105,7 +101,7 @@ cat0 <- function(..., sep = "") {
 get_install_out <- function(path) {
   install_out <- file.path(path, "00install.out")
   if (is_string(install_out) && file.exists(install_out)) {
-    win2unix(read_char(install_out))
+    win2unix(brio::read_file(install_out))
   } else {
     "<00install.out file does not exist>"
   }

@@ -93,7 +93,7 @@ get_test_fail <- function(path) {
     substr(x, first_gt, nchar(x))
   }
 
-  tests <- lapply(paths, read_char)
+  tests <- lapply(paths, brio::read_file)
   tests <- lapply(tests, win2unix)
   lapply(tests, trim_header)
 }

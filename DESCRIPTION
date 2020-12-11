@@ -13,6 +13,7 @@ License: MIT + file LICENSE
 URL: https://github.com/r-Lib/rcmdcheck#readme
 BugReports: https://github.com/r-Lib/rcmdcheck/issues
 Imports:
+    brio,
     callr (>= 3.1.1.9000),
     cli (>= 1.1.0),
     crayon,
