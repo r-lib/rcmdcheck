@@ -11,10 +11,8 @@ Results
 <!-- badges: start -->
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://tidyverse.org/lifecycle/#maturing)
-[![Linux Build
-Status](https://travis-ci.org/r-lib/rcmdcheck.svg?branch=master)](https://travis-ci.org/r-lib/rcmdcheck)
-[![Windows Build
-status](https://ci.appveyor.com/api/projects/status/github/r-lib/rcmdcheck?svg=true)](https://ci.appveyor.com/project/gaborcsardi/rcmdcheck)
+[![R build
+status](https://github.com/r-lib/rcmdcheck/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/rcmdcheck/actions)
 [![](http://www.r-pkg.org/badges/version/rcmdcheck)](http://www.r-pkg.org/pkg/rcmdcheck)
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/rcmdcheck)](http://www.r-pkg.org/pkg/rcmdcheck)
