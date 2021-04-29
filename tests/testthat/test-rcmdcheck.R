@@ -31,8 +31,8 @@ test_that("rcmdcheck works", {
     "Non-standard license specification"
   )
 
-  ## This fails without LaTex, which is not available on Appveyor
-  if (!identical(Sys.getenv("APPVEYOR"), "True")) {
+  ## This fails without LaTex, which is not available on GHA by default
+  if (Sys.which("latex") != "") {
     expect_equal(length(bad1$errors), 0)
   }
   expect_true(length(bad1$warnings) >= 1)
