@@ -50,9 +50,8 @@ test_that("rcmdcheck works", {
   lp2 <- readRDS(tmp_out2)
   expect_true(tmp_lib %in% normalizePath(lp2, mustWork = FALSE))
 
-  ## This currently fails with devtools::check(), so it also fails
-  ## on Travis
-  skip_on_travis()
+  ## This currently fails with rcmdcheck() (why?), so it also fails GHA
+  skip_on_ci()
   expect_s3_class(bad1$session_info, "session_info")
 })
 
@@ -94,9 +93,8 @@ test_that("background gives same results", {
   lp2 <- readRDS(tmp_out2)
   expect_true(tmp_lib %in% normalizePath(lp2, mustWork = FALSE))
 
-  ## This currently fails with devtools::check(), so it also fails
-  ## on Travis
-  skip_on_travis()
+  ## This currently fails with rcmdcheck() (why?), so it also fails GHA
+  skip_on_ci()
   expect_s3_class(res$session_info, "session_info")
 })
 
