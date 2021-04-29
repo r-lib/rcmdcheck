@@ -1,5 +1,7 @@
 url: http://r-lib.github.io/rcmdcheck
 
+development:
+  mode: auto
 
 reference:
 - title: Run `R CMD check` programmatically
