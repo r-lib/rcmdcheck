@@ -31,8 +31,8 @@ test_that("rcmdcheck works", {
     "Non-standard license specification"
   )
 
-  ## This fails without LaTex, which is not available on Appveyor
-  if (!identical(Sys.getenv("APPVEYOR"), "True")) {
+  ## This fails without LaTex, which is not available on GHA by default
+  if (Sys.which("latex") != "") {
     expect_equal(length(bad1$errors), 0)
   }
   expect_true(length(bad1$warnings) >= 1)
@@ -50,9 +50,8 @@ test_that("rcmdcheck works", {
   lp2 <- readRDS(tmp_out2)
   expect_true(tmp_lib %in% normalizePath(lp2, mustWork = FALSE))
 
-  ## This currently fails with devtools::check(), so it also fails
-  ## on Travis
-  skip_on_travis()
+  ## This currently fails with rcmdcheck() (why?), so it also fails GHA
+  skip_on_ci()
   expect_s3_class(bad1$session_info, "session_info")
 })
 
@@ -94,9 +93,8 @@ test_that("background gives same results", {
   lp2 <- readRDS(tmp_out2)
   expect_true(tmp_lib %in% normalizePath(lp2, mustWork = FALSE))
 
-  ## This currently fails with devtools::check(), so it also fails
-  ## on Travis
-  skip_on_travis()
+  ## This currently fails with rcmdcheck() (why?), so it also fails GHA
+  skip_on_ci()
   expect_s3_class(res$session_info, "session_info")
 })
 
