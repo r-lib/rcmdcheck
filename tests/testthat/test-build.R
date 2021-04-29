@@ -1,6 +1,4 @@
 
-context("build")
-
 test_that("input targz and targz to check can be the same", {
   f1 <- tempfile()
   on.exit(unlink(f1), add = TRUE)

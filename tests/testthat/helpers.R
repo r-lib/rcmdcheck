@@ -41,3 +41,12 @@ replay <- function(name, sleep = FALSE) {
     cb(outp)
   }
 }
+
+# Wrapper because from edition 3 'class' must be a scalar
+
+expect_error_classes <- function(expr, class) {
+  err <- tryCatch(expr, error = function(e) e)
+  for (c in class) {
+    expect_s3_class(err, c)
+  }
+}

@@ -155,7 +155,7 @@ parse_check <- function(file = NULL, text = NULL, ...) {
   ## If no text, then find the file, and read it in
   if (is.null(text)) {
     file <- find_check_file(file)
-    text <- readLines(file, encoding = "bytes")
+    text <- readLines(file, encoding = "bytes", warn = FALSE)
   }
   stdout <- paste(reencode_log(text), collapse = "\n")
 

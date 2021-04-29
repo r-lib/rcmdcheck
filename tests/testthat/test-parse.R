@@ -1,4 +1,3 @@
-context("parse")
 
 test_that("can parse basic package information from file", {
   skip_on_cran()
@@ -10,33 +9,31 @@ test_that("can parse basic package information from file", {
   expect_equal(check$rversion, "3.4.1")
 })
 
-test_that("install log is captured", {
+cli::test_that_cli("install log is captured", {
   skip_on_cran()
   outfile <- "RSQLServer-install"
-  known <- "parse-install-fail.txt"
   path <- test_path(outfile)
   check <- parse_check(path)
 
   expect_match(check$install_out, "unable to load shared object")
 
-  expect_output_file(
-    withr::with_options(list(cli.unicode = TRUE), print(check)),
-    file = known, update = FALSE)
+  expect_snapshot(
+    print(check)
+  )
 })
 
-test_that("test failures are captured", {
+cli::test_that_cli("test failures are captured", {
   skip_on_cran()
   outfile <- "dataonderivatives-test"
-  known <- "parse-test-fail.txt"
   path <- test_path(outfile)
   check <- parse_check(path)
 
   expect_named(check$test_fail, "testthat")
   expect_match(check$test_fail[[1]], "BSDR API accesible")
 
-  expect_output_file(
-    withr::with_options(list(cli.unicode = TRUE), print(check)),
-    file = known, update = FALSE)
+  expect_snapshot(
+    print(check)
+  )
 })
 
 test_that("test failure, ERROR in new line", {

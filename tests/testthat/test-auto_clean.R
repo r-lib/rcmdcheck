@@ -1,4 +1,3 @@
-context("auto_clean")
 
 test_that("auto_clean deletes files on gc()", {
   tmp <- tempfile()

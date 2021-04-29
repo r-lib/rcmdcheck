@@ -1,6 +1,4 @@
 
-context("tests")
-
 test_that("parsing tests for multiple architectures", {
 
   tgz <- test_path("fixtures", "bad-tests.tar.gz")

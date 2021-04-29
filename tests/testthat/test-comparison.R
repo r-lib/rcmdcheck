@@ -1,4 +1,3 @@
-context("comparison")
 
 test_that("basic metadata stored in comparison object", {
   cf <- compare_check_files(test_path("REDCapR-ok.log"), test_path("REDCapR-fail.log"))
@@ -11,17 +10,14 @@ test_that("status correctly computed when both checks are ok", {
   expect_equal(cf$status, "+")
 })
 
-test_that("print message displays informative output", {
+cli::test_that_cli("print message displays informative output", {
   skip_on_cran()
-  cf <- compare_check_files(test_path("minimal-ee.log"), test_path("minimal-ewn.log"))
-  known <- "comparison-newly-failing.txt"
+  cf <- compare_check_files(
+    test_path("minimal-ee.log"),
+    test_path("minimal-ewn.log")
+  )
 
-  withr::with_options(list(cli.unicode = TRUE), {
-    expect_output_file({
-      print(summary(cf))
-      cat("\n\n")
-      print(cf)
-    }, file = known, update = FALSE)
-  })
-
+  expect_snapshot(
+    print(summary(cf))
+  )
 })

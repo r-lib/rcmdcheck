@@ -12,7 +12,7 @@ win2unix <- function(str) {
 download_file <- function(url, quiet = TRUE) {
   download.file(url, tmp <- tempfile(), quiet = quiet)
   on.exit(unlink(tmp), add = TRUE)
-  readLines(tmp)
+  readLines(tmp, warn = FALSE)
 }
 
 is_string <- function(x) {

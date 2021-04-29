@@ -1,6 +1,4 @@
 
-context("rcmdcheck")
-
 test_that("rcmdcheck works", {
 
   skip_on_cran()

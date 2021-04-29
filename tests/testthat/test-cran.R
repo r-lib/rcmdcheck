@@ -1,6 +1,4 @@
 
-context("compare_to_cran")
-
 test_that("can get results (windows)", {
   skip_on_cran()
   xx <- cran_check_results("rcmdcheck", "r-release-windows-ix86+x86_64")

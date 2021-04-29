@@ -48,10 +48,8 @@ make_line <- function(x) {
   paste(rep(symbol$line, x), collapse = "")
 }
 
-lines <- vapply(1:100, FUN.VALUE = "", make_line)
-
 header_line <- function(left = "", right = "",
-                        width = getOption("width")) {
+                        width = cli::console_width()) {
 
   ncl <- nchar(left)
   ncr <- nchar(right)
@@ -66,11 +64,7 @@ header_line <- function(left = "", right = "",
 
   }
 
-  dashes <- if (ndashes <= length(lines)) {
-    lines[ndashes]
-  } else {
-    make_line(ndashes)
-  }
+  dashes <- make_line(ndashes)
 
   res <- paste0(
     substr(dashes, 1, 2),
