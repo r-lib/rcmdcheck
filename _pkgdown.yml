@@ -1,0 +1,27 @@
+url: http://r-lib.github.io/rcmdcheck
+
+
+reference:
+- title: Run `R CMD check` programmatically
+  contents:
+  - rcmdcheck
+  - rcmdcheck_process
+
+- title: Query CRAN checks
+  contents:
+  - cran_check_flavours
+  - cran_check_results
+  - check_details
+  - print.rcmdcheck
+  - xopen.rcmdcheck
+
+- title: Parse check results
+  contents:
+  - parse_check
+  - parse_check_url
+
+- title: Compare check results
+  contents:
+  - compare_checks
+  - compare_to_cran
+  - print.rcmdcheck_comparison

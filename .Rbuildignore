@@ -8,3 +8,6 @@
 ^README.html$
 ^README.Rmd$
 ^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
