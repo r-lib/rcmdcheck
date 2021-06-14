@@ -26,7 +26,7 @@ cran_check_flavours <- function(package = NULL) {
     ".html"
   )
 
-  html <- download_file(url)
+  html <- download_file_lines(url)
 
   fl_rows <- grep(
     "<tr> <td>  <a href=\"check_flavors.html#",
@@ -44,7 +44,7 @@ cran_check_flavours <- function(package = NULL) {
 
 cran_check_flavours_generic <- function() {
   url <- "https://cran.r-project.org/web/checks/check_flavors.html"
-  html <- download_file(url)
+  html <- download_file_lines(url)
 
   fl_rows <- grep(
     "^<tr id=\"[-a-z0-9_]+\"> <td> ",
@@ -72,7 +72,7 @@ cran_check_flavours_generic <- function() {
 
 cran_check_results <- function(package,
                                flavours = cran_check_flavours(package),
-                               quiet = TRUE) {
+                               quiet = FALSE) {
 
   stopifnot(is_string(package))
 
@@ -82,8 +82,11 @@ cran_check_results <- function(package,
     "-00check.txt"
   )
 
+  tmp <- paste0(tempfile(), "-", seq_along(urls))
+  download_files(urls, tmp, quiet = FALSE)
+
   structure(
-    lapply(urls, parse_check_url, quiet = quiet),
+    lapply(tmp, parse_check),
     names = flavours,
     package = package,
     class = "rmcdcheck_cran_results"
