@@ -16,6 +16,7 @@ Imports:
     callr (>= 3.1.1.9000),
     cli (>= 2.5.0),
     crayon,
+    curl,
     desc (>= 1.2.0),
     digest,
     pkgbuild,
@@ -32,8 +33,10 @@ Suggests:
     mockery,
     rmarkdown,
     testthat
+Remotes:
+    r-lib/cli@feature/progress2
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1.9001
 Config/testthat/edition: 3
