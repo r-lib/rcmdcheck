@@ -30,36 +30,28 @@ download_files <- function(urls,
   currents <- rep(0L, todo)
   finished <- rep(FALSE, todo)
 
-  if (getRversion() < "3.5.0") suspendInterrupts <- identity
-
   done <- function(num, resp) {
-    suspendInterrupts({
-      results[[num]] <<- resp
-      todo <<- todo - 1L
-      finished[[num]] <<- TRUE
-      if (is.na(sizes[[num]])) sizes[[num]] <<- currents[[num]]
-      file.rename(tmpfiles[[num]], destfiles[[num]])
-    })
+    results[[num]] <<- resp
+    todo <<- todo - 1L
+    finished[[num]] <<- TRUE
+    if (is.na(sizes[[num]])) sizes[[num]] <<- currents[[num]]
+    file.rename(tmpfiles[[num]], destfiles[[num]])
   }
 
   fail <- function(num, msg) {
-    suspendInterrupts({
-      results[[num]] <<- new_curl_error(num, urls[[num]], msg)
-      todo <<- todo - 1L
-      finished[[num]] <<- TRUE
-      if (is.na(sizes[[num]])) sizes[[num]] <<- currents[[num]]
-      unlink(tmpfiles[[num]], force = TRUE)
-    })
+    results[[num]] <<- new_curl_error(num, urls[[num]], msg)
+    todo <<- todo - 1L
+    finished[[num]] <<- TRUE
+    if (is.na(sizes[[num]])) sizes[[num]] <<- currents[[num]]
+    unlink(tmpfiles[[num]], force = TRUE)
   }
 
   prog <- function(num, down, up) {
-    suspendInterrupts({
-      # not possible to download _and_ upload with the same handle, right?
-      if (down[[1]] != 0) sizes[num] <<- down[[1]]
-      if (up[[1]] != 0) sizes[num] <<- up[[1]]
-      currents[[num]] <<- down[[2]] + up[[2]]
-      TRUE
-    })
+    # not possible to download _and_ upload with the same handle, right?
+    if (down[[1]] != 0) sizes[num] <<- down[[1]]
+    if (up[[1]] != 0) sizes[num] <<- up[[1]]
+    currents[[num]] <<- down[[2]] + up[[2]]
+    TRUE
   }
 
   if (!quiet) pbar <- cli_progress_bar(type = "download")
@@ -87,9 +79,14 @@ download_files <- function(urls,
     )
   })
 
+
+  if (getRversion() < "3.5.0") suspendInterrupts <- identity
+
   repeat {
     if (todo == 0) break;
-    multi_run(0.1, poll = TRUE, pool = pool)
+    suspendInterrupts(
+      multi_run(0.1, poll = TRUE, pool = pool)
+    )
     if (!quiet) prog_update()
   }
 
