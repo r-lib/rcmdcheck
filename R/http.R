@@ -53,11 +53,13 @@ download_files <- function(urls,
   }
 
   prog <- function(num, down, up) {
-    # not possible to download _and_ upload with the same handle, right?
-    if (down[[1]] != 0) sizes[num] <<- down[[1]]
-    if (up[[1]] != 0) sizes[num] <<- up[[1]]
-    currents[[num]] <<- down[[2]] + up[[2]]
-    TRUE
+    suspendInterrupts({
+      # not possible to download _and_ upload with the same handle, right?
+      if (down[[1]] != 0) sizes[num] <<- down[[1]]
+      if (up[[1]] != 0) sizes[num] <<- up[[1]]
+      currents[[num]] <<- down[[2]] + up[[2]]
+      TRUE
+    })
   }
 
   if (!quiet) pbar <- cli_progress_bar(type = "download")
