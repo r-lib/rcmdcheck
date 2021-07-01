@@ -31,6 +31,7 @@ Suggests:
     covr,
     knitr,
     mockery,
+    ps,
     rmarkdown,
     testthat
 Encoding: UTF-8
