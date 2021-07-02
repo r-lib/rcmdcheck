@@ -4,7 +4,7 @@ read_char <- function(path, ...) {
 }
 
 win2unix <- function(str) {
-  gsub("\r\n", "\n", str, fixed = TRUE)
+  gsub("\r\n", "\n", str, fixed = TRUE, useBytes = TRUE)
 }
 
 #' @importFrom utils download.file

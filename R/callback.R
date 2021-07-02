@@ -240,7 +240,7 @@ is_new_check <- function(x) {
 }
 
 simple_callback <- function(top_line = TRUE) {
-  function(x) cat(gsub("[\r\n]+", "\n", x))
+  function(x) cat(gsub("[\r\n]+", "\n", x, useBytes = TRUE))
 }
 
 detect_callback <- function() {

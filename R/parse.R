@@ -86,7 +86,7 @@ get_test_fail <- function(path) {
     test_dirs == "tests",
     basename(paths),
     paste0(basename(paths), " (", sub("^tests_", "", test_dirs), ")"))
-  names(paths) <- gsub("\\.Rout.fail", "", rel_paths)
+  names(paths) <- gsub("\\.Rout.fail", "", rel_paths, useBytes = TRUE)
 
   trim_header <- function(x) {
     first_gt <- regexpr(">", x)
@@ -129,7 +129,7 @@ as.data.frame.rcmdcheck <- function(x,
 #' @importFrom digest digest
 
 hash_check <- function(check) {
-  cleancheck <- gsub("[^a-zA-Z0-9]", "", first_line(check))
+  cleancheck <- gsub("[^a-zA-Z0-9]", "", first_line(check), useBytes = TRUE)
   vapply(cleancheck, digest, "")
 }
 
