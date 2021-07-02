@@ -1,4 +1,9 @@
 
+skip_on_cran()
+if (getRversion() < "3.5.0") return()
+
+httpbin <- webfakes::new_app_process(webfakes::httpbin_app())
+
 torture_me <- function(expr) {
   out <- tryCatch(
     withCallingHandlers({
@@ -18,14 +23,11 @@ torture_me <- function(expr) {
 }
 
 test_that("http interrupts", {
-  skip_on_cran()
-  if (getRversion() < "3.5.0") skip("Need R 3.5.0 for interrupts")
-
   withr::local_options(cli.progress_handlers_only = "logger")
 
   dl <- function() {
     download_files(
-      "https://httpbin.org/drip?duration=5&numbytes=1000",
+      httpbin$url("/drip", query = c(duration =5, numbytes = 1000)),
       tmp <- tempfile()
     )
   }
