@@ -1,5 +1,6 @@
 
-skip_on_cran()
+if (!identical(Sys.getenv("NOT_CRAN"), "true")) return()
+if (!isTRUE(as.logical(Sys.getenv("CI")))) return()
 if (getRversion() < "3.5.0") return()
 
 httpbin <- webfakes::new_app_process(webfakes::httpbin_app())
