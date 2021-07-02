@@ -167,7 +167,7 @@ block_callback <- function(top_line = TRUE) {
       state <<- "OK"
       test_running <<- FALSE
       NA_character_
-    } else if (grepl("^\\s+ERROR", x)) {
+    } else if (grepl("^\\s(\\[[0-9/ms]+\\]+)?\\s*ERROR", x)) {
       state <<- "ERROR"
       test_running <<- FALSE
       NA_character_
