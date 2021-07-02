@@ -231,8 +231,8 @@ parse_version <- function(entries) {
 #' @seealso \code{\link{parse_check}}
 #' @export
 
-parse_check_url <- function(url, quiet = TRUE) {
-  parse_check(text = download_file(url, quiet = quiet))
+parse_check_url <- function(url, quiet = FALSE) {
+  parse_check(text = download_file_lines(url, quiet = quiet))
 }
 
 find_check_file <- function(file) {

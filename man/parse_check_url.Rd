@@ -4,7 +4,7 @@
 \alias{parse_check_url}
 \title{Shorthand to parse R CMD check results from a URL}
 \usage{
-parse_check_url(url, quiet = TRUE)
+parse_check_url(url, quiet = FALSE)
 }
 \arguments{
 \item{url}{URL to parse the results from. Note that it should

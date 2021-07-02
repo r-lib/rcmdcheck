@@ -7,16 +7,12 @@ win2unix <- function(str) {
   gsub("\r\n", "\n", str, fixed = TRUE, useBytes = TRUE)
 }
 
-#' @importFrom utils download.file
-
-download_file <- function(url, quiet = TRUE) {
-  download.file(url, tmp <- tempfile(), quiet = quiet)
-  on.exit(unlink(tmp), add = TRUE)
-  readLines(tmp, warn = FALSE)
-}
-
 is_string <- function(x) {
   is.character(x) && length(x) == 1 && !is.na(x)
+}
+
+is_count <- function(x) {
+  is.numeric(x) && length(x) == 1 && !is.na(x) && round(x) == x
 }
 
 `%notin%` <- function(needle, haystack) {
