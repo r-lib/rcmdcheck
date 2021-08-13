@@ -1,6 +1,8 @@
 
 read_char <- function(path, ...) {
-  readChar(path, nchars = file.info(path)$size, ...)
+  enc2utf8(
+    readChar(path, nchars = file.info(path)$size, useBytes = TRUE, ...)
+  )
 }
 
 win2unix <- function(str) {
