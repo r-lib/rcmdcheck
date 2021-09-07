@@ -1,6 +1,10 @@
 
 # dev
 
+* `print.rcmdcheck()` now has a `test_output` argument and
+  `rcmdcheck.test_output` global option, to control whether to print the full
+  test output or not. (#121)
+
 # 1.3.3
 
 * `cran_check_results()` has now a `quiet` argument, and the download
