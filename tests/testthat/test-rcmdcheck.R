@@ -62,6 +62,8 @@ test_that("rcmdcheck works", {
   expect_match(det$description, "^Package: badpackage")
   det$description <- NULL
 
+  det$platform <- "x86_64-apple-darwin17.0"
+
   expect_snapshot(det)
 
   ## This currently fails with rcmdcheck() (why?), so it also fails GHA
