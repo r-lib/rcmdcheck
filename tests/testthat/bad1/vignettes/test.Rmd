@@ -14,7 +14,7 @@ doloribus occaecati error. Alias rerum voluptas illo esse et
 rerum. Officiis aut et eligendi quia quo. Culpa inventore dicta soluta
 debitis ex.
 
-```{r}
+```{r dev = "svglite"}
 outfile <- Sys.getenv("RCMDBUILD_OUTPUT", "")
 if (nzchar(outfile)) saveRDS(.libPaths(), outfile)
 ```
