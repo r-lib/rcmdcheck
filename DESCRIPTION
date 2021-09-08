@@ -15,6 +15,7 @@ BugReports: https://github.com/r-Lib/rcmdcheck/issues
 Imports:
     callr (>= 3.1.1.9000),
     cli (>= 3.0.0),
+    crayon,
     curl,
     desc (>= 1.2.0),
     digest,
