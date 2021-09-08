@@ -33,6 +33,7 @@ Suggests:
     mockery,
     ps,
     rmarkdown,
+    svglite,
     testthat,
     webfakes
 Encoding: UTF-8
