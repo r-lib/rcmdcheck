@@ -23,6 +23,9 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         id: install-r
 
+      - name: Install TinyTeX
+        uses: r-lib/actions/setup-tinytex@v1
+
       - name: Install pak and query dependencies
         run: |
           install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")

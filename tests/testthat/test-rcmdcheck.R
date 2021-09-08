@@ -62,8 +62,6 @@ test_that("rcmdcheck works", {
   expect_match(det$description, "^Package: badpackage")
   det$description <- NULL
 
-  expect_snapshot(det)
-
   ## This currently fails with rcmdcheck() (why?), so it also fails GHA
   skip_on_ci()
   expect_s3_class(si, "session_info")
