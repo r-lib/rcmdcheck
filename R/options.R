@@ -57,6 +57,11 @@
 #'   It not set, then the default of cli is uesed. The corresponding
 #'   environment variable is `RCMDCHECK_NUM_COLORS`.
 #'
+#' * `rcmdcheck.test_output`: Flag (`TRUE` or `FALSE`), whether
+#'   [print.rcmdcheck()] should print the full test output if there are
+#'   no test failures. If some tests fail, then only the failures are
+#'   printed, independently of this option.
+#'
 #' * `rcmdcheck.timestamp_limit`: lower limit is seconds, above which
 #'   rcmdcheck adds time stamps to the individual check steps. It may be
 #'   fractional. Defaults to 1/3 of a second. The corresponding environment

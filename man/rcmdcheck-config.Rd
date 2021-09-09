@@ -54,6 +54,10 @@ is only used for the output of rcmdcheck and it does not affect the
 examples and test cases (and other code) of the checked package.
 It not set, then the default of cli is uesed. The corresponding
 environment variable is \code{RCMDCHECK_NUM_COLORS}.
+\item \code{rcmdcheck.test_output}: Flag (\code{TRUE} or \code{FALSE}), whether
+\code{\link[=print.rcmdcheck]{print.rcmdcheck()}} should print the full test output if there are
+no test failures. If some tests fail, then only the failures are
+printed, independently of this option.
 \item \code{rcmdcheck.timestamp_limit}: lower limit is seconds, above which
 rcmdcheck adds time stamps to the individual check steps. It may be
 fractional. Defaults to 1/3 of a second. The corresponding environment

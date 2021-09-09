@@ -2,8 +2,9 @@
 #' Print R CMD check results
 #' @param x Check result object to print.
 #' @param header Whether to print a header.
-#' @param test_output if `TRUE`, include the test output in the results, even
-#'   if there are no test failures.
+#' @param test_output if `TRUE`, include the test output in the results,
+#'   if there are no test failures. If some tests fail, then only the
+#'   failures are printed.
 #' @param ... Additional arguments, currently ignored.
 #' @export
 #' @importFrom cli symbol

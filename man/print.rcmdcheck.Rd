@@ -16,8 +16,9 @@
 
 \item{header}{Whether to print a header.}
 
-\item{test_output}{if \code{TRUE}, include the test output in the results, even
-if there are no test failures.}
+\item{test_output}{if \code{TRUE}, include the test output in the results,
+if there are no test failures. If some tests fail, then only the
+failures are printed.}
 
 \item{...}{Additional arguments, currently ignored.}
 }
