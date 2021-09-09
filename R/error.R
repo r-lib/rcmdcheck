@@ -1,6 +1,4 @@
 
-#' @importFrom crayon yellow red underline
-
 report_system_error <- function(msg, status) {
 
   if (status$status == 0) return()

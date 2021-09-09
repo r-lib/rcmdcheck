@@ -5,7 +5,7 @@ Version: 1.0.0
 Author: Gabor Csardi
 Maintainer: Gabor Csardi <gcsardi@mango-solutions.com>
 Description: Give advice about good practices when building R packages.
-License: Public domain
+License: GPL
 Suggests:
     testthat,
     knitr,
@@ -15,3 +15,4 @@ RoxygenNote: 6.1.0
 Repository: CRAN
 Encoding: UTF-8
 VignetteBuilder: knitr
+Config/build/clean-inst-doc: FALSE

@@ -77,14 +77,10 @@ header_line <- function(left = "", right = "",
   substring(res, 1, width)
 }
 
-#' @importFrom crayon cyan
-
 cat_head <- function(left, right = "", style = cyan) {
   str <- header_line(left, right)
   cat_line(str, style = style)
 }
-
-#' @importFrom crayon red make_style
 
 print_entry <- function(entry, entry_style) {
 
@@ -123,8 +119,6 @@ print.rcmdcheck_summary <- function(x, ..., line = TRUE) {
   summary_entry(object, "notes")
   cat("\n")
 }
-
-#' @importFrom crayon green red
 
 summary_entry <- function(x, name) {
 

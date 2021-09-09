@@ -7,7 +7,7 @@
 cran_check_results(
   package,
   flavours = cran_check_flavours(package),
-  quiet = TRUE
+  quiet = FALSE
 )
 }
 \arguments{

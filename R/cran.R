@@ -20,13 +20,13 @@ cran_check_flavours <- function(package = NULL) {
 
   if (is.null(package)) return(cran_check_flavours_generic())
 
-  url <- paste0(
-    "https://cran.r-project.org/web/checks/check_results_",
-    package,
-    ".html"
+  base <- Sys.getenv(
+    "RCMDCHECK_BASE_URL",
+    "https://cran.r-project.org/web/checks/"
   )
+  url <- paste0(base, "check_results_", package, ".html")
 
-  html <- download_file(url)
+  html <- download_file_lines(url)
 
   fl_rows <- grep(
     "<tr> <td>  <a href=\"check_flavors.html#",
@@ -43,8 +43,11 @@ cran_check_flavours <- function(package = NULL) {
 }
 
 cran_check_flavours_generic <- function() {
-  url <- "https://cran.r-project.org/web/checks/check_flavors.html"
-  html <- download_file(url)
+  url <- Sys.getenv(
+    "RCMDCHECK_FLAVOURS_URL",
+    "https://cran.r-project.org/web/checks/check_flavors.html"
+  )
+  html <- download_file_lines(url)
 
   fl_rows <- grep(
     "^<tr id=\"[-a-z0-9_]+\"> <td> ",
@@ -72,18 +75,21 @@ cran_check_flavours_generic <- function() {
 
 cran_check_results <- function(package,
                                flavours = cran_check_flavours(package),
-                               quiet = TRUE) {
+                               quiet = FALSE) {
 
   stopifnot(is_string(package))
 
-  urls <- paste0(
-    "https://www.r-project.org/nosvn/R.check/",
-    flavours, "/", package,
-    "-00check.txt"
+  base <- Sys.getenv(
+    "RCMDCHECK_DETAILS_URL",
+    "https://www.r-project.org/nosvn/R.check/"
   )
+  urls <- paste0(base, flavours, "/", package, "-00check.txt")
+
+  tmp <- paste0(tempfile(), "-", seq_along(urls))
+  download_files(urls, tmp, quiet = FALSE)
 
   structure(
-    lapply(urls, parse_check_url, quiet = quiet),
+    lapply(tmp, parse_check),
     names = flavours,
     package = package,
     class = "rmcdcheck_cran_results"

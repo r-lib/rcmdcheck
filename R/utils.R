@@ -4,19 +4,15 @@ read_char <- function(path, ...) {
 }
 
 win2unix <- function(str) {
-  gsub("\r\n", "\n", str, fixed = TRUE)
-}
-
-#' @importFrom utils download.file
-
-download_file <- function(url, quiet = TRUE) {
-  download.file(url, tmp <- tempfile(), quiet = quiet)
-  on.exit(unlink(tmp), add = TRUE)
-  readLines(tmp, warn = FALSE)
+  gsub("\r\n", "\n", str, fixed = TRUE, useBytes = TRUE)
 }
 
 is_string <- function(x) {
   is.character(x) && length(x) == 1 && !is.na(x)
+}
+
+is_count <- function(x) {
+  is.numeric(x) && length(x) == 1 && !is.na(x) && round(x) == x
 }
 
 `%notin%` <- function(needle, haystack) {
@@ -111,13 +107,11 @@ get_install_out <- function(path) {
   }
 }
 
-#' @importFrom crayon col_nchar
-
-col_align <- function(text, width = getOption("width"),
+col_align <- function(text, width = cli::console_width(),
                       align = c("left", "center", "right")) {
 
   align <- match.arg(align)
-  nc <- col_nchar(text)
+  nc <- cli::ansi_nchar(text, type = "width")
 
   if (width <= nc) {
     text
@@ -163,4 +157,26 @@ cat_line <- function(..., style = NULL) {
 
 duration <- function(start) {
   as.double(Sys.time() - start, units = "secs")
+}
+
+as_integer <- function(x) {
+  suppressWarnings(as.integer(x))
+}
+
+YES_WORDS <- c("true",  "yes", "on",  "1", "yep",  "yeah")
+NO_WORDS  <- c("false", "no",  "off", "0", "nope", "nah")
+
+as_flag <- function(x, default = FALSE, name = "") {
+  x1 <- trimws(tolower(x))
+  if (is.na(x1)) return(default)
+  if (x1 %in% YES_WORDS) return(TRUE)
+  if (x1 %in% NO_WORDS) return(FALSE)
+  warning(
+    "Invalid ",
+    if (nchar(name)) paste0(encodeString(name, quote = "`"), " "),
+    "option value: ",
+    encodeString(x, quote = "`"),
+    ", must be TRUE or FALSE"
+  )
+  default
 }

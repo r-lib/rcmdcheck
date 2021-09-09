@@ -24,8 +24,12 @@ block_callback <- function(top_line = TRUE) {
   }
 
   time_if_long <- function() {
+    limit <- as.numeric(getOption(
+      "rcmdcheck.timestamp_limit",
+      Sys.getenv("RCMDCHECK_TIMESTAMP_LIMIT", "0.33333")
+    ))
     elapsed <- now - line_started
-    if (elapsed> as.difftime(1/3, units = "secs")) {
+    if (elapsed> as.difftime(limit, units = "secs")) {
       style(timing = paste0(" (", pretty_dt(elapsed), ")"))
     } else {
       ""
@@ -75,7 +79,7 @@ block_callback <- function(top_line = TRUE) {
     } else if (grepl(" \\.\\.\\. WARNING\\s*$", x)) {
       state <<- "WARNING"
       style(warn = c("W  ", no(x, "WARNING")))
-    } else if (grepl(" \\.\\.\\. ERROR\\s*$", x)) {
+    } else if (grepl(" \\.\\.\\.\\s*(\\[[0-9ms]+\\])?\\s*ERROR\\s*$", x)) {
       state <<- "ERROR"
       style(err = c("E  ", no(x, "ERROR")))
     } else if (grepl("^\\* checking tests \\.\\.\\.[ ]?$", x)) {
@@ -167,7 +171,7 @@ block_callback <- function(top_line = TRUE) {
       state <<- "OK"
       test_running <<- FALSE
       NA_character_
-    } else if (grepl("^\\s+ERROR", x)) {
+    } else if (grepl("^\\s(\\[[0-9/ms]+\\]+)?\\s*ERROR", x)) {
       state <<- "ERROR"
       test_running <<- FALSE
       NA_character_
@@ -236,11 +240,11 @@ to_status <- function(x) {
 }
 
 is_new_check <- function(x) {
-  grepl("^\\* ", x)
+  grepl("^\\*\\*? ", x)
 }
 
 simple_callback <- function(top_line = TRUE) {
-  function(x) cat(gsub("[\r\n]+", "\n", x))
+  function(x) cat(gsub("[\r\n]+", "\n", x, useBytes = TRUE))
 }
 
 detect_callback <- function() {

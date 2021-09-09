@@ -50,9 +50,21 @@ test_that("rcmdcheck works", {
   lp2 <- readRDS(tmp_out2)
   expect_true(tmp_lib %in% normalizePath(lp2, mustWork = FALSE))
 
+  ## check_details. Need to remove non-deterministic parts
+  det <- check_details(bad1)
+  si <- det$session_info
+  det$session_info <- NULL
+
+  expect_true(file.exists(det$checkdir))
+  expect_true(file.info(det$checkdir)$isdir)
+  det$checkdir <- NULL
+
+  expect_match(det$description, "^Package: badpackage")
+  det$description <- NULL
+
   ## This currently fails with rcmdcheck() (why?), so it also fails GHA
   skip_on_ci()
-  expect_s3_class(bad1$session_info, "session_info")
+  expect_s3_class(si, "session_info")
 })
 
 test_that("background gives same results", {
@@ -78,6 +90,9 @@ test_that("background gives same results", {
   bad1 <- rcmdcheck_process$new(
      test_path("bad1"),
      libpath = c(tmp_lib, .libPaths()))
+  # If we read out the output, it'll still save it internally
+  bad1$read_output()
+  bad1$read_error()
   bad1$read_all_output_lines()
   res <- bad1$parse_results()
 
