@@ -5,6 +5,8 @@
 build_package <- function(path, tmpdir, build_args, libpath, quiet) {
   path <- normalizePath(path)
 
+  check_for_tilde_file(path)
+
   dir.create(tmpdir, recursive = TRUE, showWarnings = FALSE)
   tmpdir <- normalizePath(tmpdir)
 
@@ -49,5 +51,17 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
       file.copy(path, dest, overwrite = TRUE)
     }
     dest
+  }
+}
+
+check_for_tilde_file <- function(path) {
+  lst <- dir(path)
+  if ("~" %in% lst) {
+    stop(
+      "This package contains a file or directory named `~`. ",
+      "Because of a bug in older R versions (before R 4.0.0), ",
+      "building this package might delete your entire home directory!",
+      "It is best to (carefully!) remove the file. rcmdcehck will exit now."
+    )
   }
 }
