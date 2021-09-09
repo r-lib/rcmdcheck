@@ -12,7 +12,12 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
     if (!quiet) cat_head("R CMD build")
     with_envvar(
       c("R_LIBS_USER" = paste(libpath, collapse = .Platform$path.sep)), {
-        proc <- pkgbuild_process$new(path, tmpdir, args = build_args)
+        proc <- pkgbuild_process$new(
+          path,
+          tmpdir,
+          args = build_args,
+          manual = TRUE
+        )
         on.exit(proc$kill(), add = TRUE)
         callback <- detect_callback()
         while (proc$is_incomplete_output() ||
