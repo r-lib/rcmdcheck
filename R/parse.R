@@ -41,7 +41,7 @@ new_rcmdcheck <- function(stdout,
 
       checkdir    = checkdir,
       test_fail = test_fail %||% get_test_fail(checkdir),
-      test_output = get_test_output(checkdir, pattern = "\\.Rout$"),
+      test_output = get_test_output(checkdir, pattern = "\\.Rout"),
       install_out = get_install_out(checkdir)
     ),
     class = "rcmdcheck"
@@ -78,12 +78,12 @@ parse_checkdir <- function(entries) {
   )
 }
 get_test_fail <- function(path) {
-  get_test_output(path, pattern = "\\.Rout\\.fail$")
+  get_test_output(path, pattern = "\\.Rout\\.fail")
 }
 
 get_test_output <- function(path, pattern) {
   test_path <- file.path(path, dir(path, pattern = "^tests"))
-  paths <- dir(test_path, pattern, full.names = TRUE)
+  paths <- dir(test_path, paste0(pattern, "$"), full.names = TRUE)
 
   test_dirs <- basename(dirname(paths))
   rel_paths <- ifelse(
