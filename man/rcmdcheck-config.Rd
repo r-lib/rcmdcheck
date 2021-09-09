@@ -39,6 +39,9 @@ option is \code{rcmdcheck.num_colors}.
 rcmdcheck adds time stamps to the individual check steps. It may be
 fractional. Defaults to 1/3 of a second. The corresponding option is
 \code{rcmdcheck.timestamp_limit}.
+\item \code{RSTUDIO_PANDOC}: if set, rcmdcheck adds this environment variable
+to the PATH if pandoc is not on the PATH already. It is usually set
+in RStudio.
 }
 }
 

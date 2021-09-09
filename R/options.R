@@ -43,6 +43,10 @@
 #'   fractional. Defaults to 1/3 of a second. The corresponding option is
 #'   `rcmdcheck.timestamp_limit`.
 #'
+#' * `RSTUDIO_PANDOC`: if set, rcmdcheck adds this environment variable
+#'   to the PATH if pandoc is not on the PATH already. It is usually set
+#'   in RStudio.
+#'
 #' # Options
 #'
 #' * `rcmdcheck.num_colors`: the number of ANSI colors to use in the output.

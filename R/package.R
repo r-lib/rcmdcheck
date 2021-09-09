@@ -50,7 +50,7 @@ NULL
 #'
 #' @export
 #' @importFrom rprojroot find_package_root_file
-#' @importFrom withr with_dir
+#' @importFrom withr local_path with_dir
 #' @importFrom callr rcmd_safe
 #' @importFrom desc desc
 
@@ -73,6 +73,11 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
     cleanup <- TRUE
   } else {
     cleanup <- FALSE
+  }
+
+  # Add pandoc to the PATH, for R CMD build and R CMD check
+  if (!nzchar(Sys.which("pandoc")) && nzchar(Sys.getenv("RSTUDIO_PANDOC"))) {
+    local_path(Sys.getenv("RSTUDIO_PANDOC"))
   }
 
   targz <- build_package(path, check_dir, build_args = build_args,

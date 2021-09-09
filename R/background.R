@@ -130,6 +130,12 @@ rcc_init <- function(self, private, super, path, args, build_args,
     cleanup <- FALSE
   }
 
+  # Add pandoc to the PATH for R CMD build.
+  # The updated PATH is also inherited in the subprocess below.
+  if (!nzchar(Sys.which("pandoc")) && nzchar(Sys.getenv("RSTUDIO_PANDOC"))) {
+    local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  }
+
   targz <- build_package(path, check_dir, build_args = build_args,
                          libpath = libpath, quiet = TRUE)
 
