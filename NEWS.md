@@ -5,6 +5,9 @@
   `rcmdcheck.test_output` global option, to control whether to print the full
   test output or not. (#121)
 
+* RStudio's Pandoc is now on the path during `rcmdcheck()` 
+  and `rcmdcheck_process` (#109, #132, @dpprdan).
+
 # 1.3.3
 
 * `cran_check_results()` has now a `quiet` argument, and the download

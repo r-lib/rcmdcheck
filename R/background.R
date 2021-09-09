@@ -130,6 +130,12 @@ rcc_init <- function(self, private, super, path, args, build_args,
     cleanup <- FALSE
   }
 
+  # Add pandoc to the PATH for R CMD build.
+  # The updated PATH is also inherited in the subprocess below.
+  if (!nzchar(Sys.which("pandoc")) && nzchar(Sys.getenv("RSTUDIO_PANDOC"))) {
+    local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  }
+
   targz <- build_package(path, check_dir, build_args = build_args,
                          libpath = libpath, quiet = TRUE)
 
@@ -147,7 +153,8 @@ rcc_init <- function(self, private, super, path, args, build_args,
     cmdargs = c(basename(targz), args),
     libpath = libpath,
     repos = repos,
-    user_profile = TRUE
+    user_profile = TRUE,
+    stderr = "2>&1"
   )
 
   with_envvar(
@@ -166,8 +173,8 @@ rcc_parse_results <- function(self, private) {
   if (self$is_alive()) stop("Process still alive")
 
   ## Make sure all output is read out
-  self$read_output_lines()
-  self$read_error_lines()
+  if (self$has_output_connection()) self$read_output_lines()
+  if (self$has_error_connection()) self$read_error_lines()
 
   on.exit(unlink(private$tempfiles, recursive = TRUE), add = TRUE)
 
