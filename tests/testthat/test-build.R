@@ -26,3 +26,11 @@ test_that("different packages in the same dir are fine", {
   expect_equal(readLines(res), "baz")
   expect_equal(readLines(f1), "foobar")
 })
+
+test_that("protection against ~ deletion", {
+  mockery::stub(check_for_tilde_file, "dir", c("foo", "~", "bar"))
+  expect_error(
+    check_for_tilde_file(tempfile()),
+    "delete your entire home directory"
+  )
+})
