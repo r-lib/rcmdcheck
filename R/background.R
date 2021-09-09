@@ -153,7 +153,8 @@ rcc_init <- function(self, private, super, path, args, build_args,
     cmdargs = c(basename(targz), args),
     libpath = libpath,
     repos = repos,
-    user_profile = TRUE
+    user_profile = TRUE,
+    stderr = "2>&1"
   )
 
   with_envvar(
@@ -172,8 +173,8 @@ rcc_parse_results <- function(self, private) {
   if (self$is_alive()) stop("Process still alive")
 
   ## Make sure all output is read out
-  self$read_output_lines()
-  self$read_error_lines()
+  if (self$has_output_connection()) self$read_output_lines()
+  if (self$has_error_connection()) self$read_error_lines()
 
   on.exit(unlink(private$tempfiles, recursive = TRUE), add = TRUE)
 
