@@ -2,7 +2,7 @@
 # dev
 
 * RStudio's Pandoc is now on the path during `rcmdcheck()` 
-  (#109, #132, @dpprdan).
+  and `rcmdcheck_process` (#109, #132, @dpprdan).
 
 # 1.3.3
 
