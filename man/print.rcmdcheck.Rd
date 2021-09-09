@@ -4,12 +4,21 @@
 \alias{print.rcmdcheck}
 \title{Print R CMD check results}
 \usage{
-\method{print}{rcmdcheck}(x, header = TRUE, ...)
+\method{print}{rcmdcheck}(
+  x,
+  header = TRUE,
+  test_output = getOption("rcmdcheck.test_output", FALSE),
+  ...
+)
 }
 \arguments{
 \item{x}{Check result object to print.}
 
 \item{header}{Whether to print a header.}
+
+\item{test_output}{if \code{TRUE}, include the test output in the results,
+if there are no test failures. If some tests fail, then only the
+failures are printed.}
 
 \item{...}{Additional arguments, currently ignored.}
 }

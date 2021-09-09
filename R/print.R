@@ -2,12 +2,15 @@
 #' Print R CMD check results
 #' @param x Check result object to print.
 #' @param header Whether to print a header.
+#' @param test_output if `TRUE`, include the test output in the results,
+#'   if there are no test failures. If some tests fail, then only the
+#'   failures are printed.
 #' @param ... Additional arguments, currently ignored.
 #' @export
 #' @importFrom cli symbol
 #' @importFrom prettyunits pretty_sec
 
-print.rcmdcheck <- function(x, header = TRUE, ...) {
+print.rcmdcheck <- function(x, header = TRUE, test_output = getOption("rcmdcheck.test_output", FALSE), ...) {
 
   if (header) {
     cat_head("R CMD check results", paste(x$package, x$version))
@@ -39,6 +42,15 @@ print.rcmdcheck <- function(x, header = TRUE, ...) {
     cat_line()
     cat(x$test_fail[[fail]])
     cat_line()
+  }
+
+  if (isTRUE(test_output)) {
+    for (name in names(x$test_output)) {
+      cat_head("Test results", name)
+      cat_line()
+      cat(x$test_output[[name]])
+      cat_line()
+    }
   }
 
   print(summary(x, ...), line = FALSE)
