@@ -136,6 +136,8 @@ rcc_init <- function(self, private, super, path, args, build_args,
     local_path(Sys.getenv("RSTUDIO_PANDOC"))
   }
 
+  pkgbuild::local_build_tools()
+
   targz <- build_package(path, check_dir, build_args = build_args,
                          libpath = libpath, quiet = TRUE)
 
