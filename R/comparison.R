@@ -65,7 +65,6 @@ install_failed <- function(stdout) {
 #'   printout.
 #' @param ... Additional arguments, currently ignored.
 #' @export
-#' @importFrom crayon red green bold
 
 print.rcmdcheck_comparison <- function(x, header = TRUE, ...) {
   if (header) {

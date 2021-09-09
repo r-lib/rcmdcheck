@@ -107,13 +107,11 @@ get_install_out <- function(path) {
   }
 }
 
-#' @importFrom crayon col_nchar
-
-col_align <- function(text, width = getOption("width"),
+col_align <- function(text, width = cli::console_width(),
                       align = c("left", "center", "right")) {
 
   align <- match.arg(align)
-  nc <- col_nchar(text)
+  nc <- cli::ansi_nchar(text, type = "width")
 
   if (width <= nc) {
     text
@@ -159,4 +157,8 @@ cat_line <- function(..., style = NULL) {
 
 duration <- function(start) {
   as.double(Sys.time() - start, units = "secs")
+}
+
+as_integer <- function(x) {
+  suppressWarnings(as.integer(x))
 }

@@ -27,3 +27,7 @@ reference:
   - compare_checks
   - compare_to_cran
   - print.rcmdcheck_comparison
+
+- title: Configuration
+  contents:
+  - rcmdcheck-config
