@@ -1,6 +1,31 @@
 
 # dev
 
+* `cran_check_results()` now downloads results in parallel, so it is
+  much faster.
+
+* `rcmdcheck_process` now redirects the standard error to the standard
+  output, to make sure that they are correctly interleaved (#148).
+
+* rcmdcheck now puts Rtools on the PATH, via pkgbuild (#111).
+
+* rcmdcheck now builds the manual when building the package, if it is
+  needed for `\Sexpr{}` expressions (#137).
+
+* This version fixes a rare race condition that made rcmdcheck fail (#139).
+
+* rcmdcheck now safeguards against R deleting the user's home directory
+  via an `R CMD build` bug (#120).
+
+* rcmdcheck can now ignore files in `inst/doc` when building a package.
+  See the `Config/build/clean-inst-doc` package option in
+  `?"rcmdcheck-config"` (#130).
+
+* It is now possible to turn on/off ANSI colors for rcmdcheck only,
+  without affecting the checked package. See `?"rcmdcheck-config" and the
+  `RCMDCHECK_NUM_COLORS` environment variable and the `rcmdcheck.num_colors`
+  option (#119, @jimhester).
+
 * `print.rcmdcheck()` now has a `test_output` argument and
   `rcmdcheck.test_output` global option, to control whether to print the full
   test output or not. (#121)
