@@ -15,7 +15,9 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
         proc <- pkgbuild_process$new(path, tmpdir, args = build_args)
         on.exit(proc$kill(), add = TRUE)
         callback <- detect_callback()
-        while (proc$is_incomplete_output() || proc$is_incomplete_error()) {
+        while (proc$is_incomplete_output() ||
+               proc$is_incomplete_error()
+               || proc$is_alive()) {
           proc$poll_io(-1)
           out <- proc$read_output()
           err <- proc$read_error()
