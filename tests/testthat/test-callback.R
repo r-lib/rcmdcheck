@@ -9,6 +9,7 @@ test_that("block_callback by line", {
 })
 
 test_that("block_callback by chunks", {
+  withr::local_options(rcmdcheck.timestamp_limit = 1000)
   fx <- test_path("fixtures", "test-error.txt")
   chk <- readChar(fx, file.info(fx)$size, useBytes = TRUE)
 
@@ -41,6 +42,7 @@ test_that("block_callback shows running time", {
 })
 
 test_that("notes, errors, warnings", {
+  withr::local_options(rcmdcheck.timestamp_limit = 1000)
   cb <- block_callback()
   out <- c(
     "* Step one ... NOTE\n   More note text.\n",
@@ -53,6 +55,7 @@ test_that("notes, errors, warnings", {
 })
 
 test_that("tests", {
+  withr::local_options(rcmdcheck.timestamp_limit = 1000)
   txt <- c(
     "* checking for unstated dependencies in 'tests' ... OK",
     "* checking tests ... ERROR",
@@ -80,6 +83,7 @@ test_that("tests", {
 })
 
 test_that("multi-arch tests", {
+  withr::local_options(rcmdcheck.timestamp_limit = 1000)
   txt <- c(
     "* checking for unstated dependencies in 'tests' ... OK",
     "* checking tests ...",
