@@ -162,3 +162,21 @@ duration <- function(start) {
 as_integer <- function(x) {
   suppressWarnings(as.integer(x))
 }
+
+YES_WORDS <- c("true",  "yes", "on",  "1", "yep",  "yeah")
+NO_WORDS  <- c("false", "no",  "off", "0", "nope", "nah")
+
+as_flag <- function(x, default = FALSE, name = "") {
+  x1 <- trimws(tolower(x))
+  if (is.na(x1)) return(default)
+  if (x1 %in% YES_WORDS) return(TRUE)
+  if (x1 %in% NO_WORDS) return(FALSE)
+  warning(
+    "Invalid ",
+    if (nchar(name)) paste0(encodeString(name, quote = "`"), " "),
+    "option value: ",
+    encodeString(x, quote = "`"),
+    ", must be TRUE or FALSE"
+  )
+  default
+}

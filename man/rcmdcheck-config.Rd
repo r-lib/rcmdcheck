@@ -11,6 +11,10 @@ the \code{RCMDCHECK_NUM_COLORS} environment variables and the
 \details{
 rcmdcheck uses the cli package for much of its output, so you can
 configure the output via cli, see \link[cli:cli-config]{cli::cli-config}.
+
+Package configration is defined in the \code{DESCRIPTION} file of the checked
+package. E.g.:\preformatted{Config/build/clean-inst-doc: FALSE
+}
 }
 \section{Environment variables}{
 \itemize{
@@ -33,13 +37,33 @@ It not set, then the default of cli is uesed. The corresponding
 option is \code{rcmdcheck.num_colors}.
 \item \code{RCMDCHECK_TIMESTAMP_LIMIT}: lower limit is seconds, above which
 rcmdcheck adds time stamps to the individual check steps. It may be
-fractional. Defaults to 1/3 of a second.
+fractional. Defaults to 1/3 of a second. The corresponding option is
+\code{rcmdcheck.timestamp_limit}.
 }
 }
 
 \section{Options}{
 \itemize{
-\item \code{rcmdcheck.num_colors}
+\item \code{rcmdcheck.num_colors}: the number of ANSI colors to use in the output.
+It can be used to override the number of colors detected or configured
+by the cli package. See \code{\link[cli:num_ansi_colors]{cli::num_ansi_colors()}}. This configuration
+is only used for the output of rcmdcheck and it does not affect the
+examples and test cases (and other code) of the checked package.
+It not set, then the default of cli is uesed. The corresponding
+environment variable is \code{RCMDCHECK_NUM_COLORS}.
+\item \code{rcmdcheck.timestamp_limit}: lower limit is seconds, above which
+rcmdcheck adds time stamps to the individual check steps. It may be
+fractional. Defaults to 1/3 of a second. The corresponding environment
+variable is \code{RCMDCHECK_TIMESTAMP_LIMIT}.
+}
+}
+
+\section{Package configuration:}{
+\itemize{
+\item \code{Config/build/clean-inst-doc}: Flag (\code{TRUE} or \code{FALSE}) to
+specify if the \code{inst/doc} directory should be cleaned up when
+building a package directory. If not specified, then \code{NULL} is used.
+See the \code{clean_doc} option of \code{\link[pkgbuild:build]{pkgbuild::build()}} for more details.
 }
 }
 
