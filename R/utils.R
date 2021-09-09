@@ -107,7 +107,7 @@ get_install_out <- function(path) {
   }
 }
 
-col_align <- function(text, width = getOption("width"),
+col_align <- function(text, width = cli::console_width(),
                       align = c("left", "center", "right")) {
 
   align <- match.arg(align)
