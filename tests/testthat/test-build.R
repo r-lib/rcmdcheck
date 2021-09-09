@@ -34,3 +34,13 @@ test_that("protection against ~ deletion", {
     "delete your entire home directory"
   )
 })
+
+test_that("inst/doc can be kept", {
+  bad3 <- test_path("bad3")
+  rubbish <- test_path("bad3", "inst", "doc", "rubbish")
+  on.exit(unlink(test_path("bad3", "inst"), recursive = TRUE), add = TRUE)
+  dir.create(dirname(rubbish), showWarnings = FALSE, recursive = TRUE)
+  cat("DELETE ME!\n", file = rubbish)
+  pkg <- build_package(bad3, tempfile(), character(), .libPaths(), TRUE)
+  expect_true(file.exists(rubbish))
+})

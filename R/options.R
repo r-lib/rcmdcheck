@@ -7,7 +7,13 @@
 #'
 #' rcmdcheck uses the cli package for much of its output, so you can
 #' configure the output via cli, see [cli::cli-config].
-#' 
+#'
+#' Package configration is defined in the `DESCRIPTION` file of the checked
+#' package. E.g.:
+#' ```
+#' Config/build/clean-inst-doc: FALSE
+#' ```
+#'
 #' # Environment variables
 #'
 #' * `R_PROFILE_USER`: standard R environment variable to configure the
@@ -19,11 +25,11 @@
 #'
 #' * `RCMDCHECK_DETAILS_URL`: URL to the root of the CRAN check output
 #'   page. Defaults to `https://www.r-project.org/nosvn/R.check/`.
-#' 
+#'
 #' * `RCMDCHECK_FLAVOURS_URL` URL to the CRAN check flavours page.
 #'   You can use this to select an alternative CRAN mirror. Defaults to
 #'   `https://cran.r-project.org/web/checks/check_flavors.html`.
-#' 
+#'
 #' * `RCMDCHECK_NUM_COLORS`: the number of ANSI colors to use in the output.
 #'   It can be used to override the number of colors detected or configured
 #'   by the cli package. See [cli::num_ansi_colors()]. This configuration
@@ -36,7 +42,7 @@
 #'   rcmdcheck adds time stamps to the individual check steps. It may be
 #'   fractional. Defaults to 1/3 of a second. The corresponding option is
 #'   `rcmdcheck.timestamp_limit`.
-#' 
+#'
 #' # Options
 #'
 #' * `rcmdcheck.num_colors`: the number of ANSI colors to use in the output.
@@ -51,6 +57,13 @@
 #'   rcmdcheck adds time stamps to the individual check steps. It may be
 #'   fractional. Defaults to 1/3 of a second. The corresponding environment
 #'   variable is `RCMDCHECK_TIMESTAMP_LIMIT`.
+#'
+#' # Package configuration:
+#'
+#' * `Config/build/clean-inst-doc`: Flag (`TRUE` or `FALSE`) to
+#'   specify if the `inst/doc` directory should be cleaned up when
+#'   building a package directory. If not specified, then `NULL` is used.
+#'   See the `clean_doc` option of [pkgbuild::build()] for more details.
 #'
 #' @name rcmdcheck-config
 NULL
