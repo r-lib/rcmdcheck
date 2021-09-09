@@ -12,20 +12,10 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
 
   if (file.info(path)$isdir) {
     if (!quiet) cat_head("R CMD build")
-
-    desc <- desc(path)
-    clean_doc <- as_flag(desc$get("Config/build/clean-inst-doc"), NULL)
-
     with_envvar(
       c("R_LIBS_USER" = paste(libpath, collapse = .Platform$path.sep)), {
-        proc <- pkgbuild_process$new(
-          path,
-          tmpdir,
-          args = build_args,
-          clean_doc = clean_doc
-        )
+        proc <- pkgbuild_process$new(path, tmpdir, args = build_args)
         on.exit(proc$kill(), add = TRUE)
-
         callback <- detect_callback()
         while (proc$is_incomplete_output() || proc$is_incomplete_error()) {
           proc$poll_io(-1)
