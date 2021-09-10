@@ -80,7 +80,7 @@ download_files <- function(urls,
   })
 
 
-  if (getRversion() < "3.5.0") suspendInterrupts <- identity
+  if (getRversion() < "3.6.0") suspendInterrupts <- identity
 
   repeat {
     if (todo == 0) break;
