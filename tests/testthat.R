@@ -1,4 +1,4 @@
 library(testthat)
 library(rcmdcheck)
 
-test_check("rcmdcheck", reporter = "summary")
+test_check("rcmdcheck")
