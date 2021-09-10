@@ -16,7 +16,8 @@ cran_app <- function() {
       webfakes::new_regexp("/web/checks/(?<name>[-.a-zA-Z0-9_+]+)$")
     ),
     function(req, res) {
-      flavour <- req$params$flavour %||% ""
+      flavour <- req$params$flavour
+      if (is.null(flavour)) flavour <- ""
       path <- testthat::test_path("fixtures", "checks", flavour, req$params$name)
       if (file.exists(path)) {
         res$send_file(path)
