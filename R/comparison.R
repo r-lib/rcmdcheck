@@ -67,10 +67,11 @@ install_failed <- function(stdout) {
 #' @export
 
 print.rcmdcheck_comparison <- function(x, header = TRUE, ...) {
+  vers <- sort(package_version(unique(x$versions)))
   if (header) {
     cat_head(
       "R CMD check comparison",
-      paste0(x$package, " ", paste0(x$versions, collapse = " / "))
+      paste0(x$package, " ", paste0(vers, collapse = " / "))
     )
   }
 

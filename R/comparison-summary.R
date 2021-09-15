@@ -18,7 +18,11 @@ print.rcmdcheck_comparison_summary <- function(x, ...) {
     "+" = green(symbol$tick),
     "-" = red(symbol$cross)
   )
-  header <- paste0(sum_status, " ", object$package, " ", object$versions[[1]])
+  vers <- paste(
+    sort(package_version(unique(object$versions))),
+    collapse = " / "
+  )
+  header <- paste0(sum_status, " ", object$package, " ", vers)
 
   cat_line(
     col_align(header, width = 40), " ",
