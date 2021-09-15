@@ -180,3 +180,7 @@ as_flag <- function(x, default = FALSE, name = "") {
   )
   default
 }
+
+no_timing <- function(x) {
+  gsub("\\[[0-9]+s(/[0-9]+s)?\\] ([A-Z]+)", "\\2", x, useBytes = TRUE)
+}

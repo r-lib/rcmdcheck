@@ -133,7 +133,12 @@ as.data.frame.rcmdcheck <- function(x,
 #' @importFrom digest digest
 
 hash_check <- function(check) {
-  cleancheck <- gsub("[^a-zA-Z0-9]", "", first_line(check), useBytes = TRUE)
+  cleancheck <- gsub(
+    "[^a-zA-Z0-9]",
+    "",
+    no_timing(first_line(check)),
+    useBytes = TRUE
+  )
   vapply(cleancheck, digest, "")
 }
 

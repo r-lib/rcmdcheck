@@ -65,3 +65,11 @@ test_that("successful check yields zero rows", {
 
   expect_equal(nrow(df), 0)
 })
+
+test_that("hash_check drops time stamps", {
+  n1 <- "checking R code for possible problems ... [7s/9s] NOTE\nblah"
+  n2 <- "checking R code for possible problems ... [17s] NOTE\nfoo"
+  n3 <- "checking R code for possible problems ... NOTE\nand more"
+  expect_equal(hash_check(n1), hash_check(n2))
+  expect_equal(hash_check(n1), hash_check(n3))
+})
