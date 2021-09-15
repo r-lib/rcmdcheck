@@ -57,6 +57,7 @@ print.rcmdcheck <- function(x, header = TRUE, test_output = getOption("rcmdcheck
 }
 
 make_line <- function(x) {
+  x <- max(0, x)
   paste(rep(symbol$line, x), collapse = "")
 }
 
