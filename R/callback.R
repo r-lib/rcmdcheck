@@ -7,14 +7,15 @@
 #' @importFrom utils head tail
 #' @importFrom prettyunits pretty_dt
 
-block_callback <- function(top_line = TRUE) {
+block_callback <- function(top_line = TRUE, sys_time = NULL) {
 
+  sys_time <- sys_time %||% Sys.time
   partial_line <- ""
 
   state <- "OK"
   test_running <- FALSE
   should_time <- FALSE
-  line_started <- Sys.time()
+  line_started <- sys_time()
   now <- NULL
   prev_line <- ""
 
@@ -29,7 +30,8 @@ block_callback <- function(top_line = TRUE) {
       Sys.getenv("RCMDCHECK_TIMESTAMP_LIMIT", "0.33333")
     ))
     elapsed <- now - line_started
-    if (elapsed> as.difftime(limit, units = "secs")) {
+    line_started <<- now
+    if (elapsed > as.difftime(limit, units = "secs")) {
       style(timing = paste0(" (", pretty_dt(elapsed), ")"))
     } else {
       ""
@@ -39,7 +41,7 @@ block_callback <- function(top_line = TRUE) {
   do_line <- function(x) {
 
     should_time <<- FALSE
-    now <<- Sys.time()
+    now <<- sys_time()
 
     ## Test mode is special. It will change the 'state' back to 'OK',
     ## once it is done.
@@ -141,7 +143,7 @@ block_callback <- function(top_line = TRUE) {
         ## Next test is running now, state unchanged
         xx <- style(ok = symbol$tick, pale = no(prev_line))
         xx <- style(xx, timing = time_if_long())
-        now <<- Sys.time()
+        now <<- sys_time()
       } else {
         ## Should not happen?
         xx <- NA_character_
@@ -164,7 +166,7 @@ block_callback <- function(top_line = TRUE) {
       cat(xx, "\n", sep = "")
       paste0("   ", tr)
     } else if (grepl("^\\s+Running", x)) {
-      now <<- Sys.time()
+      now <<- sys_time()
       test_running <<- TRUE
       NA_character_
     } else if (grepl("^\\s+OK", x)) {

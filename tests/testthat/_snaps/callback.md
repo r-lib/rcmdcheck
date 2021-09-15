@@ -317,3 +317,17 @@
              * checking for unstated dependencies in vignettes ... OK
       
 
+# multiple test file run times are measured properly
+
+    Code
+      out
+    Output
+      [1] "  \r   checking examples ... \r  \rv  checking examples (5s)"                      
+      [2] "\r  \rv  checking for unstated dependencies in ‘tests’    "                        
+      [3] "\r  \r-  checking tests    "                                                       
+      [4] "\r  \r   Running ‘first_edition.R’\r  \r\r  \rv  Running ‘first_edition.R’ (13.2s)"
+      [5] "   Running ‘second_edition.R’\r  \r\r  \rv  Running ‘second_edition.R’ (14.3s)"    
+      [6] "\r  \rv  checking for unstated dependencies in vignettes    "                      
+      [7] "\r  \rv  checking package vignettes in ‘inst/doc’    "                             
+      [8] "\r"                                                                                
+

@@ -105,3 +105,34 @@ test_that("multi-arch tests", {
     for (line in txt) cb(paste0(line, "\n"))
   )
 })
+
+test_that("multiple test file run times are measured properly", {
+  txt <- list(
+    list("* checking examples ... ", 5),
+    list("OK\n", 0),
+    list("* checking for unstated dependencies in ‘tests’ ... OK\n", 0),
+    list("* checking tests ... \n", 0),
+    list("  Running ‘first_edition.R’", 13.2),
+    list("\n", 0),
+    list("  Running ‘second_edition.R’", 14.3),
+    list("\n", 0),
+    list(" OK\n", 0),
+    list("* checking for unstated dependencies in vignettes ... OK\n", 0),
+    list("* checking package vignettes in ‘inst/doc’ ... OK\n", 0)
+  )
+
+  replay <- function(frames) {
+    time <- Sys.time()
+    timer <- function() time
+    cb <- block_callback(sys_time = timer)
+    for (frame in frames) {
+      cb(frame[[1]])
+      if (frame[[2]] > 0) {
+        time <- time + frame[[2]]
+      }
+    }
+  }
+
+  out <- capture.output(replay(txt))
+  expect_snapshot(out)
+})
