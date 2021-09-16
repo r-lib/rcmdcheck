@@ -91,7 +91,11 @@ test_that("background gives same results", {
      test_path("bad1"),
      libpath = c(tmp_lib, .libPaths()))
   # If we read out the output, it'll still save it internally
+  bad1$read_output()
   bad1$read_all_output_lines()
+  # No separate stderr by default
+  expect_error(bad1$read_error())
+  expect_error(bad1$read_all_error_lines())
   res <- bad1$parse_results()
 
   expect_match(res$warnings[1], "Non-standard license specification")

@@ -74,21 +74,9 @@ rcmdcheck_process <- R6Class(
       l
     },
 
-    read_error_lines = function(...) {
-      l <- super$read_error_lines(...)
-      private$cstderr <- c(private$cstderr, paste0(l, "\n"))
-      l
-    },
-
     read_output = function(...) {
       l <- super$read_output(...)
       private$cstdout <- c(private$cstdout, l)
-      l
-    },
-
-    read_error = function(...) {
-      l <- super$read_error(...)
-      private$cstderr <- c(private$cstderr, l)
       l
     },
 
@@ -132,9 +120,7 @@ rcc_init <- function(self, private, super, path, args, build_args,
 
   # Add pandoc to the PATH for R CMD build.
   # The updated PATH is also inherited in the subprocess below.
-  if (!nzchar(Sys.which("pandoc")) && nzchar(Sys.getenv("RSTUDIO_PANDOC"))) {
-    local_path(Sys.getenv("RSTUDIO_PANDOC"))
-  }
+  if (should_use_rs_pandoc()) local_path(Sys.getenv("RSTUDIO_PANDOC"))
 
   pkgbuild::local_build_tools()
 

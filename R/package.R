@@ -76,9 +76,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
   }
 
   # Add pandoc to the PATH, for R CMD build and R CMD check
-  if (!nzchar(Sys.which("pandoc")) && nzchar(Sys.getenv("RSTUDIO_PANDOC"))) {
-    local_path(Sys.getenv("RSTUDIO_PANDOC"))
-  }
+  if (should_use_rs_pandoc()) local_path(Sys.getenv("RSTUDIO_PANDOC"))
 
   pkgbuild::local_build_tools()
 

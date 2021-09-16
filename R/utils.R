@@ -184,3 +184,17 @@ as_flag <- function(x, default = FALSE, name = "") {
 no_timing <- function(x) {
   gsub("\\[[0-9]+s(/[0-9]+s)?\\] ([A-Z]+)", "\\2", x, useBytes = TRUE)
 }
+
+should_use_rs_pandoc <- function() {
+  ev <- Sys.getenv("RCMDCHECK_USE_RSTUDIO_PANDOC", "")
+
+  if (tolower(ev) == "true") {
+    TRUE
+
+  } else if (tolower(ev) == "false") {
+    FALSE
+
+  } else {
+    !nzchar(Sys.which("pandoc")) && nzchar(Sys.getenv("RSTUDIO_PANDOC"))
+  }
+}

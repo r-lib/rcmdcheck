@@ -29,3 +29,16 @@ cran_app <- function() {
 
   app
 }
+
+replay <- function(frames, callback = NULL) {
+  callback <- callback %||% block_callback
+  time <- Sys.time()
+  timer <- function() time
+  cb <- callback(sys_time = timer)
+  for (frame in frames) {
+    cb(frame[[1]])
+    if (frame[[2]] > 0) {
+      time <- time + frame[[2]]
+    }
+  }
+}

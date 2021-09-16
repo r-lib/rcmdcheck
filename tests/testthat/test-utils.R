@@ -28,3 +28,23 @@ test_that("as_flag", {
     as_flag("boo", TRUE, "thisthat")
   )
 })
+
+test_that("should_use_rs_pandoc", {
+  withr::local_envvar(RCMDCHECK_USE_RSTUDIO_PANDOC = "false")
+  expect_false(should_use_rs_pandoc())
+  
+  withr::local_envvar(RCMDCHECK_USE_RSTUDIO_PANDOC = "true")
+  expect_true(should_use_rs_pandoc())
+
+  withr::local_envvar(RCMDCHECK_USE_RSTUDIO_PANDOC = NA_character_)
+  mockery::stub(should_use_rs_pandoc, "Sys.which", "")
+  withr::local_envvar(RSTUDIO_PANDOC = "yes")
+  expect_true(should_use_rs_pandoc())
+
+  withr::local_envvar(RSTUDIO_PANDOC = NA_character_)
+  expect_false(should_use_rs_pandoc())
+
+  mockery::stub(should_use_rs_pandoc, "Sys.which", "pandoc")
+  withr::local_envvar(RSTUDIO_PANDOC = "yes")
+  expect_false(should_use_rs_pandoc())
+})

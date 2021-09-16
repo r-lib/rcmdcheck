@@ -43,9 +43,17 @@
 #'   fractional. Defaults to 1/3 of a second. The corresponding option is
 #'   `rcmdcheck.timestamp_limit`.
 #'
+#' * `RCMDCHECK_USE_RSTUDIO_PANDOC`: Flag (`true` or `false`). If `true`,
+#'   then rcmdcheck _always_ puts RStudio's pandoc (if available) on the
+#'   path. If `false`, then it _never_ does that. If not set, or set to a
+#'   different value, then pandoc is put on the path only if it is not
+#'   already available. RStudio's pandoc is detected via an `RSTUDIO_PANDOC`
+#'   environment variable.
+#'
 #' * `RSTUDIO_PANDOC`: if set, rcmdcheck adds this environment variable
 #'   to the PATH if pandoc is not on the PATH already. It is usually set
-#'   in RStudio.
+#'   in RStudio. See also the `RCMDCHECK_USE_RSTUDIO_PANDOC` environment
+#'   variable.
 #'
 #' # Options
 #'

@@ -1,5 +1,5 @@
 
-test_that("block_callback by line", {
+ test_that("block_callback by line", {
   withr::local_options(rcmdcheck.timestamp_limit = 1000)
   chk <- readLines(test_path("fixtures", "test-error.txt"))
   cb <- block_callback()
@@ -121,18 +121,93 @@ test_that("multiple test file run times are measured properly", {
     list("* checking package vignettes in ‘inst/doc’ ... OK\n", 0)
   )
 
-  replay <- function(frames) {
-    time <- Sys.time()
-    timer <- function() time
-    cb <- block_callback(sys_time = timer)
-    for (frame in frames) {
-      cb(frame[[1]])
-      if (frame[[2]] > 0) {
-        time <- time + frame[[2]]
-      }
-    }
-  }
+  out <- capture.output(replay(txt))
+  expect_snapshot(out)
+})
+
+test_that("multi-arch test cases", {
+  txt <- list(
+    list("* using log directory 'C:/Users/csard/works/ps.Rcheck'\n", 0.01), 
+    list("* using R version 4.1.1 (2021-08-10)\n", 0.01),
+    list("* using platform: x86_64-w64-mingw32 (64-bit)\n", 0.01),
+    list("* using session charset: ISO8859-1\n", 0.01),
+    list("* checking for file 'ps/DESCRIPTION' ... OK\n", 0.01),
+    list("* this is package 'ps' version '1.3.2.9000'\n", 0.01),
+    list("* checking for unstated dependencies in 'tests' ... OK\n", 0.01),
+    list("* checking tests ...\n", 0.01),
+    list("** running tests for arch 'i386' ...\n", 0.01),
+    list("  Running 'testthat.R'\n", 0.01),
+    list(" OK\n", 0.01),
+    list("** running tests for arch 'x64' ...\n", 0.01),
+    list("  Running 'testthat.R'\n", 0.01),
+    list(" OK\n", 0.01),
+    list("* checking PDF version of manual ... OK\n", 0.01),
+    list("* DONE\n", 0.01)
+  )
 
   out <- capture.output(replay(txt))
   expect_snapshot(out)
+})
+
+test_that("failed test case", {
+  txt <- readLines(test_path("fixtures", "checks", "test-error.txt"))[54:76]
+  lines <- lapply(txt, function(x) list(paste0(x, "\n"), 0.001))
+  out <- capture.output(replay(lines))
+  expect_snapshot(out)
+})
+
+test_that("comparing test output", {
+  txt <- readLines(test_path("fixtures", "checks", "comparing.txt"))[52:63]
+  lines <- lapply(txt, function(x) list(paste0(x, "\n"), 0.001))
+  out <- capture.output(replay(lines))
+  expect_snapshot(out)
+})
+
+test_that("partial comparing line", {
+  lines <- list(
+    list("* checking tests ...\n", 0),
+    list("  Running ‘test-1.R’\n", 0),
+    list("  Comparing ‘test-1.Rout’ to ", 0),
+    list("‘test-1.Rout.save’ ... OK\n", 0),
+    list("  Running ‘test-2.R’\n", 0),
+    list("  Comparing ‘test-2.Rout’ to ‘test-2.Rout.save’ ... OK\n", 0),
+    list(" OK\n", 0.01),
+    list("* checking PDF version of manual ... OK\n", 0.01),
+    list("* DONE\n", 0.01)    
+  )
+
+  out <- capture.output(replay(lines))
+  expect_snapshot(out)
+})
+
+test_that("multiple comparing blocks", {
+  txt <- readLines(test_path("fixtures", "checks", "comparing2.txt"))[53:88]
+  lines <- lapply(txt, function(x) list(paste0(x, "\n"), 0.001))
+  out <- capture.output(replay(lines))
+  expect_snapshot(out)  
+})
+
+test_that("simple_callback", {
+  txt <- readLines(test_path("fixtures", "checks", "comparing.txt"))
+  lines <- lapply(txt, function(x) list(paste0(x, "\n"), 0.001))
+  out <- capture.output(replay(lines, simple_callback))
+  expect_snapshot(out)
+})
+
+test_that("detect_callback", {
+  mockery::stub(detect_callback, "block_callback", "block")
+  mockery::stub(detect_callback, "simple_callback", "simple")
+
+  withr::local_options(cli.dynamic = TRUE)
+  expect_equal(detect_callback(), "block")
+  
+  withr::local_options(cli.dynamic = FALSE)
+  expect_equal(detect_callback(), "simple")
+})
+
+test_that("should_add_spinner", {
+  withr::local_options(cli.dynamic = TRUE)
+  expect_true(should_add_spinner())
+  withr::local_options(cli.dynamic = FALSE)
+  expect_false(should_add_spinner())
 })

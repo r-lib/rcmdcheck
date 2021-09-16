@@ -220,51 +220,20 @@ block_callback <- function(top_line = TRUE, sys_time = NULL) {
   }
 }
 
-to_status <- function(x) {
-  notes <- warnings <- errors <- 0
-  if (grepl("ERROR", x)) {
-    errors <- as.numeric(sub("^.* ([0-9]+) ERROR.*$", "\\1", x))
-  }
-  if (grepl("WARNING", x)) {
-    warnings <- as.numeric(sub("^.* ([0-9]+) WARNING.*$", "\\1", x))
-  }
-  if (grepl("NOTE", x)) {
-    notes <- as.numeric(sub("^.* ([0-9]+) NOTE.*$", "\\1", x))
-  }
-  structure(
-    list(
-      notes = rep("", notes),
-      warnings = rep("", warnings),
-      errors = rep("", errors)
-    ),
-    class = "rcmdcheck"
-  )
-}
-
 is_new_check <- function(x) {
   grepl("^\\*\\*? ", x)
 }
 
-simple_callback <- function(top_line = TRUE) {
+simple_callback <- function(top_line = TRUE, sys_time = NULL) {
   function(x) cat(gsub("[\r\n]+", "\n", x, useBytes = TRUE))
-}
-
-detect_callback <- function() {
-  if (is_dynamic_tty2()) block_callback() else simple_callback()
 }
 
 #' @importFrom cli is_dynamic_tty
 
-is_dynamic_tty2 <- function() {
-  ## This is to work around a cli bug:
-  ## https://github.com/r-lib/cli/issues/70
-  if ((x <- Sys.getenv("R_CLI_DYNAMIC", "")) != "") {
-    isTRUE(x)
-  } else {
-    is_dynamic_tty()
-  }
+detect_callback <- function() {
+  if (cli::is_dynamic_tty()) block_callback() else simple_callback()
 }
 
 should_add_spinner <- function() {
-  is_dynamic_tty2()
+  is_dynamic_tty()
 }
