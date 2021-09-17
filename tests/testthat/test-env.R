@@ -17,7 +17,7 @@ test_that("load_env", {
 
   tmp <- tempfile()
   on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
-  envfile <- file.path(tmp, "pkg", "inst", "check.env")
+  envfile <- file.path(tmp, "pkg", "tools", "check.env")
   dir.create(dirname(envfile), recursive = TRUE, showWarnings = FALSE)
   cat("foo=bar\n#comment\n\nbar=foobar\n", file = envfile)
 

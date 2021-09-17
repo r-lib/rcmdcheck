@@ -8,16 +8,16 @@ load_env <- function(path, targz, package, envir = parent.frame()) {
 
   env <- NULL
   if (file.info(path)$isdir) {
-    env_path <- file.path(path, "inst", "check.env")
+    env_path <- file.path(path, "tools", "check.env")
   } else {
     dir.create(tmp <- tempfile())
     on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
     untar(
       targz,
-      file.path(package, "inst", "check.env"),
+      file.path(package, "tools", "check.env"),
       exdir = tmp, tar = "internal"
     )
-    env_path <- file.path(tmp, package, "inst", "check.env")
+    env_path <- file.path(tmp, package, "tools", "check.env")
   }
 
   if (file.exists(env_path)) {
