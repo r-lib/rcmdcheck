@@ -85,6 +85,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   start_time <- Sys.time()
   desc <- desc(targz)
+  load_env(path, targz, desc$get("Package")[[1]])
 
   out <- with_dir(
     dirname(targz),

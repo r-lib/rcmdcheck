@@ -44,11 +44,14 @@ test_that("rcmdcheck works", {
   ## Check that libpath was passed to R CMD check subprocesses
   expect_true(file.exists(tmp_out1))
   lp1 <- readRDS(tmp_out1)
-  expect_true(tmp_lib %in% normalizePath(lp1, mustWork = FALSE))
+  expect_true(tmp_lib %in% normalizePath(lp1$libpath, mustWork = FALSE))
 
   expect_true(file.exists(tmp_out2))
   lp2 <- readRDS(tmp_out2)
   expect_true(tmp_lib %in% normalizePath(lp2, mustWork = FALSE))
+
+  # check.env file was loaded
+  expect_equal(lp1$env[['_R_CHECK_PKG_SIZES_THRESHOLD_']], "142")
 
   ## check_details. Need to remove non-deterministic parts
   det <- check_details(bad1)
@@ -104,11 +107,14 @@ test_that("background gives same results", {
   ## Check that libpath was passed to R CMD check subprocesses
   expect_true(file.exists(tmp_out1))
   lp1 <- readRDS(tmp_out1)
-  expect_true(tmp_lib %in% normalizePath(lp1, mustWork = FALSE))
+  expect_true(tmp_lib %in% normalizePath(lp1$libpath, mustWork = FALSE))
 
   expect_true(file.exists(tmp_out2))
   lp2 <- readRDS(tmp_out2)
   expect_true(tmp_lib %in% normalizePath(lp2, mustWork = FALSE))
+
+  # check.env file was loaded
+  expect_equal(lp1$env[['_R_CHECK_PKG_SIZES_THRESHOLD_']], "142")
 
   ## This currently fails with rcmdcheck() (why?), so it also fails GHA
   skip_on_ci()

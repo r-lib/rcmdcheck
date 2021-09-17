@@ -169,6 +169,7 @@ NO_WORDS  <- c("false", "no",  "off", "0", "nope", "nah")
 as_flag <- function(x, default = FALSE, name = "") {
   x1 <- trimws(tolower(x))
   if (is.na(x1)) return(default)
+  if (x1 == "") return(default)
   if (x1 %in% YES_WORDS) return(TRUE)
   if (x1 %in% NO_WORDS) return(FALSE)
   warning(
