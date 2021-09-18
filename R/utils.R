@@ -1,6 +1,7 @@
 
-read_char <- function(path, ...) {
-  readChar(path, nchars = file.info(path)$size, ...)
+read_char <- function(path, encoding = "", ...) {
+  txt <- readChar(path, nchars = file.info(path)$size, useBytes = TRUE, ...)
+  iconv(txt, encoding, "UTF-8", sub = "byte")
 }
 
 win2unix <- function(str) {
@@ -98,10 +99,10 @@ cat0 <- function(..., sep = "") {
   cat(..., sep = "")
 }
 
-get_install_out <- function(path) {
+get_install_out <- function(path, encoding = "") {
   install_out <- file.path(path, "00install.out")
   if (is_string(install_out) && file.exists(install_out)) {
-    win2unix(read_char(install_out))
+    win2unix(read_char(install_out, encoding = encoding))
   } else {
     "<00install.out file does not exist>"
   }
