@@ -1,4 +1,41 @@
 
+test_that("set_env", {
+  called <- FALSE
+  mockery::stub(set_env, "ignore_env", function(...) called <<- TRUE)
+  withr::local_envvar(RCMDCHECK_LOAD_CHECK_ENV = "false")
+
+  desc <- desc::desc("!new")
+  set_env(NULL, NULL, desc)
+  expect_false(called)
+
+  desc$set("Config/rcmdcheck/ignore-inconsequential-notes" = "false")
+  set_env(NULL, NULL, desc)
+  expect_false(called)
+
+  desc$set("Config/rcmdcheck/ignore-inconsequential-notes" = "true")
+  set_env(NULL, NULL, desc)
+  expect_true(called)
+})
+
+
+test_that("ignore_env_config", {
+  envs <- ignore_env_config()
+  expect_true(is.character(envs))
+  expect_false(is.null(names(envs)))
+  expect_false(any(names(envs) == ""))
+  expect_false(any(is.na(envs)))
+})
+
+test_that("ignore_env", {
+  do <- function() {
+    ignore_env(c(foo = "bar"))
+    expect_equal(Sys.getenv("foo"), "bar")
+  }
+  withr::local_envvar(foo = "notbar")
+  do()
+  expect_equal(Sys.getenv("foo"), "notbar")
+})
+
 test_that("load_env", {
   path_ <- NULL
   mockery::stub(

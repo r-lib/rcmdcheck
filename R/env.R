@@ -1,4 +1,25 @@
 
+set_env <- function(path, targz, desc, envir = parent.frame()) {
+  pkg <- desc$get("Package")
+  ign <- as_flag(desc$get("Config/rcmdcheck/ignore-inconsequential-notes"))
+  if (ign) ignore_env(envir = envir)
+  load_env(path, targz, pkg, envir = envir)
+}
+
+ignore_env_config <- function() {
+  c("_R_CHECK_PKG_SIZES_" = "false",
+    "_R_CHECK_RD_XREFS_" = "false",
+    "_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_" = "false",
+    "_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_" = "false"
+  )
+}
+
+ignore_env <- function(
+    to_ignore = ignore_env_config(),
+    envir = parent.frame()) {
+  withr::local_envvar(to_ignore, .local_envir = envir)
+}
+
 load_env <- function(path, targz, package, envir = parent.frame()) {
   should_load <- as_flag(
     Sys.getenv("RCMDCHECK_LOAD_CHECK_ENV"),
@@ -12,7 +33,7 @@ load_env <- function(path, targz, package, envir = parent.frame()) {
   } else {
     dir.create(tmp <- tempfile())
     on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
-    untar(
+    utils::untar(
       targz,
       file.path(package, "tools", "check.env"),
       exdir = tmp, tar = "internal"
