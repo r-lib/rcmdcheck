@@ -1,0 +1,28 @@
+
+R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(ipc)
+> 
+> test_check("ipc")
+...
+Error: package or namespace load failed for ‘stats�During startup - Warning messages:
+1: package ‘utils’ in options("defaultPackages") was not found 
+2: package ‘graphics’ in options("defaultPackages") was not found 
+3: In get(Info[i, 1], envir = env) : internal error -3 in R_decompress1
+4: package ‘stats’ in options("defaultPackages") was not found 
+...

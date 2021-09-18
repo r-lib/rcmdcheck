@@ -77,11 +77,11 @@ parse_checkdir <- function(entries) {
     perl = TRUE
   )
 }
-get_test_fail <- function(path) {
-  get_test_output(path, pattern = "\\.Rout\\.fail")
+get_test_fail <- function(path, encoding = "") {
+  get_test_output(path, pattern = "\\.Rout\\.fail", encoding = encoding)
 }
 
-get_test_output <- function(path, pattern) {
+get_test_output <- function(path, pattern, encoding = "") {
   test_path <- file.path(path, dir(path, pattern = "^tests"))
   paths <- dir(test_path, paste0(pattern, "$"), full.names = TRUE)
 
@@ -97,7 +97,7 @@ get_test_output <- function(path, pattern) {
     substr(x, first_gt, nchar(x))
   }
 
-  tests <- lapply(paths, read_char)
+  tests <- lapply(paths, read_char, encoding = encoding)
   tests <- lapply(tests, win2unix)
   lapply(tests, trim_header)
 }

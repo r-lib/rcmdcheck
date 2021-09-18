@@ -48,3 +48,9 @@ test_that("should_use_rs_pandoc", {
   withr::local_envvar(RSTUDIO_PANDOC = "yes")
   expect_false(should_use_rs_pandoc())
 })
+
+test_that("read_char and files with invalid encodings", {
+  expect_silent(
+    txt <- read_char(test_path("fixtures", "badenc.fail"), encoding = "UTF-8")
+  )
+})
