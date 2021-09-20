@@ -200,3 +200,15 @@ should_use_rs_pandoc <- function() {
     !nzchar(Sys.which("pandoc")) && nzchar(Sys.getenv("RSTUDIO_PANDOC"))
   }
 }
+
+data_literal <- function(...) {
+  cl <- match.call(expand.dots = FALSE)
+  rows <- vapply(cl$..., function(x) paste(deparse(x), collapse = " "), "")
+  utils::read.table(
+    textConnection(rows),
+    strip.white = TRUE,
+    sep = "|",
+    header = TRUE,
+    colClasses = "character"
+  )
+}

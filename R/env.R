@@ -7,16 +7,33 @@ set_env <- function(path, targz, desc, envir = parent.frame()) {
 }
 
 ignore_env_config <- function() {
-  c("_R_CHECK_PKG_SIZES_" = "false",
-    "_R_CHECK_RD_XREFS_" = "false",
-    "_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_" = "false",
-    "_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_" = "false"
+  data_literal(
+    "docs"         | "envvar"                                    | "value",
+    # ---------------------------------------------------------------------
+    "report large package sizes"
+                   | "_R_CHECK_PKG_SIZES_"                       | FALSE,
+    "check cross-references in Rd files"
+                   | "_R_CHECK_RD_XREFS_"                        | FALSE,
+    "NOTE if package requires GNU make"
+                   | "_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_"     | FALSE,
+    "report marked non-ASCII strings in datasets"
+                   | "_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_" | TRUE
   )
 }
 
-ignore_env <- function(
-    to_ignore = ignore_env_config(),
-    envir = parent.frame()) {
+format_env_docs <- function() {
+  envs <- ignore_env_config()
+  paste0(
+    "* ", envs$docs, " (`", envs$envvar, " = ", envs$value, "`)",
+    collapse = ",\n"
+  )
+}
+
+ignore_env <- function(to_ignore = NULL, envir = parent.frame()) {
+  if (is.null(to_ignore)) {
+    conf <- ignore_env_config()
+    to_ignore <- structure(conf$value, names = conf$envvar)
+  }
   withr::local_envvar(to_ignore, .local_envir = envir)
 }
 

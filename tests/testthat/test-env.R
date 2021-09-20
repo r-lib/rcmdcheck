@@ -20,10 +20,9 @@ test_that("set_env", {
 
 test_that("ignore_env_config", {
   envs <- ignore_env_config()
-  expect_true(is.character(envs))
-  expect_false(is.null(names(envs)))
-  expect_false(any(names(envs) == ""))
-  expect_false(any(is.na(envs)))
+  expect_s3_class(envs, "data.frame")
+  expect_equal(names(envs), c("docs", "envvar", "value"))
+  expect_equal(unname(sapply(envs, class)), rep("character", 3))
 })
 
 test_that("ignore_env", {
