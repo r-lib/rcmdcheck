@@ -21,10 +21,7 @@ ignore_env <- function(
 }
 
 load_env <- function(path, targz, package, envir = parent.frame()) {
-  should_load <- as_flag(
-    Sys.getenv("RCMDCHECK_LOAD_CHECK_ENV"),
-    as_flag(Sys.getenv("NOT_CRAN"))
-  )
+  should_load <- as_flag(Sys.getenv("RCMDCHECK_LOAD_CHECK_ENV"), TRUE)
   if (!should_load) return()
 
   env <- NULL

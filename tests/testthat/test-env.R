@@ -44,11 +44,7 @@ test_that("load_env", {
     function(path, envir) path_ <<- path
   )
 
-  withr::local_envvar(RCMDCHECK_LOAD_CHECK_ENV = "false", NOT_CRAN = "true")
-  load_env("foo", "bar", "package")
-  expect_null(path_)
-
-  withr::local_envvar(RCMDCHECK_LOAD_CHECK_ENV = NA, NOT_CRAN = NA)
+  withr::local_envvar(RCMDCHECK_LOAD_CHECK_ENV = "false")
   load_env("foo", "bar", "package")
   expect_null(path_)
 
@@ -58,12 +54,12 @@ test_that("load_env", {
   dir.create(dirname(envfile), recursive = TRUE, showWarnings = FALSE)
   cat("foo=bar\n#comment\n\nbar=foobar\n", file = envfile)
 
-  withr::local_envvar(RCMDCHECK_LOAD_CHECK_ENV = "true", NOT_CRAN = NA)
+  withr::local_envvar(RCMDCHECK_LOAD_CHECK_ENV = "true")
   load_env(file.path(tmp, "pkg"))
   expect_true(file.exists(path_))
   path_ <- NULL
 
-  withr::local_envvar(RCMDCHECK_LOAD_CHECK_ENV = NA, NOT_CRAN = "true")
+  withr::local_envvar(RCMDCHECK_LOAD_CHECK_ENV = NA)
   load_env(file.path(tmp, "pkg"))
   expect_true(file.exists(path_))
   path_ <- NULL
