@@ -532,3 +532,41 @@
       [71] ""                                                                              
       [72] "Status: OK"                                                                    
 
+# multiple tests
+
+    Code
+      out
+    Output
+       [1] "  \r-  checking examples ... NONE"                     
+       [2] "\r  \rv  checking for unstated dependencies in ‘tests’"
+       [3] "\r  \r-  checking tests"                               
+       [4] "\r  \r\r  \r-  Running ‘a.R’"                          
+       [5] "\r  \r-  Running ‘b.R’"                                
+       [6] "\r  \r-  Running ‘c.R’"                                
+       [7] "E  Some test files failed"                             
+       [8] "\r  \r   Running the tests in ‘tests/b.R’ failed."     
+       [9] "\r  \r   Complete output:"                             
+      [10] "\r  \r     > stop(\"error\")"                          
+      [11] "\r  \r     Error: error"                               
+      [12] "\r  \r     Execution halted"                           
+      [13] "\r  \rv  checking PDF version of manual"               
+      [14] "\r"                                                    
+
+---
+
+    Code
+      out
+    Output
+       [1] "  \r-  checking examples ... NONE"                     
+       [2] "\r  \rv  checking for unstated dependencies in ‘tests’"
+       [3] "\r  \r-  checking tests"                               
+       [4] "\r  \r\r  \rv  Running ‘a.R’"                          
+       [5] "\r  \rE  Running ‘b.R’"                                
+       [6] "\r  \r   Running the tests in ‘tests/b.R’ failed."     
+       [7] "\r  \r   Complete output:"                             
+       [8] "\r  \r     > stop(\"error\")"                          
+       [9] "\r  \r     Error: error"                               
+      [10] "\r  \r     Execution halted"                           
+      [11] "\r  \rv  checking PDF version of manual"               
+      [12] "\r"                                                    
+
