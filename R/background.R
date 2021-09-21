@@ -132,6 +132,8 @@ rcc_init <- function(self, private, super, path, args, build_args,
   private$check_dir <- check_dir
   private$targz <- targz
 
+  set_env(path, targz, private$description)
+
   private$session_output <- tempfile()
   profile <- make_fake_profile(session_output = private$session_output)
   private$tempfiles  <- c(private$session_output, profile)

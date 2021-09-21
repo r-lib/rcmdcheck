@@ -10,6 +10,58 @@ NULL
 
 #' Run `R CMD check` on a package or a directory
 #'
+#' Runs `R CMD check` as an external command, and parses its output and
+#' returns the check failures.
+#'
+#' See [rcmdcheck_process] if you need to run `R CMD check` in a background
+#' process.
+#'
+#' # Turning off package checks
+#'
+#' Sometimes it is useful to programmatically turn off some checks that
+#' may report check NOTEs.
+#' rcmdcehck provides two ways to do this.
+#'
+#' First, you may declare in `DESCRIPTION` that you don't want to see
+#' NOTEs that are accepted on CRAN, with this entry:
+#'
+#' ```
+#' Config/rcmdcheck/ignore-inconsequential-notes: true
+#' ```
+#'
+#' Currently, this will make rcmdcheck ignore the following notes:
+#' `r format_env_docs()`.
+#'
+#' The second way is more flexible, and lets you turn off individual checks
+#' via setting environment variables.
+#' You may provide a `tools/check.env` _environment file_ in your package
+#' with the list of environment variable settings that rcmdcheck will
+#' automatically use when checking the package.
+#' See [Startup] for the format of this file.
+#'
+#' Here is an example `tools/check.env` file:
+#' ```
+#' # Report if package size is larger than 10 megabytes
+#' _R_CHECK_PKG_SIZES_THRESHOLD_=10
+#'
+#' # Do not check Rd cross references
+#' _R_CHECK_RD_XREFS_=false
+#'
+#' # Do not report if package requires GNU make
+#' _R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=false
+#'
+#' # Do not check non-ASCII strings in datasets
+#' _R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_=true
+#' ```
+#'
+#' See the ["R internals" manual](https://cran.r-project.org/doc/manuals/r-devel/R-ints.html)
+#' and the [R source code](https://github.com/wch/r-source) for the
+#' environment variables that control the checks.
+#'
+#' Note that `Config/rcmdcheck/ignore-inconsequential-notes` and the
+#' `check.env` file are only supported by rcmdcheck, and running
+#' `R CMD check` from a shell (or GUI) will not use them.
+#'
 #' @param path Path to a package tarball or a directory.
 #' @param quiet Whether to print check output during checking.
 #' @param args Character vector of arguments to pass to `R CMD check`. Pass each
@@ -43,7 +95,8 @@ NULL
 #'   no errors are thrown. If `"error"`, then only `ERROR` failures
 #'   generate errors. If `"warning"`, then `WARNING` failures generate
 #'   errors as well. If `"note"`, then any check failure generated an
-#'   error.
+#'   error. Its default can be modified with the `RCMDCHECK_ERROR_ON`
+#'   environment variable. If that is not set, then `"never"` is used.
 #' @return An S3 object (list) with fields `errors`,
 #'   `warnings` and `notes`. These are all character
 #'   vectors containing the output for the failed check.
@@ -54,13 +107,21 @@ NULL
 #' @importFrom callr rcmd_safe
 #' @importFrom desc desc
 
-rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
-                      build_args = character(), check_dir = NULL,
-                      libpath = .libPaths(), repos = getOption("repos"),
-                      timeout = Inf, error_on =
-                        c("never", "error", "warning", "note")) {
+rcmdcheck <- function(
+    path = ".",
+    quiet = FALSE,
+    args = character(),
+    build_args = character(),
+    check_dir = NULL,
+    libpath = .libPaths(),
+    repos = getOption("repos"),
+    timeout = Inf,
+    error_on = Sys.getenv(
+      "RCMDCHECK_ERROR_ON",
+      c("never", "error", "warning", "note")[1]
+    )) {
 
-  error_on <- match.arg(error_on)
+  error_on <- match.arg(error_on, c("never", "error", "warning", "note"))
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -85,6 +146,7 @@ rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
 
   start_time <- Sys.time()
   desc <- desc(targz)
+  set_env(path, targz, desc)
 
   out <- with_dir(
     dirname(targz),

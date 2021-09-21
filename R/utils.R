@@ -170,6 +170,7 @@ NO_WORDS  <- c("false", "no",  "off", "0", "nope", "nah")
 as_flag <- function(x, default = FALSE, name = "") {
   x1 <- trimws(tolower(x))
   if (is.na(x1)) return(default)
+  if (x1 == "") return(default)
   if (x1 %in% YES_WORDS) return(TRUE)
   if (x1 %in% NO_WORDS) return(FALSE)
   warning(
@@ -198,4 +199,16 @@ should_use_rs_pandoc <- function() {
   } else {
     !nzchar(Sys.which("pandoc")) && nzchar(Sys.getenv("RSTUDIO_PANDOC"))
   }
+}
+
+data_literal <- function(...) {
+  cl <- match.call(expand.dots = FALSE)
+  rows <- vapply(cl$..., function(x) paste(deparse(x), collapse = " "), "")
+  utils::read.table(
+    textConnection(rows),
+    strip.white = TRUE,
+    sep = "|",
+    header = TRUE,
+    colClasses = "character"
+  )
 }

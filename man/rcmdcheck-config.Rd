@@ -25,6 +25,8 @@ You can use this to select an alternative CRAN mirror. Defaults to
 \verb{https://cran.r-project.org/web/checks/}.
 \item \code{RCMDCHECK_DETAILS_URL}: URL to the root of the CRAN check output
 page. Defaults to \verb{https://www.r-project.org/nosvn/R.check/}.
+\item \code{RCMDCHECK_ERROR_ON}: the default value for the \code{error_on} argument
+of \code{\link[=rcmdcheck]{rcmdcheck()}}.
 \item \code{RCMDCHECK_FLAVOURS_URL} URL to the CRAN check flavours page.
 You can use this to select an alternative CRAN mirror. Defaults to
 \verb{https://cran.r-project.org/web/checks/check_flavors.html}.
@@ -45,6 +47,9 @@ path. If \code{false}, then it \emph{never} does that. If not set, or set to a
 different value, then pandoc is put on the path only if it is not
 already available. RStudio's pandoc is detected via an \code{RSTUDIO_PANDOC}
 environment variable.
+\item \code{RCMDCHECK_LOAD_CHECK_ENV}: you can use this environment variable
+suppress loading environment variables from the \code{tools/check.env} file.
+See \code{\link[=rcmdcheck]{rcmdcheck()}} for details.
 \item \code{RSTUDIO_PANDOC}: if set, rcmdcheck adds this environment variable
 to the PATH if pandoc is not on the PATH already. It is usually set
 in RStudio. See also the \code{RCMDCHECK_USE_RSTUDIO_PANDOC} environment

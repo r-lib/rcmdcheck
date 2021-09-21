@@ -54,3 +54,24 @@ test_that("error is thrown as needed, with the correct type", {
   expect_silent(handle_error_on(nte1, "warning"))
   expect_silent(handle_error_on(nte1, "error"))
 })
+
+test_that("error_on argument", {
+  value <- NULL
+  mockery::stub(
+    rcmdcheck,
+    "match.arg",
+    function(arg, ...) {
+      value <<- arg
+      stop("that's enough")
+    }
+  )
+
+  value < NULL
+  tryCatch(rcmdcheck(error_on = "error"), error = function(e) e)
+  expect_equal(value, "error")
+
+  value < NULL
+  withr::local_envvar(RCMDCHECK_ERROR_ON = "note")
+  tryCatch(rcmdcheck(), error = function(e) e)
+  expect_equal(value, "note")
+})

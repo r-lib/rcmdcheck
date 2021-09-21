@@ -26,6 +26,9 @@
 #' * `RCMDCHECK_DETAILS_URL`: URL to the root of the CRAN check output
 #'   page. Defaults to `https://www.r-project.org/nosvn/R.check/`.
 #'
+#' * `RCMDCHECK_ERROR_ON`: the default value for the `error_on` argument
+#'   of [rcmdcheck()].
+#'
 #' * `RCMDCHECK_FLAVOURS_URL` URL to the CRAN check flavours page.
 #'   You can use this to select an alternative CRAN mirror. Defaults to
 #'   `https://cran.r-project.org/web/checks/check_flavors.html`.
@@ -49,6 +52,10 @@
 #'   different value, then pandoc is put on the path only if it is not
 #'   already available. RStudio's pandoc is detected via an `RSTUDIO_PANDOC`
 #'   environment variable.
+#'
+#' * `RCMDCHECK_LOAD_CHECK_ENV`: you can use this environment variable
+#'   suppress loading environment variables from the `tools/check.env` file.
+#'   See [rcmdcheck()] for details.
 #'
 #' * `RSTUDIO_PANDOC`: if set, rcmdcheck adds this environment variable
 #'   to the PATH if pandoc is not on the PATH already. It is usually set

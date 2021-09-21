@@ -14,7 +14,8 @@ rcmdcheck(
   libpath = .libPaths(),
   repos = getOption("repos"),
   timeout = Inf,
-  error_on = c("never", "error", "warning", "note")
+  error_on = Sys.getenv("RCMDCHECK_ERROR_ON", c("never", "error", "warning",
+    "note")[1])
 )
 }
 \arguments{
@@ -58,7 +59,8 @@ and the error is only thrown after completion. If \code{"never"}, then
 no errors are thrown. If \code{"error"}, then only \code{ERROR} failures
 generate errors. If \code{"warning"}, then \code{WARNING} failures generate
 errors as well. If \code{"note"}, then any check failure generated an
-error.}
+error. Its default can be modified with the \code{RCMDCHECK_ERROR_ON}
+environment variable. If that is not set, then \code{"never"} is used.}
 }
 \value{
 An S3 object (list) with fields \code{errors},
@@ -68,4 +70,57 @@ vectors containing the output for the failed check.
 \description{
 Run R CMD check from R programmatically, and capture the results of the
 individual checks.
+
+Runs \verb{R CMD check} as an external command, and parses its output and
+returns the check failures.
 }
+\details{
+See \link{rcmdcheck_process} if you need to run \verb{R CMD check} in a background
+process.
+}
+\section{Turning off package checks}{
+Sometimes it is useful to programmatically turn off some checks that
+may report check NOTEs.
+rcmdcehck provides two ways to do this.
+
+First, you may declare in \code{DESCRIPTION} that you don't want to see
+NOTEs that are accepted on CRAN, with this entry:\preformatted{Config/rcmdcheck/ignore-inconsequential-notes: true
+}
+
+Currently, this will make rcmdcheck ignore the following notes:
+\itemize{
+\item report large package sizes (\verb{_R_CHECK_PKG_SIZES_ = FALSE}),
+\item check cross-references in Rd files (\verb{_R_CHECK_RD_XREFS_ = FALSE}),
+\item NOTE if package requires GNU make (\verb{_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_ = FALSE}),
+\item report marked non-ASCII strings in datasets (\verb{_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_ = TRUE}).
+}
+
+The second way is more flexible, and lets you turn off individual checks
+via setting environment variables.
+You may provide a \code{tools/check.env} \emph{environment file} in your package
+with the list of environment variable settings that rcmdcheck will
+automatically use when checking the package.
+See \link{Startup} for the format of this file.
+
+Here is an example \code{tools/check.env} file:\preformatted{# Report if package size is larger than 10 megabytes
+_R_CHECK_PKG_SIZES_THRESHOLD_=10
+
+# Do not check Rd cross references
+_R_CHECK_RD_XREFS_=false
+
+# Do not report if package requires GNU make
+_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=false
+
+# Do not check non-ASCII strings in datasets
+_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_=true
+}
+
+See the \href{https://cran.r-project.org/doc/manuals/r-devel/R-ints.html}{"R internals" manual}
+and the \href{https://github.com/wch/r-source}{R source code} for the
+environment variables that control the checks.
+
+Note that \code{Config/rcmdcheck/ignore-inconsequential-notes} and the
+\code{check.env} file are only supported by rcmdcheck, and running
+\verb{R CMD check} from a shell (or GUI) will not use them.
+}
+

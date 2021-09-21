@@ -10,5 +10,8 @@ foobar <- function(argument) {
 
 foobar2 <- function() {
   outfile <- Sys.getenv("RCMDCHECK_OUTPUT", "")
-  if (nzchar(outfile)) saveRDS(.libPaths(), outfile)
+  if (nzchar(outfile)) {
+    data <- list(libpath = .libPaths(), env = Sys.getenv())
+    saveRDS(data, outfile)
+  }
 }
