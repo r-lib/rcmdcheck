@@ -208,7 +208,7 @@ do_check <- function(targz, package, args, libpath, repos,
       user_profile = TRUE,
       repos = repos,
       stderr = "2>&1",
-      block_callback = if (!quiet) detect_callback(),
+      block_callback = if (!quiet) detect_callback(as_cran = "--as-cran" %in% args),
       spinner = !quiet && should_add_spinner(),
       timeout = timeout,
       fail_on_status = FALSE

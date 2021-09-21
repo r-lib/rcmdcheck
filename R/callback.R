@@ -7,7 +7,10 @@
 #' @importFrom utils head tail
 #' @importFrom prettyunits pretty_dt
 
-block_callback <- function(top_line = TRUE, sys_time = NULL) {
+block_callback <- function(
+    top_line = TRUE,
+    sys_time = NULL,
+    as_cran = NA) {
 
   sys_time <- sys_time %||% Sys.time
   partial_line <- ""
@@ -99,26 +102,6 @@ block_callback <- function(top_line = TRUE, sys_time = NULL) {
     }
   }
 
-  ## The output from the tests is a bit messed up, especially if we
-  ## want to process it line by line.
-  ## The tests start with '* checking test ...\n' and then when a test
-  ## file starts running we see sg like '  Running 'testthat.R''
-  ## This is without the newline character.
-  ##
-  ## The first test file that errors out will stop the tests entirely.
-  ##
-  ## When a test file is done, we get a '\n', and then either the next one
-  ## is started with another '  Running ...' line (without \n), or they are
-  ## done completely, and we get a '\n' and ' ERROR\n' / ' OK\n' depending
-  ## on the result.
-  ##
-  ## So the tricky thing is, we can only update a 'Running ' line after
-  ## we already know what is in the next line. If the next line is ' ERROR',
-  ## then the test file failed, otherwise succeeded. So we also do the actual
-  ## updating based on the '  Running' partial lines.
-  ##
-  ## As usually, prev_line contains the previous line.
-
   do_test_mode <- function(x) {
     ## Maybe we just learned the result of the current test file
     if (test_running) {
@@ -132,7 +115,14 @@ block_callback <- function(top_line = TRUE, sys_time = NULL) {
         ## Tests are over, error
         state <<- "ERROR"
         test_running <<- FALSE
-        xx <- style(err = "E", pale = no(prev_line))
+        if (isTRUE(as_cran)) {
+          xp <- style(pale = symbol$line, pale = no(prev_line))
+          xp <- style(xp, timing = time_if_long())
+          cat(xp, "\n", sep = "")
+          xx <- style(err = "E", pale = "  Some test files failed")
+        } else {
+          xx <- style(err = "E", pale = no(prev_line))
+        }
         xx <- style(xx, timing = time_if_long())
       } else if (grepl("^\\s+Comparing", x)) {
         ## Comparison
@@ -141,7 +131,11 @@ block_callback <- function(top_line = TRUE, sys_time = NULL) {
         xx <- style(xx, timing = time_if_long())
       } else if (grepl("^\\s+Running", x)) {
         ## Next test is running now, state unchanged
-        xx <- style(ok = symbol$tick, pale = no(prev_line))
+        if (isTRUE(as_cran)) {
+          xx <- style(pale = symbol$line, pale = no(prev_line))
+        } else {
+          xx <- style(ok = symbol$tick, pale = no(prev_line))
+        }
         xx <- style(xx, timing = time_if_long())
         now <<- sys_time()
       } else {
@@ -190,7 +184,11 @@ block_callback <- function(top_line = TRUE, sys_time = NULL) {
       if (grepl("^\\s+Running ", x) || grepl("^\\s+Comparing", x)) {
         test_running <<- FALSE
         if (grepl("^\\s+Running ", x)) {
-          xx <- style(ok = symbol$tick, pale = no(prev_line))
+          if (isTRUE(as_cran)) {
+            xx <- style(pale = symbol$line, pale = no(prev_line))
+          } else {
+            xx <- style(ok = symbol$tick, pale = no(prev_line))
+          }
           xx <- style(xx, timing = time_if_long())
         } else {
           xx <- style(ok = symbol$tick, pale = prev_line)
@@ -224,14 +222,14 @@ is_new_check <- function(x) {
   grepl("^\\*\\*? ", x)
 }
 
-simple_callback <- function(top_line = TRUE, sys_time = NULL) {
+simple_callback <- function(top_line = TRUE, sys_time = NULL, ...) {
   function(x) cat(gsub("[\r\n]+", "\n", x, useBytes = TRUE))
 }
 
 #' @importFrom cli is_dynamic_tty
 
-detect_callback <- function() {
-  if (cli::is_dynamic_tty()) block_callback() else simple_callback()
+detect_callback <- function(...) {
+  if (cli::is_dynamic_tty()) block_callback(...) else simple_callback(...)
 }
 
 should_add_spinner <- function() {
