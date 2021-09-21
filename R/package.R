@@ -95,7 +95,8 @@ NULL
 #'   no errors are thrown. If `"error"`, then only `ERROR` failures
 #'   generate errors. If `"warning"`, then `WARNING` failures generate
 #'   errors as well. If `"note"`, then any check failure generated an
-#'   error.
+#'   error. Its default can be modified with the `RCMDCHECK_ERROR_ON`
+#'   environment variable. If that is not set, then `"never"` is used.
 #' @return An S3 object (list) with fields `errors`,
 #'   `warnings` and `notes`. These are all character
 #'   vectors containing the output for the failed check.
@@ -106,13 +107,21 @@ NULL
 #' @importFrom callr rcmd_safe
 #' @importFrom desc desc
 
-rcmdcheck <- function(path = ".", quiet = FALSE, args = character(),
-                      build_args = character(), check_dir = NULL,
-                      libpath = .libPaths(), repos = getOption("repos"),
-                      timeout = Inf, error_on =
-                        c("never", "error", "warning", "note")) {
+rcmdcheck <- function(
+    path = ".",
+    quiet = FALSE,
+    args = character(),
+    build_args = character(),
+    check_dir = NULL,
+    libpath = .libPaths(),
+    repos = getOption("repos"),
+    timeout = Inf,
+    error_on = Sys.getenv(
+      "RCMDCHECK_ERROR_ON",
+      c("never", "error", "warning", "note")[1]
+    )) {
 
-  error_on <- match.arg(error_on)
+  error_on <- match.arg(error_on, c("never", "error", "warning", "note"))
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)

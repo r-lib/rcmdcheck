@@ -26,6 +26,9 @@
 #' * `RCMDCHECK_DETAILS_URL`: URL to the root of the CRAN check output
 #'   page. Defaults to `https://www.r-project.org/nosvn/R.check/`.
 #'
+#' * `RCMDCHECK_ERROR_ON`: the default value for the `error_on` argument
+#'   of [rcmdcheck()].
+#'
 #' * `RCMDCHECK_FLAVOURS_URL` URL to the CRAN check flavours page.
 #'   You can use this to select an alternative CRAN mirror. Defaults to
 #'   `https://cran.r-project.org/web/checks/check_flavors.html`.

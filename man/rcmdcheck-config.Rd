@@ -25,6 +25,8 @@ You can use this to select an alternative CRAN mirror. Defaults to
 \verb{https://cran.r-project.org/web/checks/}.
 \item \code{RCMDCHECK_DETAILS_URL}: URL to the root of the CRAN check output
 page. Defaults to \verb{https://www.r-project.org/nosvn/R.check/}.
+\item \code{RCMDCHECK_ERROR_ON}: the default value for the \code{error_on} argument
+of \code{\link[=rcmdcheck]{rcmdcheck()}}.
 \item \code{RCMDCHECK_FLAVOURS_URL} URL to the CRAN check flavours page.
 You can use this to select an alternative CRAN mirror. Defaults to
 \verb{https://cran.r-project.org/web/checks/check_flavors.html}.
