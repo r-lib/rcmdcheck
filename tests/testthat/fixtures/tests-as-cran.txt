@@ -1,0 +1,13 @@
+* checking examples ... NONE
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘a.R’
+  Running ‘b.R’
+  Running ‘c.R’
+ ERROR
+Running the tests in ‘tests/b.R’ failed.
+Complete output:
+  > stop("error")
+  Error: error
+  Execution halted
+* checking PDF version of manual ... OK

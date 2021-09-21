@@ -127,7 +127,7 @@ test_that("multiple test file run times are measured properly", {
 
 test_that("multi-arch test cases", {
   txt <- list(
-    list("* using log directory 'C:/Users/csard/works/ps.Rcheck'\n", 0.01), 
+    list("* using log directory 'C:/Users/csard/works/ps.Rcheck'\n", 0.01),
     list("* using R version 4.1.1 (2021-08-10)\n", 0.01),
     list("* using platform: x86_64-w64-mingw32 (64-bit)\n", 0.01),
     list("* using session charset: ISO8859-1\n", 0.01),
@@ -173,7 +173,7 @@ test_that("partial comparing line", {
     list("  Comparing ‘test-2.Rout’ to ‘test-2.Rout.save’ ... OK\n", 0),
     list(" OK\n", 0.01),
     list("* checking PDF version of manual ... OK\n", 0.01),
-    list("* DONE\n", 0.01)    
+    list("* DONE\n", 0.01)
   )
 
   out <- capture.output(replay(lines))
@@ -184,7 +184,7 @@ test_that("multiple comparing blocks", {
   txt <- readLines(test_path("fixtures", "checks", "comparing2.txt"))[53:88]
   lines <- lapply(txt, function(x) list(paste0(x, "\n"), 0.001))
   out <- capture.output(replay(lines))
-  expect_snapshot(out)  
+  expect_snapshot(out)
 })
 
 test_that("simple_callback", {
@@ -200,7 +200,7 @@ test_that("detect_callback", {
 
   withr::local_options(cli.dynamic = TRUE)
   expect_equal(detect_callback(), "block")
-  
+
   withr::local_options(cli.dynamic = FALSE)
   expect_equal(detect_callback(), "simple")
 })
@@ -210,4 +210,17 @@ test_that("should_add_spinner", {
   expect_true(should_add_spinner())
   withr::local_options(cli.dynamic = FALSE)
   expect_false(should_add_spinner())
+})
+
+test_that("multiple tests", {
+  txt <- readLines(test_path("fixtures", "tests-as-cran.txt"))
+  lines <- lapply(txt, function(x) list(paste0(x, "\n"), 0.001))
+  cb <- function(...) block_callback(as_cran = TRUE, ...)
+  out <- capture.output(replay(lines, callback = cb))
+  expect_snapshot(out)
+
+  txt <- readLines(test_path("fixtures", "tests-not-as-cran.txt"))
+  lines <- lapply(txt, function(x) list(paste0(x, "\n"), 0.001))
+  out <- capture.output(replay(lines))
+  expect_snapshot(out)
 })
