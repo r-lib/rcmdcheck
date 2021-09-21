@@ -50,6 +50,10 @@
 #'   already available. RStudio's pandoc is detected via an `RSTUDIO_PANDOC`
 #'   environment variable.
 #'
+#' * `RCMDCHECK_LOAD_CHECK_ENV`: you can use this environment variable
+#'   suppress loading environment variables from the `tools/check.env` file.
+#'   See [rcmdcheck()] for details.
+#'
 #' * `RSTUDIO_PANDOC`: if set, rcmdcheck adds this environment variable
 #'   to the PATH if pandoc is not on the PATH already. It is usually set
 #'   in RStudio. See also the `RCMDCHECK_USE_RSTUDIO_PANDOC` environment

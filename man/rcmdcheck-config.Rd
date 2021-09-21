@@ -45,6 +45,9 @@ path. If \code{false}, then it \emph{never} does that. If not set, or set to a
 different value, then pandoc is put on the path only if it is not
 already available. RStudio's pandoc is detected via an \code{RSTUDIO_PANDOC}
 environment variable.
+\item \code{RCMDCHECK_LOAD_CHECK_ENV}: you can use this environment variable
+suppress loading environment variables from the \code{tools/check.env} file.
+See \code{\link[=rcmdcheck]{rcmdcheck()}} for details.
 \item \code{RSTUDIO_PANDOC}: if set, rcmdcheck adds this environment variable
 to the PATH if pandoc is not on the PATH already. It is usually set
 in RStudio. See also the \code{RCMDCHECK_USE_RSTUDIO_PANDOC} environment
