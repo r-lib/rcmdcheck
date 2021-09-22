@@ -1,6 +1,7 @@
 
 test_that("check process crashes", {
   skip_on_cran()
+  if (!ps::ps_is_supported()) skip("Needs working ps")
 
   chkdir = tempfile()
   on.exit(unlink(chkdir, recursive = TRUE), add = TRUE)
@@ -18,7 +19,7 @@ test_that("check process crashes", {
   on.exit(unlink(c(pidfile, dbgfile)), add = TRUE)
   code <- sprintf(
     "if (! file.exists('%s')) cat(Sys.getpid(), '\\n', file = '%s')\n",
-    pidfile, pidfile
+    encodeString(pidfile), encodeString(pidfile)
   )
   cat(code, file = dbgfile)
 
@@ -45,11 +46,16 @@ test_that("check process crashes", {
 
   # Kill the check process
   Sys.sleep(1)
-  tools::pskill(pid, tools::SIGKILL)
+  ps::ps_kill(ps::ps_handle(pid))
 
   # Wait for the rcmdcheck() process to quit
   limit <- Sys.time() + as.difftime(1, units = "secs")
   while (proc$is_alive() && Sys.time() < limit) Sys.sleep(0.1)
+  expect_true(Sys.time() < limit)
+  if (proc$is_alive()) {
+    proc$kill()
+    return()
+  }
 
   # Result of rcmdcheck()
   expect_error(
