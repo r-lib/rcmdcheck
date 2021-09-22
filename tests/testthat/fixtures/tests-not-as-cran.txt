@@ -1,10 +1,10 @@
 * checking examples ... NONE
-* checking for unstated dependencies in ‘tests’ ... OK
+* checking for unstated dependencies in 'tests' ... OK
 * checking tests ...
-  Running ‘a.R’
-  Running ‘b.R’
+  Running 'a.R'
+  Running 'b.R'
  ERROR
-Running the tests in ‘tests/b.R’ failed.
+Running the tests in 'tests/b.R' failed.
 Complete output:
   > stop("error")
   Error: error

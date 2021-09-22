@@ -69,7 +69,7 @@ test_that("tests", {
     "  Error in parse(con, n = -1, srcfile = srcfile, encoding = \"UTF-8\") : ",
     "    test-diagnost_ols.R:19:8: unexpected $end",
     "  18: ",
-    "  19: lm_modeÄ",
+    "  19: lm_mode",
     "             ^",
     "  Calls: test_check ... doWithOneRestart -> force -> lapply -> FUN -> source_file -> parse",
     "  Execution halted",
@@ -110,15 +110,15 @@ test_that("multiple test file run times are measured properly", {
   txt <- list(
     list("* checking examples ... ", 5),
     list("OK\n", 0),
-    list("* checking for unstated dependencies in ‘tests’ ... OK\n", 0),
+    list("* checking for unstated dependencies in 'tests' ... OK\n", 0),
     list("* checking tests ... \n", 0),
-    list("  Running ‘first_edition.R’", 13.2),
+    list("  Running 'first_edition.R'", 13.2),
     list("\n", 0),
-    list("  Running ‘second_edition.R’", 14.3),
+    list("  Running 'second_edition.R'", 14.3),
     list("\n", 0),
     list(" OK\n", 0),
     list("* checking for unstated dependencies in vignettes ... OK\n", 0),
-    list("* checking package vignettes in ‘inst/doc’ ... OK\n", 0)
+    list("* checking package vignettes in 'inst/doc' ... OK\n", 0)
   )
 
   out <- capture.output(replay(txt))
@@ -166,11 +166,11 @@ test_that("comparing test output", {
 test_that("partial comparing line", {
   lines <- list(
     list("* checking tests ...\n", 0),
-    list("  Running ‘test-1.R’\n", 0),
-    list("  Comparing ‘test-1.Rout’ to ", 0),
-    list("‘test-1.Rout.save’ ... OK\n", 0),
-    list("  Running ‘test-2.R’\n", 0),
-    list("  Comparing ‘test-2.Rout’ to ‘test-2.Rout.save’ ... OK\n", 0),
+    list("  Running 'test-1.R'\n", 0),
+    list("  Comparing 'test-1.Rout' to ", 0),
+    list("'test-1.Rout.save' ... OK\n", 0),
+    list("  Running 'test-2.R'\n", 0),
+    list("  Comparing 'test-2.Rout' to 'test-2.Rout.save' ... OK\n", 0),
     list(" OK\n", 0.01),
     list("* checking PDF version of manual ... OK\n", 0.01),
     list("* DONE\n", 0.01)
