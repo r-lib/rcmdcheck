@@ -97,6 +97,8 @@ NULL
 #'   errors as well. If `"note"`, then any check failure generated an
 #'   error. Its default can be modified with the `RCMDCHECK_ERROR_ON`
 #'   environment variable. If that is not set, then `"never"` is used.
+#' @param env A named character vector, rxtra environment variables to
+#'   set in the check process.
 #' @return An S3 object (list) with fields `errors`,
 #'   `warnings` and `notes`. These are all character
 #'   vectors containing the output for the failed check.
@@ -119,7 +121,8 @@ rcmdcheck <- function(
     error_on = Sys.getenv(
       "RCMDCHECK_ERROR_ON",
       c("never", "error", "warning", "note")[1]
-    )) {
+    ),
+    env = character()) {
 
   error_on <- match.arg(error_on, c("never", "error", "warning", "note"))
 
@@ -139,7 +142,7 @@ rcmdcheck <- function(
   # Add pandoc to the PATH, for R CMD build and R CMD check
   if (should_use_rs_pandoc()) local_path(Sys.getenv("RSTUDIO_PANDOC"))
 
-  pkgbuild::local_build_tools()
+  pkgbuild::without_cache(pkgbuild::local_build_tools())
 
   targz <- build_package(path, check_dir, build_args = build_args,
                          libpath = libpath, quiet = quiet)
@@ -156,7 +159,8 @@ rcmdcheck <- function(
       libpath = libpath,
       repos = repos,
       quiet = quiet,
-      timeout = timeout
+      timeout = timeout,
+      env = env
     )
   )
 
@@ -185,7 +189,7 @@ rcmdcheck <- function(
 #' @importFrom withr with_envvar
 
 do_check <- function(targz, package, args, libpath, repos,
-                     quiet, timeout) {
+                     quiet, timeout, env) {
 
   session_output <- tempfile()
   profile <- make_fake_profile(session_output = session_output)
@@ -198,7 +202,11 @@ do_check <- function(targz, package, args, libpath, repos,
   rlibsuser <- if (callr_version < "3.0.0.9001")
     paste(libpath, collapse = .Platform$path.sep)
 
+  chkenv <- callr::rcmd_safe_env()
+  if (length(env)) chkenv[names(env)] <- env
+
   if (!quiet) cat_head("R CMD check")
+  callback <- if (!quiet) detect_callback(as_cran = "--as-cran" %in% args)
   res <- with_envvar(
     c(R_PROFILE_USER = profile, R_LIBS_USER = rlibsuser),
     rcmd_safe(
@@ -208,12 +216,28 @@ do_check <- function(targz, package, args, libpath, repos,
       user_profile = TRUE,
       repos = repos,
       stderr = "2>&1",
-      block_callback = if (!quiet) detect_callback(as_cran = "--as-cran" %in% args),
+      block_callback = callback,
       spinner = !quiet && should_add_spinner(),
       timeout = timeout,
-      fail_on_status = FALSE
+      fail_on_status = FALSE,
+      env = chkenv
     )
   )
+
+  # To print an incomplete line on timeout or crash
+  if (!is.null(callback) && (res$timeout || res$status != 0)) callback("\n")
+
+  # Non-zero status is an error, the check process failed
+  # R CMD check returns 1 for installation errors, we don't want to error
+  # for those.
+  if (res$status != 0 && res$status != 1) {
+    stop(
+      call. = FALSE,
+      "R CMD check process failed with exit status ", res$status,
+      "\n\nStandard output and error:\n",
+      res$stdout
+    )
+  }
 
   list(result = res, session_info = session_output)
 }

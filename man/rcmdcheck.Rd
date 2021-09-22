@@ -15,7 +15,8 @@ rcmdcheck(
   repos = getOption("repos"),
   timeout = Inf,
   error_on = Sys.getenv("RCMDCHECK_ERROR_ON", c("never", "error", "warning",
-    "note")[1])
+    "note")[1]),
+  env = character()
 )
 }
 \arguments{
@@ -61,6 +62,9 @@ generate errors. If \code{"warning"}, then \code{WARNING} failures generate
 errors as well. If \code{"note"}, then any check failure generated an
 error. Its default can be modified with the \code{RCMDCHECK_ERROR_ON}
 environment variable. If that is not set, then \code{"never"} is used.}
+
+\item{env}{A named character vector, rxtra environment variables to
+set in the check process.}
 }
 \value{
 An S3 object (list) with fields \code{errors},
