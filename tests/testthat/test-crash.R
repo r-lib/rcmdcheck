@@ -49,7 +49,7 @@ test_that("check process crashes", {
   ps::ps_kill(ps::ps_handle(pid))
 
   # Wait for the rcmdcheck() process to quit
-  limit <- Sys.time() + as.difftime(1, units = "secs")
+  limit <- Sys.time() + as.difftime(10, units = "secs")
   while (proc$is_alive() && Sys.time() < limit) Sys.sleep(0.1)
   expect_true(Sys.time() < limit)
   if (proc$is_alive()) {
