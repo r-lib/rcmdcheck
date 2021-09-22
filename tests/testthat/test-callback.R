@@ -11,7 +11,7 @@
 test_that("block_callback by chunks", {
   withr::local_options(rcmdcheck.timestamp_limit = 1000)
   fx <- test_path("fixtures", "test-error.txt")
-  chk <- readChar(fx, file.info(fx)$size, useBytes = TRUE)
+  chk <- win2unix(read_char(fx))
 
   # We don't make this random, so the partial lines are always the same
   # and the snapshot does not change
