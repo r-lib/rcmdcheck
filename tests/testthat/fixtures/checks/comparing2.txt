@@ -1,9 +1,9 @@
-* using log directory ‘/Users/gaborcsardi/works/ps.Rcheck’
+* using log directory '/Users/gaborcsardi/works/ps.Rcheck'
 * using R version 4.1.0 (2021-05-18)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
-* checking for file ‘ps/DESCRIPTION’ ... OK
-* this is package ‘ps’ version ‘1.6.0.9000’
+* checking for file 'ps/DESCRIPTION' ... OK
+* this is package 'ps' version '1.6.0.9000'
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -13,7 +13,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘ps’ can be installed ... OK
+* checking whether package 'ps' can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -51,24 +51,24 @@
 * checking use of PKG_*FLAGS in Makefiles ... OK
 * checking compiled code ... OK
 * checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
+* checking for unstated dependencies in 'tests' ... OK
 * checking tests ...
-  Running ‘test-1.R’
-  Comparing ‘test-1.Rout’ to ‘test-1.Rout.save’ ... OK
-  Running ‘test-2.R’
-  Comparing ‘test-2.Rout’ to ‘test-2.Rout.save’ ... OK
-  Running ‘test.R’
-  Comparing ‘test.Rout’ to ‘test.Rout.save’ ...1,4d0
+  Running 'test-1.R'
+  Comparing 'test-1.Rout' to 'test-1.Rout.save' ... OK
+  Running 'test-2.R'
+  Comparing 'test-2.Rout' to 'test-2.Rout.save' ... OK
+  Running 'test.R'
+  Comparing 'test.Rout' to 'test.Rout.save' ...1,4d0
 <
 <
 < >
 < > cat("This is the output.\n")
 6d1
 < >
-  Running ‘testthat.R’/Library/Frameworks/R.framework/Versions/4.1/Resources/bin/BATCH: line 60: 84659 Abort trap: 6           ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
+  Running 'testthat.R'/Library/Frameworks/R.framework/Versions/4.1/Resources/bin/BATCH: line 60: 84659 Abort trap: 6           ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
 
  ERROR
-Running the tests in ‘tests/testthat.R’ failed.
+Running the tests in 'tests/testthat.R' failed.
 Last 13 lines of output:
   +   ## ps does not support this platform
   +   reporter <- "progress"
@@ -90,5 +90,5 @@ Last 13 lines of output:
 
 Status: 1 ERROR
 See
-  ‘/Users/gaborcsardi/works/ps.Rcheck/00check.log’
+  '/Users/gaborcsardi/works/ps.Rcheck/00check.log'
 for details.

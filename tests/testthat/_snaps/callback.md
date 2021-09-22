@@ -3,30 +3,30 @@
     Code
       for (line in chk) cb(paste0(line, "\n"))
     Output
-        -  using log directory ‘/tmp/RtmpoYWa4I/file31fc5a857856/mlr.Rcheck’
+        -  using log directory '/tmp/RtmpoYWa4I/file31fc5a857856/mlr.Rcheck'
         -  using R version 3.5.0 (2017-01-27)
         -  using platform: x86_64-pc-linux-gnu (64-bit)
         -  using session charset: UTF-8
-        v  checking for file ‘mlr/DESCRIPTION’
-        -  this is package ‘mlr’ version ‘2.13’
+        v  checking for file 'mlr/DESCRIPTION'
+        -  this is package 'mlr' version '2.13'
         -  package encoding: UTF-8
         v  checking package namespace information
         N  checking package dependencies
-           Package suggested but not available for checking: ‘elmNN’
+           Package suggested but not available for checking: 'elmNN'
         v  checking if this is a source package
         v  checking if there is a namespace
         v  checking for executable files
         v  checking for hidden files and directories
         v  checking for portable file names
         v  checking for sufficient/correct file permissions
-        -  checking whether package ‘mlr’ can be installed ... [22s/22s] OK
+        -  checking whether package 'mlr' can be installed ... [22s/22s] OK
         N  checking installed package size
              installed size is  6.5Mb
              sub-directories of 1Mb or more:
                data   3.3Mb
                R      2.0Mb
         v  checking package directory
-        v  checking ‘build’ directory
+        v  checking 'build' directory
         v  checking DESCRIPTION meta-information
         v  checking top-level files
         v  checking for left-over files
@@ -54,17 +54,17 @@
         v  checking Rd \usage sections
         v  checking Rd contents
         v  checking for unstated dependencies in examples
-        v  checking contents of ‘data’ directory
+        v  checking contents of 'data' directory
         v  checking data for non-ASCII characters
         v  checking data for ASCII and uncompressed saves
         v  checking line endings in C/C++/Fortran sources/headers
         v  checking compiled code
-        v  checking installed files from ‘inst/doc’
-        v  checking files in ‘vignettes’
+        v  checking installed files from 'inst/doc'
+        v  checking files in 'vignettes'
         -  checking examples ... [18s/28s] OK
-        v  checking for unstated dependencies in ‘tests’
+        v  checking for unstated dependencies in 'tests'
         -  checking tests
-             Running the tests in ‘tests/run-classif1.R’ failed.
+             Running the tests in 'tests/run-classif1.R' failed.
            Last 999 lines of output:
              
              burning and aggregating chains from all threads... done
@@ -96,7 +96,7 @@
              done building BART in 0.014 sec 
              
              burning and aggregating chains from all threads... done
-             ── 1. Error: classif_blackboost (@test_classif_blackboost.R#32)  ───────────────
+             -- 1. Error: classif_blackboost (@test_classif_blackboost.R#32)  ---------------
              no method for assigning subsets of this S4 class
              1: do.call(mboost::blackboost, pars) at testthat/test_classif_blackboost.R:32
              2: (function (formula, data = list(), weights = NULL, na.action = na.pass, offset = NULL, 
@@ -122,9 +122,9 @@
              Error: testthat unit tests failed
              Execution halted
         v  checking for unstated dependencies in vignettes
-        v  checking package vignettes in ‘inst/doc’
+        v  checking package vignettes in 'inst/doc'
         -  checking running R code from vignettes
-              ‘mlr.Rmd’ using ‘UTF-8’ ... [0s/0s] OK
+              'mlr.Rmd' using 'UTF-8' ... [0s/0s] OK
             NONE
         -  checking re-building of vignette outputs ... [3s/4s] OK
         v  checking PDF version of manual
@@ -135,30 +135,30 @@
     Code
       for (ch in chunks) cb(ch)
     Output
-        -  using log directory ‘/tmp/RtmpoYWa4I/file31fc5a857856/mlr.Rcheck’
+        -  using log directory '/tmp/RtmpoYWa4I/file31fc5a857856/mlr.Rcheck'
       -  using R version 3.5.0 (2017-01-27)
       -  using platform: x86_64-pc-linux-gnu (64-bit)
       -  using session charset: UTF-8
-      v  checking for file ‘mlr/DESCRIPTION’
-      -  this is package ‘mlr’ version ‘2.13’
+      v  checking for file 'mlr/DESCRIPTION'
+      -  this is package 'mlr' version '2.13'
       -  package encoding: UTF-8
       v  checking package namespace information
       N  checking package dependencies
-         Package suggested but not available for checking: ‘elmNN’
+         Package suggested but not available for checking: 'elmNN'
       v  checking if this is a source package
       v  checking if there is a namespace
       v  checking for executable files
       v  checking for hidden files and directories
       v  checking for portable file names
       v  checking for sufficient/correct file permissions
-      -  checking whether package ‘mlr’ can be installed ... [22s/22s] OK
+      -  checking whether package 'mlr' can be installed ... [22s/22s] OK
       N  checking installed package size
            installed size is  6.5Mb
            sub-directories of 1Mb or more:
              data   3.3Mb
              R      2.0Mb
       v  checking package directory
-      v  checking ‘build’ directory
+      v  checking 'build' directory
       v  checking DESCRIPTION meta-information
       v  checking top-level files
       v  checking for left-over files
@@ -186,17 +186,17 @@
       v  checking Rd \usage sections
       v  checking Rd contents
       v  checking for unstated dependencies in examples
-      v  checking contents of ‘data’ directory
+      v  checking contents of 'data' directory
       v  checking data for non-ASCII characters
       v  checking data for ASCII and uncompressed saves
          checking line endings in C/C++/Fortran s  v  checking line endings in C/C++/Fortran sources/headers
          checking compiled code ... OK  v  checking compiled code
-      v  checking installed files from ‘inst/doc’
-      v  checking files in ‘vignettes’
+      v  checking installed files from 'inst/doc'
+      v  checking files in 'vignettes'
       -  checking examples ... [18s/28s] OK
-      v  checking for unstated dependencies in ‘tests’
+      v  checking for unstated dependencies in 'tests'
       -  checking tests
-      Running the tests in ‘t     Running the tests in ‘tests/run-classif1.R’ failed.
+      Running the tests in 't     Running the tests in 'tests/run-classif1.R' failed.
          Last 999 lines of output:
            
                 burning and aggregating chains from all threads... done
@@ -228,7 +228,7 @@
          done building B       done building BART in 0.014 sec 
            
            burning and aggregating chains from all threads... done
-           ── 1. Error: classif_blackboost (@test_classif_blackboost.R#32)  ───────────────
+           -- 1. Error: classif_blackboost (@test_classif_blackboost.R#32)  ---------------
            no method for assigning subsets of this S4 class
          1: do.call(mboost::blackboost, pars)       1: do.call(mboost::blackboost, pars) at testthat/test_classif_blackboost.R:32
            2: (function (formula, data = list(), weights = NULL, na.action = na.pass, offset = NULL, 
@@ -254,9 +254,9 @@
            Error: testthat unit tests failed
            Execution halted
       v  checking for unstated dependencies in vignettes
-      v  checking package vignettes in ‘inst/doc’
+      v  checking package vignettes in 'inst/doc'
       -  checking running R code from vignettes
-            ‘mlr.Rmd’ using ‘UTF-8’ ... [0s/0s] OK
+            'mlr.Rmd' using 'UTF-8' ... [0s/0s] OK
           NONE
       -  checking re-building of vignette outputs ... [3s/4s] OK
          checking PDF vers  v  checking PDF version of manual
@@ -292,7 +292,7 @@
              Error in parse(con, n = -1, srcfile = srcfile, encoding = "UTF-8") : 
                test-diagnost_ols.R:19:8: unexpected $end
              18: 
-             19: lm_modeÄ
+             19: lm_mode
                         ^
              Calls: test_check ... doWithOneRestart -> force -> lapply -> FUN -> source_file -> parse
              Execution halted
@@ -323,12 +323,12 @@
       out
     Output
       [1] "  \r   checking examples ... \r  \rv  checking examples (5s)"                      
-      [2] "\r  \rv  checking for unstated dependencies in ‘tests’"                            
+      [2] "\r  \rv  checking for unstated dependencies in 'tests'"                            
       [3] "\r  \r-  checking tests"                                                           
-      [4] "\r  \r   Running ‘first_edition.R’\r  \r\r  \rv  Running ‘first_edition.R’ (13.2s)"
-      [5] "   Running ‘second_edition.R’\r  \r\r  \rv  Running ‘second_edition.R’ (14.3s)"    
+      [4] "\r  \r   Running 'first_edition.R'\r  \r\r  \rv  Running 'first_edition.R' (13.2s)"
+      [5] "   Running 'second_edition.R'\r  \r\r  \rv  Running 'second_edition.R' (14.3s)"    
       [6] "\r  \rv  checking for unstated dependencies in vignettes"                          
-      [7] "\r  \rv  checking package vignettes in ‘inst/doc’"                                 
+      [7] "\r  \rv  checking package vignettes in 'inst/doc'"                                 
       [8] "\r"                                                                                
 
 # multi-arch test cases
@@ -356,22 +356,22 @@
     Code
       out
     Output
-       [1] "  \rv  checking for unstated dependencies in ‘tests’"                                       
+       [1] "  \rv  checking for unstated dependencies in 'tests'"                                       
        [2] "\r  \r-  checking tests"                                                                    
-       [3] "\r  \r\r  \rE  Running ‘testthat.R’"                                                        
-       [4] "\r  \r   Running the tests in ‘tests/testthat.R’ failed."                                   
+       [3] "\r  \r\r  \rE  Running 'testthat.R'"                                                        
+       [4] "\r  \r   Running the tests in 'tests/testthat.R' failed."                                   
        [5] "\r  \r   Last 13 lines of output:"                                                          
-       [6] "\r  \r     ⠏ |   0       | windows                                                         "
-       [7] "\r  \r     ⠏ |   0       | winver                                                          "
-       [8] "\r  \r     ⠏ |   0       | winver                                                          "
-       [9] "\r  \r     ✔ |   6       | winver"                                                          
+       [6] "\r  \r     / |   0       | windows                                                         "
+       [7] "\r  \r     / |   0       | winver                                                          "
+       [8] "\r  \r     / |   0       | winver                                                          "
+       [9] "\r  \r     v |   6       | winver"                                                          
       [10] "\r  \r     "                                                                                
-      [11] "\r  \r     ══ Results ═════════════════════════════════════════════════════════════════════"
+      [11] "\r  \r     == Results ====================================================================="
       [12] "\r  \r     Duration: 13.5 s"                                                                
       [13] "\r  \r     "                                                                                
-      [14] "\r  \r     ── Skipped tests  ──────────────────────────────────────────────────────────────"
-      [15] "\r  \r     • Needs working IPv6 connection (2)"                                             
-      [16] "\r  \r     • On CRAN (13)"                                                                  
+      [14] "\r  \r     -- Skipped tests  --------------------------------------------------------------"
+      [15] "\r  \r     * Needs working IPv6 connection (2)"                                             
+      [16] "\r  \r     * On CRAN (13)"                                                                  
       [17] "\r  \r     "                                                                                
       [18] "\r  \r     [ FAIL 1 | WARN 0 | SKIP 15 | PASS 367 ]"                                        
       [19] "\r  \r     Error: Test failures"                                                            
@@ -384,18 +384,18 @@
     Code
       out
     Output
-       [1] "  \rv  checking for unstated dependencies in ‘tests’"          
+       [1] "  \rv  checking for unstated dependencies in 'tests'"          
        [2] "\r  \r-  checking tests"                                       
-       [3] "\r  \r\r  \rv  Running ‘first_edition.R’"                      
-       [4] "\r  \rv  Running ‘second_edition.R’"                           
-       [5] "\r  \rv  Running ‘spelling.R’"                                 
-       [6] "X  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’"          
+       [3] "\r  \r\r  \rv  Running 'first_edition.R'"                      
+       [4] "\r  \rv  Running 'second_edition.R'"                           
+       [5] "\r  \rv  Running 'spelling.R'"                                 
+       [6] "X  Comparing 'spelling.Rout' to 'spelling.Rout.save'"          
        [7] "   6,8d5"                                                      
        [8] "\r  \r   < Potential spelling errors:"                         
        [9] "\r  \r   <   WORD              FOUND IN"                       
       [10] "\r  \r   < programatically   NEWS.md:14"                       
       [11] "\r  \r\r  \rv  checking for unstated dependencies in vignettes"
-      [12] "\r  \rv  checking package vignettes in ‘inst/doc’"             
+      [12] "\r  \rv  checking package vignettes in 'inst/doc'"             
       [13] "\r"                                                            
 
 # partial comparing line
@@ -404,10 +404,10 @@
       out
     Output
       [1] "  \r-  checking tests"                                                               
-      [2] "\r  \r\r  \rv  Running ‘test-1.R’"                                                   
-      [3] "   Comparing ‘test-1.Rout’ to \r  \rv  Comparing ‘test-1.Rout’ to ‘test-1.Rout.save’"
-      [4] "\r  \r\r  \rv  Running ‘test-2.R’"                                                   
-      [5] "v  Comparing ‘test-2.Rout’ to ‘test-2.Rout.save’"                                    
+      [2] "\r  \r\r  \rv  Running 'test-1.R'"                                                   
+      [3] "   Comparing 'test-1.Rout' to \r  \rv  Comparing 'test-1.Rout' to 'test-1.Rout.save'"
+      [4] "\r  \r\r  \rv  Running 'test-2.R'"                                                   
+      [5] "v  Comparing 'test-2.Rout' to 'test-2.Rout.save'"                                    
       [6] "\r  \r\r  \rv  checking PDF version of manual"                                       
       [7] "\r  \r\r"                                                                            
 
@@ -417,14 +417,14 @@
       out
     Output
        [1] "  \rv  checking examples"                                                                                                                                                    
-       [2] "\r  \rv  checking for unstated dependencies in ‘tests’"                                                                                                                      
+       [2] "\r  \rv  checking for unstated dependencies in 'tests'"                                                                                                                      
        [3] "\r  \r-  checking tests"                                                                                                                                                     
-       [4] "\r  \r\r  \rv  Running ‘test-1.R’"                                                                                                                                           
-       [5] "v  Comparing ‘test-1.Rout’ to ‘test-1.Rout.save’"                                                                                                                            
-       [6] "\r  \r\r  \rv  Running ‘test-2.R’"                                                                                                                                           
-       [7] "v  Comparing ‘test-2.Rout’ to ‘test-2.Rout.save’"                                                                                                                            
-       [8] "\r  \r\r  \rv  Running ‘test.R’"                                                                                                                                             
-       [9] "X  Comparing ‘test.Rout’ to ‘test.Rout.save’"                                                                                                                                
+       [4] "\r  \r\r  \rv  Running 'test-1.R'"                                                                                                                                           
+       [5] "v  Comparing 'test-1.Rout' to 'test-1.Rout.save'"                                                                                                                            
+       [6] "\r  \r\r  \rv  Running 'test-2.R'"                                                                                                                                           
+       [7] "v  Comparing 'test-2.Rout' to 'test-2.Rout.save'"                                                                                                                            
+       [8] "\r  \r\r  \rv  Running 'test.R'"                                                                                                                                             
+       [9] "X  Comparing 'test.Rout' to 'test.Rout.save'"                                                                                                                                
       [10] "   1,4d0"                                                                                                                                                                    
       [11] "\r  \r   <"                                                                                                                                                                  
       [12] "\r  \r   <"                                                                                                                                                                  
@@ -434,7 +434,7 @@
       [16] "\r  \r   < >"                                                                                                                                                                
       [17] "\r  \r\r  \r   "                                                                                                                                                             
       [18] "\r  \rE"                                                                                                                                                                     
-      [19] "\r  \r   Running the tests in ‘tests/testthat.R’ failed."                                                                                                                    
+      [19] "\r  \r   Running the tests in 'tests/testthat.R' failed."                                                                                                                    
       [20] "\r  \r   Last 13 lines of output:"                                                                                                                                           
       [21] "\r  \r     +   ## ps does not support this platform"                                                                                                                         
       [22] "\r  \r     +   reporter <- \"progress\""                                                                                                                                     
@@ -459,12 +459,12 @@
     Code
       out
     Output
-       [1] "* using log directory ‘/private/tmp/readr.Rcheck’"                             
+       [1] "* using log directory '/private/tmp/readr.Rcheck'"                             
        [2] "* using R version 4.1.0 (2021-05-18)"                                          
        [3] "* using platform: x86_64-apple-darwin17.0 (64-bit)"                            
        [4] "* using session charset: UTF-8"                                                
-       [5] "* checking for file ‘readr/DESCRIPTION’ ... OK"                                
-       [6] "* this is package ‘readr’ version ‘2.0.1.9000’"                                
+       [5] "* checking for file 'readr/DESCRIPTION' ... OK"                                
+       [6] "* this is package 'readr' version '2.0.1.9000'"                                
        [7] "* package encoding: UTF-8"                                                     
        [8] "* checking package namespace information ... OK"                               
        [9] "* checking package dependencies ... OK"                                        
@@ -474,10 +474,10 @@
       [13] "* checking for hidden files and directories ... OK"                            
       [14] "* checking for portable file names ... OK"                                     
       [15] "* checking for sufficient/correct file permissions ... OK"                     
-      [16] "* checking whether package ‘readr’ can be installed ... OK"                    
+      [16] "* checking whether package 'readr' can be installed ... OK"                    
       [17] "* checking installed package size ... OK"                                      
       [18] "* checking package directory ... OK"                                           
-      [19] "* checking ‘build’ directory ... OK"                                           
+      [19] "* checking 'build' directory ... OK"                                           
       [20] "* checking DESCRIPTION meta-information ... OK"                                
       [21] "* checking top-level files ... OK"                                             
       [22] "* checking for left-over files ... OK"                                         
@@ -507,24 +507,24 @@
       [46] "* checking R/sysdata.rda ... OK"                                               
       [47] "* checking line endings in C/C++/Fortran sources/headers ... OK"               
       [48] "* checking compiled code ... OK"                                               
-      [49] "* checking installed files from ‘inst/doc’ ... OK"                             
-      [50] "* checking files in ‘vignettes’ ... OK"                                        
+      [49] "* checking installed files from 'inst/doc' ... OK"                             
+      [50] "* checking files in 'vignettes' ... OK"                                        
       [51] "* checking examples ... OK"                                                    
-      [52] "* checking for unstated dependencies in ‘tests’ ... OK"                        
+      [52] "* checking for unstated dependencies in 'tests' ... OK"                        
       [53] "* checking tests ..."                                                          
-      [54] "  Running ‘first_edition.R’"                                                   
-      [55] "  Running ‘second_edition.R’"                                                  
-      [56] "  Running ‘spelling.R’"                                                        
-      [57] "  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6,8d5"                  
+      [54] "  Running 'first_edition.R'"                                                   
+      [55] "  Running 'second_edition.R'"                                                  
+      [56] "  Running 'spelling.R'"                                                        
+      [57] "  Comparing 'spelling.Rout' to 'spelling.Rout.save' ...6,8d5"                  
       [58] "< Potential spelling errors:"                                                  
       [59] "<   WORD              FOUND IN"                                                
       [60] "< programatically   NEWS.md:14"                                                
       [61] " OK"                                                                           
       [62] "* checking for unstated dependencies in vignettes ... OK"                      
-      [63] "* checking package vignettes in ‘inst/doc’ ... OK"                             
+      [63] "* checking package vignettes in 'inst/doc' ... OK"                             
       [64] "* checking running R code from vignettes ..."                                  
-      [65] "  ‘locales.Rmd’ using ‘UTF-8’... OK"                                           
-      [66] "  ‘readr.Rmd’ using ‘UTF-8’... OK"                                             
+      [65] "  'locales.Rmd' using 'UTF-8'... OK"                                           
+      [66] "  'readr.Rmd' using 'UTF-8'... OK"                                             
       [67] " NONE"                                                                         
       [68] "* checking re-building of vignette outputs ... OK"                             
       [69] "* checking PDF version of manual ... OK"                                       
@@ -538,13 +538,13 @@
       out
     Output
        [1] "  \r-  checking examples ... NONE"                     
-       [2] "\r  \rv  checking for unstated dependencies in ‘tests’"
+       [2] "\r  \rv  checking for unstated dependencies in 'tests'"
        [3] "\r  \r-  checking tests"                               
-       [4] "\r  \r\r  \r-  Running ‘a.R’"                          
-       [5] "\r  \r-  Running ‘b.R’"                                
-       [6] "\r  \r-  Running ‘c.R’"                                
+       [4] "\r  \r\r  \r-  Running 'a.R'"                          
+       [5] "\r  \r-  Running 'b.R'"                                
+       [6] "\r  \r-  Running 'c.R'"                                
        [7] "E  Some test files failed"                             
-       [8] "\r  \r   Running the tests in ‘tests/b.R’ failed."     
+       [8] "\r  \r   Running the tests in 'tests/b.R' failed."     
        [9] "\r  \r   Complete output:"                             
       [10] "\r  \r     > stop(\"error\")"                          
       [11] "\r  \r     Error: error"                               
@@ -558,11 +558,11 @@
       out
     Output
        [1] "  \r-  checking examples ... NONE"                     
-       [2] "\r  \rv  checking for unstated dependencies in ‘tests’"
+       [2] "\r  \rv  checking for unstated dependencies in 'tests'"
        [3] "\r  \r-  checking tests"                               
-       [4] "\r  \r\r  \rv  Running ‘a.R’"                          
-       [5] "\r  \rE  Running ‘b.R’"                                
-       [6] "\r  \r   Running the tests in ‘tests/b.R’ failed."     
+       [4] "\r  \r\r  \rv  Running 'a.R'"                          
+       [5] "\r  \rE  Running 'b.R'"                                
+       [6] "\r  \r   Running the tests in 'tests/b.R' failed."     
        [7] "\r  \r   Complete output:"                             
        [8] "\r  \r     > stop(\"error\")"                          
        [9] "\r  \r     Error: error"                               

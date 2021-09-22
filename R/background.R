@@ -122,7 +122,7 @@ rcc_init <- function(self, private, super, path, args, build_args,
   # The updated PATH is also inherited in the subprocess below.
   if (should_use_rs_pandoc()) local_path(Sys.getenv("RSTUDIO_PANDOC"))
 
-  pkgbuild::local_build_tools()
+  pkgbuild::without_cache(pkgbuild::local_build_tools())
 
   targz <- build_package(path, check_dir, build_args = build_args,
                          libpath = libpath, quiet = TRUE)

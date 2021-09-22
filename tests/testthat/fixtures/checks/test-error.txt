@@ -51,23 +51,23 @@
 * checking use of PKG_*FLAGS in Makefiles ... OK
 * checking compiled code ... OK
 * checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
+* checking for unstated dependencies in 'tests' ... OK
 * checking tests ...
-  Running ‘testthat.R’
+  Running 'testthat.R'
  ERROR
-Running the tests in ‘tests/testthat.R’ failed.
+Running the tests in 'tests/testthat.R' failed.
 Last 13 lines of output:
-  ⠏ |   0       | windows                                                         
-  ⠏ |   0       | winver                                                          
-  ⠏ |   0       | winver                                                          
-  ✔ |   6       | winver
+  / |   0       | windows                                                         
+  / |   0       | winver                                                          
+  / |   0       | winver                                                          
+  v |   6       | winver
   
-  ══ Results ═════════════════════════════════════════════════════════════════════
+  == Results =====================================================================
   Duration: 13.5 s
   
-  ── Skipped tests  ──────────────────────────────────────────────────────────────
-  • Needs working IPv6 connection (2)
-  • On CRAN (13)
+  -- Skipped tests  --------------------------------------------------------------
+  * Needs working IPv6 connection (2)
+  * On CRAN (13)
   
   [ FAIL 1 | WARN 0 | SKIP 15 | PASS 367 ]
   Error: Test failures

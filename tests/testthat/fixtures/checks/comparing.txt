@@ -1,9 +1,9 @@
-* using log directory ‘/private/tmp/readr.Rcheck’
+* using log directory '/private/tmp/readr.Rcheck'
 * using R version 4.1.0 (2021-05-18)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
-* checking for file ‘readr/DESCRIPTION’ ... OK
-* this is package ‘readr’ version ‘2.0.1.9000’
+* checking for file 'readr/DESCRIPTION' ... OK
+* this is package 'readr' version '2.0.1.9000'
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -13,10 +13,10 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘readr’ can be installed ... OK
+* checking whether package 'readr' can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking ‘build’ directory ... OK
+* checking 'build' directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -46,24 +46,24 @@
 * checking R/sysdata.rda ... OK
 * checking line endings in C/C++/Fortran sources/headers ... OK
 * checking compiled code ... OK
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
+* checking installed files from 'inst/doc' ... OK
+* checking files in 'vignettes' ... OK
 * checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
+* checking for unstated dependencies in 'tests' ... OK
 * checking tests ...
-  Running ‘first_edition.R’
-  Running ‘second_edition.R’
-  Running ‘spelling.R’
-  Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6,8d5
+  Running 'first_edition.R'
+  Running 'second_edition.R'
+  Running 'spelling.R'
+  Comparing 'spelling.Rout' to 'spelling.Rout.save' ...6,8d5
 < Potential spelling errors:
 <   WORD              FOUND IN
 < programatically   NEWS.md:14
  OK
 * checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
+* checking package vignettes in 'inst/doc' ... OK
 * checking running R code from vignettes ...
-  ‘locales.Rmd’ using ‘UTF-8’... OK
-  ‘readr.Rmd’ using ‘UTF-8’... OK
+  'locales.Rmd' using 'UTF-8'... OK
+  'readr.Rmd' using 'UTF-8'... OK
  NONE
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
