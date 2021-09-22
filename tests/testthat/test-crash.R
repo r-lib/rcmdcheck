@@ -1,4 +1,6 @@
 
+if (!isTRUE(as.logical(Sys.getenv("RCMDCHECK_EXTRA_TESTS")))) return()
+
 test_that("check process crashes", {
   skip_on_cran()
   if (!ps::ps_is_supported()) skip("Needs working ps")
