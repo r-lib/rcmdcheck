@@ -1,6 +1,6 @@
 
 if (!identical(Sys.getenv("NOT_CRAN"), "true")) return()
-if (!isTRUE(as.logical(Sys.getenv("CI")))) return()
+if (!isTRUE(as.logical(Sys.getenv("EXTRA_TESTS")))) return()
 if (getRversion() < "3.6.0") return()
 
 httpbin <- webfakes::new_app_process(webfakes::httpbin_app())
