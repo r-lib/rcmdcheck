@@ -33,6 +33,26 @@
 * RStudio's Pandoc is now on the path during `rcmdcheck()` 
   and `rcmdcheck_process` (#109, #132, @dpprdan).
 
+* `rcmdcheck()` now errors if the check process crashes (#110, #163).
+
+* `rcmdcheck()` prints the check ouptut better interactively, especially
+  when the package has multiple test files (#145, #161).
+
+* rcmdcheck can now ignore `NOTE`s, if requested, see `?rcmdcheck` for
+  details (#12, #160).
+
+* rcmdcheck now always converts its output to UTF-8 from the native
+  encoding. It also handles parsing check output in a non-native encoding
+  better (#152).
+
+* rcmdcheck now ignored time stamps when comparing two check results (#128).
+
+* rcmdcheck now does not print extra empty lines in the interactive output
+  on GitHub Actions.
+
+* rcmdcheck now uses a more robust implementation to extract the session
+  info from the check process (#164).
+
 # 1.3.3
 
 * `cran_check_results()` has now a `quiet` argument, and the download
