@@ -63,7 +63,7 @@ errors as well. If \code{"note"}, then any check failure generated an
 error. Its default can be modified with the \code{RCMDCHECK_ERROR_ON}
 environment variable. If that is not set, then \code{"never"} is used.}
 
-\item{env}{A named character vector, rxtra environment variables to
+\item{env}{A named character vector, extra environment variables to
 set in the check process.}
 }
 \value{
