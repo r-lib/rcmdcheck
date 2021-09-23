@@ -1,4 +1,13 @@
 
+# these are set by devtools, and probably by --as-cran as well,
+# so we unset them here
+
+withr::local_envvar(
+  "_R_CHECK_CRAN_INCOMING_REMOTE_" = NA_character_,
+  "_R_CHECK_CRAN_INCOMING_" = NA_character_,
+  "_R_CHECK_FORCE_SUGGESTS_" = NA_character_
+)
+
 test_that("rcmdcheck works", {
 
   skip_on_cran()
