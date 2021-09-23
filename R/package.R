@@ -97,7 +97,7 @@ NULL
 #'   errors as well. If `"note"`, then any check failure generated an
 #'   error. Its default can be modified with the `RCMDCHECK_ERROR_ON`
 #'   environment variable. If that is not set, then `"never"` is used.
-#' @param env A named character vector, rxtra environment variables to
+#' @param env A named character vector, extra environment variables to
 #'   set in the check process.
 #' @return An S3 object (list) with fields `errors`,
 #'   `warnings` and `notes`. These are all character
@@ -191,37 +191,41 @@ rcmdcheck <- function(
 do_check <- function(targz, package, args, libpath, repos,
                      quiet, timeout, env) {
 
-  session_output <- tempfile()
-  profile <- make_fake_profile(session_output = session_output)
-  on.exit(unlink(profile), add = TRUE)
-
   # if the pkg.Rcheck directory already exists, unlink it
   unlink(paste0(package, ".Rcheck"), recursive = TRUE)
 
-  callr_version <- package_version(getNamespaceVersion("callr"))
-  rlibsuser <- if (callr_version < "3.0.0.9001")
-    paste(libpath, collapse = .Platform$path.sep)
-
+  # set up environment, start with callr safe set
   chkenv <- callr::rcmd_safe_env()
+
+  # if R_TESTS is set here, we'll skip the session_info, because we are
+  # probably inside test cases of some package
+  if (Sys.getenv("R_TESTS", "") == "") {
+    session_output <- tempfile()
+    libdir <- file.path(dirname(targz), paste0(package, ".Rcheck"))
+    profile <- make_fake_profile(package, session_output, libdir)
+    on.exit(unlink(profile), add = TRUE)
+    chkenv["R_TESTS"] <- profile
+  } else {
+    session_output <- NULL
+  }
+
+  # user supplied env vars take precedence
   if (length(env)) chkenv[names(env)] <- env
 
   if (!quiet) cat_head("R CMD check")
   callback <- if (!quiet) detect_callback(as_cran = "--as-cran" %in% args)
-  res <- with_envvar(
-    c(R_PROFILE_USER = profile, R_LIBS_USER = rlibsuser),
-    rcmd_safe(
-      "check",
-      cmdargs = c(basename(targz), args),
-      libpath = libpath,
-      user_profile = TRUE,
-      repos = repos,
-      stderr = "2>&1",
-      block_callback = callback,
-      spinner = !quiet && should_add_spinner(),
-      timeout = timeout,
-      fail_on_status = FALSE,
-      env = chkenv
-    )
+  res <- rcmd_safe(
+    "check",
+    cmdargs = c(basename(targz), args),
+    libpath = libpath,
+    user_profile = FALSE,
+    repos = repos,
+    stderr = "2>&1",
+    block_callback = callback,
+    spinner = !quiet && should_add_spinner(),
+    timeout = timeout,
+    fail_on_status = FALSE,
+    env = chkenv
   )
 
   # To print an incomplete line on timeout or crash

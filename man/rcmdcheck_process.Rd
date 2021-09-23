@@ -41,6 +41,8 @@ package to check.
 \item \code{repos}: The \code{repos} option to set for the check.
 This is needed for cyclic dependency checks if you use the
 \code{--as-cran} argument. The default uses the current value.
+\item \code{env}: A named character vector, extra environment variables to
+set in the check process.
 }
 }
 
