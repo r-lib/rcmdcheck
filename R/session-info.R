@@ -1,31 +1,32 @@
 
-make_fake_profile  <- function(session_output) {
+make_fake_profile  <- function(package, session_output, libdir) {
   profile <- tempfile()
 
-  ## Include the real profile as well, if any
-  user <- Sys.getenv("R_PROFILE_USER", NA_character_)
-  local <- ".Rprofile"
-  home  <- path.expand("~/.Rprofile")
-  if (is.na(user) && file.exists(local)) user <- local
-  if (is.na(user) && file.exists(home)) user <- home
-  if (!is.na(user) && file.exists(user)) file.append(profile, user)
-
-  last <- substitute(
-    function() {
-      si <- tryCatch(sessioninfo::session_info(), error = identity)
-      l <- if (file.exists(`__output__`)) {
-        readRDS(`__output__`)
-      } else {
-        list()
-      }
-      saveRDS(c(l, list(si)), `__output__`)
-    },
-    list(`__output__` = session_output)
+  args <- list(
+    `__output__` = session_output,
+    `__package__` = package,
+    `__libdir__` = libdir
   )
 
-  cat(".Last <-", deparse(last), sep = "\n", file = profile,
-      append = TRUE)
+  expr <- substitute({
+    local({
+      reg.finalizer(
+        .GlobalEnv,
+        function(...) {
+          tryCatch({
+            .libPaths(c(`__libdir__`, .libPaths()))
+            si <- sessioninfo::session_info(pkgs = `__package__`)
+            saveRDS(si, `__output__`)
+          }, error = function(e) NULL)
+        },
+        onexit = TRUE
+      )
+      Sys.unsetenv("R_TESTS")
+    })
+  }, args)
 
+  cat(deparse(expr), sep = "\n", file = profile)
+  
   profile
 }
 
@@ -37,10 +38,5 @@ get_session_info <- function(package, session_output) {
     error = function(e) NULL
   )
 
-  session_info <- Filter(
-    function(so) package %in% so$packages$package,
-    session_info
-  )
-
-  if (length(session_info) > 0) session_info[[1]] else NULL
+  session_info
 }
