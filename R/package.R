@@ -197,11 +197,12 @@ do_check <- function(targz, package, args, libpath, repos,
   # set up environment, start with callr safe set
   chkenv <- callr::rcmd_safe_env()
 
+  libdir <- file.path(dirname(targz), paste0(package, ".Rcheck"))
+
   # if R_TESTS is set here, we'll skip the session_info, because we are
   # probably inside test cases of some package
   if (Sys.getenv("R_TESTS", "") == "") {
     session_output <- tempfile()
-    libdir <- file.path(dirname(targz), paste0(package, ".Rcheck"))
     profile <- make_fake_profile(package, session_output, libdir)
     on.exit(unlink(profile), add = TRUE)
     chkenv["R_TESTS"] <- profile
@@ -217,7 +218,7 @@ do_check <- function(targz, package, args, libpath, repos,
   res <- rcmd_safe(
     "check",
     cmdargs = c(basename(targz), args),
-    libpath = libpath,
+    libpath = c(libdir, libpath),
     user_profile = FALSE,
     repos = repos,
     stderr = "2>&1",

@@ -139,24 +139,25 @@ rcc_init <- function(self, private, super, path, args, build_args,
   # set up environment, start with callr safe set
   chkenv <- callr::rcmd_safe_env()
 
+  package <- private$description$get("Package")[[1]]
+  libdir <- file.path(dirname(targz), paste0(package, ".Rcheck"))
+
   # if R_TESTS is set here, we'll skip the session_info, because we are
   # probably inside test cases of some package
   if (Sys.getenv("R_TESTS", "") == "") {
     private$session_output <- tempfile()
     private$tempfiles  <- c(private$session_output, profile)
-    package <- private$description$get("Package")[[1]]
-    libdir <- file.path(dirname(targz), paste0(package, ".Rcheck"))
     profile <- make_fake_profile(package, private$session_output, libdir)
     chkenv["R_TESTS"] <- profile
   }
 
   # user supplied env vars take precedence
   if (length(env)) chkenv[names(env)] <- env
-  
+
   options <- rcmd_process_options(
     cmd = "check",
     cmdargs = c(basename(targz), args),
-    libpath = libpath,
+    libpath = c(libdir, libpath),
     repos = repos,
     user_profile = FALSE,
     stderr = "2>&1",
