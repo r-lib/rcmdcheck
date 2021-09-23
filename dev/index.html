@@ -76,6 +76,16 @@
 <div id="run-r-cmd-check-from-r-and-capture-results" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#run-r-cmd-check-from-r-and-capture-results" class="anchor"></a>Run R CMD check from R and Capture Results</h1></div>
+<ul>
+<li>
+<a href="#rcmdcheck">rcmdcheck</a>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 </div>
 <div id="rcmdcheck" class="section level1">
@@ -85,7 +95,7 @@
 <p>Run R CMD check from R and Capture Results</p>
 </blockquote>
 <!-- badges: start -->
-<p><a href="https://tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://github.com/r-lib/rcmdcheck/actions"><img src="https://github.com/r-lib/rcmdcheck/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="http://www.r-pkg.org/pkg/rcmdcheck"><img src="http://www.r-pkg.org/badges/version/rcmdcheck"></a> <a href="http://www.r-pkg.org/pkg/rcmdcheck"><img src="http://cranlogs.r-pkg.org/badges/rcmdcheck" alt="CRAN RStudio mirror downloads"></a> <a href="https://codecov.io/github/r-lib/rcmdcheck?branch=master"><img src="https://img.shields.io/codecov/c/github/r-lib/rcmdcheck/master.svg" alt="Coverage Status"></a> <!-- badges: end --></p>
+<p><a href="https://tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://github.com/r-lib/rcmdcheck/actions"><img src="https://github.com/r-lib/rcmdcheck/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://www.r-pkg.org/pkg/rcmdcheck"><img src="https://www.r-pkg.org/badges/version/rcmdcheck"></a> <a href="https://www.r-pkg.org/pkg/rcmdcheck"><img src="https://cranlogs.r-pkg.org/badges/rcmdcheck" alt="CRAN RStudio mirror downloads"></a> <a href="https://codecov.io/github/r-lib/rcmdcheck?branch=master"><img src="https://img.shields.io/codecov/c/github/r-lib/rcmdcheck/master.svg" alt="Coverage Status"></a> <!-- badges: end --></p>
 <p>Run R CMD check form R programatically, and capture the results of the individual checks.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -97,7 +107,7 @@
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-lib.github.io/rcmdcheck">rcmdcheck</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-lib.github.io/rcmdcheck/">rcmdcheck</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/rcmdcheck.html">rcmdcheck</a></span><span class="op">(</span><span class="st">"path/to/R/package"</span><span class="op">)</span></code></pre></div>
 <p>Call <code><a href="reference/rcmdcheck.html">rcmdcheck()</a></code> on a source R package <code>.tar.gz</code> file, or on a folder containing your R package. Supply <code>quiet = FALSE</code> if you want to omit the output. The result of the check is returned, in a list with elements <code>errors</code>, <code>warnings</code>, and <code>notes</code>. Each element is a character vector, and one element of the character vectors is a single failure.</p>
 <p><img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@master/tools/rcmdcheck.svg"></p>
@@ -106,11 +116,11 @@
 <a href="#programmatic-usage" class="anchor"></a>Programmatic usage</h3>
 <p><code><a href="reference/rcmdcheck.html">rcmdcheck()</a></code> returns an <code>rcmdcheck</code> object, which you can query and manipulate.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-lib.github.io/rcmdcheck">rcmdcheck</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-lib.github.io/rcmdcheck/">rcmdcheck</a></span><span class="op">)</span>
 <span class="va">chk</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rcmdcheck.html">rcmdcheck</a></span><span class="op">(</span><span class="st">"tests/testthat/bad1"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">chk</span>
-<span class="co">#&gt; ── R CMD check results ────────────────────────────── badpackage 1.0.0 ────</span>
-<span class="co">#&gt; Duration: 11s</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────── badpackage 1.0.0 ────</span>
+<span class="co">#&gt; Duration: 12.4s</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ❯ checking DESCRIPTION meta-information ... WARNING</span>
 <span class="co">#&gt;   Non-standard license specification:</span>
@@ -121,9 +131,9 @@
 <p><code><a href="reference/check_details.html">check_details()</a></code> turns the check results into a simple lists with the following information currently:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="reference/check_details.html">check_details</a></span><span class="op">(</span><span class="va">chk</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "package"      "version"      "notes"        "warnings"    </span>
-<span class="co">#&gt;  [5] "errors"       "platform"     "checkdir"     "install_out" </span>
-<span class="co">#&gt;  [9] "description"  "session_info" "cran"         "bioc"</span></code></pre></div>
+<span class="co">#&gt;  [1] "package"      "version"      "notes"        "warnings"     "errors"      </span>
+<span class="co">#&gt;  [6] "platform"     "checkdir"     "install_out"  "description"  "session_info"</span>
+<span class="co">#&gt; [11] "cran"         "bioc"</span></code></pre></div>
 <ul>
 <li>
 <code>package</code>: Package name.</li>
@@ -164,59 +174,128 @@
 <p><code><a href="reference/cran_check_flavours.html">cran_check_flavours()</a></code> downloads the names of the CRAN platforms:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/cran_check_flavours.html">cran_check_flavours</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "r-devel-linux-x86_64-debian-clang"</span>
-<span class="co">#&gt;  [2] "r-devel-linux-x86_64-debian-gcc"  </span>
-<span class="co">#&gt;  [3] "r-devel-linux-x86_64-fedora-clang"</span>
-<span class="co">#&gt;  [4] "r-devel-linux-x86_64-fedora-gcc"  </span>
-<span class="co">#&gt;  [5] "r-patched-linux-x86_64"           </span>
-<span class="co">#&gt;  [6] "r-patched-solaris-x86"            </span>
-<span class="co">#&gt;  [7] "r-release-linux-x86_64"           </span>
-<span class="co">#&gt;  [8] "r-release-windows-ix86+x86_64"    </span>
-<span class="co">#&gt;  [9] "r-release-osx-x86_64"             </span>
-<span class="co">#&gt; [10] "r-oldrel-windows-ix86+x86_64"     </span>
-<span class="co">#&gt; [11] "r-oldrel-osx-x86_64"</span></code></pre></div>
+<span class="co">#&gt;  [1] "r-devel-linux-x86_64-debian-clang" "r-devel-linux-x86_64-debian-gcc"  </span>
+<span class="co">#&gt;  [3] "r-devel-linux-x86_64-fedora-clang" "r-devel-linux-x86_64-fedora-gcc"  </span>
+<span class="co">#&gt;  [5] "r-devel-windows-x86_64"            "r-patched-linux-x86_64"           </span>
+<span class="co">#&gt;  [7] "r-patched-solaris-x86"             "r-release-linux-x86_64"           </span>
+<span class="co">#&gt;  [9] "r-release-macos-arm64"             "r-release-macos-x86_64"           </span>
+<span class="co">#&gt; [11] "r-release-windows-ix86+x86_64"     "r-oldrel-macos-x86_64"            </span>
+<span class="co">#&gt; [13] "r-oldrel-windows-ix86+x86_64"</span></code></pre></div>
 <p><code><a href="reference/cran_check_results.html">cran_check_results()</a></code> loads and parses all check results for a package.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/cran_check_results.html">cran_check_results</a></span><span class="op">(</span><span class="st">"igraph"</span><span class="op">)</span>
 <span class="co">#&gt; $`r-devel-linux-x86_64-debian-clang`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span>
+<span class="co">#&gt; ❯ checking top-level files ... WARNING</span>
+<span class="co">#&gt;     Output from running autoreconf:</span>
+<span class="co">#&gt;     configure.ac:71: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:71: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:71: the top level</span>
+<span class="co">#&gt;     configure.ac:110: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:110: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:110: the top level</span>
+<span class="co">#&gt;     configure.ac:127: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:127: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:127: the top level</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 0 errors ✔ | 1 warning ✖ | 0 notes ✔</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $`r-devel-linux-x86_64-debian-gcc`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span>
+<span class="co">#&gt; ❯ checking top-level files ... WARNING</span>
+<span class="co">#&gt;     Output from running autoreconf:</span>
+<span class="co">#&gt;     configure.ac:71: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:71: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:71: the top level</span>
+<span class="co">#&gt;     configure.ac:110: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:110: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:110: the top level</span>
+<span class="co">#&gt;     configure.ac:127: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:127: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:127: the top level</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 0 errors ✔ | 1 warning ✖ | 0 notes ✔</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $`r-devel-linux-x86_64-fedora-clang`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
-<span class="co">#&gt;     installed size is 16.1Mb</span>
+<span class="co">#&gt;     installed size is 16.9Mb</span>
 <span class="co">#&gt;     sub-directories of 1Mb or more:</span>
 <span class="co">#&gt;       R      1.4Mb</span>
 <span class="co">#&gt;       help   1.1Mb</span>
-<span class="co">#&gt;       libs  13.1Mb</span>
+<span class="co">#&gt;       libs  14.0Mb</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $`r-devel-linux-x86_64-fedora-gcc`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`r-devel-windows-x86_64`</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
+<span class="co">#&gt; Duration: 0ms</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
+<span class="co">#&gt;     installed size is  9.8Mb</span>
+<span class="co">#&gt;     sub-directories of 1Mb or more:</span>
+<span class="co">#&gt;       R      1.4Mb</span>
+<span class="co">#&gt;       help   1.1Mb</span>
+<span class="co">#&gt;       libs   6.9Mb</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`r-devel-windows-x86_64-gcc10-UCRT`</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
+<span class="co">#&gt; Duration: 0ms</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ❯ checking whether package 'igraph' can be installed ... ERROR</span>
+<span class="co">#&gt;   See below...</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ❯ checking package dependencies ... NOTE</span>
+<span class="co">#&gt;   Package suggested but not available for checking: 'rgl'</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ── Install failure ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &lt;00install.out file does not exist&gt;</span>
+<span class="co">#&gt; 1 error ✖ | 0 warnings ✔ | 1 note ✖</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $`r-patched-linux-x86_64`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span>
+<span class="co">#&gt; ❯ checking top-level files ... WARNING</span>
+<span class="co">#&gt;     Output from running autoreconf:</span>
+<span class="co">#&gt;     configure.ac:71: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:71: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:71: the top level</span>
+<span class="co">#&gt;     configure.ac:110: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:110: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:110: the top level</span>
+<span class="co">#&gt;     configure.ac:127: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:127: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:127: the top level</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 0 errors ✔ | 1 warning ✖ | 0 notes ✔</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $`r-patched-solaris-x86`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
@@ -229,62 +308,84 @@
 <span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $`r-release-linux-x86_64`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span>
+<span class="co">#&gt; ❯ checking top-level files ... WARNING</span>
+<span class="co">#&gt;     Output from running autoreconf:</span>
+<span class="co">#&gt;     configure.ac:71: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:71: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:71: the top level</span>
+<span class="co">#&gt;     configure.ac:110: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:110: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:110: the top level</span>
+<span class="co">#&gt;     configure.ac:127: warning: The macro `AC_HELP_STRING' is obsolete.</span>
+<span class="co">#&gt;     configure.ac:127: You should run autoupdate.</span>
+<span class="co">#&gt;     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...</span>
+<span class="co">#&gt;     configure.ac:127: the top level</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $`r-release-windows-ix86+x86_64`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; 0 errors ✔ | 1 warning ✖ | 0 notes ✔</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`r-release-macos-arm64`</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ❯ checking whether package 'igraph' can be installed ... NOTE</span>
-<span class="co">#&gt;   See below...</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
-<span class="co">#&gt;     installed size is 16.7Mb</span>
+<span class="co">#&gt;     installed size is 23.7Mb</span>
 <span class="co">#&gt;     sub-directories of 1Mb or more:</span>
-<span class="co">#&gt;       R      1.4Mb</span>
+<span class="co">#&gt;       R      2.0Mb</span>
 <span class="co">#&gt;       help   1.1Mb</span>
-<span class="co">#&gt;       libs  13.8Mb</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 2 notes ✖</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $`r-release-osx-x86_64`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
-<span class="co">#&gt; Duration: 0ms</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ❯ checking package dependencies ... NOTE</span>
-<span class="co">#&gt;   Package suggested but not available for checking: ‘graph’</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
-<span class="co">#&gt;     installed size is 17.9Mb</span>
-<span class="co">#&gt;     sub-directories of 1Mb or more:</span>
-<span class="co">#&gt;       R      1.4Mb</span>
-<span class="co">#&gt;       help   1.2Mb</span>
-<span class="co">#&gt;       libs  14.9Mb</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 2 notes ✖</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $`r-oldrel-windows-ix86+x86_64`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
-<span class="co">#&gt; Duration: 0ms</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
-<span class="co">#&gt;     installed size is 16.7Mb</span>
-<span class="co">#&gt;     sub-directories of 1Mb or more:</span>
-<span class="co">#&gt;       R      1.4Mb</span>
-<span class="co">#&gt;       help   1.1Mb</span>
-<span class="co">#&gt;       libs  13.8Mb</span>
+<span class="co">#&gt;       libs  20.0Mb</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $`r-oldrel-osx-x86_64`</span>
-<span class="co">#&gt; ── R CMD check results ──────────────────────────────── igraph 1.2.4.1 ────</span>
+<span class="co">#&gt; $`r-release-macos-x86_64`</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
 <span class="co">#&gt; Duration: 0ms</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
-<span class="co">#&gt;     installed size is 17.2Mb</span>
+<span class="co">#&gt;     installed size is 21.2Mb</span>
+<span class="co">#&gt;     sub-directories of 1Mb or more:</span>
+<span class="co">#&gt;       R      1.4Mb</span>
+<span class="co">#&gt;       help   1.1Mb</span>
+<span class="co">#&gt;       libs  18.3Mb</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`r-release-windows-ix86+x86_64`</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
+<span class="co">#&gt; Duration: 0ms</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
+<span class="co">#&gt;     installed size is 17.1Mb</span>
+<span class="co">#&gt;     sub-directories of 1Mb or more:</span>
+<span class="co">#&gt;       R      1.4Mb</span>
+<span class="co">#&gt;       help   1.1Mb</span>
+<span class="co">#&gt;       libs  14.2Mb</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`r-oldrel-macos-x86_64`</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
+<span class="co">#&gt; Duration: 0ms</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
+<span class="co">#&gt;     installed size is 21.2Mb</span>
+<span class="co">#&gt;     sub-directories of 1Mb or more:</span>
+<span class="co">#&gt;       R      1.4Mb</span>
+<span class="co">#&gt;       help   1.1Mb</span>
+<span class="co">#&gt;       libs  18.3Mb</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`r-oldrel-windows-ix86+x86_64`</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────</span>
+<span class="co">#&gt; Duration: 0ms</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ❯ checking installed package size ... NOTE</span>
+<span class="co">#&gt;     installed size is 17.1Mb</span>
 <span class="co">#&gt;     sub-directories of 1Mb or more:</span>
 <span class="co">#&gt;       R      1.4Mb</span>
 <span class="co">#&gt;       help   1.1Mb</span>
@@ -304,13 +405,17 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chk</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rcmdcheck.html">rcmdcheck</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="reference/compare_to_cran.html">compare_to_cran</a></span><span class="op">(</span><span class="va">chk</span><span class="op">)</span>
-<span class="co">#&gt; ─ R CMD check comparison  rcmdcheck 1.3.2.9002 / 1.3.2 / 1.3.2 / 1.3.2</span>
+<span class="co">#&gt; ── R CMD check comparison ────────────────────────────────────────────────────────────── rcmdcheck 1.3.3 / 1.3.3.9000 ────</span>
 <span class="co">#&gt; Status: OK</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Fixed</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ✔ checking tests ... [41s] ERROR</span>
-<span class="co">#&gt; ✔ checking tests ... [38s] ERROR</span></code></pre></div>
+<span class="co">#&gt; ✔ checking LazyData ... NOTE</span>
+<span class="co">#&gt; ✔ checking LazyData ... NOTE</span>
+<span class="co">#&gt; ✔ checking LazyData ... NOTE</span>
+<span class="co">#&gt; ✔ checking LazyData ... NOTE</span>
+<span class="co">#&gt; ✔ checking LazyData ... NOTE</span>
+<span class="co">#&gt; ✔ checking LazyData ... NOTE</span></code></pre></div>
 </div>
 <div id="background-processes" class="section level3">
 <h3 class="hasAnchor">
@@ -319,12 +424,12 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chkpx</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/rcmdcheck_process.html">rcmdcheck_process</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span>
 <span class="va">chkpx</span>
-<span class="co">#&gt; PROCESS 'R', running, pid 61974.</span></code></pre></div>
+<span class="co">#&gt; PROCESS 'R', running, pid 82576.</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chkpx</span><span class="op">$</span><span class="fu">wait</span><span class="op">(</span><span class="op">)</span>
 <span class="va">chkpx</span><span class="op">$</span><span class="fu">parse_results</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; ── R CMD check results ────────────────────────── rcmdcheck 1.3.2.9002 ────</span>
-<span class="co">#&gt; Duration: 15.2s</span>
+<span class="co">#&gt; ── R CMD check results ───────────────────────────────────────────────────────────────────────── rcmdcheck 1.3.3.9000 ────</span>
+<span class="co">#&gt; Duration: 23.6s</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></code></pre></div>
 </div>
