@@ -65,8 +65,6 @@ test_that("rcmdcheck works", {
   expect_match(det$description, "^Package: badpackage")
   det$description <- NULL
 
-  ## This currently fails with rcmdcheck() (why?), so it also fails GHA
-  skip_on_ci()
   expect_s3_class(si, "session_info")
 })
 
@@ -116,8 +114,6 @@ test_that("background gives same results", {
   # check.env file was loaded
   expect_equal(lp1$env[['_R_CHECK_PKG_SIZES_THRESHOLD_']], "142")
 
-  ## This currently fails with rcmdcheck() (why?), so it also fails GHA
-  skip_on_ci()
   expect_s3_class(res$session_info, "session_info")
 })
 
