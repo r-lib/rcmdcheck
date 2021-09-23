@@ -10,7 +10,7 @@ Description: Run 'R CMD check' from 'R' and capture the results
     of the individual checks. Supports running checks in the background,
     timeouts, pretty printing and comparing check results.
 License: MIT + file LICENSE
-URL: http://r-lib.github.io/rcmdcheck, https://github.com/r-Lib/rcmdcheck#readme
+URL: https://r-lib.github.io/rcmdcheck/, https://github.com/r-Lib/rcmdcheck#readme
 BugReports: https://github.com/r-Lib/rcmdcheck/issues
 Imports:
     callr (>= 3.1.1.9000),
