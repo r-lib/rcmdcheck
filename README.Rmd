@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 [![Coverage Status](https://img.shields.io/codecov/c/github/r-lib/rcmdcheck/master.svg)](https://codecov.io/github/r-lib/rcmdcheck?branch=master)
 <!-- badges: end -->
 
-Run R CMD check form R programatically, and capture the results of the
+Run R CMD check from R programmatically and capture the results of the
 individual checks.
 
 ## Installation
