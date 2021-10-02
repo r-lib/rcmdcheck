@@ -78,7 +78,7 @@ NULL
 #'   `build_args = c("--force", "--keep-empty-dirs")` is a correct usage and
 #'   `build_args = "--force --keep-empty-dirs"` is incorrect.
 #' @param check_dir Path to a directory where the check is performed.
-#'   If this is not `NULL`, then the a temporary directory is used, that
+#'   If this is not `NULL`, then a temporary directory is used, that
 #'   is cleaned up when the returned object is garbage collected.
 #' @param libpath The library path to set for the check.
 #'   The default uses the current library path.
