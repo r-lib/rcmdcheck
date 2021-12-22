@@ -20,7 +20,7 @@ NULL
 #'
 #' Sometimes it is useful to programmatically turn off some checks that
 #' may report check NOTEs.
-#' rcmdcehck provides two ways to do this.
+#' rcmdcheck provides two ways to do this.
 #'
 #' First, you may declare in `DESCRIPTION` that you don't want to see
 #' NOTEs that are accepted on CRAN, with this entry:
