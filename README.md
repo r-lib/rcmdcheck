@@ -21,7 +21,7 @@ status](https://github.com/r-lib/rcmdcheck/workflows/R-CMD-check/badge.svg)](htt
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/rcmdcheck)](https://www.r-pkg.org/pkg/rcmdcheck)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/r-lib/rcmdcheck/master.svg)](https://codecov.io/github/r-lib/rcmdcheck?branch=master)
+Status](https://img.shields.io/codecov/c/github/r-lib/rcmdcheck/main.svg)](https://codecov.io/github/r-lib/rcmdcheck?branch=main)
 <!-- badges: end -->
 
 Run R CMD check form R programatically, and capture the results of the
@@ -46,7 +46,7 @@ the output. The result of the check is returned, in a list with elements
 `errors`, `warnings`, and `notes`. Each element is a character vector,
 and one element of the character vectors is a single failure.
 
-<img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@master/tools/rcmdcheck.svg">
+<img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@main/tools/rcmdcheck.svg">
 
 ### Programmatic usage
 
