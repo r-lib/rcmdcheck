@@ -13,8 +13,10 @@ rcmdcheck uses the cli package for much of its output, so you can
 configure the output via cli, see \link[cli:cli-config]{cli::cli-config}.
 
 Package configration is defined in the \code{DESCRIPTION} file of the checked
-package. E.g.:\preformatted{Config/build/clean-inst-doc: FALSE
-}
+package. E.g.:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Config/build/clean-inst-doc: FALSE
+}\if{html}{\out{</div>}}
 }
 \section{Environment variables}{
 \itemize{

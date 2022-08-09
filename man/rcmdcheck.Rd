@@ -14,8 +14,7 @@ rcmdcheck(
   libpath = .libPaths(),
   repos = getOption("repos"),
   timeout = Inf,
-  error_on = Sys.getenv("RCMDCHECK_ERROR_ON", c("never", "error", "warning",
-    "note")[1]),
+  error_on = Sys.getenv("RCMDCHECK_ERROR_ON", c("never", "error", "warning", "note")[1]),
   env = character()
 )
 }
@@ -39,7 +38,7 @@ spaces to delimit arguments like you would in the shell). For example,
 \code{build_args = "--force --keep-empty-dirs"} is incorrect.}
 
 \item{check_dir}{Path to a directory where the check is performed.
-If this is not \code{NULL}, then the a temporary directory is used, that
+If this is not \code{NULL}, then a temporary directory is used, that
 is cleaned up when the returned object is garbage collected.}
 
 \item{libpath}{The library path to set for the check.
@@ -85,11 +84,13 @@ process.
 \section{Turning off package checks}{
 Sometimes it is useful to programmatically turn off some checks that
 may report check NOTEs.
-rcmdcehck provides two ways to do this.
+rcmdcheck provides two ways to do this.
 
 First, you may declare in \code{DESCRIPTION} that you don't want to see
-NOTEs that are accepted on CRAN, with this entry:\preformatted{Config/rcmdcheck/ignore-inconsequential-notes: true
-}
+NOTEs that are accepted on CRAN, with this entry:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Config/rcmdcheck/ignore-inconsequential-notes: true
+}\if{html}{\out{</div>}}
 
 Currently, this will make rcmdcheck ignore the following notes:
 \itemize{
@@ -106,7 +107,9 @@ with the list of environment variable settings that rcmdcheck will
 automatically use when checking the package.
 See \link{Startup} for the format of this file.
 
-Here is an example \code{tools/check.env} file:\preformatted{# Report if package size is larger than 10 megabytes
+Here is an example \code{tools/check.env} file:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# Report if package size is larger than 10 megabytes
 _R_CHECK_PKG_SIZES_THRESHOLD_=10
 
 # Do not check Rd cross references
@@ -117,7 +120,7 @@ _R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=false
 
 # Do not check non-ASCII strings in datasets
 _R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_=true
-}
+}\if{html}{\out{</div>}}
 
 See the \href{https://cran.r-project.org/doc/manuals/r-devel/R-ints.html}{"R internals" manual}
 and the \href{https://github.com/wch/r-source}{R source code} for the
