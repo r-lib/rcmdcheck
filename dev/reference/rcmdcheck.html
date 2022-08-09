@@ -59,27 +59,30 @@ returns the check failures.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rcmdcheck</span><span class="op">(</span>
-  path <span class="op">=</span> <span class="st">"."</span>,
-  quiet <span class="op">=</span> <span class="cn">FALSE</span>,
-  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,
-  build_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,
-  check_dir <span class="op">=</span> <span class="cn">NULL</span>,
-  libpath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths</a></span><span class="op">(</span><span class="op">)</span>,
-  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span>,
-  timeout <span class="op">=</span> <span class="cn">Inf</span>,
-  error_on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"RCMDCHECK_ERROR_ON"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"never"</span>, <span class="st">"error"</span>, <span class="st">"warning"</span>,
-    <span class="st">"note"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,
-  env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rcmdcheck</span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  build_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  check_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  libpath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span>,</span>
+<span>  timeout <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  error_on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"RCMDCHECK_ERROR_ON"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"never"</span>, <span class="st">"error"</span>, <span class="st">"warning"</span>, <span class="st">"note"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>Path to a package tarball or a directory.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>Whether to print check output during checking.</p></dd>
+
+
 <dt>args</dt>
 <dd><p>Character vector of arguments to pass to <code>R CMD check</code>. Pass each
 argument as a single element of this character vector (do not use spaces to
@@ -88,28 +91,43 @@ running of examples and tests, use <code>args = c("--no-examples", "--no-tests")
 instead of the <code>--output</code> option you should use the <code>check_dir</code> argument,
 because  <code>--output</code> cannot deal with spaces and other special characters on
 Windows.)</p></dd>
+
+
 <dt>build_args</dt>
 <dd><p>Character vector of arguments to pass to <code>R CMD build</code>.
 Pass each argument as a single element of this character vector (do not use
 spaces to delimit arguments like you would in the shell). For example,
 <code>build_args = c("--force", "--keep-empty-dirs")</code> is a correct usage and
 <code>build_args = "--force --keep-empty-dirs"</code> is incorrect.</p></dd>
+
+
 <dt>check_dir</dt>
-<dd><p>Path to a directory where the check is performed.
-If this is not <code>NULL</code>, then the a temporary directory is used, that
-is cleaned up when the returned object is garbage collected.</p></dd>
+<dd><p>Path to a directory where the check will be performed.
+The path will be created if needed and is reported in the <code>checkdir</code> field
+of the object returned by <code>rcmdcheck()</code>.</p>
+<p>If <code>check_dir = NULL</code> (the default), the check is performed in a temporary
+directory that is automatically cleaned up when the object returned by
+<code>rcmdcheck()</code> is deleted.</p></dd>
+
+
 <dt>libpath</dt>
 <dd><p>The library path to set for the check.
 The default uses the current library path.</p></dd>
+
+
 <dt>repos</dt>
 <dd><p>The <code>repos</code> option to set for the check.
 This is needed for cyclic dependency checks if you use the
 <code>--as-cran</code> argument. The default uses the current value.</p></dd>
+
+
 <dt>timeout</dt>
 <dd><p>Timeout for the check, in seconds, or as a
 <a href="https://rdrr.io/r/base/difftime.html" class="external-link">base::difftime</a> object. If it is not finished before this, it will be
 killed. <code>Inf</code> means no timeout. If the check is timed out,
 that is added as an extra error to the result object.</p></dd>
+
+
 <dt>error_on</dt>
 <dd><p>Whether to throw an error on <code>R CMD check</code> failures.
 Note that the check is always completed (unless a timeout happens),
@@ -119,13 +137,18 @@ generate errors. If <code>"warning"</code>, then <code>WARNING</code> failures g
 errors as well. If <code>"note"</code>, then any check failure generated an
 error. Its default can be modified with the <code>RCMDCHECK_ERROR_ON</code>
 environment variable. If that is not set, then <code>"never"</code> is used.</p></dd>
+
+
 <dt>env</dt>
 <dd><p>A named character vector, extra environment variables to
 set in the check process.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An S3 object (list) with fields <code>errors</code>,
+    
+
+<p>An S3 object (list) with fields <code>errors</code>,
 <code>warnings</code> and <code>notes</code>. These are all character
 vectors containing the output for the failed check.</p>
     </div>
@@ -138,10 +161,10 @@ process.</p>
     <h2>Turning off package checks</h2>
     <p>Sometimes it is useful to programmatically turn off some checks that
 may report check NOTEs.
-rcmdcehck provides two ways to do this.</p>
+rcmdcheck provides two ways to do this.</p>
 <p>First, you may declare in <code>DESCRIPTION</code> that you don't want to see
-NOTEs that are accepted on CRAN, with this entry:</p><div class="sourceCode"><pre><code><span class="va">Config</span><span class="op">/</span><span class="va">rcmdcheck</span><span class="op">/</span><span class="va">ignore</span><span class="op">-</span><span class="va">inconsequential</span><span class="op">-</span><span class="va">notes</span><span class="op">:</span> <span class="va">true</span></code></pre></div>
-
+NOTEs that are accepted on CRAN, with this entry:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>Config<span class="op">/</span>rcmdcheck<span class="op">/</span>ignore<span class="op">-</span>inconsequential<span class="op">-</span>notes<span class="op">:</span><span class="st"> </span>true</span></code></pre><p></p></div>
 <p>Currently, this will make rcmdcheck ignore the following notes:</p><ul><li><p>report large package sizes (<code>_R_CHECK_PKG_SIZES_ = FALSE</code>),</p></li>
 <li><p>check cross-references in Rd files (<code>_R_CHECK_RD_XREFS_ = FALSE</code>),</p></li>
 <li><p>NOTE if package requires GNU make (<code>_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_ = FALSE</code>),</p></li>
@@ -152,19 +175,18 @@ You may provide a <code>tools/check.env</code> <em>environment file</em> in your
 with the list of environment variable settings that rcmdcheck will
 automatically use when checking the package.
 See <a href="https://rdrr.io/r/base/Startup.html" class="external-link">Startup</a> for the format of this file.</p>
-<p>Here is an example <code>tools/check.env</code> file:</p><div class="sourceCode"><pre><code># Report if package size is larger than 10 megabytes
-_R_CHECK_PKG_SIZES_THRESHOLD_=10
-
-# Do not check Rd cross references
-_R_CHECK_RD_XREFS_=false
-
-# Do not report if package requires GNU make
-_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=false
-
-# Do not check non-ASCII strings in datasets
-_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_=true
-</code></pre></div>
-
+<p>Here is an example <code>tools/check.env</code> file:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Report if package size is larger than 10 megabytes</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>_R_CHECK_PKG_SIZES_THRESHOLD_=<span class="dv">10</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Do not check Rd cross references</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>_R_CHECK_RD_XREFS_=false</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Do not report if package requires GNU make</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=false</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># Do not check non-ASCII strings in datasets</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_=true</span></code></pre><p></p></div>
 <p>See the <a href="https://cran.r-project.org/doc/manuals/r-devel/R-ints.html" class="external-link">"R internals" manual</a>
 and the <a href="https://github.com/wch/r-source" class="external-link">R source code</a> for the
 environment variables that control the checks.</p>
@@ -185,7 +207,7 @@ environment variables that control the checks.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
