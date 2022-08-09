@@ -37,9 +37,9 @@ spaces to delimit arguments like you would in the shell). For example,
 \code{build_args = c("--force", "--keep-empty-dirs")} is a correct usage and
 \code{build_args = "--force --keep-empty-dirs"} is incorrect.}
 
-\item{check_dir}{Path to a directory where the check is performed.
-If this is not \code{NULL}, then a temporary directory is used, that
-is cleaned up when the returned object is garbage collected.}
+\item{check_dir}{Path to a directory where the check is performed. If this is
+\code{NULL}, then a temporary directory is used, that is cleaned up when the
+returned object is garbage collected.}
 
 \item{libpath}{The library path to set for the check.
 The default uses the current library path.}
