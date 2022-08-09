@@ -8,12 +8,14 @@ rcmdcheck_process is an R6 class, that extends the
 \link[callr:rcmd_process]{callr::rcmd_process} class (which in turn extends \link[processx:process]{processx::process}.
 }
 \section{Usage}{
-\preformatted{cp <- rcmdcheck_process$new(path = ".", args = character(),
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{cp <- rcmdcheck_process$new(path = ".", args = character(),
          build_args = character(), check_dir = NULL,
          libpath = .libPaths(), repos = getOption("repos"))
 
 cp$parse_results()
-}
+}\if{html}{\out{</div>}}
 
 Other methods are inherited from \link[callr:rcmd_process]{callr::rcmd_process} and
 \link[processx:process]{processx::process}.
