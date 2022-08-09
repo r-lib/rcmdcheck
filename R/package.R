@@ -77,8 +77,12 @@ NULL
 #'   spaces to delimit arguments like you would in the shell). For example,
 #'   `build_args = c("--force", "--keep-empty-dirs")` is a correct usage and
 #'   `build_args = "--force --keep-empty-dirs"` is incorrect.
-#' @param check_dir Path to a directory where the check is performed. If this is
-#'   `NULL`, then a temporary directory is used, that is cleaned up afterwards.
+#' @param check_dir Path to a directory where the check will be performed. 
+#'   Will be created if needed. 
+#'
+#'   Alternatively, supply `NULL` to perform the check in a temporary directory
+#'   that will be automatically cleaned up when the object returned by `rcmdcheck()`
+#'   is deleted. 
 #' @param libpath The library path to set for the check.
 #'   The default uses the current library path.
 #' @param repos The `repos` option to set for the check.
