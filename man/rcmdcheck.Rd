@@ -75,7 +75,7 @@ An S3 object (list) with fields \code{errors},
 vectors containing the output for the failed check.
 }
 \description{
-Run R CMD check from R programmatically, and capture the results of the
+Run R CMD check programmatically from R, and capture the results of the
 individual checks.
 
 Runs \verb{R CMD check} as an external command, and parses its output and
