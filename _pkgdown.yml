@@ -3,6 +3,13 @@ url: http://r-lib.github.io/rcmdcheck
 development:
   mode: auto
 
+template:
+  package: tidytemplate
+  bootstrap: 5
+  includes:
+    in_header: |
+      <script defer data-domain="rcmdcheck.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
+
 reference:
 - title: Run `R CMD check` programmatically
   contents:
