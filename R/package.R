@@ -1,7 +1,6 @@
-
 #' Run R CMD check from R and Capture Results
 #'
-#' Run R CMD check from R programmatically, and capture the results of the
+#' Run R CMD check programmatically from R, and capture the results of the
 #' individual checks.
 #'
 #' @docType package

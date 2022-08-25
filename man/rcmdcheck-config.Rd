@@ -12,7 +12,7 @@ the \code{RCMDCHECK_NUM_COLORS} environment variables and the
 rcmdcheck uses the cli package for much of its output, so you can
 configure the output via cli, see \link[cli:cli-config]{cli::cli-config}.
 
-Package configration is defined in the \code{DESCRIPTION} file of the checked
+Package configuration is defined in the \code{DESCRIPTION} file of the checked
 package. E.g.:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Config/build/clean-inst-doc: FALSE
@@ -37,7 +37,7 @@ It can be used to override the number of colors detected or configured
 by the cli package. See \code{\link[cli:num_ansi_colors]{cli::num_ansi_colors()}}. This configuration
 is only used for the output of rcmdcheck and it does not affect the
 examples and test cases (and other code) of the checked package.
-It not set, then the default of cli is uesed. The corresponding
+If not set, then the default of cli is used. The corresponding
 option is \code{rcmdcheck.num_colors}.
 \item \code{RCMDCHECK_TIMESTAMP_LIMIT}: lower limit is seconds, above which
 rcmdcheck adds time stamps to the individual check steps. It may be
@@ -66,7 +66,7 @@ It can be used to override the number of colors detected or configured
 by the cli package. See \code{\link[cli:num_ansi_colors]{cli::num_ansi_colors()}}. This configuration
 is only used for the output of rcmdcheck and it does not affect the
 examples and test cases (and other code) of the checked package.
-It not set, then the default of cli is uesed. The corresponding
+If not set, then the default of cli is used. The corresponding
 environment variable is \code{RCMDCHECK_NUM_COLORS}.
 \item \code{rcmdcheck.test_output}: Flag (\code{TRUE} or \code{FALSE}), whether
 \code{\link[=print.rcmdcheck]{print.rcmdcheck()}} should print the full test output if there are

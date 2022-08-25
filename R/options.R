@@ -8,7 +8,7 @@
 #' rcmdcheck uses the cli package for much of its output, so you can
 #' configure the output via cli, see [cli::cli-config].
 #'
-#' Package configration is defined in the `DESCRIPTION` file of the checked
+#' Package configuration is defined in the `DESCRIPTION` file of the checked
 #' package. E.g.:
 #' ```
 #' Config/build/clean-inst-doc: FALSE
@@ -38,7 +38,7 @@
 #'   by the cli package. See [cli::num_ansi_colors()]. This configuration
 #'   is only used for the output of rcmdcheck and it does not affect the
 #'   examples and test cases (and other code) of the checked package.
-#'   It not set, then the default of cli is uesed. The corresponding
+#'   If not set, then the default of cli is used. The corresponding
 #'   option is `rcmdcheck.num_colors`.
 #'
 #' * `RCMDCHECK_TIMESTAMP_LIMIT`: lower limit is seconds, above which
@@ -69,7 +69,7 @@
 #'   by the cli package. See [cli::num_ansi_colors()]. This configuration
 #'   is only used for the output of rcmdcheck and it does not affect the
 #'   examples and test cases (and other code) of the checked package.
-#'   It not set, then the default of cli is uesed. The corresponding
+#'   If not set, then the default of cli is used. The corresponding
 #'   environment variable is `RCMDCHECK_NUM_COLORS`.
 #'
 #' * `rcmdcheck.test_output`: Flag (`TRUE` or `FALSE`), whether
