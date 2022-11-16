@@ -86,7 +86,7 @@ cran_check_results <- function(package,
   urls <- paste0(base, flavours, "/", package, "-00check.txt")
 
   tmp <- paste0(tempfile(), "-", seq_along(urls))
-  download_files(urls, tmp, quiet = FALSE)
+  download_files(urls, tmp, quiet = quiet)
 
   structure(
     lapply(tmp, parse_check),
