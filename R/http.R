@@ -16,7 +16,7 @@ download_files <- function(urls,
     length(urls) == length(destfiles),
     is_count(total_con),
     is_count(host_con),
-    length(handles) == urls || length(handles) == 0
+    length(handles) == length(urls) || length(handles) == 0
   )
 
   pool <- new_pool(total_con = total_con, host_con = host_con)
