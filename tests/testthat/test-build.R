@@ -44,3 +44,19 @@ test_that("inst/doc can be kept", {
   pkg <- build_package(bad3, tempfile(), character(), .libPaths(), TRUE)
   expect_true(file.exists(rubbish))
 })
+
+test_that("libpath argument is used in build_package", {
+  lib <- tempfile()
+  dir.create(lib)
+  on.exit(unlink(lib, recursive = TRUE), add = TRUE)
+
+  pkg1 <- test_path("dependent_pkgs", "pkg1_0.0.0.9000.tar.gz")
+  utils::install.packages(pkg1, lib = lib, type = "source")
+
+  pkg2_source <- test_path("dependent_pkgs", "pkg2")
+  expect_error({
+    build_package(pkg2_source, tempfile(), character(), .libPaths(), TRUE)
+  })
+  pkg2 <- build_package(pkg2_source, tempfile(), character(), lib, TRUE)
+  expect_true(file.exists(pkg2))
+})
