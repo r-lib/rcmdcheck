@@ -51,9 +51,10 @@ test_that("libpath argument is used in build_package", {
   dir.create(lib)
 
   pkg1_source <- test_path("dependent_pkgs", "pkg1")
-  pkg1 <- pkgbuild::build(pkg1_source,  quiet = TRUE)
+  pkg1 <- pkgbuild::build(pkg1_source, quiet = TRUE)
   on.exit(unlink(pkg1, recursive = TRUE), add = TRUE)
-  install.packages(pkg1, lib = lib, type = "source", quiet = TRUE)
+  install.packages(pkg1, lib = lib, repos = NULL, type = "source", quiet = TRUE)
+  install.packages(c("knitr", "markdown"), lib = lib, quiet = TRUE)
 
   pkg2_source <- test_path("dependent_pkgs", "pkg2")
   expect_error({
