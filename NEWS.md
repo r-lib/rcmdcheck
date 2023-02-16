@@ -1,7 +1,9 @@
 
-# development version
+# rcmdcheck (development version)
 
-# 1.4.0
+* Update pkgdown template and move url to https://rcmdcheck.r-lib.org.
+
+# rcmdcheck 1.4.0
 
 * `cran_check_results()` now downloads results in parallel, so it is
   much faster.
@@ -55,7 +57,7 @@
 * rcmdcheck now uses a more robust implementation to extract the session
   info from the check process (#164).
 
-# 1.3.3
+# rcmdcheck 1.3.3
 
 * `cran_check_results()` has now a `quiet` argument, and the download
   progress bars are shown if it is set to `FALSE` (#17).
@@ -71,12 +73,12 @@
 * `rcmdcheck()` has now better colors. WARNINGs are magenta, and NOTEs
   are blue (#103, @hadley).
 
-# 1.3.2
+# rcmdcheck 1.3.2
 
 * `rcmdcheck()` now correctly overwrites existing tarballs if they already
   exist in the check directory. This time for real.
 
-# 1.3.1
+# rcmdcheck 1.3.1
 
 * `rcmdcheck()` now correctly overwrites existing tarballs if they already
   exist in the check directory (#84 @jimhester).
@@ -84,7 +86,7 @@
 * rcmdcheck now uses `sessioninfo::session_info()` to query session
   information for the check.
 
-# 1.3.0
+# rcmdcheck 1.3.0
 
 * New `rcmdcheck_process` class to run `R CMD check` in the background.
 
@@ -124,7 +126,7 @@
 * `rcmdcheck()` result printing is now better, the colors are
   consistent (#54).
 
-# 1.2.1
+# rcmdcheck 1.2.1
 
 * Compare two check results with `compare_checks` or compare check
   results to CRAN with `compare_to_cran`.
@@ -145,13 +147,13 @@
 * Use the `callr` package (https://github.com/r-lib/callr)
   for running `R CMD` commands.
 
-# 1.1.0
+# rcmdcheck 1.1.0
 
 * New arguments `libpath` and `repos` to set the library path
   and the default CRAN repository
 
 * Do not run tests on CRAN.
 
-# 1.0.0
+# rcmdcheck 1.0.0
 
 First public release.
