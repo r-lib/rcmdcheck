@@ -1,4 +1,12 @@
-url: http://r-lib.github.io/rcmdcheck
+url: https://rcmdcheck.r-lib.org
+
+template:
+  package: tidytemplate
+  bootstrap: 5
+
+  includes:
+    in_header: |
+      <script defer data-domain="rcmdcheck.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
 development:
   mode: auto
