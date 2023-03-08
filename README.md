@@ -1,10 +1,9 @@
 Run R CMD check from R and Capture Results
 ================
 
-  - [rcmdcheck](#rcmdcheck)
-      - [Installation](#installation)
-      - [Usage](#usage)
-      - [License](#license)
+- [rcmdcheck](#rcmdcheck)
+  - [Installation](#installation)
+  - [Usage](#usage)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -24,13 +23,22 @@ downloads](https://cranlogs.r-pkg.org/badges/rcmdcheck)](https://www.r-pkg.org/p
 Status](https://img.shields.io/codecov/c/github/r-lib/rcmdcheck/main.svg)](https://codecov.io/github/r-lib/rcmdcheck?branch=main)
 <!-- badges: end -->
 
-Run R CMD check form R programatically, and capture the results of the
+Run R CMD check from R programmatically and capture the results of the
 individual checks.
 
 ## Installation
 
+Install the released version from CRAN
+
 ``` r
 install.packages("rcmdcheck")
+```
+
+Or install the development version from GitHub:
+
+``` r
+# install.packages("pak")
+pak::pak("r-lib/rcmdcheck")
 ```
 
 ## Usage
@@ -57,8 +65,8 @@ manipulate.
 library(rcmdcheck)
 chk <- rcmdcheck("tests/testthat/bad1", quiet = TRUE)
 chk
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────── badpackage 1.0.0 ────
-#> Duration: 12.4s
+#> ── R CMD check results ─────────────────────────────────── badpackage 1.0.0 ────
+#> Duration: 10s
 #> 
 #> ❯ checking DESCRIPTION meta-information ... WARNING
 #>   Non-standard license specification:
@@ -78,22 +86,22 @@ names(check_details(chk))
 #> [11] "cran"         "bioc"
 ```
 
-  - `package`: Package name.
-  - `version`: Package version number.
-  - `notes`: Character vector of check `NOTE`s.
-  - `warnings`: Character vector of check `WARNING`s.
-  - `errors`: Character vector of check `ERROR`s.
-  - `platform`: Platform, e.g. `x86_64-apple-darwin15.6.0`.
-  - `checkdir`: Check directory.
-  - `install_out`: Output of the package installation.
-  - `description`: The text of the `DESCRIPTION` file.
-  - `session_info`: A `sessioninfo::session_info` object, session
-    information from within the check process.
-  - `cran`: Flag, whether this is a CRAN package. (Based on the
-    `Repository` field in `DESCRIPTION`, which is typically only set for
-    published CRAN packages.)
-  - `bioc`: Flag, whether this is a Bioconductor package, based on the
-    presence of the `biocViews` field in `DESCRIPTION`.
+- `package`: Package name.
+- `version`: Package version number.
+- `notes`: Character vector of check `NOTE`s.
+- `warnings`: Character vector of check `WARNING`s.
+- `errors`: Character vector of check `ERROR`s.
+- `platform`: Platform, e.g. `x86_64-apple-darwin15.6.0`.
+- `checkdir`: Check directory.
+- `install_out`: Output of the package installation.
+- `description`: The text of the `DESCRIPTION` file.
+- `session_info`: A `sessioninfo::session_info` object, session
+  information from within the check process.
+- `cran`: Flag, whether this is a CRAN package. (Based on the
+  `Repository` field in `DESCRIPTION`, which is typically only set for
+  published CRAN packages.)
+- `bioc`: Flag, whether this is a Bioconductor package, based on the
+  presence of the `biocViews` field in `DESCRIPTION`.
 
 Note that if the check results were parsed from a file, some of these
 fields might be missing (`NULL`), as we don’t have access to the
@@ -115,9 +123,9 @@ cran_check_flavours()
 #>  [1] "r-devel-linux-x86_64-debian-clang" "r-devel-linux-x86_64-debian-gcc"  
 #>  [3] "r-devel-linux-x86_64-fedora-clang" "r-devel-linux-x86_64-fedora-gcc"  
 #>  [5] "r-devel-windows-x86_64"            "r-patched-linux-x86_64"           
-#>  [7] "r-patched-solaris-x86"             "r-release-linux-x86_64"           
-#>  [9] "r-release-macos-arm64"             "r-release-macos-x86_64"           
-#> [11] "r-release-windows-ix86+x86_64"     "r-oldrel-macos-x86_64"            
+#>  [7] "r-release-linux-x86_64"            "r-release-macos-arm64"            
+#>  [9] "r-release-macos-x86_64"            "r-release-windows-x86_64"         
+#> [11] "r-oldrel-macos-arm64"              "r-oldrel-macos-x86_64"            
 #> [13] "r-oldrel-windows-ix86+x86_64"
 ```
 
@@ -126,211 +134,123 @@ cran_check_flavours()
 ``` r
 cran_check_results("igraph")
 #> $`r-devel-linux-x86_64-debian-clang`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
-#> Duration: 0ms
-#> 
-#> ❯ checking top-level files ... WARNING
-#>     Output from running autoreconf:
-#>     configure.ac:71: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:71: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:71: the top level
-#>     configure.ac:110: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:110: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:110: the top level
-#>     configure.ac:127: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:127: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:127: the top level
-#> 
-#> 0 errors ✔ | 1 warning ✖ | 0 notes ✔
-#> 
-#> $`r-devel-linux-x86_64-debian-gcc`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
-#> Duration: 0ms
-#> 
-#> ❯ checking top-level files ... WARNING
-#>     Output from running autoreconf:
-#>     configure.ac:71: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:71: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:71: the top level
-#>     configure.ac:110: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:110: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:110: the top level
-#>     configure.ac:127: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:127: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:127: the top level
-#> 
-#> 0 errors ✔ | 1 warning ✖ | 0 notes ✔
-#> 
-#> $`r-devel-linux-x86_64-fedora-clang`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
-#> Duration: 0ms
-#> 
-#> ❯ checking installed package size ... NOTE
-#>     installed size is 16.9Mb
-#>     sub-directories of 1Mb or more:
-#>       R      1.4Mb
-#>       help   1.1Mb
-#>       libs  14.0Mb
-#> 
-#> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
-#> 
-#> $`r-devel-linux-x86_64-fedora-gcc`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 #> 
-#> $`r-devel-windows-x86_64`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> $`r-devel-linux-x86_64-debian-gcc`
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
+#> Duration: 0ms
+#> 
+#> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+#> 
+#> $`r-devel-linux-x86_64-fedora-clang`
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
 #> ❯ checking installed package size ... NOTE
-#>     installed size is  9.8Mb
+#>     installed size is  7.2Mb
 #>     sub-directories of 1Mb or more:
 #>       R      1.4Mb
-#>       help   1.1Mb
-#>       libs   6.9Mb
+#>       help   1.4Mb
+#>       libs   3.3Mb
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 #> 
-#> $`r-devel-windows-x86_64-gcc10-UCRT`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> $`r-devel-linux-x86_64-fedora-gcc`
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
-#> ❯ checking whether package 'igraph' can be installed ... ERROR
-#>   See below...
-#> 
-#> ❯ checking package dependencies ... NOTE
-#>   Package suggested but not available for checking: 'rgl'
-#> 
-#> ── Install failure ───────────────────────────────────────────────────────────────────────────────────────────────────────
-#> 
-#> <00install.out file does not exist>
-#> 1 error ✖ | 0 warnings ✔ | 1 note ✖
+#> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 #> 
 #> $`r-patched-linux-x86_64`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
-#> ❯ checking top-level files ... WARNING
-#>     Output from running autoreconf:
-#>     configure.ac:71: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:71: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:71: the top level
-#>     configure.ac:110: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:110: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:110: the top level
-#>     configure.ac:127: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:127: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:127: the top level
-#> 
-#> 0 errors ✔ | 1 warning ✖ | 0 notes ✔
-#> 
-#> $`r-patched-solaris-x86`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
-#> Duration: 0ms
-#> 
-#> ❯ checking installed package size ... NOTE
-#>     installed size is  9.6Mb
-#>     sub-directories of 1Mb or more:
-#>       R      1.5Mb
-#>       help   1.2Mb
-#>       libs   6.5Mb
-#> 
-#> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
+#> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 #> 
 #> $`r-release-linux-x86_64`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
-#> ❯ checking top-level files ... WARNING
-#>     Output from running autoreconf:
-#>     configure.ac:71: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:71: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:71: the top level
-#>     configure.ac:110: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:110: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:110: the top level
-#>     configure.ac:127: warning: The macro `AC_HELP_STRING' is obsolete.
-#>     configure.ac:127: You should run autoupdate.
-#>     ./lib/autoconf/general.m4:204: AC_HELP_STRING is expanded from...
-#>     configure.ac:127: the top level
-#> 
-#> 0 errors ✔ | 1 warning ✖ | 0 notes ✔
+#> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 #> 
 #> $`r-release-macos-arm64`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
 #> ❯ checking installed package size ... NOTE
-#>     installed size is 23.7Mb
+#>     installed size is 19.9Mb
 #>     sub-directories of 1Mb or more:
-#>       R      2.0Mb
-#>       help   1.1Mb
-#>       libs  20.0Mb
+#>       R      2.1Mb
+#>       help   1.4Mb
+#>       libs  15.4Mb
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 #> 
 #> $`r-release-macos-x86_64`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
 #> ❯ checking installed package size ... NOTE
-#>     installed size is 21.2Mb
+#>     installed size is 18.5Mb
 #>     sub-directories of 1Mb or more:
 #>       R      1.4Mb
-#>       help   1.1Mb
-#>       libs  18.3Mb
+#>       help   1.4Mb
+#>       libs  14.6Mb
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 #> 
-#> $`r-release-windows-ix86+x86_64`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> $`r-release-windows-x86_64`
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
 #> ❯ checking installed package size ... NOTE
-#>     installed size is 17.1Mb
+#>     installed size is 10.3Mb
 #>     sub-directories of 1Mb or more:
 #>       R      1.4Mb
-#>       help   1.1Mb
-#>       libs  14.2Mb
+#>       help   1.4Mb
+#>       libs   6.4Mb
+#> 
+#> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
+#> 
+#> $`r-oldrel-macos-arm64`
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
+#> Duration: 0ms
+#> 
+#> ❯ checking installed package size ... NOTE
+#>     installed size is 19.9Mb
+#>     sub-directories of 1Mb or more:
+#>       R      2.0Mb
+#>       help   1.4Mb
+#>       libs  15.4Mb
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 #> 
 #> $`r-oldrel-macos-x86_64`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
 #> ❯ checking installed package size ... NOTE
-#>     installed size is 21.2Mb
+#>     installed size is 18.5Mb
 #>     sub-directories of 1Mb or more:
 #>       R      1.4Mb
-#>       help   1.1Mb
-#>       libs  18.3Mb
+#>       help   1.4Mb
+#>       libs  14.6Mb
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 #> 
 #> $`r-oldrel-windows-ix86+x86_64`
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────────────── igraph 1.2.6 ────
+#> ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────
 #> Duration: 0ms
 #> 
 #> ❯ checking installed package size ... NOTE
-#>     installed size is 17.1Mb
+#>     installed size is 17.2Mb
 #>     sub-directories of 1Mb or more:
 #>       R      1.4Mb
-#>       help   1.1Mb
-#>       libs  14.2Mb
+#>       help   1.4Mb
+#>       libs  13.4Mb
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 #> 
@@ -349,41 +269,28 @@ the same package:
 ``` r
 chk <- rcmdcheck(quiet = TRUE)
 compare_to_cran(chk)
-#> ── R CMD check comparison ────────────────────────────────────────────────────────────── rcmdcheck 1.3.3 / 1.3.3.9000 ────
+#> ── R CMD check comparison ──────────────────── rcmdcheck 1.4.0 / 1.4.0.9000 ────
 #> Status: OK
-#> 
-#> ── Fixed
-#> 
-#> ✔ checking LazyData ... NOTE
-#> ✔ checking LazyData ... NOTE
-#> ✔ checking LazyData ... NOTE
-#> ✔ checking LazyData ... NOTE
-#> ✔ checking LazyData ... NOTE
-#> ✔ checking LazyData ... NOTE
 ```
 
 ### Background processes
 
-`rcmdcheck_process` is a `processx::process` class, that can run `R CMD
-check` in the background. You can also use this to run multiple checks
-concurrently. `processx::process` methods can be used to poll or
+`rcmdcheck_process` is a `processx::process` class, that can run
+`R CMD check` in the background. You can also use this to run multiple
+checks concurrently. `processx::process` methods can be used to poll or
 manipulate the check processes.
 
 ``` r
 chkpx <- rcmdcheck_process$new()
 chkpx
-#> PROCESS 'R', running, pid 82576.
+#> PROCESS 'R', running, pid 22384.
 ```
 
 ``` r
 chkpx$wait()
 chkpx$parse_results()
-#> ── R CMD check results ───────────────────────────────────────────────────────────────────────── rcmdcheck 1.3.3.9000 ────
-#> Duration: 23.6s
+#> ── R CMD check results ─────────────────────────────── rcmdcheck 1.4.0.9000 ────
+#> Duration: 16.1s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
-
-## License
-
-MIT © Mango Solutions, Gábor Csárdi, RStudio
