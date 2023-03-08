@@ -14,13 +14,12 @@ Run R CMD check from R and Capture Results
 <!-- badges: start -->
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R build
-status](https://github.com/r-lib/rcmdcheck/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/rcmdcheck/actions)
 [![](https://www.r-pkg.org/badges/version/rcmdcheck)](https://www.r-pkg.org/pkg/rcmdcheck)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/rcmdcheck)](https://www.r-pkg.org/pkg/rcmdcheck)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/r-lib/rcmdcheck/main.svg)](https://codecov.io/github/r-lib/rcmdcheck?branch=main)
+[![R-CMD-check](https://github.com/r-lib/rcmdcheck/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/rcmdcheck/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/r-lib/rcmdcheck/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/rcmdcheck?branch=main)
 <!-- badges: end -->
 
 Run R CMD check from R programmatically and capture the results of the
@@ -66,7 +65,7 @@ library(rcmdcheck)
 chk <- rcmdcheck("tests/testthat/bad1", quiet = TRUE)
 chk
 #> ── R CMD check results ─────────────────────────────────── badpackage 1.0.0 ────
-#> Duration: 10s
+#> Duration: 9.7s
 #> 
 #> ❯ checking DESCRIPTION meta-information ... WARNING
 #>   Non-standard license specification:
@@ -283,14 +282,14 @@ manipulate the check processes.
 ``` r
 chkpx <- rcmdcheck_process$new()
 chkpx
-#> PROCESS 'R', running, pid 22384.
+#> PROCESS 'R', running, pid 25919.
 ```
 
 ``` r
 chkpx$wait()
 chkpx$parse_results()
 #> ── R CMD check results ─────────────────────────────── rcmdcheck 1.4.0.9000 ────
-#> Duration: 16.1s
+#> Duration: 16.8s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
