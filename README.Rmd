@@ -60,7 +60,7 @@ output. The result of the check is returned, in a list with elements
 `errors`, `warnings`, and `notes`. Each element is a character vector,
 and one element of the character vectors is a single failure.
 
-<img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@main/tools/rcmdcheck.svg">
+<img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@main/tools/rcmdcheck.svg" alt="animated screenshot of a terminal window demonstrating example usage of the rcmdcheck function.">
 
 ### Programmatic usage
 
