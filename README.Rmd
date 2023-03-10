@@ -23,10 +23,10 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R build status](https://github.com/r-lib/rcmdcheck/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/rcmdcheck/actions)
 [![](https://www.r-pkg.org/badges/version/rcmdcheck)](https://www.r-pkg.org/pkg/rcmdcheck)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/rcmdcheck)](https://www.r-pkg.org/pkg/rcmdcheck)
-[![Coverage Status](https://img.shields.io/codecov/c/github/r-lib/rcmdcheck/main.svg)](https://codecov.io/github/r-lib/rcmdcheck?branch=main)
+[![R-CMD-check](https://github.com/r-lib/rcmdcheck/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/rcmdcheck/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/rcmdcheck/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/rcmdcheck?branch=main)
 <!-- badges: end -->
 
 Run R CMD check from R programmatically and capture the results of the
@@ -34,8 +34,17 @@ individual checks.
 
 ## Installation
 
+Install the released version from CRAN
+ 
 ```r
 install.packages("rcmdcheck")
+```
+
+Or install the development version from GitHub:
+
+```r
+# install.packages("pak")
+pak::pak("r-lib/rcmdcheck")
 ```
 
 ## Usage
@@ -51,7 +60,7 @@ output. The result of the check is returned, in a list with elements
 `errors`, `warnings`, and `notes`. Each element is a character vector,
 and one element of the character vectors is a single failure.
 
-<img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@main/tools/rcmdcheck.svg">
+<img width="1000" src="https://cdn.jsdelivr.net/gh/r-lib/rcmdcheck@main/tools/rcmdcheck.svg" alt="animated screenshot of a terminal window demonstrating example usage of the rcmdcheck function.">
 
 ### Programmatic usage
 
@@ -140,7 +149,3 @@ chkpx
 chkpx$wait()
 chkpx$parse_results()
 ```
-
-## License
-
-MIT © Mango Solutions, Gábor Csárdi, RStudio

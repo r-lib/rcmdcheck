@@ -1,11 +1,14 @@
 Package: rcmdcheck
 Title: Run 'R CMD check' from 'R' and Capture Results
 Version: 1.4.0.9000
-Authors@R: 
+Authors@R: c(
     person(given = "Gábor",
            family = "Csárdi",
            role = c("cre", "aut"),
-           email = "csardi.gabor@gmail.com")
+           email = "csardi.gabor@gmail.com"),
+    person("Mango Solutions", role = c("cph", "fnd")),
+    person("Posit Software, PBC", role = c("cph", "fnd"))
+  )
 Description: Run 'R CMD check' from 'R' and capture the results
     of the individual checks. Supports running checks in the background,
     timeouts, pretty printing and comparing check results.

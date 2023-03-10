@@ -12,3 +12,5 @@
 ^docs$
 ^pkgdown$
 ^dev-lib$
+^LICENSE\.md$
+^codecov\.yml$
