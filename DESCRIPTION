@@ -1,16 +1,20 @@
 Package: rcmdcheck
 Title: Run 'R CMD check' from 'R' and Capture Results
 Version: 1.4.0.9000
-Authors@R: 
+Authors@R: c(
     person(given = "Gábor",
            family = "Csárdi",
            role = c("cre", "aut"),
-           email = "csardi.gabor@gmail.com")
+           email = "csardi.gabor@gmail.com"),
+    person("Mango Solutions", role = c("cph", "fnd")),
+    person("Posit Software, PBC", role = c("cph", "fnd"))
+  )
 Description: Run 'R CMD check' from 'R' and capture the results
     of the individual checks. Supports running checks in the background,
     timeouts, pretty printing and comparing check results.
 License: MIT + file LICENSE
-URL: https://r-lib.github.io/rcmdcheck/, https://github.com/r-Lib/rcmdcheck#readme
+URL: https://rcmdcheck.r-lib.org/,
+    https://github.com/r-lib/rcmdcheck#readme
 BugReports: https://github.com/r-Lib/rcmdcheck/issues
 Imports:
     callr (>= 3.1.1.9000),
@@ -40,3 +44,4 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Config/testthat/edition: 3
+Config/Needs/website: tidyverse/tidytemplate
