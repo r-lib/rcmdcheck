@@ -109,7 +109,7 @@ rcmdcheck_process <- R6Class(
 #' @importFrom desc desc
 
 rcc_init <- function(self, private, super, path, args, build_args,
-                     check_dir, libpath, repos, env, ...) {
+                     check_dir, libpath, repos, env, ..., stderr = "2>&1") {
 
   if (file.info(path)$isdir) {
     path <- find_package_root_file(path = path)
@@ -164,7 +164,7 @@ rcc_init <- function(self, private, super, path, args, build_args,
     libpath = c(libdir, libpath),
     repos = repos,
     user_profile = FALSE,
-    stderr = "2>&1",
+    stderr = stderr,
     env = chkenv,
     ...
   )
