@@ -73,3 +73,16 @@ test_that("hash_check drops time stamps", {
   expect_equal(hash_check(n1), hash_check(n2))
   expect_equal(hash_check(n1), hash_check(n3))
 })
+
+test_that("results are not recycled to zero", {
+  ok <- parse_check(test_path("REDCapR-ok.log"))
+  fail <- parse_check(test_path("REDCapR-fail.log"))
+
+  # Happens e.g. with `rcmdcheck::cran_check_results()`
+  ok$rversion <- character()
+  fail$rversion <- character()
+
+  # Used to be "+" because of the recycling to zero
+  out <- compare_checks(ok, fail)
+  expect_equal(out$status, "-")
+})

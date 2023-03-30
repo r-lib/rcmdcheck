@@ -120,10 +120,10 @@ as.data.frame.rcmdcheck <- function(x,
 
   data_frame(
     which = which,
-    platform = x$platform %||% NA_character_,
-    rversion = x$rversion %||% NA_character_,
-    package = x$package %||% NA_character_,
-    version = x$version %||% NA_character_,
+    platform = x$platform %|0|% NA_character_,
+    rversion = x$rversion %|0|% NA_character_,
+    package = x$package %|0|% NA_character_,
+    version = x$version %|0|% NA_character_,
     type = entries$type,
     output = entries$output,
     hash = hash_check(entries$output)
