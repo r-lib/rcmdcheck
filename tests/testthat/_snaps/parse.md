@@ -135,15 +135,15 @@
       > library(dataonderivatives)
       > 
       > test_check("dataonderivatives")
-      1. Failure: BSDR API accesible (@test-bsdr.R#6) --------------------------------
+      1. Failure: BSDR API accessible (@test-bsdr.R#6) --------------------------------
       `df1` inherits from `NULL` not `data.frame`.
       
       
-      2. Failure: BSDR API accesible (@test-bsdr.R#8) --------------------------------
+      2. Failure: BSDR API accessible (@test-bsdr.R#8) --------------------------------
       `df2` inherits from `NULL` not `data.frame`.
       
       
-      3. Failure: BSDR API accesible (@test-bsdr.R#9) --------------------------------
+      3. Failure: BSDR API accessible (@test-bsdr.R#9) --------------------------------
       nrow(df1) <= nrow(df2) isn't true.
       
       
@@ -153,9 +153,9 @@
       
       testthat results ================================================================
       OK: 23 SKIPPED: 0 FAILED: 4
-      1. Failure: BSDR API accesible (@test-bsdr.R#6) 
-      2. Failure: BSDR API accesible (@test-bsdr.R#8) 
-      3. Failure: BSDR API accesible (@test-bsdr.R#9) 
+      1. Failure: BSDR API accessible (@test-bsdr.R#6) 
+      2. Failure: BSDR API accessible (@test-bsdr.R#8) 
+      3. Failure: BSDR API accessible (@test-bsdr.R#9) 
       4. Failure: CME SDR file parses (@test-cme.R#22) 
       
       Error: testthat unit tests failed
@@ -184,15 +184,15 @@
       > library(dataonderivatives)
       > 
       > test_check("dataonderivatives")
-      1. Failure: BSDR API accesible (@test-bsdr.R#6) --------------------------------
+      1. Failure: BSDR API accessible (@test-bsdr.R#6) --------------------------------
       `df1` inherits from `NULL` not `data.frame`.
       
       
-      2. Failure: BSDR API accesible (@test-bsdr.R#8) --------------------------------
+      2. Failure: BSDR API accessible (@test-bsdr.R#8) --------------------------------
       `df2` inherits from `NULL` not `data.frame`.
       
       
-      3. Failure: BSDR API accesible (@test-bsdr.R#9) --------------------------------
+      3. Failure: BSDR API accessible (@test-bsdr.R#9) --------------------------------
       nrow(df1) <= nrow(df2) isn't true.
       
       
@@ -202,9 +202,9 @@
       
       testthat results ================================================================
       OK: 23 SKIPPED: 0 FAILED: 4
-      1. Failure: BSDR API accesible (@test-bsdr.R#6) 
-      2. Failure: BSDR API accesible (@test-bsdr.R#8) 
-      3. Failure: BSDR API accesible (@test-bsdr.R#9) 
+      1. Failure: BSDR API accessible (@test-bsdr.R#6) 
+      2. Failure: BSDR API accessible (@test-bsdr.R#8) 
+      3. Failure: BSDR API accessible (@test-bsdr.R#9) 
       4. Failure: CME SDR file parses (@test-cme.R#22) 
       
       Error: testthat unit tests failed
@@ -233,15 +233,15 @@
       > library(dataonderivatives)
       > 
       > test_check("dataonderivatives")
-      1. Failure: BSDR API accesible (@test-bsdr.R#6) --------------------------------
+      1. Failure: BSDR API accessible (@test-bsdr.R#6) --------------------------------
       `df1` inherits from `NULL` not `data.frame`.
       
       
-      2. Failure: BSDR API accesible (@test-bsdr.R#8) --------------------------------
+      2. Failure: BSDR API accessible (@test-bsdr.R#8) --------------------------------
       `df2` inherits from `NULL` not `data.frame`.
       
       
-      3. Failure: BSDR API accesible (@test-bsdr.R#9) --------------------------------
+      3. Failure: BSDR API accessible (@test-bsdr.R#9) --------------------------------
       nrow(df1) <= nrow(df2) isn't true.
       
       
@@ -251,9 +251,9 @@
       
       testthat results ================================================================
       OK: 23 SKIPPED: 0 FAILED: 4
-      1. Failure: BSDR API accesible (@test-bsdr.R#6) 
-      2. Failure: BSDR API accesible (@test-bsdr.R#8) 
-      3. Failure: BSDR API accesible (@test-bsdr.R#9) 
+      1. Failure: BSDR API accessible (@test-bsdr.R#6) 
+      2. Failure: BSDR API accessible (@test-bsdr.R#8) 
+      3. Failure: BSDR API accessible (@test-bsdr.R#9) 
       4. Failure: CME SDR file parses (@test-cme.R#22) 
       
       Error: testthat unit tests failed
@@ -282,15 +282,15 @@
       > library(dataonderivatives)
       > 
       > test_check("dataonderivatives")
-      1. Failure: BSDR API accesible (@test-bsdr.R#6) --------------------------------
+      1. Failure: BSDR API accessible (@test-bsdr.R#6) --------------------------------
       `df1` inherits from `NULL` not `data.frame`.
       
       
-      2. Failure: BSDR API accesible (@test-bsdr.R#8) --------------------------------
+      2. Failure: BSDR API accessible (@test-bsdr.R#8) --------------------------------
       `df2` inherits from `NULL` not `data.frame`.
       
       
-      3. Failure: BSDR API accesible (@test-bsdr.R#9) --------------------------------
+      3. Failure: BSDR API accessible (@test-bsdr.R#9) --------------------------------
       nrow(df1) <= nrow(df2) isn't true.
       
       
@@ -300,9 +300,9 @@
       
       testthat results ================================================================
       OK: 23 SKIPPED: 0 FAILED: 4
-      1. Failure: BSDR API accesible (@test-bsdr.R#6) 
-      2. Failure: BSDR API accesible (@test-bsdr.R#8) 
-      3. Failure: BSDR API accesible (@test-bsdr.R#9) 
+      1. Failure: BSDR API accessible (@test-bsdr.R#6) 
+      2. Failure: BSDR API accessible (@test-bsdr.R#8) 
+      3. Failure: BSDR API accessible (@test-bsdr.R#9) 
       4. Failure: CME SDR file parses (@test-cme.R#22) 
       
       Error: testthat unit tests failed

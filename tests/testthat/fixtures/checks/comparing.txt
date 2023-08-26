@@ -57,7 +57,7 @@
   Comparing 'spelling.Rout' to 'spelling.Rout.save' ...6,8d5
 < Potential spelling errors:
 <   WORD              FOUND IN
-< programatically   NEWS.md:14
+< programmatically   NEWS.md:14
  OK
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in 'inst/doc' ... OK

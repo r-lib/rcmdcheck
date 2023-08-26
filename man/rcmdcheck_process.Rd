@@ -54,7 +54,7 @@ Most methods are inherited from \link[callr:rcmd_process]{callr::rcmd_process} a
 \link[processx:process]{processx::process}.
 
 \code{cp$parse_results()} parses the results, and returns an S3 object with
-fields \code{errors}, \code{warnnigs} and \code{notes}, just like \code{\link[=rcmdcheck]{rcmdcheck()}}. It
+fields \code{errors}, \code{warnings} and \code{notes}, just like \code{\link[=rcmdcheck]{rcmdcheck()}}. It
 is an error to call it before the process has finished. Use the
 \code{wait()} method to wait for the check to finish, or the \code{is_alive()}
 method to check if it is still running.

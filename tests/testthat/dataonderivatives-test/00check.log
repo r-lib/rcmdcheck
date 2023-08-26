@@ -58,9 +58,9 @@ Last 13 lines of output:
   
   testthat results ================================================================
   OK: 23 SKIPPED: 0 FAILED: 4
-  1. Failure: BSDR API accesible (@test-bsdr.R#6) 
-  2. Failure: BSDR API accesible (@test-bsdr.R#8) 
-  3. Failure: BSDR API accesible (@test-bsdr.R#9) 
+  1. Failure: BSDR API accessible (@test-bsdr.R#6) 
+  2. Failure: BSDR API accessible (@test-bsdr.R#8) 
+  3. Failure: BSDR API accessible (@test-bsdr.R#9) 
   4. Failure: CME SDR file parses (@test-cme.R#22) 
   
   Error: testthat unit tests failed

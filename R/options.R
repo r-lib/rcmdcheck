@@ -8,7 +8,7 @@
 #' rcmdcheck uses the cli package for much of its output, so you can
 #' configure the output via cli, see [cli::cli-config].
 #'
-#' Package configration is defined in the `DESCRIPTION` file of the checked
+#' Package configuration is defined in the `DESCRIPTION` file of the checked
 #' package. E.g.:
 #' ```
 #' Config/build/clean-inst-doc: FALSE

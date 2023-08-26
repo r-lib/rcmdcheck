@@ -44,7 +44,7 @@
 #' [processx::process].
 #'
 #' `cp$parse_results()` parses the results, and returns an S3 object with
-#' fields `errors`, `warnnigs` and `notes`, just like [rcmdcheck()]. It
+#' fields `errors`, `warnings` and `notes`, just like [rcmdcheck()]. It
 #' is an error to call it before the process has finished. Use the
 #' `wait()` method to wait for the check to finish, or the `is_alive()`
 #' method to check if it is still running.

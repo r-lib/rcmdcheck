@@ -29,7 +29,7 @@ cli::test_that_cli("test failures are captured", {
   check <- parse_check(path)
 
   expect_named(check$test_fail, "testthat")
-  expect_match(check$test_fail[[1]], "BSDR API accesible")
+  expect_match(check$test_fail[[1]], "BSDR API accessible")
 
   expect_snapshot(
     print(check)
