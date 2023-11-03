@@ -12,3 +12,4 @@
 ^docs$
 ^pkgdown$
 ^dev-lib$
+^codecov\.yml$
