@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://r-lib.github.io/rcmdcheck/404.html</loc>
+  </url>
+  <url>
+    <loc>http://r-lib.github.io/rcmdcheck/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>http://r-lib.github.io/rcmdcheck/authors.html</loc>
+  </url>
+  <url>
     <loc>http://r-lib.github.io/rcmdcheck/index.html</loc>
+  </url>
+  <url>
+    <loc>http://r-lib.github.io/rcmdcheck/news/index.html</loc>
   </url>
   <url>
     <loc>http://r-lib.github.io/rcmdcheck/reference/check_details.html</loc>
@@ -20,6 +32,9 @@
   </url>
   <url>
     <loc>http://r-lib.github.io/rcmdcheck/reference/data_frame.html</loc>
+  </url>
+  <url>
+    <loc>http://r-lib.github.io/rcmdcheck/reference/index.html</loc>
   </url>
   <url>
     <loc>http://r-lib.github.io/rcmdcheck/reference/myrep.html</loc>
