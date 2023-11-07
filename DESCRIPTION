@@ -37,7 +37,7 @@ Suggests:
     ps,
     rmarkdown,
     svglite,
-    testthat,
+    testthat (>= 3.2.0),
     webfakes
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
