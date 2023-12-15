@@ -48,7 +48,7 @@ NULL
 #' _R_CHECK_RD_XREFS_=false
 #'
 #' # Do not report if package requires GNU make
-#' _R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=false
+#' _R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=true
 #'
 #' # Do not check non-ASCII strings in datasets
 #' _R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_=true
