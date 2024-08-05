@@ -1,69 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/check_details.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/compare_checks.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/compare_to_cran.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/cran_check_flavours.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/cran_check_results.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/data_frame.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/myrep.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/parse_check.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/parse_check_url.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/print.rcmdcheck.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/print.rcmdcheck_comparison.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck-config.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck_process.html</loc>
-  </url>
-  <url>
-    <loc>https://rcmdcheck.r-lib.org/dev/reference/xopen.rcmdcheck.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://rcmdcheck.r-lib.org/dev/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/LICENSE-text.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/LICENSE.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/authors.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/index.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/news/index.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/check_details.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/compare_checks.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/compare_to_cran.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/cran_check_flavours.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/cran_check_results.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/data_frame.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/index.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/myrep.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/parse_check.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/parse_check_url.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/print.rcmdcheck.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/print.rcmdcheck_comparison.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck-config.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck_process.html</loc></url>
+<url><loc>https://rcmdcheck.r-lib.org/dev/reference/xopen.rcmdcheck.html</loc></url>
 </urlset>
+
