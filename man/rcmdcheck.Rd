@@ -100,7 +100,7 @@ Currently, this will make rcmdcheck ignore the following notes:
 \itemize{
 \item report large package sizes (\verb{_R_CHECK_PKG_SIZES_ = FALSE}),
 \item check cross-references in Rd files (\verb{_R_CHECK_RD_XREFS_ = FALSE}),
-\item NOTE if package requires GNU make (\verb{_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_ = FALSE}),
+\item ignore NOTE about package requiring GNU make (\verb{_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_ = TRUE}),
 \item report marked non-ASCII strings in datasets (\verb{_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_ = TRUE}).
 }
 
@@ -120,7 +120,7 @@ _R_CHECK_PKG_SIZES_THRESHOLD_=10
 _R_CHECK_RD_XREFS_=false
 
 # Do not report if package requires GNU make
-_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=false
+_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=true
 
 # Do not check non-ASCII strings in datasets
 _R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_=true
