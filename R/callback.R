@@ -22,9 +22,17 @@ block_callback <- function(
   now <- NULL
   prev_line <- ""
 
+  # R may print a duration before emitting 'OK' when reporting
+  # elapsed time when running tests; the behavior seems to depend
+  # on whether test are run with `--as-cran`.
+  #
+  # https://github.com/r-lib/rcmdcheck/issues/205
+  ok_regex <- "^\\s+(\\[.*\\]\\s*)?OK"
+
   no <- function(x, what = "") {
+    what <- paste0("\\Q", what, "\\E")
     pattern <- paste0(" \\.\\.\\.[ ]?", what, "$")
-    sub("^\\*+ ", "", sub(pattern, "", x))
+    sub("^\\*+ ", "", sub(pattern, "", x, perl = TRUE))
   }
 
   time_if_long <- function() {
@@ -105,7 +113,7 @@ block_callback <- function(
   do_test_mode <- function(x) {
     ## Maybe we just learned the result of the current test file
     if (test_running) {
-      if (grepl("^\\s+OK", x)) {
+      if (grepl(ok_regex, x)) {
         ## Tests are over, success
         state <<- "OK"
         test_running <<- FALSE
@@ -163,7 +171,7 @@ block_callback <- function(
       now <<- sys_time()
       test_running <<- TRUE
       NA_character_
-    } else if (grepl("^\\s+OK", x)) {
+    } else if (grepl(ok_regex, x)) {
       state <<- "OK"
       test_running <<- FALSE
       NA_character_
