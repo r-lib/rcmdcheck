@@ -2,7 +2,7 @@
 # rcmdcheck (development version)
 
 * Fixed an issue where check output could be malformed when testing
-  packages with multiple test files (#205).
+  packages with multiple test files (#205, @kevinushey).
 
 * Update pkgdown template and move url to https://rcmdcheck.r-lib.org.
 
