@@ -30,9 +30,8 @@ block_callback <- function(
   ok_regex <- "^\\s+(\\[.*\\]\\s*)?OK"
 
   no <- function(x, what = "") {
-    what <- paste0("\\Q", what, "\\E")
     pattern <- paste0(" \\.\\.\\.[ ]?", what, "$")
-    sub("^\\*+ ", "", sub(pattern, "", x, perl = TRUE))
+    sub("^\\*+ ", "", sub(pattern, "", x))
   }
 
   time_if_long <- function() {
