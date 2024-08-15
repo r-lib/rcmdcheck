@@ -24,7 +24,7 @@ block_callback <- function(
 
   # R may print a duration before emitting 'OK' when reporting
   # elapsed time when running tests; the behavior seems to depend
-  # on whether test are run with `--as-cran`.
+  # on whether tests are run with `--as-cran`.
   #
   # https://github.com/r-lib/rcmdcheck/issues/205
   ok_regex <- "^\\s+(\\[.*\\]\\s*)?OK"
