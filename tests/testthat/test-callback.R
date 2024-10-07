@@ -195,8 +195,8 @@ test_that("simple_callback", {
 })
 
 test_that("detect_callback", {
-  mockery::stub(detect_callback, "block_callback", "block")
-  mockery::stub(detect_callback, "simple_callback", "simple")
+  local_mocked_bindings(block_callback = function() "block")
+  local_mocked_bindings(simple_callback = function() "simple")
 
   withr::local_options(cli.dynamic = TRUE)
   expect_equal(detect_callback(), "block")

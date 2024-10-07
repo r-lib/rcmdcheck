@@ -195,7 +195,7 @@ test_that("check arguments", {
 
 test_that("check_dir argument", {
   wd <- NULL
-  mockery::stub(rcmdcheck, "do_check", function(...) {
+  local_mocked_bindings(do_check =  function(...) {
     wd <<- getwd()
     stop("enough")
   })
