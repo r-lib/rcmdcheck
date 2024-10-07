@@ -32,7 +32,6 @@ Imports:
 Suggests:
     covr,
     knitr,
-    mockery,
     processx,
     ps,
     rmarkdown,

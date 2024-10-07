@@ -57,10 +57,8 @@ test_that("error is thrown as needed, with the correct type", {
 
 test_that("error_on argument", {
   value <- NULL
-  mockery::stub(
-    rcmdcheck,
-    "match.arg",
-    function(arg, ...) {
+  local_mocked_bindings(
+    match.arg = function(arg, ...) {
       value <<- arg
       stop("that's enough")
     }
