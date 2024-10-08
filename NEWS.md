@@ -6,6 +6,8 @@
 
 * Update pkgdown template and move url to https://rcmdcheck.r-lib.org.
 
+* Fix usage of `libpath` argument (#195).
+
 # rcmdcheck 1.4.0
 
 * `cran_check_results()` now downloads results in parallel, so it is
@@ -37,7 +39,7 @@
   `rcmdcheck.test_output` global option, to control whether to print the full
   test output or not. (#121)
 
-* RStudio's Pandoc is now on the path during `rcmdcheck()` 
+* RStudio's Pandoc is now on the path during `rcmdcheck()`
   and `rcmdcheck_process` (#109, #132, @dpprdan).
 
 * `rcmdcheck()` now errors if the check process crashes (#110, #163).
