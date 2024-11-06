@@ -14,8 +14,8 @@ ignore_env_config <- function() {
                    | "_R_CHECK_PKG_SIZES_"                       | FALSE,
     "check cross-references in Rd files"
                    | "_R_CHECK_RD_XREFS_"                        | FALSE,
-    "NOTE if package requires GNU make"
-                   | "_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_"     | FALSE,
+    "ignore NOTE about package requiring GNU make"
+                   | "_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_"     | TRUE,
     "report marked non-ASCII strings in datasets"
                    | "_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_" | TRUE
   )
