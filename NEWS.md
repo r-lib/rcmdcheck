@@ -1,10 +1,12 @@
-
 # rcmdcheck (development version)
 
 * Fixed an issue where check output could be malformed when testing
   packages with multiple test files (#205, @kevinushey).
 
 * Update pkgdown template and move url to https://rcmdcheck.r-lib.org.
+
+* Fixed and issue where `rcmdcheck_process$new()` could fail the setup stage
+  due to `libpath` not being used by the build sub process. (#230, @maksymiuks)
 
 # rcmdcheck 1.4.0
 

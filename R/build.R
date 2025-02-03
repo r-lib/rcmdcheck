@@ -1,6 +1,6 @@
 
 #' @importFrom pkgbuild pkgbuild_process
-#' @importFrom withr with_envvar
+#' @importFrom withr with_libpaths
 
 build_package <- function(path, tmpdir, build_args, libpath, quiet) {
   path <- normalizePath(path)
@@ -16,8 +16,7 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
     desc <- desc(path)
     clean_doc <- as_flag(desc$get("Config/build/clean-inst-doc"), NULL)
 
-    with_envvar(
-      c("R_LIBS_USER" = paste(libpath, collapse = .Platform$path.sep)), {
+    with_libpaths(libpath, {
         proc <- pkgbuild_process$new(
           path,
           tmpdir,
