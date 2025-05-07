@@ -8,10 +8,10 @@
 <title>Run R CMD check from R and Capture Results • rcmdcheck</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Run R CMD check from R and Capture Results">
 <meta name="description" content="Run R CMD check from R and capture the results of the individual checks. Supports running checks in the background, timeouts, pretty printing and comparing check results.">
 <meta property="og:description" content="Run R CMD check from R and capture the results of the individual checks. Supports running checks in the background, timeouts, pretty printing and comparing check results.">
@@ -101,7 +101,7 @@
 <span><span class="va">chk</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rcmdcheck.html">rcmdcheck</a></span><span class="op">(</span><span class="st">"tests/testthat/bad1"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">chk</span></span>
 <span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────── badpackage 1.0.0 ────</span></span>
-<span><span class="co">#&gt; Duration: 9.7s</span></span>
+<span><span class="co">#&gt; Duration: 12.5s</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ❯ checking DESCRIPTION meta-information ... WARNING</span></span>
 <span><span class="co">#&gt;   Non-standard license specification:</span></span>
@@ -135,7 +135,7 @@
 <li>
 <code>description</code>: The text of the <code>DESCRIPTION</code> file.</li>
 <li>
-<code>session_info</code>: A <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">sessioninfo::session_info</a></code> object, session information from within the check process.</li>
+<code>session_info</code>: A <code><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">sessioninfo::session_info</a></code> object, session information from within the check process.</li>
 <li>
 <code>cran</code>: Flag, whether this is a CRAN package. (Based on the <code>Repository</code> field in <code>DESCRIPTION</code>, which is typically only set for published CRAN packages.)</li>
 <li>
@@ -161,128 +161,209 @@
 <span><span class="co">#&gt;  [7] "r-release-linux-x86_64"            "r-release-macos-arm64"            </span></span>
 <span><span class="co">#&gt;  [9] "r-release-macos-x86_64"            "r-release-windows-x86_64"         </span></span>
 <span><span class="co">#&gt; [11] "r-oldrel-macos-arm64"              "r-oldrel-macos-x86_64"            </span></span>
-<span><span class="co">#&gt; [13] "r-oldrel-windows-ix86+x86_64"</span></span></code></pre></div>
+<span><span class="co">#&gt; [13] "r-oldrel-windows-x86_64"</span></span></code></pre></div>
 <p><code><a href="reference/cran_check_results.html">cran_check_results()</a></code> loads and parses all check results for a package.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cran_check_results.html">cran_check_results</a></span><span class="op">(</span><span class="st">"igraph"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $`r-devel-linux-x86_64-debian-clang`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File ‘igraph/libs/igraph.so’:</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: ‘Rf_allocSExp’</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,</span></span>
+<span><span class="co">#&gt;   and section ‘Moving into C API compliance’ for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-devel-linux-x86_64-debian-gcc`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File ‘igraph/libs/igraph.so’:</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: ‘Rf_allocSExp’</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,</span></span>
+<span><span class="co">#&gt;   and section ‘Moving into C API compliance’ for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-devel-linux-x86_64-fedora-clang`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ❯ checking installed package size ... NOTE</span></span>
-<span><span class="co">#&gt;     installed size is  7.2Mb</span></span>
-<span><span class="co">#&gt;     sub-directories of 1Mb or more:</span></span>
-<span><span class="co">#&gt;       R      1.4Mb</span></span>
-<span><span class="co">#&gt;       help   1.4Mb</span></span>
-<span><span class="co">#&gt;       libs   3.3Mb</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File ‘igraph/libs/igraph.so’:</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: ‘Rf_allocSExp’</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,</span></span>
+<span><span class="co">#&gt;   and section ‘Moving into C API compliance’ for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-devel-linux-x86_64-fedora-gcc`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File ‘igraph/libs/igraph.so’:</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: ‘Rf_allocSExp’</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,</span></span>
+<span><span class="co">#&gt;   and section ‘Moving into C API compliance’ for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`r-devel-windows-x86_64`</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
+<span><span class="co">#&gt; Duration: 0ms</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File 'igraph/libs/x64/igraph.dll':</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: 'Rf_allocSExp'</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See 'Writing portable packages' in the 'Writing R Extensions' manual,</span></span>
+<span><span class="co">#&gt;   and section 'Moving into C API compliance' for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-patched-linux-x86_64`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File ‘igraph/libs/igraph.so’:</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: ‘Rf_allocSExp’</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,</span></span>
+<span><span class="co">#&gt;   and section ‘Moving into C API compliance’ for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-release-linux-x86_64`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File ‘igraph/libs/igraph.so’:</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: ‘Rf_allocSExp’</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,</span></span>
+<span><span class="co">#&gt;   and section ‘Moving into C API compliance’ for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-release-macos-arm64`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ❯ checking installed package size ... NOTE</span></span>
-<span><span class="co">#&gt;     installed size is 19.9Mb</span></span>
-<span><span class="co">#&gt;     sub-directories of 1Mb or more:</span></span>
-<span><span class="co">#&gt;       R      2.1Mb</span></span>
-<span><span class="co">#&gt;       help   1.4Mb</span></span>
-<span><span class="co">#&gt;       libs  15.4Mb</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File ‘igraph/libs/igraph.so’:</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: ‘Rf_allocSExp’</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,</span></span>
+<span><span class="co">#&gt;   and section ‘Moving into C API compliance’ for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-release-macos-x86_64`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ❯ checking installed package size ... NOTE</span></span>
-<span><span class="co">#&gt;     installed size is 18.5Mb</span></span>
-<span><span class="co">#&gt;     sub-directories of 1Mb or more:</span></span>
-<span><span class="co">#&gt;       R      1.4Mb</span></span>
-<span><span class="co">#&gt;       help   1.4Mb</span></span>
-<span><span class="co">#&gt;       libs  14.6Mb</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File ‘igraph/libs/igraph.so’:</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: ‘Rf_allocSExp’</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,</span></span>
+<span><span class="co">#&gt;   and section ‘Moving into C API compliance’ for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-release-windows-x86_64`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ❯ checking installed package size ... NOTE</span></span>
-<span><span class="co">#&gt;     installed size is 10.3Mb</span></span>
-<span><span class="co">#&gt;     sub-directories of 1Mb or more:</span></span>
-<span><span class="co">#&gt;       R      1.4Mb</span></span>
-<span><span class="co">#&gt;       help   1.4Mb</span></span>
-<span><span class="co">#&gt;       libs   6.4Mb</span></span>
+<span><span class="co">#&gt; ❯ checking compiled code ... NOTE</span></span>
+<span><span class="co">#&gt;   File 'igraph/libs/x64/igraph.dll':</span></span>
+<span><span class="co">#&gt;     Found non-API call to R: 'Rf_allocSExp'</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   Compiled code should not call non-API entry points in R.</span></span>
+<span><span class="co">#&gt;   </span></span>
+<span><span class="co">#&gt;   See 'Writing portable packages' in the 'Writing R Extensions' manual,</span></span>
+<span><span class="co">#&gt;   and section 'Moving into C API compliance' for issues with the use of</span></span>
+<span><span class="co">#&gt;   non-API entry points.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-oldrel-macos-arm64`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ❯ checking installed package size ... NOTE</span></span>
-<span><span class="co">#&gt;     installed size is 19.9Mb</span></span>
+<span><span class="co">#&gt;     installed size is 23.8Mb</span></span>
 <span><span class="co">#&gt;     sub-directories of 1Mb or more:</span></span>
-<span><span class="co">#&gt;       R      2.0Mb</span></span>
-<span><span class="co">#&gt;       help   1.4Mb</span></span>
-<span><span class="co">#&gt;       libs  15.4Mb</span></span>
+<span><span class="co">#&gt;       R      2.1Mb</span></span>
+<span><span class="co">#&gt;       doc    1.2Mb</span></span>
+<span><span class="co">#&gt;       help   2.9Mb</span></span>
+<span><span class="co">#&gt;       libs  17.1Mb</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`r-oldrel-macos-x86_64`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ❯ checking installed package size ... NOTE</span></span>
-<span><span class="co">#&gt;     installed size is 18.5Mb</span></span>
+<span><span class="co">#&gt;     installed size is 23.6Mb</span></span>
 <span><span class="co">#&gt;     sub-directories of 1Mb or more:</span></span>
-<span><span class="co">#&gt;       R      1.4Mb</span></span>
-<span><span class="co">#&gt;       help   1.4Mb</span></span>
-<span><span class="co">#&gt;       libs  14.6Mb</span></span>
+<span><span class="co">#&gt;       R      1.3Mb</span></span>
+<span><span class="co">#&gt;       doc    1.2Mb</span></span>
+<span><span class="co">#&gt;       help   2.0Mb</span></span>
+<span><span class="co">#&gt;       libs  18.7Mb</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $`r-oldrel-windows-ix86+x86_64`</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 1.4.1 ────</span></span>
+<span><span class="co">#&gt; $`r-oldrel-windows-x86_64`</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────────── igraph 2.1.4 ────</span></span>
 <span><span class="co">#&gt; Duration: 0ms</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ❯ checking installed package size ... NOTE</span></span>
-<span><span class="co">#&gt;     installed size is 17.2Mb</span></span>
+<span><span class="co">#&gt;     installed size is 10.7Mb</span></span>
 <span><span class="co">#&gt;     sub-directories of 1Mb or more:</span></span>
-<span><span class="co">#&gt;       R      1.4Mb</span></span>
-<span><span class="co">#&gt;       help   1.4Mb</span></span>
-<span><span class="co">#&gt;       libs  13.4Mb</span></span>
+<span><span class="co">#&gt;       R      1.3Mb</span></span>
+<span><span class="co">#&gt;       doc    1.2Mb</span></span>
+<span><span class="co">#&gt;       help   2.1Mb</span></span>
+<span><span class="co">#&gt;       libs   5.7Mb</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 1 note ✖</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -308,12 +389,12 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chkpx</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/rcmdcheck_process.html">rcmdcheck_process</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">chkpx</span></span>
-<span><span class="co">#&gt; PROCESS 'R', running, pid 25919.</span></span></code></pre></div>
+<span><span class="co">#&gt; PROCESS 'R', running, pid 74156.</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chkpx</span><span class="op">$</span><span class="fu">wait</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">chkpx</span><span class="op">$</span><span class="fu">parse_results</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── R CMD check results ─────────────────────────────── rcmdcheck 1.4.0.9000 ────</span></span>
-<span><span class="co">#&gt; Duration: 16.8s</span></span>
+<span><span class="co">#&gt; Duration: 19.5s</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span></code></pre></div>
 </div>
@@ -355,10 +436,10 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a> <br><small class="roles"> Maintainer, author </small>  </li>
-<li>Mango Solutions <br><small class="roles"> Copyright holder, funder </small>  </li>
+<a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a> <br><small class="roles"> Maintainer, author </small>   </li>
+<li>Mango Solutions <br><small class="roles"> Copyright holder, funder </small>   </li>
 <li>
-<a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
+<a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>  <a href="https://ror.org/03wc8by49" class="external-link"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/main/ror-icon-rgb.svg" class="ror" alt="ROR"></a> </li>
 </ul>
 </div>
 
@@ -369,7 +450,7 @@
 <li><a href="https://www.r-pkg.org/pkg/rcmdcheck" class="external-link"><img src="https://www.r-pkg.org/badges/version/rcmdcheck"></a></li>
 <li><a href="https://www.r-pkg.org/pkg/rcmdcheck" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/rcmdcheck" alt="CRAN RStudio mirror downloads"></a></li>
 <li><a href="https://github.com/r-lib/rcmdcheck/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/r-lib/rcmdcheck/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/r-lib/rcmdcheck?branch=main" class="external-link"><img src="https://codecov.io/gh/r-lib/rcmdcheck/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://app.codecov.io/gh/r-lib/rcmdcheck" class="external-link"><img src="https://codecov.io/gh/r-lib/rcmdcheck/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
@@ -384,7 +465,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
   </div></footer>

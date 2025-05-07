@@ -1,8 +1,8 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-10-07T12:21Z
+last_built: 2025-05-07T14:30Z
 urls:
   reference: https://rcmdcheck.r-lib.org/reference
   article: https://rcmdcheck.r-lib.org/articles
