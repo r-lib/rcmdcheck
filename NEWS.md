@@ -6,6 +6,8 @@
 
 * Update pkgdown template and move url to https://rcmdcheck.r-lib.org.
 
+* Fix usage of `libpath` argument (#195).
+
 * `cran_check_results()` works again.
 
 # rcmdcheck 1.4.0
