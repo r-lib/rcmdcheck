@@ -68,13 +68,10 @@ block_callback <- function(
     prev_line <<- x
 
     ## NA_character_ can omit output
-    if (is.na(xx)) {
-      return()
-    }
+    if (is.na(xx)) return()
 
-    if (should_time) {
-      xx <- style(xx, timing = time_if_long())
-    }
+    if (should_time) xx <- style(xx, timing = time_if_long())
+
 
     line_started <<- now
 
@@ -158,9 +155,8 @@ block_callback <- function(
     }
 
     ## Now focus on the current line, if we are still testing
-    if (state != "tests") {
-      return(NA_character_)
-    }
+    if (state != "tests") return(NA_character_)
+
     if (grepl("^\\s+Comparing.*OK$", x)) {
       ## Comparison, success
       style(ok = symbol$tick, pale = no(x, "OK"))
@@ -224,9 +220,7 @@ block_callback <- function(
     }
     cat("  \r")
     lapply(lines, do_line)
-    if (state == "tests") {
-      do_test_partial_line(partial_line)
-    }
+    if (state == "tests") do_test_partial_line(partial_line)
     cat0(sub("^[\\* ]\\*?", "  ", partial_line), "\r")
   }
 }
