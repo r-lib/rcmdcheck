@@ -10,6 +10,8 @@
 
 * `cran_check_results()` works again.
 
+* `rcmdcheck()` now will print rcheck envvars ([#172](https://github.com/r-lib/rcmdcheck/issues/172))
+
 # rcmdcheck 1.4.0
 
 * `cran_check_results()` now downloads results in parallel, so it is
