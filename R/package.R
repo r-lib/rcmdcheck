@@ -227,9 +227,41 @@ do_check <- function(
   }
 
   # user supplied env vars take precedence
-  if (length(env)) chkenv[names(env)] <- env
+  if (length(env)) {
+    chkenv[names(env)] <- env
+  }
 
-  if (!quiet) cat_head("R CMD check")
+  if (!quiet) {
+    cat_head("R CMD check")
+    cat_line()
+    all_vars <- Sys.getenv()
+    rchk_vars <- all_vars[
+      grep("_R_CHECK|NOT_CRAN|RCMDCHECK|R_TESTS", names(all_vars))
+    ]
+    rchk_vars[names(env)] <- env
+    if (length(rchk_vars) == 0) {
+      cli::cat_bullet(
+        "No R CMD check env vars set",
+        col = "darkgrey",
+        bullet = "line",
+        bullet_col = "darkgrey"
+      )
+    }
+    if (length(rchk_vars) > 0) {
+      cli::cat_bullet(
+        "R CMD check env vars set:",
+        col = "darkgrey",
+        bullet = "line",
+        bullet_col = "darkgrey"
+      )
+      cli::cat_bullet(
+        paste0(format(names(rchk_vars)), " = ", unname(rchk_vars)),
+        col = "darkgrey"
+      )
+      cat_line()
+    }
+  }
+
   callback <- if (!quiet) detect_callback(as_cran = "--as-cran" %in% args)
   res <- rcmd_safe(
     "check",
