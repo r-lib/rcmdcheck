@@ -10,7 +10,7 @@
 
 * `cran_check_results()` works again.
 
-* `rcmdcheck()` now will print rcheck envvars ([#172](https://github.com/r-lib/rcmdcheck/issues/172))
+* `rcmdcheck()` now will print relevant environment variables (#172, @tanho63)
 
 # rcmdcheck 1.4.0
 
