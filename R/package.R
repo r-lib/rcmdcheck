@@ -143,7 +143,9 @@ rcmdcheck <- function(
   }
 
   # Add pandoc to the PATH, for R CMD build and R CMD check
-  if (should_use_rs_pandoc()) local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  if (should_use_rs_pandoc()) {
+    local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  }
 
   pkgbuild::without_cache(pkgbuild::local_build_tools())
 
@@ -175,7 +177,9 @@ rcmdcheck <- function(
 
   on.exit(unlink(out$session_info, recursive = TRUE), add = TRUE)
 
-  if (isTRUE(out$timeout)) message("R CMD check timed out")
+  if (isTRUE(out$timeout)) {
+    message("R CMD check timed out")
+  }
 
   res <- new_rcmdcheck(
     stdout = out$result$stdout,
@@ -188,7 +192,9 @@ rcmdcheck <- function(
   )
 
   # Automatically delete temporary files when this object disappears
-  if (cleanup) res$cleaner <- auto_clean(check_dir)
+  if (cleanup) {
+    res$cleaner <- auto_clean(check_dir)
+  }
 
   handle_error_on(res, error_on)
 
@@ -239,17 +245,10 @@ do_check <- function(
       grep("_R_CHECK|NOT_CRAN|RCMDCHECK|R_TESTS", names(all_vars))
     ]
     rchk_vars[names(env)] <- env
-    if (length(rchk_vars) == 0) {
-      cli::cat_bullet(
-        "No R CMD check env vars set",
-        col = "darkgrey",
-        bullet = "line",
-        bullet_col = "darkgrey"
-      )
-    }
+
     if (length(rchk_vars) > 0) {
       cli::cat_bullet(
-        "R CMD check env vars set:",
+        "With:",
         col = "darkgrey",
         bullet = "line",
         bullet_col = "darkgrey"
@@ -278,7 +277,9 @@ do_check <- function(
   )
 
   # To print an incomplete line on timeout or crash
-  if (!is.null(callback) && (res$timeout || res$status != 0)) callback("\n")
+  if (!is.null(callback) && (res$timeout || res$status != 0)) {
+    callback("\n")
+  }
 
   # Non-zero status is an error, the check process failed
   # R CMD check returns 1 for installation errors, we don't want to error
