@@ -129,7 +129,7 @@ rcmdcheck <- function(
 ) {
   error_on <- match.arg(error_on, c("never", "error", "warning", "note"))
 
-  if (file.info(path)$isdir) {
+  if (safecheck_isdir(path)) {
     path <- find_package_root_file(path = path)
   } else {
     path <- normalizePath(path)
