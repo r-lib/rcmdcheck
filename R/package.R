@@ -145,7 +145,7 @@ rcmdcheck <- function(
   # Add pandoc to the PATH, for R CMD build and R CMD check
   if (should_use_rs_pandoc()) local_path(Sys.getenv("RSTUDIO_PANDOC"))
 
-  pkgbuild::without_cache(pkgbuild::local_build_tools())
+  pkgbuild::without_cache(pkgbuild::local_build_tools(required = FALSE))
 
   targz <- build_package(
     path,
