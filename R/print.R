@@ -68,8 +68,12 @@ header_line <- function(left = "", right = "", width = cli::console_width()) {
   ncl <- nchar(left)
   ncr <- nchar(right)
 
-  if (ncl) left <- paste0(" ", left, " ")
-  if (ncr) right <- paste0(" ", right, " ")
+  if (ncl) {
+    left <- paste0(" ", left, " ")
+  }
+  if (ncr) {
+    right <- paste0(" ", right, " ")
+  }
   ndashes <- width - ((ncl > 0) * 2 + (ncr > 0) * 2 + ncl + ncr)
 
   if (ndashes < 4) {
@@ -123,6 +127,8 @@ print_entry <- function(entry, entry_style) {
 summary.rcmdcheck <- function(object, ...) {
   structure(list(object), class = "rcmdcheck_summary")
 }
+
+#' @export
 
 print.rcmdcheck_summary <- function(x, ..., line = TRUE) {
   object <- x[[1]]

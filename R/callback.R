@@ -36,7 +36,7 @@ block_callback <- function(
   time_if_long <- function() {
     limit <- as.numeric(getOption(
       "rcmdcheck.timestamp_limit",
-      Sys.getenv("RCMDCHECK_TIMESTAMP_LIMIT", "0.33333")
+      Sys.getenv("RCMDCHECK_TIMESTAMP_LIMIT", "1")
     ))
     elapsed <- now - line_started
     line_started <<- now
@@ -71,6 +71,7 @@ block_callback <- function(
     if (is.na(xx)) return()
 
     if (should_time) xx <- style(xx, timing = time_if_long())
+
 
     line_started <<- now
 
@@ -155,6 +156,7 @@ block_callback <- function(
 
     ## Now focus on the current line, if we are still testing
     if (state != "tests") return(NA_character_)
+
     if (grepl("^\\s+Comparing.*OK$", x)) {
       ## Comparison, success
       style(ok = symbol$tick, pale = no(x, "OK"))
