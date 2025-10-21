@@ -143,7 +143,9 @@ rcmdcheck <- function(
   }
 
   # Add pandoc to the PATH, for R CMD build and R CMD check
-  if (should_use_rs_pandoc()) local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  if (should_use_rs_pandoc()) {
+    local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  }
 
   pkgbuild::without_cache(pkgbuild::local_build_tools())
 
@@ -175,7 +177,9 @@ rcmdcheck <- function(
 
   on.exit(unlink(out$session_info, recursive = TRUE), add = TRUE)
 
-  if (isTRUE(out$timeout)) message("R CMD check timed out")
+  if (isTRUE(out$timeout)) {
+    message("R CMD check timed out")
+  }
 
   res <- new_rcmdcheck(
     stdout = out$result$stdout,
@@ -188,7 +192,9 @@ rcmdcheck <- function(
   )
 
   # Automatically delete temporary files when this object disappears
-  if (cleanup) res$cleaner <- auto_clean(check_dir)
+  if (cleanup) {
+    res$cleaner <- auto_clean(check_dir)
+  }
 
   handle_error_on(res, error_on)
 
@@ -227,9 +233,34 @@ do_check <- function(
   }
 
   # user supplied env vars take precedence
-  if (length(env)) chkenv[names(env)] <- env
+  if (length(env)) {
+    chkenv[names(env)] <- env
+  }
 
-  if (!quiet) cat_head("R CMD check")
+  if (!quiet) {
+    cat_head("R CMD check")
+    cat_line()
+    all_vars <- Sys.getenv()
+    rchk_vars <- all_vars[
+      grep("_R_CHECK|NOT_CRAN|RCMDCHECK|R_TESTS", names(all_vars))
+    ]
+    rchk_vars[names(env)] <- env
+
+    if (length(rchk_vars) > 0) {
+      cli::cat_bullet(
+        "With:",
+        col = "darkgrey",
+        bullet = "line",
+        bullet_col = "darkgrey"
+      )
+      cli::cat_bullet(
+        paste0(format(names(rchk_vars)), " = ", unname(rchk_vars)),
+        col = "darkgrey"
+      )
+      cat_line()
+    }
+  }
+
   callback <- if (!quiet) detect_callback(as_cran = "--as-cran" %in% args)
   res <- rcmd_safe(
     "check",
@@ -246,7 +277,9 @@ do_check <- function(
   )
 
   # To print an incomplete line on timeout or crash
-  if (!is.null(callback) && (res$timeout || res$status != 0)) callback("\n")
+  if (!is.null(callback) && (res$timeout || res$status != 0)) {
+    callback("\n")
+  }
 
   # Non-zero status is an error, the check process failed
   # R CMD check returns 1 for installation errors, we don't want to error
