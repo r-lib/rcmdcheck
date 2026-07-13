@@ -172,8 +172,8 @@ rcc_init <- function(
   # probably inside test cases of some package
   if (Sys.getenv("R_TESTS", "") == "") {
     private$session_output <- tempfile()
-    private$tempfiles <- c(private$session_output, profile)
     profile <- make_fake_profile(package, private$session_output, libdir)
+    private$tempfiles <- c(private$session_output, profile)
     chkenv["R_TESTS"] <- profile
   }
 
