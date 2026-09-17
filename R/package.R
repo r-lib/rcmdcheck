@@ -3,9 +3,8 @@
 #' Run R CMD check from R programmatically, and capture the results of the
 #' individual checks.
 #'
-#' @docType package
-#' @name rcmdcheck
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 #' Run `R CMD check` on a package or a directory
 #'

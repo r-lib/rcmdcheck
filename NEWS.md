@@ -10,6 +10,8 @@
 
 * `cran_check_results()` works again.
 
+* 1s default for "RCMDCHECK_TIMESTAMP_LIMIT" (#210 @gayol-openrxiv).
+
 # rcmdcheck 1.4.0
 
 * `cran_check_results()` now downloads results in parallel, so it is
