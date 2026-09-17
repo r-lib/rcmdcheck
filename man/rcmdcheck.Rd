@@ -2,6 +2,7 @@
 % Please edit documentation in R/package.R
 \docType{package}
 \name{rcmdcheck}
+\alias{rcmdcheck-package}
 \alias{rcmdcheck}
 \title{Run R CMD check from R and Capture Results}
 \usage{
@@ -135,3 +136,27 @@ Note that \code{Config/rcmdcheck/ignore-inconsequential-notes} and the
 \verb{R CMD check} from a shell (or GUI) will not use them.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://rcmdcheck.r-lib.org/}
+  \item \url{https://github.com/r-lib/rcmdcheck#readme}
+  \item Report bugs at \url{https://github.com/r-Lib/rcmdcheck/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Gábor Csárdi \email{csardi.gabor@gmail.com}
+
+Authors:
+\itemize{
+  \item Gábor Csárdi \email{csardi.gabor@gmail.com}
+}
+
+Other contributors:
+\itemize{
+  \item Mango Solutions [copyright holder, funder]
+  \item Posit Software, PBC (\href{https://ror.org/03wc8by49}{ROR}) [copyright holder, funder]
+}
+
+}

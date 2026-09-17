@@ -21,7 +21,7 @@ package. E.g.:
 \section{Environment variables}{
 \itemize{
 \item \code{R_PROFILE_USER}: standard R environment variable to configure the
-path to the user level R profile. See \link[base:Startup]{base::R_PROFILE_USER}.
+path to the user level R profile. See \link[base:R_PROFILE_USER]{base::R_PROFILE_USER}.
 \item \code{RCMDCHECK_BASE_URL}: URL to the root of the CRAN check web page.
 You can use this to select an alternative CRAN mirror. Defaults to
 \verb{https://cran.r-project.org/web/checks/}.
