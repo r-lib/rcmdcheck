@@ -21,7 +21,7 @@ package. E.g.:
 \section{Environment variables}{
 \itemize{
 \item \code{R_PROFILE_USER}: standard R environment variable to configure the
-path to the user level R profile. See \link[base:Startup]{base::R_PROFILE_USER}.
+path to the user level R profile. See \link[base:R_PROFILE_USER]{base::R_PROFILE_USER}.
 \item \code{RCMDCHECK_BASE_URL}: URL to the root of the CRAN check web page.
 You can use this to select an alternative CRAN mirror. Defaults to
 \verb{https://cran.r-project.org/web/checks/}.
@@ -41,7 +41,7 @@ It not set, then the default of cli is uesed. The corresponding
 option is \code{rcmdcheck.num_colors}.
 \item \code{RCMDCHECK_TIMESTAMP_LIMIT}: lower limit is seconds, above which
 rcmdcheck adds time stamps to the individual check steps. It may be
-fractional. Defaults to 1/3 of a second. The corresponding option is
+fractional. Defaults to 1 second. The corresponding option is
 \code{rcmdcheck.timestamp_limit}.
 \item \code{RCMDCHECK_USE_RSTUDIO_PANDOC}: Flag (\code{true} or \code{false}). If \code{true},
 then rcmdcheck \emph{always} puts RStudio's pandoc (if available) on the
@@ -74,7 +74,7 @@ no test failures. If some tests fail, then only the failures are
 printed, independently of this option.
 \item \code{rcmdcheck.timestamp_limit}: lower limit is seconds, above which
 rcmdcheck adds time stamps to the individual check steps. It may be
-fractional. Defaults to 1/3 of a second. The corresponding environment
+fractional. Defaults to 1 second. The corresponding environment
 variable is \code{RCMDCHECK_TIMESTAMP_LIMIT}.
 }
 }
