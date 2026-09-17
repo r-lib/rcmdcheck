@@ -109,12 +109,8 @@ parse_install_warnings <- function(install_out) {
   install_out <- win2unix(install_out)
   warning_header <- "Warning(?::| in [^\\n]* :| messages?:)"
   pattern <- paste0(
-    "(?ms)^",
-    warning_header,
-    ".*?",
-    "(?=^",
-    warning_header,
-    "|^\\*+ |\\z)"
+    "(?ms)^", warning_header, ".*?",
+    "(?=^", warning_header, "|^\\*+ |\\z)"
   )
   warnings <- regmatches(
     install_out,
@@ -148,17 +144,11 @@ col_align <- function(
 
 strrep <- function(x, times) {
   x <- as.character(x)
-  if (length(x) == 0L) {
-    return(x)
-  }
+  if (length(x) == 0L) return(x)
   r <- .mapply(
     function(x, times) {
-      if (is.na(x) || is.na(times)) {
-        return(NA_character_)
-      }
-      if (times <= 0L) {
-        return("")
-      }
+      if (is.na(x) || is.na(times)) return(NA_character_)
+      if (times <= 0L) return("")
       paste0(replicate(times, x), collapse = "")
     },
     list(x = x, times = times),
@@ -193,18 +183,10 @@ NO_WORDS <- c("false", "no", "off", "0", "nope", "nah")
 
 as_flag <- function(x, default = FALSE, name = "") {
   x1 <- trimws(tolower(x))
-  if (is.na(x1)) {
-    return(default)
-  }
-  if (x1 == "") {
-    return(default)
-  }
-  if (x1 %in% YES_WORDS) {
-    return(TRUE)
-  }
-  if (x1 %in% NO_WORDS) {
-    return(FALSE)
-  }
+  if (is.na(x1)) return(default)
+  if (x1 == "") return(default)
+  if (x1 %in% YES_WORDS) return(TRUE)
+  if (x1 %in% NO_WORDS) return(FALSE)
   warning(
     "Invalid ",
     if (nchar(name)) paste0(encodeString(name, quote = "`"), " "),
