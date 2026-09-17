@@ -1,6 +1,10 @@
 
 # rcmdcheck (development version)
 
+* R warnings emitted while installing a package are now reported as check
+  warnings. Repeated warnings from installation load tests are deduplicated
+  (#167).
+
 * Fixed an issue where check output could be malformed when testing
   packages with multiple test files (#205, @kevinushey).
 
