@@ -170,6 +170,8 @@ test_that("build arguments", {
     error = TRUE,
     rcmdcheck(test_path("bad1"), build_args = "-v"),
     transform = function(x) {
+      # pdflatex availability differs across machines
+      x <- x[!grepl("pdflatex not found", x)]
       x <- sub(
         "package builder: [.0-9]+ [(]r[0-9]+[)]",
         "package builder: <rvesion> (r<commit>)",
