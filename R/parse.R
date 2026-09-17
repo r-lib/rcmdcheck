@@ -19,6 +19,15 @@ new_rcmdcheck <- function(
 
   notdone <- function(x) grep("^DONE", x, invert = TRUE, value = TRUE)
 
+  install_out <- get_install_out(checkdir)
+  install_warnings <- parse_install_warnings(install_out)
+  if (length(install_warnings)) {
+    install_warnings <- paste0(
+      "checking for warnings during installation ... WARNING\n",
+      paste(install_warnings, collapse = "\n")
+    )
+  }
+
   res <- structure(
     list(
       stdout = stdout,
@@ -30,7 +39,10 @@ new_rcmdcheck <- function(
       rversion = parse_rversion(entries),
       platform = parse_platform(entries),
       errors = notdone(grep("ERROR\n", entries, value = TRUE)),
-      warnings = notdone(grep("WARNING\n", entries, value = TRUE)),
+      warnings = c(
+        notdone(grep("WARNING\n", entries, value = TRUE)),
+        install_warnings
+      ),
       notes = notdone(grep("NOTE\n", entries, value = TRUE)),
 
       description = description$str(normalize = FALSE),
@@ -42,7 +54,7 @@ new_rcmdcheck <- function(
       checkdir = checkdir,
       test_fail = test_fail %||% get_test_fail(checkdir),
       test_output = get_test_output(checkdir, pattern = "\\.Rout"),
-      install_out = get_install_out(checkdir)
+      install_out = install_out
     ),
     class = "rcmdcheck"
   )

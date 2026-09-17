@@ -21,6 +21,30 @@ cli::test_that_cli("install log is captured", {
   )
 })
 
+test_that("install warnings are included in check warnings", {
+  local_mocked_bindings(
+    get_install_out = function(...) {
+      paste(
+        "** testing if installed package can be loaded",
+        "Warning: something odd at load",
+        "** testing if installed package keeps a record of temporary installation path",
+        sep = "\n"
+      )
+    }
+  )
+
+  check <- parse_check(test_path("bikedata-ok.log"))
+
+  expect_equal(
+    check$warnings,
+    paste(
+      "checking for warnings during installation ... WARNING",
+      "Warning: something odd at load",
+      sep = "\n"
+    )
+  )
+})
+
 cli::test_that_cli("test failures are captured", {
   skip_on_cran()
   outfile <- "dataonderivatives-test"

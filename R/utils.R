@@ -105,6 +105,42 @@ get_install_out <- function(path, encoding = "") {
   }
 }
 
+parse_install_warnings <- function(install_out) {
+  lines <- strsplit(win2unix(install_out), "\n", fixed = TRUE)[[1]]
+  starts <- grep("^Warning(?::| in .* :| messages?:)", lines, perl = TRUE)
+
+  if (!length(starts)) {
+    return(character())
+  }
+
+  ends <- vapply(
+    starts,
+    function(start) {
+      if (start == length(lines)) {
+        return(start)
+      }
+
+      following <- seq.int(start + 1L, length(lines))
+      boundary <- following[
+        grepl(
+          "^(?:Warning(?::| in .* :| messages?:)|\\*+ )",
+          lines[following],
+          perl = TRUE
+        )
+      ]
+      if (length(boundary)) boundary[[1]] - 1L else length(lines)
+    },
+    integer(1)
+  )
+
+  warnings <- Map(
+    function(start, end) paste(lines[start:end], collapse = "\n"),
+    starts,
+    ends
+  )
+  unique(trimws(unlist(warnings), which = "right"))
+}
+
 col_align <- function(
   text,
   width = cli::console_width(),
