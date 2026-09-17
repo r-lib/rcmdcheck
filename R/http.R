@@ -24,7 +24,9 @@ download_files <- function(
 
   todo <- length(urls)
   tmpfiles <- paste0(destfiles, ".tmp")
-  if (is.null(handles)) handles <- vector(todo, mode = "list")
+  if (is.null(handles)) {
+    handles <- vector(todo, mode = "list")
+  }
   results <- vector(todo, mode = "list")
   sizes <- rep(NA_integer_, todo)
   currents <- rep(0L, todo)
@@ -34,7 +36,9 @@ download_files <- function(
     results[[num]] <<- resp
     todo <<- todo - 1L
     finished[[num]] <<- TRUE
-    if (is.na(sizes[[num]])) sizes[[num]] <<- currents[[num]]
+    if (is.na(sizes[[num]])) {
+      sizes[[num]] <<- currents[[num]]
+    }
     file.rename(tmpfiles[[num]], destfiles[[num]])
   }
 
@@ -42,26 +46,36 @@ download_files <- function(
     results[[num]] <<- new_curl_error(num, urls[[num]], msg)
     todo <<- todo - 1L
     finished[[num]] <<- TRUE
-    if (is.na(sizes[[num]])) sizes[[num]] <<- currents[[num]]
+    if (is.na(sizes[[num]])) {
+      sizes[[num]] <<- currents[[num]]
+    }
     unlink(tmpfiles[[num]], force = TRUE)
   }
 
   prog <- function(num, down, up) {
     # not possible to download _and_ upload with the same handle, right?
-    if (down[[1]] != 0) sizes[num] <<- down[[1]]
-    if (up[[1]] != 0) sizes[num] <<- up[[1]]
+    if (down[[1]] != 0) {
+      sizes[num] <<- down[[1]]
+    }
+    if (up[[1]] != 0) {
+      sizes[num] <<- up[[1]]
+    }
     currents[[num]] <<- down[[2]] + up[[2]]
     TRUE
   }
 
-  if (!quiet) pbar <- cli_progress_bar(type = "download")
+  if (!quiet) {
+    pbar <- cli_progress_bar(type = "download")
+  }
 
   prog_update <- function() {
     cli_progress_update(id = pbar, set = sum(currents), total = sum(sizes))
   }
 
   lapply(seq_along(urls), function(i) {
-    if (is.null(handles[[i]])) handles[[i]] <<- new_handle()
+    if (is.null(handles[[i]])) {
+      handles[[i]] <<- new_handle()
+    }
     handle_setopt(handles[[i]], url = urls[[i]])
     if (!quiet) {
       handle_setopt(
@@ -79,10 +93,14 @@ download_files <- function(
     )
   })
 
-  if (getRversion() < "3.6.0") suspendInterrupts <- identity
+  if (getRversion() < "3.6.0") {
+    suspendInterrupts <- identity
+  }
 
   repeat {
-    if (todo == 0) break
+    if (todo == 0) {
+      break
+    }
     suspendInterrupts(
       multi_run(0.1, poll = TRUE, pool = pool)
     )
@@ -123,8 +141,12 @@ download_file_lines <- function(url, ...) {
 }
 
 http_stop_for_status <- function(resp) {
-  if (!is.integer(resp$status_code)) stop("Not an HTTP response")
-  if (resp$status_code < 300) return(invisible(resp))
+  if (!is.integer(resp$status_code)) {
+    stop("Not an HTTP response")
+  }
+  if (resp$status_code < 300) {
+    return(invisible(resp))
+  }
   stop(http_error(resp))
 }
 
