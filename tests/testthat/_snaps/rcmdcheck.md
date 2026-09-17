@@ -3,16 +3,16 @@
     Code
       bad1$read_error()
     Condition
-      Error:
-      ! stderr is not a pipe.
+      Error in `process_get_error_connection()`:
+      ! ! stderr is not a pipe.
 
 ---
 
     Code
       bad1$read_all_error_lines()
     Condition
-      Error:
-      ! stderr is not a pipe.
+      Error in `process_get_error_connection()`:
+      ! ! stderr is not a pipe.
 
 # build arguments
 
