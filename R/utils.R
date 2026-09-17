@@ -107,24 +107,25 @@ get_install_out <- function(path, encoding = "") {
 
 parse_install_warnings <- function(install_out) {
   install_out <- win2unix(install_out)
-  warning_header <- paste(
+  warning_header <- paste0(
     "Warning(?:",
-    "    :                         # Warning: message",
-    "  | [ ] in [ ] [^\\n]* [ ] : # Warning in call : message",
-    "  | [ ] messages? :           # Warning message(s):",
-    ")",
-    sep = "\n"
+    # Warning: message
+    ":",
+    # Warning in call : message
+    "| in [^\\n]* :",
+    # Warning message: or Warning messages:
+    "| messages?:",
+    ")"
   )
-  pattern <- paste(
-    "(?msx)                        # Multiline, dot-all, free-spacing.",
-    paste0("^", warning_header),   # Begin at an R warning header.
-    ".*?                           # Include its body non-greedily.",
-    "(?=                           # Stop before:",
-    paste0("  ^", warning_header), #   the next R warning,
-    "  | ^\\*+ [ ]                #   the next installation stage, or",
-    "  | \\z                      #   the end of the installation log.",
-    ")",
-    sep = "\n"
+  pattern <- paste0(
+    # Use multiline and dot-all modes.
+    "(?ms)",
+    # Begin at an R warning header.
+    "^", warning_header,
+    # Include its body non-greedily.
+    ".*?",
+    # Stop before the next warning, installation stage, or end of the log.
+    "(?=^", warning_header, "|^\\*+ |\\z)"
   )
   warnings <- regmatches(
     install_out,
