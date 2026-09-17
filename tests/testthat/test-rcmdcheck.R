@@ -166,12 +166,21 @@ test_that("build arguments", {
   tmp <- tempfile()
   on.exit(unlink(tmp), add = TRUE)
 
+  # pdflatex availability differs across machines, so muffle its message
+  check_bad1_verbose <- function() {
+    withCallingHandlers(
+      rcmdcheck(test_path("bad1"), build_args = "-v"),
+      message = function(m) {
+        if (grepl("pdflatex not found", conditionMessage(m))) {
+          invokeRestart("muffleMessage")
+        }
+      }
+    )
+  }
   expect_snapshot(
     error = TRUE,
-    rcmdcheck(test_path("bad1"), build_args = "-v"),
+    check_bad1_verbose(),
     transform = function(x) {
-      # pdflatex availability differs across machines
-      x <- x[!grepl("pdflatex not found", x)]
       x <- sub(
         "package builder: [.0-9]+ [(]r[0-9]+[)]",
         "package builder: <rvesion> (r<commit>)",
