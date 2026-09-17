@@ -16,7 +16,9 @@
 #' }
 
 cran_check_flavours <- function(package = NULL) {
-  if (is.null(package)) return(cran_check_flavours_generic())
+  if (is.null(package)) {
+    return(cran_check_flavours_generic())
+  }
 
   base <- Sys.getenv(
     "RCMDCHECK_BASE_URL",
