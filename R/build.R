@@ -9,7 +9,7 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
   dir.create(tmpdir, recursive = TRUE, showWarnings = FALSE)
   tmpdir <- normalizePath(tmpdir)
 
-  if (file.info(path)$isdir) {
+  if (safecheck_isdir(path)) {
     if (!quiet) cat_head("R CMD build")
 
     desc <- desc(path)

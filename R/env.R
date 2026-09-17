@@ -47,7 +47,7 @@ load_env <- function(path, targz, package, envir = parent.frame()) {
   if (!should_load) return()
 
   env <- NULL
-  if (file.info(path)$isdir) {
+  if (safecheck_isdir(path)) {
     env_path <- file.path(path, "tools", "check.env")
   } else {
     dir.create(tmp <- tempfile())

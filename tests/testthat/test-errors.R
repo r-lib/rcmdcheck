@@ -96,3 +96,7 @@ test_that("error_on argument", {
   tryCatch(rcmdcheck(), error = function(e) e)
   expect_equal(value, "note")
 })
+
+test_that("error correctly when reading invalid files", {
+  expect_error(rcmdcheck("Invalid file name"), "path 'Invalid file name' does not exist!")
+})

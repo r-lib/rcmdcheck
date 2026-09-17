@@ -210,3 +210,10 @@ data_literal <- function(...) {
     colClasses = "character"
   )
 }
+
+safecheck_isdir <- function(path){
+  if(!file.exists(path)) stop("path '", path, "' does not exist!")
+  res <- file.info(path, extra_cols = FALSE)
+  if(is.na(res$isdir)) stop("path '", path, "' is not readable!")
+  res$isdir
+}
