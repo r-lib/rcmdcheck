@@ -67,7 +67,7 @@ rcmdcheck_process <- R6Class(
       libpath = .libPaths(),
       repos = getOption("repos"),
       env = character()
-    )
+    ) {
       rcc_init(
         self,
         private,
@@ -79,7 +79,8 @@ rcmdcheck_process <- R6Class(
         libpath,
         repos,
         env
-      ),
+      )
+    },
 
     parse_results = function() rcc_parse_results(self, private),
 
@@ -143,7 +144,9 @@ rcc_init <- function(
 
   # Add pandoc to the PATH for R CMD build.
   # The updated PATH is also inherited in the subprocess below.
-  if (should_use_rs_pandoc()) local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  if (should_use_rs_pandoc()) {
+    local_path(Sys.getenv("RSTUDIO_PANDOC"))
+  }
 
   pkgbuild::without_cache(pkgbuild::local_build_tools())
 
@@ -172,13 +175,15 @@ rcc_init <- function(
   # probably inside test cases of some package
   if (Sys.getenv("R_TESTS", "") == "") {
     private$session_output <- tempfile()
-    private$tempfiles <- c(private$session_output, profile)
     profile <- make_fake_profile(package, private$session_output, libdir)
+    private$tempfiles <- c(private$session_output, profile)
     chkenv["R_TESTS"] <- profile
   }
 
   # user supplied env vars take precedence
-  if (length(env)) chkenv[names(env)] <- env
+  if (length(env)) {
+    chkenv[names(env)] <- env
+  }
 
   options <- rcmd_process_options(
     cmd = "check",
@@ -199,11 +204,17 @@ rcc_init <- function(
 }
 
 rcc_parse_results <- function(self, private) {
-  if (self$is_alive()) stop("Process still alive")
+  if (self$is_alive()) {
+    stop("Process still alive")
+  }
 
   ## Make sure all output is read out
-  if (self$has_output_connection()) self$read_output_lines()
-  if (self$has_error_connection()) self$read_error_lines()
+  if (self$has_output_connection()) {
+    self$read_output_lines()
+  }
+  if (self$has_error_connection()) {
+    self$read_error_lines()
+  }
 
   on.exit(unlink(private$tempfiles, recursive = TRUE), add = TRUE)
 

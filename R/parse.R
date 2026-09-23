@@ -274,7 +274,9 @@ parse_check_url <- function(url, quiet = FALSE) {
 }
 
 find_check_file <- function(file) {
-  if (is.null(file)) file <- "."
+  if (is.null(file)) {
+    file <- "."
+  }
 
   if (file.exists(file) && file.info(file)$isdir) {
     find_check_file_indir(file)

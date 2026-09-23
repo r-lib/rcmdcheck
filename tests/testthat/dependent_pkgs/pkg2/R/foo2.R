@@ -3,4 +3,6 @@
 #' foo2
 #' @import pkg1
 #' @export
-foo2 <- function() {2}
+foo2 <- function() {
+  2
+}
