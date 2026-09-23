@@ -10,7 +10,7 @@
 
 * `cran_check_results()` works again.
 
-* 1s default for "RCMDCHECK_TIMESTAMP_LIMIT" (#210 @gayol-openrxiv).
+* Changed `"RCMDCHECK_TIMESTAMP_LIMIT"` default to 1 (@gayol-openrxiv, #210).
 
 # rcmdcheck 1.4.0
 
