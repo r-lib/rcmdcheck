@@ -230,11 +230,7 @@ do_check <- function(
 
   if (!quiet) {
     cat_head("R CMD check")
-
-    vars <- rchk_env_vars()
-    bullets <- paste0("- ", format(names(vars)), " = ", vars, "\n")
-    cat_line("With env vars:", style = darkgrey)
-    cat_line(bullets, style = darkgrey)
+    show_env_vars()
   }
 
   callback <- if (!quiet) detect_callback(as_cran = "--as-cran" %in% args)
@@ -273,10 +269,14 @@ do_check <- function(
   list(result = res, session_info = session_output)
 }
 
-rchk_env_vars <- function() {
+show_env_vars <- function() {
   all_vars <- Sys.getenv()
   rchk <- grepl("_R_CHECK|NOT_CRAN|RCMDCHECK|R_TESTS", names(all_vars))
-  all_vars[rchk]
+  vars <- all_vars[rchk]
+
+  bullets <- paste0("- ", format(names(vars)), " = ", vars, "\n")
+  cat_line("With env vars:", style = darkgrey)
+  cat_line(bullets, style = darkgrey)
 }
 
 handle_error_on <- function(res, error_on) {
