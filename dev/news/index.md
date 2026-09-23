@@ -15,6 +15,10 @@
 - [`cran_check_results()`](https://rcmdcheck.r-lib.org/dev/reference/cran_check_results.md)
   works again.
 
+- Changed `"RCMDCHECK_TIMESTAMP_LIMIT"` default to 1
+  ([@gayol-openrxiv](https://github.com/gayol-openrxiv),
+  [\#210](https://github.com/r-Lib/rcmdcheck/issues/210)).
+
 - [`rcmdcheck()`](https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck.md)
   now will print relevant environment variables
   ([\#172](https://github.com/r-Lib/rcmdcheck/issues/172),

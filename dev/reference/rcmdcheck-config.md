@@ -46,7 +46,7 @@ package. E.g.:
 
 - `RCMDCHECK_TIMESTAMP_LIMIT`: lower limit is seconds, above which
   rcmdcheck adds time stamps to the individual check steps. It may be
-  fractional. Defaults to 1/3 of a second. The corresponding option is
+  fractional. Defaults to 1 second. The corresponding option is
   `rcmdcheck.timestamp_limit`.
 
 - `RCMDCHECK_USE_RSTUDIO_PANDOC`: Flag (`true` or `false`). If `true`,
@@ -86,7 +86,7 @@ package. E.g.:
 
 - `rcmdcheck.timestamp_limit`: lower limit is seconds, above which
   rcmdcheck adds time stamps to the individual check steps. It may be
-  fractional. Defaults to 1/3 of a second. The corresponding environment
+  fractional. Defaults to 1 second. The corresponding environment
   variable is `RCMDCHECK_TIMESTAMP_LIMIT`.
 
 ## Package configuration:
