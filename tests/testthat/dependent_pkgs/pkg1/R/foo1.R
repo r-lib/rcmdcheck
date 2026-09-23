@@ -2,4 +2,6 @@
 #'
 #' foo1
 #' @export
-foo1 <- function() {1}
+foo1 <- function() {
+  1
+}
