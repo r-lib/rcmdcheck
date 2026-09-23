@@ -121,11 +121,14 @@ parse_install_warnings <- function(install_out) {
     # Use multiline and dot-all modes.
     "(?ms)",
     # Begin at an R warning header.
-    "^", warning_header,
+    "^",
+    warning_header,
     # Include its body non-greedily.
     ".*?",
     # Stop before the next warning, installation stage, or end of the log.
-    "(?=^", warning_header, "|^\\*+ |\\z)"
+    "(?=^",
+    warning_header,
+    "|^\\*+ |\\z)"
   )
   warnings <- regmatches(
     install_out,
