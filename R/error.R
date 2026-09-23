@@ -1,5 +1,7 @@
 report_system_error <- function(msg, status) {
-  if (status$status == 0) return()
+  if (status$status == 0) {
+    return()
+  }
 
   if (status$stderr == "") {
     stop(

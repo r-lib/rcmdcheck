@@ -15,7 +15,9 @@
 #' @export
 
 compare_checks <- function(old, new) {
-  if (inherits(old, "rcmdcheck")) old <- list(old)
+  if (inherits(old, "rcmdcheck")) {
+    old <- list(old)
+  }
   rcmdcheck_comparison(old, new)
 }
 

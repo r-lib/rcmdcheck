@@ -3,21 +3,21 @@
     Code
       bad1$read_error()
     Condition
-      Error:
-      ! stderr is not a pipe.
+      Error in `process_get_error_connection()`:
+      ! ! stderr is not a pipe.
 
 ---
 
     Code
       bad1$read_all_error_lines()
     Condition
-      Error:
-      ! stderr is not a pipe.
+      Error in `process_get_error_connection()`:
+      ! ! stderr is not a pipe.
 
 # build arguments
 
     Code
-      rcmdcheck(test_path("bad1"), build_args = "-v")
+      check_bad1_verbose()
     Output
       -- R CMD build -----------------------------------------------------------------
       R add-on package builder: <rvesion> (r<commit>)

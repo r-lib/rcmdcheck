@@ -54,6 +54,12 @@ test_that("libpath argument is used in build_package", {
   expect_error({
     build_package(pkg2_source, tempfile(), character(), .libPaths(), TRUE)
   })
-  pkg2 <- build_package(pkg2_source, tempfile(), character(), c(lib, .libPaths()), TRUE)
+  pkg2 <- build_package(
+    pkg2_source,
+    tempfile(),
+    character(),
+    c(lib, .libPaths()),
+    TRUE
+  )
   expect_true(file.exists(pkg2))
 })

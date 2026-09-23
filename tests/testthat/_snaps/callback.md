@@ -1,7 +1,9 @@
 # block_callback by line
 
     Code
-      for (line in chk) cb(paste0(line, "\n"))
+      for (line in chk) {
+        cb(paste0(line, "\n"))
+      }
     Output
         -  using log directory '/tmp/RtmpoYWa4I/file31fc5a857856/mlr.Rcheck'
         -  using R version 3.5.0 (2017-01-27)
@@ -133,7 +135,9 @@
 # block_callback by chunks
 
     Code
-      for (ch in chunks) cb(ch)
+      for (ch in chunks) {
+        cb(ch)
+      }
     Output
         -  using log directory '/tmp/RtmpoYWa4I/file31fc5a857856/mlr.Rcheck'
       -  using R version 3.5.0 (2017-01-27)
@@ -265,7 +269,9 @@
 # notes, errors, warnings
 
     Code
-      for (line in out) cb(line)
+      for (line in out) {
+        cb(line)
+      }
     Output
         N  Step one
             More note text.
@@ -278,7 +284,9 @@
 # tests
 
     Code
-      for (line in txt) cb(paste0(line, "\n"))
+      for (line in txt) {
+        cb(paste0(line, "\n"))
+      }
     Output
         v  checking for unstated dependencies in 'tests'
         E  checking tests
@@ -302,7 +310,9 @@
 # multi-arch tests
 
     Code
-      for (line in txt) cb(paste0(line, "\n"))
+      for (line in txt) {
+        cb(paste0(line, "\n"))
+      }
     Output
         v  checking for unstated dependencies in 'tests'
         -  checking tests
