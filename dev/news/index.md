@@ -15,6 +15,11 @@
 - [`cran_check_results()`](https://rcmdcheck.r-lib.org/dev/reference/cran_check_results.md)
   works again.
 
+- [`rcmdcheck()`](https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck.md)
+  now will print relevant environment variables
+  ([\#172](https://github.com/r-Lib/rcmdcheck/issues/172),
+  [@tanho63](https://github.com/tanho63))
+
 ## rcmdcheck 1.4.0
 
 CRAN release: 2021-09-27

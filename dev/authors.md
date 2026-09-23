@@ -17,12 +17,12 @@ Source:
 [`DESCRIPTION`](https://github.com/r-Lib/rcmdcheck/blob/main/DESCRIPTION)
 
 Csárdi G (2026). *rcmdcheck: Run 'R CMD check' from 'R' and Capture
-Results*. R package version 1.4.0.9000, <https://rcmdcheck.r-lib.org/>.
+Results*. R package version 1.4.0.9001, <https://rcmdcheck.r-lib.org/>.
 
     @Manual{,
       title = {rcmdcheck: Run 'R CMD check' from 'R' and Capture Results},
       author = {Gábor Csárdi},
       year = {2026},
-      note = {R package version 1.4.0.9000},
+      note = {R package version 1.4.0.9001},
       url = {https://rcmdcheck.r-lib.org/},
     }
