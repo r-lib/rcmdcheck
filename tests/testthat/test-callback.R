@@ -52,6 +52,7 @@ test_that("block_callback by chunks", {
 })
 
 test_that("block_callback shows running time", {
+  withr::local_options(rcmdcheck.timestamp_limit = 0.1)
   cb <- block_callback()
   out <- capture.output({
     cb("* Doing something")

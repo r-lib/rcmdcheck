@@ -128,6 +128,7 @@ summary.rcmdcheck <- function(object, ...) {
   structure(list(object), class = "rcmdcheck_summary")
 }
 
+#' @export
 print.rcmdcheck_summary <- function(x, ..., line = TRUE) {
   object <- x[[1]]
 

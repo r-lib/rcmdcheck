@@ -36,7 +36,7 @@ block_callback <- function(
   time_if_long <- function() {
     limit <- as.numeric(getOption(
       "rcmdcheck.timestamp_limit",
-      Sys.getenv("RCMDCHECK_TIMESTAMP_LIMIT", "0.33333")
+      Sys.getenv("RCMDCHECK_TIMESTAMP_LIMIT", "1")
     ))
     elapsed <- now - line_started
     line_started <<- now
