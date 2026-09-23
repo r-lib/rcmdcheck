@@ -3,7 +3,9 @@ test_that("block_callback by line", {
   chk <- readLines(test_path("fixtures", "test-error.txt"))
   cb <- block_callback()
   expect_snapshot(
-    for (line in chk) cb(paste0(line, "\n"))
+    for (line in chk) {
+      cb(paste0(line, "\n"))
+    }
   )
 })
 
@@ -43,7 +45,9 @@ test_that("block_callback by chunks", {
 
   cb <- block_callback()
   expect_snapshot(
-    for (ch in chunks) cb(ch)
+    for (ch in chunks) {
+      cb(ch)
+    }
   )
 })
 
@@ -66,7 +70,9 @@ test_that("notes, errors, warnings", {
     "* Step three ... ERROR\n   More error text.\n"
   )
   expect_snapshot(
-    for (line in out) cb(line)
+    for (line in out) {
+      cb(line)
+    }
   )
 })
 
@@ -94,7 +100,9 @@ test_that("tests", {
 
   cb <- block_callback()
   expect_snapshot(
-    for (line in txt) cb(paste0(line, "\n"))
+    for (line in txt) {
+      cb(paste0(line, "\n"))
+    }
   )
 })
 
@@ -118,7 +126,9 @@ test_that("multi-arch tests", {
 
   cb <- block_callback()
   expect_snapshot(
-    for (line in txt) cb(paste0(line, "\n"))
+    for (line in txt) {
+      cb(paste0(line, "\n"))
+    }
   )
 })
 

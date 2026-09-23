@@ -18,7 +18,9 @@ cran_app <- function() {
     ),
     function(req, res) {
       flavour <- req$params$flavour
-      if (is.null(flavour)) flavour <- ""
+      if (is.null(flavour)) {
+        flavour <- ""
+      }
       path <- testthat::test_path(
         "fixtures",
         "checks",
