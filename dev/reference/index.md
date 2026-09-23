@@ -3,7 +3,9 @@
 ## Run `R CMD check` programmatically
 
 - [`rcmdcheck()`](https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck.md)
-  : Run R CMD check from R and Capture Results
+  :
+
+  Run `R CMD check` on a package or a directory
 
 - [`rcmdcheck_process`](https://rcmdcheck.r-lib.org/dev/reference/rcmdcheck_process.md)
   :

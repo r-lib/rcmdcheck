@@ -1,7 +1,4 @@
-# Run R CMD check from R and Capture Results
-
-Run R CMD check from R programmatically, and capture the results of the
-individual checks.
+# Run `R CMD check` on a package or a directory
 
 Runs `R CMD check` as an external command, and parses its output and
 returns the check failures.
