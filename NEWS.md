@@ -12,6 +12,8 @@
 
 * Changed `"RCMDCHECK_TIMESTAMP_LIMIT"` default to 1 (@gayol-openrxiv, #210).
 
+* `rcmdcheck()` now will print relevant environment variables (#172, @tanho63)
+
 # rcmdcheck 1.4.0
 
 * `cran_check_results()` now downloads results in parallel, so it is
