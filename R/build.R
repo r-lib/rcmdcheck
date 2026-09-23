@@ -10,13 +10,16 @@ build_package <- function(path, tmpdir, build_args, libpath, quiet) {
   tmpdir <- normalizePath(tmpdir)
 
   if (file.info(path)$isdir) {
-    if (!quiet) cat_head("R CMD build")
+    if (!quiet) {
+      cat_head("R CMD build")
+    }
 
     desc <- desc(path)
     clean_doc <- as_flag(desc$get("Config/build/clean-inst-doc"), NULL)
 
     with_libpaths(
-      libpath, {
+      libpath,
+      {
         proc <- pkgbuild_process$new(
           path,
           tmpdir,

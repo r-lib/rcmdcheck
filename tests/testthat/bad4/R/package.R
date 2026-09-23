@@ -16,4 +16,6 @@ foobar2 <- function() {
 
 foobar2()
 
-while (TRUE) Sys.sleep(1000)
+while (TRUE) {
+  Sys.sleep(1000)
+}

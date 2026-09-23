@@ -17,7 +17,7 @@
 # build arguments
 
     Code
-      rcmdcheck(test_path("bad1"), build_args = "-v")
+      check_bad1_verbose()
     Output
       -- R CMD build -----------------------------------------------------------------
       R add-on package builder: <rvesion> (r<commit>)
