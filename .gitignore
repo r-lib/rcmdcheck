@@ -5,3 +5,6 @@
 /README.html
 docs
 /dev-lib
+
+/.quarto/
+**/*.quarto_ipynb
