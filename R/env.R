@@ -1,7 +1,9 @@
 set_env <- function(path, targz, desc, envir = parent.frame()) {
   pkg <- desc$get("Package")
   ign <- as_flag(desc$get("Config/rcmdcheck/ignore-inconsequential-notes"))
-  if (ign) ignore_env(envir = envir)
+  if (ign) {
+    ignore_env(envir = envir)
+  }
   load_env(path, targz, pkg, envir = envir)
 }
 
@@ -44,7 +46,9 @@ ignore_env <- function(to_ignore = NULL, envir = parent.frame()) {
 
 load_env <- function(path, targz, package, envir = parent.frame()) {
   should_load <- as_flag(Sys.getenv("RCMDCHECK_LOAD_CHECK_ENV"), TRUE)
-  if (!should_load) return()
+  if (!should_load) {
+    return()
+  }
 
   env <- NULL
   if (file.info(path)$isdir) {
@@ -70,7 +74,9 @@ load_env_file <- function(path, envir = parent.frame()) {
   env <- readLines(path, warn = FALSE)
   env <- ignore_comments(env)
   env <- ignore_empty_lines(env)
-  if (length(env) == 0) return(invisible())
+  if (length(env) == 0) {
+    return(invisible())
+  }
 
   env <- lapply(env, parse_dot_line)
   envc <- structure(
