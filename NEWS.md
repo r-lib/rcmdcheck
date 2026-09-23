@@ -10,6 +10,8 @@
 
 * `cran_check_results()` works again.
 
+* `rcmdcheck()` now will print relevant environment variables (#172, @tanho63)
+
 # rcmdcheck 1.4.0
 
 * `cran_check_results()` now downloads results in parallel, so it is
