@@ -53,3 +53,45 @@ test_that("read_char and files with invalid encodings", {
     txt <- read_char(test_path("fixtures", "badenc.fail"), encoding = "UTF-8")
   )
 })
+
+test_that("parse_install_warnings extracts and deduplicates R warnings", {
+  install_out <- paste(
+    "** libs",
+    "source.cpp:1:2: warning: unused variable [-Wunused-variable]",
+    "1 warning generated.",
+    "** testing if installed package can be loaded from temporary location",
+    "Warning in fun(libname, pkgname) :",
+    "  something odd at load",
+    "** testing if installed package can be loaded from final location",
+    "Warning in fun(libname, pkgname) :",
+    "  something odd at load",
+    "Warning message:",
+    "another warning",
+    "** testing if installed package keeps a record of temporary installation path",
+    sep = "\n"
+  )
+
+  expect_equal(
+    parse_install_warnings(install_out),
+    c(
+      "Warning in fun(libname, pkgname) :\n  something odd at load",
+      "Warning message:\nanother warning"
+    )
+  )
+})
+
+test_that("parse_install_warnings recognizes warning without a call", {
+  expect_equal(
+    parse_install_warnings("** R\nWarning: something odd\n** help"),
+    "Warning: something odd"
+  )
+  expect_length(parse_install_warnings("file.c:1: warning: cosmetic"), 0)
+  expect_length(
+    parse_install_warnings("<00install.out file does not exist>"),
+    0
+  )
+  expect_equal(
+    parse_install_warnings("Warning: final line"),
+    "Warning: final line"
+  )
+})
