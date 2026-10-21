@@ -37,7 +37,7 @@
 #'   by the cli package. See [cli::num_ansi_colors()]. This configuration
 #'   is only used for the output of rcmdcheck and it does not affect the
 #'   examples and test cases (and other code) of the checked package.
-#'   It not set, then the default of cli is uesed. The corresponding
+#'   It not set, then the default of cli is used. The corresponding
 #'   option is `rcmdcheck.num_colors`.
 #'
 #' * `RCMDCHECK_TIMESTAMP_LIMIT`: lower limit is seconds, above which
@@ -68,7 +68,7 @@
 #'   by the cli package. See [cli::num_ansi_colors()]. This configuration
 #'   is only used for the output of rcmdcheck and it does not affect the
 #'   examples and test cases (and other code) of the checked package.
-#'   It not set, then the default of cli is uesed. The corresponding
+#'   It not set, then the default of cli is used. The corresponding
 #'   environment variable is `RCMDCHECK_NUM_COLORS`.
 #'
 #' * `rcmdcheck.test_output`: Flag (`TRUE` or `FALSE`), whether
