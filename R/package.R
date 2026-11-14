@@ -138,7 +138,7 @@ rcmdcheck <- function(
     local_path(Sys.getenv("RSTUDIO_PANDOC"))
   }
 
-  pkgbuild::without_cache(pkgbuild::local_build_tools())
+  pkgbuild::without_cache(pkgbuild::local_build_tools(required = FALSE))
 
   targz <- build_package(
     path,
